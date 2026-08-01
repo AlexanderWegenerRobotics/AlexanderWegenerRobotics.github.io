@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control and perception projects — Alexander Wegener</title>
+<meta name="description" content="Vision-based NMPC for robotic pushing under perception uncertainty, underactuated control of a double pendulum, and a reusable MuJoCo simulation layer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="rail" aria-label="Navigation">
+  <span class="rail__mark">A. WEGENER</span>
+  <div class="rail__stages">
+    <a class="rail__stage is-active" data-stage="train" href="index.html"><span class="rail__dot"></span>Back</a>
+  </div>
+  <span class="rail__foot">2026</span>
+</nav>
+
+<div class="shell">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Control and perception</span>
+    <h1>Work that isn't part of the teleoperation stack.</h1>
+    <p class="lede measure" style="margin-top:24px">
+      Estimation under bad measurements, optimal control of an underactuated system, and the
+      simulation layer the rest of it runs on. Separate problems, same discipline.
+    </p>
+    <div class="linkrow">
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics">All repositories <em>↗</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION MPC ============ -->
+<section data-stage="collect">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">Vision-based NMPC · Boston University, 2026</span>
+      <h2>Pushing an object you cannot see clearly.</h2>
+      <p>
+        Nonprehensile manipulation is hard enough with perfect state. This project asks what
+        happens when the camera is the state estimator and the camera is unreliable — and
+        whether telling the controller about its own uncertainty is worth the cost.
+      </p>
+    </div>
+
+    <div class="g-1-1">
+      <div>
+        <h3>The setup</h3>
+        <p class="small mt-s">
+          Quasi-static pusher-slider dynamics after Hogan and Rodriguez, with state
+          <span style="font-family:var(--data);font-size:13px">[x, y, θ, p<sub>y</sub>]</span> and
+          control <span style="font-family:var(--data);font-size:13px">[v<sub>n</sub>, v<sub>t</sub>]</span>.
+          Stick and slide contact modes are handled implicitly through a smooth tanh
+          approximation of the motion-cone boundaries, which keeps the problem a plain
+          nonlinear program — no mixed-integer solve.
+        </p>
+        <p class="small">
+          A vision thread at 60 Hz runs ArUco detection and PnP pose estimation. A separate
+          propagation thread at 100 Hz runs an extended Kalman filter and solves the NMPC with
+          acados using SQP real-time iteration, feeding a Cartesian arm controller.
+        </p>
+      </div>
+      <div>
+        <h3>Three controllers, one question</h3>
+        <dl class="deflist mt-s">
+          <div><dt>Baseline</dt><dd>Nominal NMPC on the raw pose estimate</dd></div>
+          <div><dt>Certainty equivalent</dt><dd>NMPC on the EKF mean, ignoring covariance</dd></div>
+          <div><dt>Uncertainty aware</dt><dd>Chance-constrained NMPC, tightening constraints by the EKF covariance at the 95th percentile</dd></div>
+        </dl>
+        <p class="small mt-s">
+          Evaluated over a 360-run sweep with injected measurement noise, dropout, and latency,
+          plus a separate sensitivity study on the tightening factor.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l g-2-1">
+      <figure>
+        <!-- REPLACE: <img src="assets/vision-mpc.gif" alt="Vision-based pushing"> -->
+        <div class="slot"><b>Pushing under injected disturbance</b><span>Acquire → Approach → Pushing → Success / Lost / Failed</span></div>
+        <figcaption><span class="sim">Sim</span>MuJoCo, with the perception pipeline running on rendered camera frames rather than ground-truth state.</figcaption>
+      </figure>
+      <div class="panel panel--accent">
+        <h4>The result that didn't go my way</h4>
+        <p class="small">
+          Chance-constrained tightening costs about eight percentage points of success rate in
+          clean conditions, because the tightening is always on whether or not the estimate is
+          actually uncertain. In an unconstrained workspace the benefit is modest.
+        </p>
+        <p class="tiny">Worth reporting precisely because it bounds where the method is useful.</p>
+      </div>
+    </div>
+
+    <div class="linkrow">
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/vision_mpc">Repository <em>↗</em></a>
+      <a class="link" href="assets/vision-mpc-report.pdf">Report <em>PDF</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOUBLE PENDULUM ============ -->
+<section data-stage="train">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">Underactuated control</span>
+      <h2>Three ways to catch a double pendulum.</h2>
+      <p>
+        Swing-up and stabilisation of an underactuated double pendulum, implemented three
+        times so the trade-offs are measured rather than argued.
+      </p>
+    </div>
+
+    <dl class="deflist">
+      <div>
+        <dt>LQR</dt>
+        <dd>Passivity-based energy-shaping swing-up, a four-condition catch test, then an infinite-horizon LQR gain from the discrete algebraic Riccati equation.</dd>
+      </div>
+      <div>
+        <dt>iLQR</dt>
+        <dd>Offline trajectory optimisation across seven warm-start seeds, with short-horizon online replanning and RK4 integration.</dd>
+      </div>
+      <div>
+        <dt>MPC</dt>
+        <dd>Direct multiple shooting, twenty-step horizon at 40 ms, CasADi with IPOPT, DARE-based terminal cost.</dd>
+      </div>
+    </dl>
+
+    <div class="mt-m g-2-1">
+      <figure>
+        <!-- REPLACE: <img src="assets/double-pendulum.gif" alt="Double pendulum swing-up"> -->
+        <div class="slot slot--flat"><b>Swing-up and catch</b><span>Three controllers, same plant</span></div>
+      </figure>
+      <div class="panel">
+        <h4>Why it runs in two processes</h4>
+        <p class="small">
+          Physics and control sit in separate operating-system processes connected by shared
+          memory, so the simulation clock never stalls waiting on the controller. With an MPC
+          solve around eight milliseconds, that separation is the difference between measuring
+          the controller and measuring the solver.
+        </p>
+      </div>
+    </div>
+
+    <div class="linkrow">
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics">Repository <em>↗</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIMCORE + HAPTICS ============ -->
+<section data-stage="curate">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">Infrastructure</span>
+      <h2>Things built once and reused.</h2>
+    </div>
+
+    <div class="g2">
+      <div class="panel">
+        <h4>SimCore</h4>
+        <p class="small">
+          A MuJoCo simulation layer holding robot kinematics, camera rendering, and object
+          state access, built as an installable package and pulled in as a dependency by the
+          projects above rather than copied between them.
+        </p>
+        <div class="linkrow"><a class="link" href="https://github.com/AlexanderWegenerRobotics/SimCore">Repository <em>↗</em></a></div>
+      </div>
+      <div class="panel">
+        <h4>Sigma 7 haptic control</h4>
+        <p class="small">
+          A standalone control stack for the Sigma 7 force-feedback device — Cartesian
+          impedance and guidance-force rendering in a 1 kHz loop — maintained independently of
+          the teleoperation system it originally served.
+        </p>
+        <div class="linkrow"><a class="link" href="https://github.com/AlexanderWegenerRobotics">Repository <em>↗</em></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__links">
+      <a class="link" href="index.html">Back to the main page <em>←</em></a>
+      <a class="link" href="thesis.html">The user study <em>→</em></a>
+    </div>
+    <p class="foot__meta">Alexander Wegener · Last updated July 2026</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
