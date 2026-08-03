@@ -10,7 +10,7 @@
 <meta property="og:description" content="Bimanual VR teleoperation from Boston to Abu Dhabi, over the public internet. Interface, dataset, policy, deployment.">
 <meta property="og:type" content="website">
 <!-- REPLACE: absolute URL to a 1200x630 preview image once the site is live -->
-<!-- <meta property="og:image" content="https://yourdomain.dev/assets/preview.png"> -->
+<!-- <meta property="og:image" content="https://alexanderwegenerrobotics.github.io/assets/preview.png"> -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,8 @@
     <h1>Bimanual teleoperation, Boston to Abu Dhabi.</h1>
 
     <p class="lede hero__lede">
+      <!-- VERIFY the distance figure before publishing. Boston to Abu Dhabi is
+           roughly 11,300 km great-circle — check it yourself rather than trusting this. -->
       Two Franka Panda arms, controlled live from a VR headset eleven thousand kilometres
       away over the public internet. I built and operate the whole loop it sits in —
       interface, dataset, policy, deployment — and my research asks whether guiding the
@@ -58,18 +60,15 @@
     </p>
 
     <p class="hero__affil">
-      Boston University &nbsp;·&nbsp; TU Munich, MIRMI &nbsp;·&nbsp; Tesla &nbsp;·&nbsp; Formula Student
+      Boston University &nbsp;·&nbsp; MBZUAI &nbsp;·&nbsp; TU Munich, MIRMI &nbsp;·&nbsp; Tesla
     </p>
 
-    <!-- ============ HERO VIDEO ============
-         REPLACE the .slot below with:
-         <video src="assets/hero-crosscontinental.mp4" autoplay muted loop playsinline
-                poster="assets/hero-poster.jpg"></video>
-         Split view: operator in headset | VR view with live HUD | Abu Dhabi arms.
-         The HUD must show the real cross-continental latency, not a local run. -->
     <figure class="media">
       <video src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline></video>
-      <figcaption>Live control across roughly eleven thousand kilometres of public internet. Latency shown on the HUD is measured, not nominal.</figcaption>
+      <figcaption>
+        Operator in Boston, arms in Abu Dhabi, one clock. The latency on the HUD is measured
+        end to end, not nominal.
+      </figcaption>
     </figure>
 
     <!-- ============ SPEC STRIP ============ -->
@@ -105,13 +104,13 @@
       </p>
     </div>
 
-    <!-- ============ LOOP DIAGRAM ============
-         REPLACE with your draw.io export:
-         <img src="assets/loop-diagram.svg" alt="...">
-         Keep the alt text — it is what a screen reader and a link preview will surface. -->
     <figure class="media">
-      <img src="assets/loop-diagram.svg" alt="...">
-      <figcaption>The same stack runs in simulation and on hardware — MuJoCo writes frames into the identical buffer the camera does, so nothing is reimplemented between the two.</figcaption>
+      <img src="assets/loop-diagram.svg"
+           alt="The teleoperation-to-policy loop: data collection, data pipeline, training, and evaluation, with intent nudging feeding data collection and validated by evaluation.">
+      <figcaption>
+        The same stack runs in simulation and on hardware — MuJoCo writes frames into the
+        identical buffer the camera does, so nothing is reimplemented between the two.
+      </figcaption>
     </figure>
   </div>
 </section>
@@ -124,14 +123,20 @@
     <div class="sechead measure">
       <span class="eyebrow">Background</span>
       <h2>Eight years of building things that have to work.</h2>
+      <p>
+        Battery packs, then motor design, then motor control, then robot control. The
+        hardware changed; the problem — closing a loop reliably on something physical — has
+        not.
+      </p>
     </div>
 
+    <!-- VERIFY every date below against what actually happened. -->
     <ol class="track">
       <li class="track__item track__item--wide">
         <a href="formula-student.html">
-          <span class="track__yr">2017—2021</span>
+          <span class="track__yr">2018—2022</span>
           <span class="track__role">Formula Student</span>
-          <span class="track__note">4 years · 2 as CTO</span>
+          <span class="track__note">4 years · 2 as technical director</span>
         </a>
       </li>
       <li class="track__item">
@@ -182,53 +187,68 @@
 
     <div class="g2">
       <figure>
-        <!-- REPLACE: <video src="assets/collect-gaze-menu.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>Gaze and voice menu</b><span>Hands-free selection during a two-armed task</span></div>
-        <figcaption>Menu items are selected by looking at them. The wrist-camera inset grows on gaze.</figcaption>
+        <video src="assets/collect-gaze-menu.mp4" autoplay muted loop playsinline></video>
+        <figcaption>
+          Menu items are selected by looking at them. The wrist-camera inset grows on gaze and
+          shrinks again when attention returns to the task.
+        </figcaption>
       </figure>
       <figure>
-        <!-- REPLACE: <video src="assets/collect-ghost-overlay.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>Ghost overlay and workspace bounds</b><span>Intended motion rendered live</span></div>
-        <figcaption>A translucent gripper shows the operator the motion they are currently commanding, before the arm gets there. Workspace limits are drawn in the view rather than discovered by hitting them.</figcaption>
+        <video src="assets/collect-ghost-overlay.mp4" autoplay muted loop playsinline></video>
+        <figcaption>
+          A translucent gripper shows the operator the motion they are currently commanding,
+          before the arm gets there — the gap opens under fast motion and closes at steady
+          state. Workspace limits are drawn in the view rather than discovered by hitting them.
+        </figcaption>
       </figure>
     </div>
 
-    <div class="mt-l g-2-1">
-      <div>
+    <div class="mt-l">
+      <div class="measure">
         <h3>Getting a frame across an ocean</h3>
         <p class="mt-s">
           Frames are read from shared memory — from the camera, or from MuJoCo, through the
-          same buffer. A 64-bit wall-clock timestamp is embedded in an extra image row before
-          encoding, so the receiver measures true one-way delay at decode time rather than
+          same buffer. Left and right images are packed side by side into a single frame before
+          encoding, so one stream carries both eyes and they cannot drift apart. A 64-bit
+          wall-clock timestamp is embedded in an extra image row, and with both machines
+          disciplined to NTP the receiver measures true one-way delay at decode time rather than
           assuming half the round trip. Encoding is GStreamer H.264 at ultra-low-latency
           settings, streamed as RTP over UDP with ULP-FEC redundancy, across a ZeroTier link.
         </p>
-
-        <!-- REPLACE: <img src="assets/video-pipeline.svg" alt="Video transmission pipeline"> -->
-        <figure class="media mt-m">
-          <div class="slot slot--flat"><b>Video transmission diagram</b><span>Source → sender → network → receiver, with the feedback loop into the quality controller</span></div>
-        </figure>
-
-        <div class="linkrow">
-          <a class="link" href="assets/system-architecture.pdf">Full system architecture <em>PDF</em></a>
-        </div>
       </div>
 
-      <div class="panel panel--accent">
-        <h4>When the link misbehaves</h4>
-        <p class="small">
-          On the public internet, packet loss and jitter are operating conditions rather than
-          failures. The sender runs a hysteresis-based state machine on the receiver's 50 Hz
-          feedback and steps the stream down, trading bitrate and frame rate against forward
-          error correction.
-        </p>
-        <div class="ladder">
-          <b>NORMAL</b><i>→</i><b>DEGRADED</b><i>→</i><b class="crit">CRITICAL</b><i>→</i><b>STALE</b>
+      <figure class="media mt-m">
+        <img src="assets/video-pipeline.svg"
+             alt="Video transmission pipeline: stereo frames packed into one frame, timestamped, encoded and streamed, then split back to left and right at the receiver, with receiver measurements feeding a quality controller that adapts the sender.">
+      </figure>
+
+      <div class="mt-m g-2-1">
+        <div class="panel panel--accent">
+          <h4>When the link misbehaves</h4>
+          <p class="small">
+            On the public internet, packet loss and jitter are operating conditions rather than
+            failures — the question is not whether the link degrades but what the system does
+            when it does.
+          </p>
+          <p class="small">
+            Hysteresis on the thresholds is what makes the ladder usable. Without it, a loss
+            rate hovering near a boundary makes the stream flap between states, and the
+            operator sees quality oscillate rather than settle.
+          </p>
         </div>
-        <p class="tiny">
-          Hysteresis on the thresholds keeps the system from flapping between states when loss
-          hovers near a boundary.
-        </p>
+
+        <div>
+          <h4>Stereo, not mono</h4>
+          <p class="small mt-s">
+            Depth perception matters for grasping, so the operator sees a true stereo pair.
+            Packing both eyes into one encoded frame costs horizontal resolution per eye and
+            buys guaranteed synchronisation — two separate streams would need to be aligned,
+            and drift between the eyes is intolerable in a headset.
+          </p>
+          <div class="linkrow">
+            <a class="link" href="assets/system-architecture.pdf">Full system architecture <em>PDF</em></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -252,18 +272,43 @@
       </p>
     </div>
 
-    <div class="g2">
+    <!-- row 1: annotation clip, given the larger share -->
+    <div class="g-2-1">
       <figure>
-        <!-- REPLACE: <video src="assets/curate-episode-prompt.mp4" autoplay muted loop playsinline></video> -->
-         <video src="assets/labeling.mp4" autoplay muted loop playsinline></video>
-        <figcaption>Annotation happens inside the interface, at the moment the operator still remembers what went wrong.</figcaption>
+        <!-- Poster should be the frame showing the SUCCESS / PARTIAL / FAILURE prompt,
+             so the annotation moment is what a reader sees before playback starts. -->
+        <video src="assets/curate-annotation.mp4" poster="assets/curate-annotation-poster.jpg"
+               autoplay muted loop playsinline></video>
+        <figcaption>
+          Annotation happens inside the interface, at the moment the operator still remembers
+          what went wrong.
+        </figcaption>
       </figure>
-      <figure>
-        <!-- REPLACE: <img src="assets/curate-rerun.png" alt="Rerun timeline"> -->
-        <div class="slot"><b>Rerun timeline</b><span>Head and wrist cameras, EE pose and command, contact force, gripper, gaze and target attention, intent labels</span></div>
-        <figcaption>Every stream on one synchronised timeline, which is what makes an episode auditable rather than merely stored.</figcaption>
-      </figure>
+      <div>
+        <h4>What gets written</h4>
+        <p class="small mt-s">
+          Every episode carries its outcome, the intent and phase labels produced as it ran,
+          and the full synchronised stream set — both wrist cameras, the head view,
+          end-effector pose and command, contact force, gripper state, and gaze.
+        </p>
+        <p class="small">
+          The operator also sees a running episode count and session time. That is a small
+          thing, and it exists because collecting a few hundred demonstrations is a session
+          you have to pace rather than a task you complete.
+        </p>
+      </div>
     </div>
+
+    <!-- row 2: Rerun, full width -->
+    <figure class="media mt-l">
+      <video src="assets/curate-rerun.mp4" autoplay muted loop playsinline></video>
+      <figcaption>
+        Every stream on one synchronised timeline, which is what makes an episode auditable
+        rather than merely stored. The position plots carry commanded against achieved per
+        axis, so tracking quality is visible alongside the video; the intent panel shows the
+        model's live estimate of target and arm with its confidence.
+      </figcaption>
+    </figure>
 
     <div class="mt-l g-1-1">
       <dl class="deflist">
@@ -305,16 +350,18 @@
           sorting, stacking, and assembly rather than being hand-built for one task.
         </p>
         <p class="small">
-          Complexity is earned rather than assumed: a hidden Markov baseline first, then a
-          GRU, then a transformer only where the simpler models demonstrably fall short.
+          Complexity is earned rather than assumed: a deterministic filter baseline first,
+          then a GRU, then a transformer only where the simpler models demonstrably fall
+          short. The model runs live inside the loop — its estimates and confidences are
+          logged alongside every episode, visible in the timeline above.
         </p>
-        <!-- REPLACE with a real comparison table once the numbers exist -->
+        <!-- REPLACE the dashes as the numbers land. -->
         <div class="panel mt-m">
           <h4>Model comparison</h4>
           <table class="mt-s">
             <thead><tr><th>Model</th><th>Accuracy</th><th>Inference</th></tr></thead>
             <tbody>
-              <tr><td>HMM</td><td class="num">—</td><td class="num">—</td></tr>
+              <tr><td>Baseline filter</td><td class="num">—</td><td class="num">—</td></tr>
               <tr><td>GRU</td><td class="num">—</td><td class="num">—</td></tr>
               <tr><td>Transformer</td><td class="num">—</td><td class="num">—</td></tr>
             </tbody>
@@ -385,7 +432,7 @@
           <tbody>
             <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--sim">Sim</span></td><td class="num">—</td></tr>
             <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
-            <tr><td>Intent prediction accuracy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
+            <tr><td>Intent and phase accuracy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
             <tr><td>Nudged vs. unnudged policy</td><td><span class="tag tag--pending">Pending</span></td><td class="num">—</td></tr>
             <tr><td>End-to-end one-way latency</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
           </tbody>
@@ -463,7 +510,12 @@
       <figure>
         <!-- REPLACE: <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video> -->
         <div class="slot"><b>Gaze and probability mass</b><span>Where the operator is looking, and the model's belief over candidate targets</span></div>
-        <figcaption>Gaze is used strictly as a predictive input. It never defines the ground-truth labels — using it for both would make the result circular.</figcaption>
+        <figcaption>
+          Logged gaze attention — the scene is dimmed to show where the operator is actually
+          looking, recorded alongside every episode. Gaze is used strictly as a predictive
+          input; it never defines the ground-truth labels, since using it for both would make
+          the result circular.
+        </figcaption>
       </figure>
       <figure>
         <!-- REPLACE: <video src="assets/nudge-intervention.mp4" autoplay muted loop playsinline></video> -->
@@ -525,13 +577,16 @@
         <figcaption>
           <!-- REPLACE this caption with your own account of the signal's shape.
                A signal you can explain beats a signal that looks clean. -->
-          The characteristic shape comes from the passivity observer draining and refilling the
-          energy tank during contact — describe the mechanism here in your own words.
+          Write your own account of why the signal behaves the way it does here.
         </figcaption>
       </figure>
       <div class="panel">
-        <h4>Also on hardware</h4>
-        <p class="small">Vision-based pushing control with an EKF and chance-constrained NMPC. Independent haptic control for the Sigma 7. A reusable MuJoCo simulation layer shared across projects.</p>
+        <h4>Also built</h4>
+        <p class="small">
+          Force-domain diffusion policies for tight-clearance insertion. Vision-based pushing
+          control with an EKF and chance-constrained NMPC. Independent haptic control for the
+          Sigma 7. A reusable MuJoCo simulation layer shared across projects.
+        </p>
       </div>
     </div>
 
@@ -557,7 +612,7 @@
       </div>
       <div class="exit">
         <a class="link" href="projects.html">Control and perception <em>→</em></a>
-        <p>Vision-based NMPC, underactuated control, simulation infrastructure.</p>
+        <p>Force-domain diffusion policies, vision-based NMPC, underactuated control.</p>
       </div>
       <div class="exit">
         <a class="link" href="formula-student.html">Formula Student <em>→</em></a>
@@ -580,9 +635,9 @@
       <div>
         <dt>Thesis</dt>
         <dd>
+          <!-- REPLACE with the exact title from your title page -->
           <strong>Informational Nudging in Teleoperated Manipulation</strong> — MSc thesis,
           Technical University of Munich, MIRMI, Haddadin lab.
-          <!-- REPLACE with the exact title from your title page -->
           <a class="link" style="margin-left:10px" href="assets/thesis.pdf">PDF</a>
         </dd>
       </div>
@@ -614,7 +669,6 @@
 <footer>
   <div class="wrap">
     <div class="foot__links">
-      <!-- REPLACE all four -->
       <a class="link" href="assets/cv.pdf">Curriculum vitae <em>PDF</em></a>
       <a class="link" href="https://github.com/AlexanderWegenerRobotics">GitHub <em>↗</em></a>
       <a class="link" href="https://www.linkedin.com/in/alexmauricewegener">LinkedIn <em>↗</em></a>

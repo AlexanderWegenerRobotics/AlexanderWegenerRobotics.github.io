@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 500" width="100%" role="img" aria-labelledby="vpTitle vpDesc">
+  <title id="vpTitle">Video transmission pipeline</title>
+  <desc id="vpDesc">Stereo frames are packed side by side into a single frame, timestamped, encoded and streamed over the network, then split back into left and right eyes at the receiver. Receiver measurements feed a quality controller that adapts the sender.</desc>
+
+  <style>
+    svg{
+      --ink:#14181A; --body:#3D4548; --mute:#788386; --faint:#A6AFB1;
+      --rule:#DCE2E3; --panel:#FFFFFF; --accent:#17697B; --tint:#F1F7F8;
+      --font: Archivo, ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+    .bx   { fill:var(--panel); stroke:var(--rule); stroke-width:1.5 }
+    .bxT  { fill:var(--tint);  stroke:var(--accent); stroke-width:1.5 }
+    .frame{ fill:var(--tint);  stroke:var(--accent); stroke-width:1.25 }
+    .hd   { font-family:var(--mono); font-size:11.5px; font-weight:700;
+            letter-spacing:.16em; fill:var(--accent) }
+    .ln   { font-family:var(--font); font-size:12.5px; fill:var(--body) }
+    .lbl  { font-family:var(--mono); font-size:10.5px; fill:var(--mute); letter-spacing:.08em }
+    .lblA { font-family:var(--mono); font-size:10.5px; fill:var(--accent); letter-spacing:.08em }
+    .eye  { font-family:var(--mono); font-size:10px; font-weight:700; fill:var(--accent); letter-spacing:.06em }
+    .fl   { stroke:#9AA3A5; stroke-width:1.75; fill:none }
+    .fb   { stroke:var(--accent); stroke-width:1.75; fill:none; stroke-dasharray:6 4; stroke-linecap:round }
+    .st   { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.09em; fill:var(--body) }
+  </style>
+
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9AA3A5"/></marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#17697B"/></marker>
+  </defs>
+
+  <!-- ============ 01 SOURCE + STEREO PACKING ============ -->
+  <rect class="bx" x="16" y="70" width="252" height="176" rx="3"/>
+  <text class="hd" x="36" y="96">SOURCE</text>
+
+  <!-- two eyes -->
+  <rect class="frame" x="36" y="112" width="46" height="34" rx="2"/>
+  <text class="eye" x="59" y="133" text-anchor="middle">L</text>
+  <rect class="frame" x="90" y="112" width="46" height="34" rx="2"/>
+  <text class="eye" x="113" y="133" text-anchor="middle">R</text>
+
+  <path class="fl" marker-end="url(#a1)" d="M 144 129 L 166 129"/>
+
+  <!-- packed frame -->
+  <rect class="frame" x="172" y="112" width="76" height="34" rx="2"/>
+  <line x1="210" y1="112" x2="210" y2="146" stroke="#17697B" stroke-width="1" stroke-dasharray="3 3"/>
+  <text class="eye" x="191" y="133" text-anchor="middle">L</text>
+  <text class="eye" x="229" y="133" text-anchor="middle">R</text>
+
+  <text class="ln" x="36" y="176">Stereo pair packed into one frame —</text>
+  <text class="ln" x="36" y="194">a single encode keeps the eyes in sync</text>
+  <text class="lblA" x="36" y="220">64-bit wall-clock stamp embedded</text>
+  <text class="lbl" x="36" y="236">Mono: one frame, same path</text>
+
+  <path class="fl" marker-end="url(#a1)" d="M 272 158 L 296 158"/>
+
+  <!-- ============ 02 SENDER ============ -->
+  <rect class="bx" x="302" y="70" width="222" height="176" rx="3"/>
+  <text class="hd" x="322" y="96">SENDER</text>
+  <text class="ln" x="322" y="126">GStreamer, H.264</text>
+  <text class="ln" x="322" y="144">ultra-low-latency encode</text>
+  <text class="ln" x="322" y="174">RTP payload + ULP-FEC</text>
+  <text class="ln" x="322" y="192">redundancy</text>
+  <text class="ln" x="322" y="222">Streamed over UDP</text>
+
+  <!-- ============ NETWORK ============ -->
+  <path class="fl" marker-end="url(#a1)" d="M 530 140 L 776 140"/>
+  <text class="lbl" x="653" y="120" text-anchor="middle">ZeroTier VPN</text>
+  <text class="lbl" x="653" y="172" text-anchor="middle">Boston &#8594; Abu Dhabi</text>
+
+  <!-- ============ 03 RECEIVER ============ -->
+  <rect class="bx" x="782" y="70" width="282" height="176" rx="3"/>
+  <text class="hd" x="802" y="96">RECEIVER</text>
+  <text class="ln" x="802" y="126">Depayload, H.264 decode</text>
+  <text class="ln" x="802" y="150">Frame split back to L / R,</text>
+  <text class="ln" x="802" y="168">rendered as stereo for depth</text>
+  <text class="ln" x="802" y="192">Latest-frame queue</text>
+  <text class="lblA" x="802" y="222">Measures OWD, jitter, loss, FPS</text>
+
+  <!-- ============ FEEDBACK ============ -->
+  <path class="fb" marker-end="url(#a2)" d="M 900 252 C 900 306, 878 336, 826 338"/>
+  <text class="lblA" x="922" y="298">RTP feedback</text>
+  <text class="lblA" x="922" y="314">@ 50 Hz</text>
+
+  <!-- ============ 04 QUALITY CONTROLLER ============ -->
+  <rect class="bxT" x="302" y="308" width="520" height="128" rx="3"/>
+  <text class="hd" x="324" y="336">QUALITY CONTROLLER</text>
+  <text class="ln" x="324" y="360">Hysteresis-based. Trades bitrate and frame rate against FEC</text>
+  <text class="ln" x="324" y="378">redundancy as the link degrades.</text>
+
+  <rect x="324" y="394" width="80" height="24" rx="2" fill="#fff" stroke="#DCE2E3"/>
+  <text class="st" x="364" y="410" text-anchor="middle">NORMAL</text>
+  <text class="lbl" x="412" y="410" text-anchor="middle">&#8594;</text>
+  <rect x="422" y="394" width="96" height="24" rx="2" fill="#fff" stroke="#DCE2E3"/>
+  <text class="st" x="470" y="410" text-anchor="middle">DEGRADED</text>
+  <text class="lbl" x="526" y="410" text-anchor="middle">&#8594;</text>
+  <rect x="536" y="394" width="86" height="24" rx="2" fill="#fff" stroke="#C9A0A0"/>
+  <text class="st" x="579" y="410" text-anchor="middle" fill="#8A3A3A">CRITICAL</text>
+  <text class="lbl" x="630" y="410" text-anchor="middle">&#8594;</text>
+  <rect x="640" y="394" width="68" height="24" rx="2" fill="#fff" stroke="#DCE2E3"/>
+  <text class="st" x="674" y="410" text-anchor="middle">STALE</text>
+
+  <!-- controller adapts sender -->
+  <path class="fb" marker-end="url(#a2)" d="M 380 306 L 380 252"/>
+  <text class="lblA" x="394" y="282">adapts</text>
+
+  <!-- ============ FOOTNOTE ============ -->
+  <line x1="16" y1="466" x2="1064" y2="466" stroke="#DCE2E3" stroke-width="1"/>
+  <text class="lbl" x="16" y="488">One-way delay is measured from the embedded timestamp at decode time, not inferred from round-trip.</text>
+</svg>

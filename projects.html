@@ -41,6 +41,137 @@
   </div>
 </section>
 
+<!-- ============================================================
+     FORCE INSERTION
+     Paste this directly after the closing </section> of the hero
+     block in projects.html, so it sits ABOVE the vision-MPC section.
+     ============================================================ -->
+
+<section data-stage="nudging">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">Force-domain diffusion policy · Boston University, 2026</span>
+      <h2>Teaching a policy to feel its way into a hole.</h2>
+      <p>
+        Sub-millimetre clearance insertion, controlled entirely in the force domain — no
+        vision, no privileged pose. A scripted expert collects demonstrations, generative
+        policies learn from them, and the learned policy is deployed back into the same
+        environment and measured against the expert that taught it.
+      </p>
+    </div>
+
+    <div class="g-1-1">
+      <div>
+        <h3>Collecting the demonstrations</h3>
+        <p class="small mt-s">
+          A four-phase expert runs approach, contact, search, and insert under Cartesian
+          impedance control, with feed-forward Lissajous force profiles during the search.
+          Every episode perturbs the hole pose and the approach setpoint independently, so the
+          dataset covers a spread of misalignment conditions rather than one nominal case.
+          Trajectories are logged at 200 Hz into HDF5 with per-episode outcome metadata.
+        </p>
+        <p class="tiny">
+          Expert policy adapted from Wu et al., <em>1 kHz Behavior Tree for Self-adaptable
+          Tactile Insertion</em>, ICRA 2024.
+        </p>
+      </div>
+      <div>
+        <h3>Learning from them</h3>
+        <p class="small mt-s">
+          Two model families on an identical observation and action interface: a diffusion
+          policy (DDPM, sampled with DDIM) and a CVAE. The observation is eighteen dimensions
+          of pure force and motion — external wrench, internal wrench from joint torques, and
+          end-effector velocity. The action is a six-dimensional feed-forward wrench, filtered
+          and applied through impedance control at 200 Hz.
+        </p>
+        <p class="small">
+          An architecture search across six variants found early fusion of all input streams
+          to be the decisive design choice.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============ THE RESULT ============ -->
+    <div class="mt-l">
+      <h3>The learned policy beats the expert that trained it</h3>
+      <table class="mt-m">
+        <thead>
+          <tr>
+            <th>Policy</th>
+            <th>Cylinder <span style="text-transform:none;letter-spacing:0">(trained)</span></th>
+            <th>Rectangle</th>
+            <th>Hex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Deterministic expert</td><td class="num">61%</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>DDPM-50</td><td class="num">67%</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>DDIM-5</td><td class="num">62%</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td><strong>DDIM-10</strong></td><td class="num"><strong>78%</strong></td><td class="num">74%</td><td class="num">65%</td></tr>
+        </tbody>
+      </table>
+      <p class="tiny mt-s">
+        Fifty closed-loop episodes with randomised hole-pose perturbation.
+        <span class="tag tag--sim" style="margin-left:6px">Sim</span>
+        Rectangle and hex columns are zero-shot — DDIM-10 trained only on the cylindrical peg,
+        deployed on unseen geometries without retraining.
+      </p>
+    </div>
+
+    <div class="mt-l g2">
+      <figure>
+        <img src="assets/insertion_wide.gif" alt="Insertion, wide view — four-phase sequence under impedance control">
+        <figcaption><span class="sim">Sim</span>Franka Panda, MuJoCo. Approach, contact, search, insert.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/insertion_closeup.gif" alt="Insertion close-up, sub-millimetre clearance">
+        <figcaption><span class="sim">Sim</span>The search phase feeling for alignment it cannot see.</figcaption>
+      </figure>
+    </div>
+
+    <!-- ============ THE FINDING WORTH KEEPING ============ -->
+    <div class="mt-l g-2-1">
+      <figure>
+        <img src="assets/staircase_ddpm_vs_ddim.png" alt="Tracking comparison at 3 Hz versus 15 Hz, same weights, different sampler">
+        <figcaption>
+          DDPM-50 emits a staircase that cannot follow the expert's Lissajous search pattern.
+          DDIM-10 tracks it faithfully.
+        </figcaption>
+      </figure>
+      <div class="panel panel--accent">
+        <h4>Inference rate is a control problem</h4>
+        <p class="small">
+          The same trained weights fail or succeed depending only on how fast they can be
+          sampled. DDIM sampling cut inference from roughly 325 ms to 59 ms without retraining
+          — about 3 Hz to 15 Hz — and that alone was the difference between a policy that
+          tracked the reference and one that stepped past it.
+        </p>
+        <p class="tiny">
+          In a contact-rich loop, a policy's deployment rate is not an implementation detail.
+          It is part of whether the policy works at all.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-m panel measure">
+      <h4>Why this task, twice</h4>
+      <p class="small">
+        Tight-clearance insertion is also one of the two tasks in
+        <a href="thesis.html" style="border-bottom:1px solid var(--rule)">the user study</a> —
+        there, measuring what guidance does for a human operator. Here, measuring what a
+        learned policy can do on the same problem. The human side and the policy side of the
+        same manipulation task.
+      </p>
+    </div>
+
+    <div class="linkrow">
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/force-insertion-sim">Simulation and data collection <em>↗</em></a>
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/force-insertion-policy">Policy training and export <em>↗</em></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ VISION MPC ============ -->
 <section data-stage="collect">
   <div class="wrap">
@@ -88,8 +219,7 @@
 
     <div class="mt-l g-2-1">
       <figure>
-        <!-- REPLACE: <img src="assets/vision-mpc.gif" alt="Vision-based pushing"> -->
-        <div class="slot"><b>Pushing under injected disturbance</b><span>Acquire → Approach → Pushing → Success / Lost / Failed</span></div>
+        <img src="assets/vision-mpc.gif" alt="Vision-based pushing under injected disturbance">
         <figcaption><span class="sim">Sim</span>MuJoCo, with the perception pipeline running on rendered camera frames rather than ground-truth state.</figcaption>
       </figure>
       <div class="panel panel--accent">
@@ -104,7 +234,7 @@
     </div>
 
     <div class="linkrow">
-      <a class="link" href="https://github.com/AlexanderWegenerRobotics/vision_mpc">Repository <em>↗</em></a>
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/vision-mpc">Repository <em>↗</em></a>
       <a class="link" href="assets/vision-mpc-report.pdf">Report <em>PDF</em></a>
     </div>
   </div>
@@ -140,8 +270,7 @@
 
     <div class="mt-m g-2-1">
       <figure>
-        <!-- REPLACE: <img src="assets/double-pendulum.gif" alt="Double pendulum swing-up"> -->
-        <div class="slot slot--flat"><b>Swing-up and catch</b><span>Three controllers, same plant</span></div>
+        <img src="assets/double-pendulum.gif" alt="Double pendulum swing-up">
       </figure>
       <div class="panel">
         <h4>Why it runs in two processes</h4>
@@ -155,7 +284,7 @@
     </div>
 
     <div class="linkrow">
-      <a class="link" href="https://github.com/AlexanderWegenerRobotics">Repository <em>↗</em></a>
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/rotary-pendulum-sim">Repository <em>↗</em></a>
     </div>
   </div>
 </section>
@@ -186,7 +315,7 @@
           impedance and guidance-force rendering in a 1 kHz loop — maintained independently of
           the teleoperation system it originally served.
         </p>
-        <div class="linkrow"><a class="link" href="https://github.com/AlexanderWegenerRobotics">Repository <em>↗</em></a></div>
+        <div class="linkrow"><a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-haptic-interface">Repository <em>↗</em></a></div>
       </div>
     </div>
   </div>
