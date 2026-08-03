@@ -344,30 +344,21 @@
       <div>
         <h3>Intent recognition</h3>
         <p class="small mt-s">
-          Predicts what the operator is about to do — which object, which arm, which
-          destination, and which phase of the task — from gaze, arm state, and object
-          positions. The representation is deliberately task-agnostic, so it carries across
-          sorting, stacking, and assembly rather than being hand-built for one task.
+          Predicts what the operator is about to do — which object or bin they are acting
+          toward, and which phase they are in: idle, approach, grasp, transport, place.
+          Causally, one frame at a time, so the rest of the system can react while the action
+          is still happening rather than after it. The representation is deliberately
+          task-agnostic, so it carries across sorting, stacking, and assembly.
         </p>
         <p class="small">
-          Complexity is earned rather than assumed: a deterministic filter baseline first,
-          then a GRU, then a transformer only where the simpler models demonstrably fall
-          short. The model runs live inside the loop — its estimates and confidences are
-          logged alongside every episode, visible in the timeline above.
+          Three model families sit behind one interface and consume identical features — a
+          structured HMM, a GRU, and a causal transformer — so any difference in score is
+          attributable to the model rather than its inputs.
         </p>
-        <!-- REPLACE the dashes as the numbers land. -->
-        <div class="panel mt-m">
-          <h4>Model comparison</h4>
-          <table class="mt-s">
-            <thead><tr><th>Model</th><th>Accuracy</th><th>Inference</th></tr></thead>
-            <tbody>
-              <tr><td>Baseline filter</td><td class="num">—</td><td class="num">—</td></tr>
-              <tr><td>GRU</td><td class="num">—</td><td class="num">—</td></tr>
-              <tr><td>Transformer</td><td class="num">—</td><td class="num">—</td></tr>
-            </tbody>
-          </table>
-          <p class="tiny mt-s">Intent and phase accuracy against hand labels, with inference time on deployment hardware.</p>
-        </div>
+        <p class="tiny">
+          Reported as macro F1, not accuracy: idle is more than half of all frames, and a
+          model that has learned nothing still reaches sixty per cent frame accuracy here.
+        </p>
       </div>
 
       <div>
@@ -392,6 +383,46 @@
         </p>
       </div>
     </div>
+
+    <!-- ============ ABLATION LADDER ============ -->
+    <div class="mt-l g-2-1">
+      <figure>
+        <img src="assets/train-ablation-ladder.png" alt="Validation macro F1 for four conditions: shuffled features at 0.244, features only at 0.786, GRU with memory at 0.862, transformer with attention at 0.846">
+        <figcaption>
+          Each row differs from the one above it by exactly one thing, so every claim has a
+          control.
+        </figcaption>
+      </figure>
+      <div class="panel panel--accent">
+        <h4>What each ingredient is worth</h4>
+        <p class="small">
+          Features alone carry almost all of it: 0.244 at the chance floor to 0.786 with no
+          temporal context at all. Adding memory buys another 0.076. Adding attention buys
+          nothing, and tripling capacity makes it worse.
+        </p>
+        <p class="small">
+          Three unrelated mechanisms — a Bayesian filter, a recurrent state reset every frame,
+          and attention restricted to a single frame — land within 0.011 of each other around
+          0.78. That number is a property of the data, not of any model.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-m panel measure">
+      <h4>The null result was predicted, not discovered</h4>
+      <p class="small">
+        Before the transformer was written, segment-duration statistics put phase lengths at
+        57 to 137 frames, and a boundary analysis showed the residual errors were segment
+        <em>extent</em> rather than missed segments. Both said the task is short-horizon. The
+        transformer was then given a 1023-frame receptive field — about 34 seconds, roughly two
+        full pick-and-place cycles, deliberately more reach than the measured dependency
+        length — and gained nothing.
+      </p>
+      <p class="tiny">
+        Stating the prediction before running the experiment is what makes the negative result
+        worth reporting.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -411,7 +442,68 @@
       </p>
     </div>
 
-    <figure class="media">
+    <h3>Intent and phase, three models on one timeline</h3>
+    <figure class="media mt-m">
+      <!-- REPLACE with the m4v/mp4 export of the playback tool -->
+      <video src="assets/eval-intent-playback.mp4" autoplay muted loop playsinline></video>
+      <figcaption>
+        Ground truth against all three models as phase ribbons, running causally — each model
+        sees only the past, one frame at a time. Per-clip accuracy is shown live, including
+        where the models disagree with the label and with each other.
+      </figcaption>
+    </figure>
+
+    <div class="mt-l g-1-1">
+      <figure>
+        <img src="assets/eval-model-comparison.png" alt="Held-out macro F1 for HMM, GRU and transformer, with paired difference intervals showing the GRU-transformer difference crossing zero">
+        <figcaption>
+          Held-out test split, eleven episodes never used for fitting or selection. The
+          GRU–transformer interval crosses zero: that is a tie, and it is reported as one.
+        </figcaption>
+      </figure>
+      <div>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Params</th><th>Test macro F1</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HMM + duration model</td><td class="num">—</td><td class="num">0.768</td></tr>
+            <tr><td>GRU</td><td class="num">28.5k</td><td class="num">0.832</td></tr>
+            <tr><td>Transformer</td><td class="num">28.8k</td><td class="num">0.833</td></tr>
+          </tbody>
+        </table>
+        <p class="tiny mt-s">
+          Both learned models beat the structured baseline by about 0.065 with a 95% interval
+          clear of zero. Against each other: +0.001, interval [−0.017, +0.018].
+        </p>
+      </div>
+    </div>
+
+    <!-- ============ LATENCY — THE DEPLOYMENT DECISION ============ -->
+    <div class="mt-l g-2-1">
+      <figure>
+        <img src="assets/eval-intent-latency.png" alt="Per-frame inference latency for HMM, GRU and transformer against a 30 Hz control-loop budget, log scale, with the transformer exceeding the budget">
+        <figcaption>
+          Per-frame cost, median and 99th percentile, against the control loop's budget.
+        </figcaption>
+      </figure>
+      <div class="panel panel--accent">
+        <h4>The best model is not the deployable one</h4>
+        <p class="small">
+          The module runs inside a 30 Hz loop. The GRU's per-frame work is constant; the
+          transformer re-encodes its whole context buffer every frame and costs roughly an
+          order of magnitude more, with its p99 over budget.
+        </p>
+        <p class="small">
+          So the GRU ships — and it is not the model that scored highest on validation. In a
+          real-time system, inference rate is part of whether a model works at all, not an
+          implementation detail discovered afterwards.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="mt-l">Manipulation policy</h3>
+    <figure class="media mt-m">
       <img src="assets/eval-act-replay.png" alt="Predicted versus logged commanded trajectories for both arms across x, y, z and gripper on a held-out episode">
       <figcaption>
         Open-loop replay on a held-out episode: predicted actions against the operator's logged
@@ -423,27 +515,35 @@
 
     <div class="mt-l g-2-1">
       <div>
-        <!-- REPLACE the dashes with real numbers as they land.
+        <!-- REPLACE remaining dashes as the numbers land.
              Keep the WHERE column — labelled rows are the point of this table. -->
         <table>
           <thead>
             <tr><th>Result</th><th>Where</th><th>Value</th></tr>
           </thead>
           <tbody>
+            <tr><td>Intent and phase macro F1, GRU</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.832</td></tr>
+            <tr><td>Intent inference, GRU p99</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">1.5 ms</td></tr>
+            <tr><td>ACT open-loop replay MAE</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.0385</td></tr>
             <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--sim">Sim</span></td><td class="num">—</td></tr>
             <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
-            <tr><td>Intent and phase accuracy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
             <tr><td>Nudged vs. unnudged policy</td><td><span class="tag tag--pending">Pending</span></td><td class="num">—</td></tr>
-            <tr><td>End-to-end one-way latency</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
           </tbody>
         </table>
       </div>
       <div class="panel">
         <h4>What is not done yet</h4>
         <p class="small">
-          The paired policy comparison — the result the research question turns on — has not
-          been run. The perception stack is in integration; object pose currently comes from
-          simulation ground truth rather than the vision pipeline.
+          Both models are evaluated on replayed episodes. Closed-loop behaviour under real
+          timing is not yet measured, and the paired policy comparison — the result the
+          research question turns on — has not been run.
+        </p>
+        <p class="small">
+          Fifty-eight training episodes. Intervals are wide and honestly so: differences under
+          about 0.02 macro F1 are not measurable on this validation set. Around five per cent
+          of committed target labels name a candidate outside the model's own pool, mostly
+          during transport — unwinnable frames for every model here, and an open question
+          about what "target" means while carrying an object.
         </p>
         <p class="tiny">Updated July 2026.</p>
       </div>
@@ -536,7 +636,6 @@
         </div>
 
         <figure>
-          <!-- REPLACE: <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video> -->
           <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video>
           <figcaption>
             Logged gaze attention — the scene is dimmed to show where the operator is actually
@@ -583,12 +682,10 @@
 
     <div class="g2">
       <figure>
-        <!-- REPLACE: <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video> -->
         <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video>
         <figcaption>Sequential assembly — one of the two study tasks, on the physical avatar.</figcaption>
       </figure>
       <figure>
-        <!-- REPLACE: <video src="assets/hw-insertion.mp4" autoplay muted loop playsinline></video> -->
         <video src="assets/hw-insertion.mp4" autoplay muted loop playsinline></video>
         <figcaption>The second task, where force feedback does the most work.</figcaption>
       </figure>
@@ -596,7 +693,6 @@
 
     <div class="mt-m g2">
       <figure>
-        <!-- REPLACE: <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video> -->
         <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video>
         <figcaption>
           Study participant driving the avatar. Published with consent.
@@ -604,7 +700,6 @@
         </figcaption>
       </figure>
       <figure>
-        <!-- REPLACE: <video src="assets/hw-operator-view.mp4" autoplay muted loop playsinline></video> -->
          <video src="assets/hw-operator-view.mp4" autoplay muted loop playsinline></video>
         <figcaption>
           The earlier interface: camera switching, force and torque gauges, assistance

@@ -467,64 +467,88 @@
       changes what their demonstrations can teach.
     </p>
 
-    <div class="mt-l g-1-1">
-      <div class="finding finding--done">
-        <span class="finding__tag">Established — MSc thesis, TU Munich</span>
-        <h3>Nudging measurably improves the operator.</h3>
-        <p class="small mt-s">
-          A ten-participant study across two tasks — gearbox assembly and tight-clearance
-          tactile insertion — compared six feedback conditions from fully manual to combined
-          informational and dynamic assistance. Roughly three hundred trials, randomised
-          order, NASA-TLX after every trial, contact forces and torques logged from the robot.
-        </p>
-        <p class="small">
-          Assisted conditions reduced perceived workload by twenty to forty TLX points on the
-          insertion task, cut peak contact forces, and raised success rates without costing
-          completion time. Notably, combining informational and dynamic assistance was not
-          better than either alone — more help is not monotonically better.
-        </p>
-        <div class="linkrow">
-          <a class="link" href="thesis.html">The study in full <em>→</em></a>
+    <!-- ============ STAGE ONE — ESTABLISHED ============ -->
+    <div class="mt-l finding finding--done">
+      <span class="finding__tag">Established — MSc thesis, TU Munich</span>
+      <div class="g-2-1">
+        <div>
+          <h3>Nudging measurably improves the operator.</h3>
+          <p class="small mt-s">
+            A ten-participant study across two tasks — gearbox assembly and tight-clearance
+            tactile insertion — compared six feedback conditions, from fully manual to
+            combined informational and dynamic assistance. Roughly three hundred trials,
+            randomised order with no condition repeating back to back, NASA-TLX after every
+            trial, contact forces and torques logged from the robot.
+          </p>
+          <p class="small">
+            Assistance cut perceived workload sharply and reduced peak contact forces without
+            costing completion time. The finding worth arguing about: combining informational
+            and dynamic assistance was <strong>not</strong> better than either channel alone.
+            More help is not monotonically better.
+          </p>
+          <div class="linkrow">
+            <a class="link" href="thesis.html">Method, all six conditions, and the full results <em>→</em></a>
+          </div>
+        </div>
+
+        <div>
+          <table>
+            <thead>
+              <tr><th>Insertion task</th><th>Time</th><th>TLX</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Manual</td><td class="num">160.9 s</td><td class="num">70.3</td></tr>
+              <tr><td>Pure information</td><td class="num">161.2 s</td><td class="num">26.9</td></tr>
+              <tr><td>Pure dynamic</td><td class="num">158.4 s</td><td class="num">27.7</td></tr>
+            </tbody>
+          </table>
+          <p class="tiny mt-s">
+            Mode-wise means over per-participant averages. Workload falls by more than forty
+            points while completion time does not move — in a precision-limited task,
+            difficulty is not about speed.
+          </p>
         </div>
       </div>
+    </div>
 
-      <div class="finding finding--open">
-        <span class="finding__tag">Open — current work</span>
-        <h3>Does it improve the policies too?</h3>
-        <p class="small mt-s">
-          Better operators are not the point. Better data is. The current system predicts
-          operator intent in real time and uses that prediction to shape what the operator
-          sees — the ghost overlay, predictive cues — so the demonstrations they produce are
-          cleaner and more consistent.
-        </p>
-        <p class="small">
-          The test is a paired comparison: two policies with identical architecture and
-          training budget, one trained on nudge-assisted demonstrations and one on
-          unassisted, evaluated on task success. That reframes a noisy human-factors
-          question as a single number a robot-learning team already cares about.
-        </p>
+    <!-- ============ STAGE TWO — OPEN ============ -->
+    <div class="mt-l finding finding--open">
+      <span class="finding__tag">Open — current work</span>
+      <div class="g-1-1">
+        <div>
+          <h3>Does it improve the policies too?</h3>
+          <p class="small mt-s">
+            Better operators are not the point. Better data is. The current system predicts
+            operator intent in real time — target object, arm, destination, phase — and uses
+            that prediction to shape what the operator sees, so the demonstrations they
+            produce are cleaner and more consistent.
+          </p>
+          <p class="small">
+            The test is a paired comparison: two policies with identical architecture and
+            training budget, one trained on nudge-assisted demonstrations and one on
+            unassisted, evaluated on task success. That reframes a noisy human-factors
+            question as a single number a robot-learning team already cares about.
+          </p>
+          <p class="tiny">
+            The interface and the intent model are running. The comparison has not been run
+            yet — the Evaluate table above says so.
+          </p>
+        </div>
+
+        <figure>
+          <!-- REPLACE: <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video> -->
+          <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video>
+          <figcaption>
+            Logged gaze attention — the scene is dimmed to show where the operator is actually
+            looking, recorded alongside every episode. Gaze is used strictly as a predictive
+            input; it never defines the ground-truth labels, since using it for both would
+            make the result circular.
+          </figcaption>
+        </figure>
       </div>
     </div>
 
-    <div class="mt-l g2">
-      <figure>
-        <!-- REPLACE: <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>Gaze and probability mass</b><span>Where the operator is looking, and the model's belief over candidate targets</span></div>
-        <figcaption>
-          Logged gaze attention — the scene is dimmed to show where the operator is actually
-          looking, recorded alongside every episode. Gaze is used strictly as a predictive
-          input; it never defines the ground-truth labels, since using it for both would make
-          the result circular.
-        </figcaption>
-      </figure>
-      <figure>
-        <!-- REPLACE: <video src="assets/nudge-intervention.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>The nudge itself</b><span>What changes in the operator's view, and when</span></div>
-        <figcaption>The intervention happens live, during collection — it is not a post-hoc filter on the data.</figcaption>
-      </figure>
-    </div>
-
-    <div class="mt-m g3">
+    <div class="mt-l g3">
       <div class="panel">
         <h4>Gaze as input, never as label</h4>
         <p class="tiny">Using the same signal to predict and to define ground truth would invalidate the result.</p>
@@ -559,14 +583,33 @@
 
     <div class="g2">
       <figure>
-        <!-- REPLACE: <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>Operator on the Sigma 7</b><span>Force feedback, VR headset, thesis platform</span></div>
-        <figcaption>Study participant operating the avatar with force feedback. Published with consent. <span style="font-family:var(--data);font-size:11px;color:var(--faint)">2025</span></figcaption>
+        <!-- REPLACE: <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video> -->
+        <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video>
+        <figcaption>Sequential assembly — one of the two study tasks, on the physical avatar.</figcaption>
       </figure>
       <figure>
-        <!-- REPLACE: <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video> -->
-        <div class="slot"><b>Gearbox assembly on hardware</b><span>Franka Panda, pan-tilt head, ArUco-based perception</span></div>
-        <figcaption>One of the two study tasks, running on the physical avatar.</figcaption>
+        <!-- REPLACE: <video src="assets/hw-insertion.mp4" autoplay muted loop playsinline></video> -->
+        <video src="assets/hw-insertion.mp4" autoplay muted loop playsinline></video>
+        <figcaption>The second task, where force feedback does the most work.</figcaption>
+      </figure>
+    </div>
+
+    <div class="mt-m g2">
+      <figure>
+        <!-- REPLACE: <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video> -->
+        <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video>
+        <figcaption>
+          Study participant driving the avatar. Published with consent.
+          <span style="font-family:var(--data);font-size:11px;color:var(--faint)">2025</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <!-- REPLACE: <video src="assets/hw-operator-view.mp4" autoplay muted loop playsinline></video> -->
+         <video src="assets/hw-operator-view.mp4" autoplay muted loop playsinline></video>
+        <figcaption>
+          The earlier interface: camera switching, force and torque gauges, assistance
+          controls. Separate recordings — these two views are not time-synchronised.
+        </figcaption>
       </figure>
     </div>
 
@@ -575,34 +618,23 @@
         <!-- REPLACE: <img src="assets/hw-force-signal.png" alt="Force feedback signal"> -->
         <div class="slot slot--flat"><b>Force feedback signal</b><span>Passivity-based controller, logged from a real trial</span></div>
         <figcaption>
-          <!-- REPLACE this caption with your own account of the signal's shape.
+          <!-- REPLACE with your own account of the signal's shape.
                A signal you can explain beats a signal that looks clean. -->
           Write your own account of why the signal behaves the way it does here.
         </figcaption>
       </figure>
       <div class="panel">
-        <h4>Also built</h4>
+        <h4>Since then</h4>
         <p class="small">
-          Force-domain diffusion policies for tight-clearance insertion. Vision-based pushing
-          control with an EKF and chance-constrained NMPC. Independent haptic control for the
-          Sigma 7. A reusable MuJoCo simulation layer shared across projects.
+          A revised haptic controller followed the study, maintained as its own project. The
+          signal alongside is from that work.
+        </p>
+        <p class="small">
+          Also built: force-domain diffusion policies for tight-clearance insertion,
+          vision-based pushing control with an EKF and chance-constrained NMPC, and a reusable
+          MuJoCo simulation layer shared across projects.
         </p>
       </div>
-    </div>
-
-    <div class="mt-l g3">
-      <figure>
-        <div class="slot"><b>Peg-board insertion</b><span>Contact-rich assembly</span></div>
-        <figcaption><span class="sim">Sim</span>MuJoCo, with CoACD convex decomposition of concave geometry.</figcaption>
-      </figure>
-      <figure>
-        <div class="slot"><b>Gearbox assembly</b><span>High decision density</span></div>
-        <figcaption><span class="sim">Sim</span>Built to make contact-rich assembly simulatable at all.</figcaption>
-      </figure>
-      <figure>
-        <div class="slot"><b>Assembly, same interface</b><span>No rework between tasks</span></div>
-        <figcaption>Evidence that the intent representation carries across tasks rather than being fitted to sorting.</figcaption>
-      </figure>
     </div>
 
     <div class="exits">
@@ -644,8 +676,10 @@
       <div>
         <dt>Paper</dt>
         <dd>
-          <!-- REPLACE with the full citation of the paper you co-authored -->
-          Co-authored publication — full citation here.
+          L. Chen et al., "Enhanced Robotic Navigation in Deformable Environments using Learning
+          from Demonstration and Dynamic Modulation," 2025 IEEE/RSJ International Conference on
+          Intelligent Robots and Systems (IROS), Hangzhou, China, 2025, pp. 9940-9947,
+          <a class="link" style="margin-left:6px" href="https://doi.org/10.1109/IROS60139.2025.11247327">DOI</a>
         </dd>
       </div>
       <div>
