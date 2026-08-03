@@ -383,3 +383,63 @@ footer{ border-top:1px solid var(--rule); padding:76px 0 96px }
   table{ font-size:13px }
   th,td{ padding:9px 8px 9px 0 }
 }
+
+/* ============================================================
+   TIMELINE — a measurement track, not a résumé
+   ============================================================ */
+.track{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-auto-flow:column; grid-auto-columns:1fr;
+  border-top:1px solid var(--ink);
+}
+.track__item{
+  position:relative;
+  padding:26px 20px 0 0;
+  border-right:1px solid var(--rule-2);
+}
+.track__item:last-child{ border-right:0; padding-right:0 }
+
+/* tick mark on the rule */
+.track__item::before{
+  content:""; position:absolute; top:-1px; left:0;
+  width:1px; height:11px; background:var(--ink);
+}
+
+.track__item > *,
+.track__item > a{ display:block; text-decoration:none; color:inherit }
+.track__item > a{ padding-bottom:4px }
+
+.track__yr{
+  font-family:var(--data); font-size:10.5px; letter-spacing:.11em;
+  color:var(--mute); margin-bottom:9px;
+}
+.track__role{
+  font-family:var(--display); font-size:14.5px; font-weight:650;
+  line-height:1.24; color:var(--ink); letter-spacing:-.008em;
+  margin-bottom:5px;
+}
+.track__note{
+  font-size:12.5px; line-height:1.4; color:var(--mute);
+}
+
+/* the one clickable entry earns a visible affordance */
+.track__item--wide > a .track__role{
+  border-bottom:1px solid var(--rule);
+  display:inline; padding-bottom:2px;
+  transition:border-color .2s ease;
+}
+.track__item--wide > a:hover .track__role{ border-bottom-color:var(--ink) }
+
+/* current position */
+.track__item--now::before{ background:var(--collect); width:2px; height:15px }
+.track__item--now .track__yr{ color:var(--collect) }
+
+@media (max-width:900px){
+  .track{ grid-auto-flow:row; grid-auto-columns:auto; border-top:0 }
+  .track__item{
+    border-right:0; border-top:1px solid var(--rule-2);
+    padding:18px 0 18px 20px;
+  }
+  .track__item::before{ top:-1px; left:0; width:11px; height:1px }
+  .track__item--now::before{ width:15px; height:2px }
+}

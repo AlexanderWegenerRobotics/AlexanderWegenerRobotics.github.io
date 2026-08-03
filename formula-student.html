@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formula Student — Alexander Wegener</title>
+<meta name="description" content="Four years building an electric race car: carbon-fibre battery containers, a 20,000 rpm motor, field-oriented control, and two years as technical director of a sixty-person team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="rail" aria-label="Navigation">
+  <span class="rail__mark">A. WEGENER</span>
+  <div class="rail__stages">
+    <a class="rail__stage is-active" data-stage="train" href="index.html#background"><span class="rail__dot"></span>Back</a>
+  </div>
+  <span class="rail__foot">FS</span>
+</nav>
+
+<div class="shell">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Formula Student · 2018 &ndash; 2022</span>
+    <h1>Where I learned that hardware has a deadline.</h1>
+    <p class="lede measure" style="margin-top:24px">
+      Four years on an electric race car — from laying carbon fibre for a battery container
+      to designing the motor, writing the field-oriented control that ran it, and eventually
+      running the whole team. A competition date does not move, and the car either runs or it
+      does not.
+    </p>
+
+    <div class="specs" style="margin-top:44px">
+      <div><b>60</b><span>people led</span></div>
+      <div><b>20,000</b><span>rpm, motor I designed</span></div>
+      <div><b>29 Nm</b><span>peak torque</span></div>
+      <div><b>7</b><span>subteams coordinated</span></div>
+      <div><b>4</b><span>years, 2 as director</span></div>
+    </div>
+
+    <!-- REPLACE: hero image — the finished car, or the car driving fast -->
+    <figure class="media" style="margin-top:44px">
+      <img src="assets/fs-car-finished.jpeg" alt="Finished Formula Student car">
+      <figcaption>The car the whole thing exists to produce.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 2018 · BATTERY ============ -->
+<section data-stage="collect">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">2018 · Battery department</span>
+      <h2>Starting with the parts that catch fire.</h2>
+      <p>
+        I joined in the battery department, building the high-voltage container out of carbon
+        fibre — including making the mould it was laid up in. Alongside it I helped develop
+        and integrate the dashboard for the HV charging system.
+      </p>
+    </div>
+    <p class="small measure">
+      It is a good place to start. A high-voltage pack on a student car is the subsystem where
+      a mistake is not recoverable, and the scrutineering rules are unforgiving. You learn
+      quickly that a design is not finished when it works — it is finished when someone else
+      can inspect it and agree that it is safe.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 2018-2019 · DRIVETRAIN ============ -->
+<section data-stage="curate">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">2018 &ndash; 2019 · Head of drivetrain development</span>
+      <h2>A motor, and somewhere to test it.</h2>
+      <p>
+        Leading a team of seven, responsible for the drivetrain and for coordinating the power
+        electronics development effort alongside it.
+      </p>
+    </div>
+
+    <div class="g-1-1">
+      <div>
+        <h3>The motor</h3>
+        <p class="small mt-s">
+          I designed the mechanical side of a high-power electric motor: 20,000 rpm, 29 Nm
+          peak. At those speeds the mechanical problems stop being separable from the
+          electromagnetic ones — rotor stresses, bearing selection, thermal paths, and
+          balancing all constrain what the electrical design is allowed to want.
+        </p>
+      </div>
+      <div>
+        <h3>The test bench</h3>
+        <p class="small mt-s">
+          Before that, a test bench for electric motors — because a motor you cannot measure is
+          a motor you cannot improve. This turned out to be the piece of infrastructure the
+          next two years of work depended on, which is a lesson I have applied since.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l g2">
+      <figure>
+        <img src="assets/fs-motor.jpeg" alt="Electric motor, mechanical design">
+        <figcaption>20,000 rpm, 29 Nm peak.</figcaption>
+      </figure>
+      <figure>
+        <video src="assets/fs-testbench-motor.mp4" autoplay muted loop playsinline></video>
+        <figcaption>The first bench that let us characterise a motor rather than guess at it.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2019-2021 · TECHNICAL DIRECTOR ============ -->
+<section data-stage="nudging">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">2019 &ndash; 2021 · Technical director</span>
+      <h2>Sixty people, one car, a date that does not move.</h2>
+      <p>
+        Technical director while continuing to lead the powertrain department. Seven subteams
+        reporting in — suspension, chassis, battery, powertrain, low voltage, aerodynamics —
+        plus budget, sponsorship, and the university relationship.
+      </p>
+    </div>
+
+    <div class="g-1-1">
+      <div>
+        <h3>Still hands on the hardware</h3>
+        <p class="small mt-s">
+          I did not stop building. Through this period I worked on the power electronics
+          development and testing, wrote field-oriented motor control, and ran motor
+          characterisation — flux mapping and field-weakening control, measured on the bench
+          and then validated in the car.
+        </p>
+        <p class="small">
+          This is the work that connects most directly to what I do now. A current loop that
+          has to close reliably at high rate, on hardware that will destroy itself if the
+          control is wrong, is the same discipline as a 1 kHz torque loop on a robot arm — one
+          layer further down.
+        </p>
+      </div>
+      <div>
+        <h3>And everything else</h3>
+        <dl class="deflist mt-s">
+          <div><dt>Team</dt><dd>~60 people across seven subteams, with the technical integration between them as my problem rather than theirs</dd></div>
+          <div><dt>Sponsorship</dt><dd>Relationships with BMW, Knorr-Bremse, Infineon and others</dd></div>
+          <div><dt>Faculty</dt><dd>Primary contact between the team and the professors backing it</dd></div>
+          <div><dt>Budget</dt><dd>Team finances and resource allocation across subteams</dd></div>
+          <div><dt>Testing</dt><dd>Testing director during the test programme, team lead at competition</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="mt-l g3">
+      <figure>
+        <img src="assets/fs-power-electronics-messy.jpeg" alt="Power electronics, measurement setup mid-development">
+        <figcaption>What the work actually looks like before it looks like anything.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/fs-power-electronics-finished.jpeg" alt="Finished inverter, installed">
+        <figcaption>The same subsystem, packaged and in the car.</figcaption>
+      </figure>
+      <figure>
+        <video src="assets/fs-dual-motor-bench.mp4" autoplay muted loop playsinline></video>
+        <figcaption>Validating the drive before it went anywhere near the chassis.</figcaption>
+      </figure>
+    </div>
+
+    <div class="mt-l panel panel--accent measure">
+      <h4>Leading through 2020</h4>
+      <p class="small">
+        <!-- REPLACE with your own account. What actually happened? What did you decide?
+             The specific decision is worth far more than the general observation. -->
+        I stayed technical director through the pandemic, when the workshop access, the testing
+        schedule, and the competition calendar all became uncertain. Write here what you
+        actually decided and what it cost — a specific call, not a summary.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CAR ============ -->
+<section data-stage="evaluate">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">The result</span>
+      <h2>Assembly to first drive.</h2>
+    </div>
+
+    <div class="g3">
+      <figure>
+        <img src="assets/fs-car-raw.jpeg" alt="Bare chassis, build-up">
+      </figure>
+      <figure>
+        <img src="assets/fs-car-nofoil.jpeg" alt="Assembled car, unlivered, systems in">
+      </figure>
+      <figure>
+        <img src="assets/fs-car-finished.jpeg" alt="Complete car, competition ready">
+      </figure>
+    </div>
+
+    <figure class="media mt-l">
+      <video src="assets/fs-first-drive.mp4" autoplay muted loop playsinline></video>
+      <figcaption>Two years of subsystem work resolving into a single question with a yes or no answer.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ AFTER ============ -->
+<section>
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">2021 &ndash; 2022 · After the directorship</span>
+      <h2>Six more months on the control.</h2>
+      <p>
+        I stepped down as technical director and went back to the motor control — continuing
+        development and testing, and integrating the power electronics. Handing over the
+        organisation and staying on the technical problem was the right trade, and it is
+        roughly the shape of what I want now.
+      </p>
+    </div>
+
+    <div class="linkrow">
+      <a class="link" href="index.html">Back to the main page <em>←</em></a>
+      <a class="link" href="index.html#collect">What I build now <em>→</em></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="foot__meta">Alexander Wegener · Last updated 2026</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
