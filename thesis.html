@@ -9,6 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Figures in grids: normalise wildly different source dimensions
+     so rows align. `contain` keeps plots and diagrams whole. */
+  .g2 figure img,
+  .g3 figure img{
+    width:100%; aspect-ratio:16/9; object-fit:contain;
+    background:var(--panel);
+  }
+  .g2 figure img.tall{ aspect-ratio:4/3 }
+</style>
 </head>
 <body>
 
@@ -100,9 +110,13 @@
     </div>
 
     <figure class="media mt-l">
-      <!-- REPLACE: <img src="assets/thesis-architecture.png" alt="System architecture"> -->
-      <div class="slot slot--flat"><b>System architecture</b><span>Operator interface, central control unit, avatar, recommender, perception</span></div>
-      <figcaption>Every object pose, robot pose, and visual overlay is expressed in one world frame, so guidance cues align geometrically with the physical interaction rather than approximately.</figcaption>
+      <img src="assets/thesis-architecture.png"
+           alt="System architecture: operator interface, central control unit, avatar, recommender and perception, with the data flows between them">
+      <figcaption>
+        Every object pose, robot pose, and visual overlay is expressed in one world frame, so
+        guidance cues align geometrically with the physical interaction rather than
+        approximately.
+      </figcaption>
     </figure>
   </div>
 </section>
@@ -195,22 +209,40 @@
       </div>
     </div>
 
-    <div class="mt-l g-1-1">
-      <div>
-        <h3>What was measured</h3>
-        <dl class="deflist mt-s">
-          <div><dt>Performance</dt><dd>Completion time, binary success from trial markers and task time limits</dd></div>
-          <div><dt>Kinematics</dt><dd>Path length, velocity and acceleration statistics from the end-effector trajectory</dd></div>
-          <div><dt>Interaction</dt><dd>Contact force and torque distributions, 95th-percentile summaries</dd></div>
-          <div><dt>Phase-split</dt><dd>For insertion, free-space and contact phases separated by force threshold</dd></div>
-          <div><dt>Subjective</dt><dd>NASA-TLX after every trial, stored with trial index, mode, and operator ID</dd></div>
-        </dl>
-      </div>
+    <!-- The two tasks now get their own full-width row -->
+    <h3 class="mt-l">The two tasks</h3>
+    <div class="g2 mt-m">
       <figure>
-        <!-- REPLACE: <img src="assets/thesis-tasks.png" alt="Gearbox and insertion tasks"> -->
-        <div class="slot"><b>The two tasks</b><span>Sequential gearbox assembly, and three-peg tight-clearance insertion</span></div>
-        <figcaption>Gearbox assembly is sequential and reaching-dominated. Insertion is contact-rich and accuracy-dominated, which is why the two behave differently in the results.</figcaption>
+        <img class="tall" src="assets/thesis-task-gearbox.png"
+             alt="Gearbox assembly task: base plate fixture and gears with AprilTag markers, initial layout and assembled state">
+        <figcaption>
+          Gearbox assembly — sequential and reaching-dominated. Each gear must be placed in
+          order onto the fixture.
+        </figcaption>
       </figure>
+      <figure>
+        <img class="tall" src="assets/thesis-task-insertion.png"
+             alt="Robot aligning a cylindrical peg held in a parallel gripper with a fixture opening">
+        <figcaption>
+          Tight-clearance insertion — contact-rich and accuracy-dominated. Three peg diameters,
+          sub-millimetre clearance.
+        </figcaption>
+      </figure>
+    </div>
+    <p class="tiny mt-s measure">
+      The two tasks stress different things, which is why they behave differently in the
+      results: reaching and sequencing on one side, alignment under contact on the other.
+    </p>
+
+    <div class="mt-l measure">
+      <h3>What was measured</h3>
+      <dl class="deflist mt-s">
+        <div><dt>Performance</dt><dd>Completion time, binary success from trial markers and task time limits</dd></div>
+        <div><dt>Kinematics</dt><dd>Path length, velocity and acceleration statistics from the end-effector trajectory</dd></div>
+        <div><dt>Interaction</dt><dd>Contact force and torque distributions, 95th-percentile summaries</dd></div>
+        <div><dt>Phase-split</dt><dd>For insertion, free-space and contact phases separated by force threshold</dd></div>
+        <div><dt>Subjective</dt><dd>NASA-TLX after every trial, stored with trial index, mode, and operator ID</dd></div>
+      </dl>
     </div>
   </div>
 </section>
@@ -244,18 +276,37 @@
     </table>
     <p class="tiny mt-s">Mode-wise means over per-participant averages, ± standard deviation.</p>
 
-    <div class="mt-l g2">
+    <!-- Workload -->
+    <figure class="media mt-l">
+      <img src="assets/thesis-tlx.png"
+           alt="NASA-TLX overall workload by feedback mode for both the gearbox and insertion tasks">
+      <figcaption>
+        Overall workload across all six modes, both tasks. Within-subject normalisation
+        confirms the ordering holds across participants despite large individual differences in
+        absolute ratings.
+      </figcaption>
+    </figure>
+
+    <!-- Interaction quality -->
+    <h3 class="mt-l">What the operator did to the hardware</h3>
+    <div class="g2 mt-m">
       <figure>
-        <!-- REPLACE: <img src="assets/thesis-tlx.png" alt="NASA-TLX by feedback mode"> -->
-        <div class="slot"><b>NASA-TLX by condition</b><span>Both tasks, within-participant z-scored</span></div>
-        <figcaption>Within-subject normalisation confirms the ordering holds across participants despite large individual differences in absolute ratings.</figcaption>
+        <img src="assets/thesis-force-insertion.png"
+             alt="Box plot of contact force distribution by feedback mode for the insertion task">
+        <figcaption>Contact force during the contact phase, insertion task.</figcaption>
       </figure>
       <figure>
-        <!-- REPLACE: <img src="assets/thesis-forces.png" alt="Contact force distributions"> -->
-        <div class="slot"><b>Contact force and torque</b><span>Distributions by condition</span></div>
-        <figcaption>Dynamic assistance damps misalignment and discourages forceful correction; informational cues alone already avoid the extreme contacts.</figcaption>
+        <img src="assets/thesis-torque-insertion.png"
+             alt="Box plot of contact torque distribution by feedback mode for the insertion task">
+        <figcaption>Contact torque, same trials.</figcaption>
       </figure>
     </div>
+    <p class="tiny mt-s measure">
+      Median contact force falls from roughly 21 N under manual control to about 12 N with
+      dynamic assistance, and the spread narrows sharply — the long upper whiskers under manual
+      and baseline are the forceful corrections that assistance removes. Note that Full sits
+      level with Pure dynamic rather than below it.
+    </p>
 
     <div class="mt-l g-1-1">
       <div class="panel panel--accent">
@@ -263,8 +314,8 @@
         <p class="small">
           Full assistance — informational and dynamic together — was not better than either
           channel alone. Pure information and Pure dynamic reached the lowest workload scores,
-          with Full in a similar range but no better. Stacking assistance did not compound its
-          benefit.
+          with Full in a similar range but no better. The same pattern appears in the contact
+          forces above. Stacking assistance did not compound its benefit.
         </p>
       </div>
       <div>
@@ -281,6 +332,18 @@
         </p>
       </div>
     </div>
+
+    <!-- OPTIONAL: the efficiency-workload scatter is the visual proof of the
+         paragraph above. Thesis Figure 6.15. Drop it in and delete this comment.
+    <figure class="media mt-l">
+      <img src="assets/thesis-efficiency-workload.png"
+           alt="Mode-wise means plotted in completion time versus workload space for both tasks">
+      <figcaption>
+        Each point is a mode-wise mean. The assisted conditions on the insertion task move
+        almost vertically — workload down, time unchanged.
+      </figcaption>
+    </figure>
+    -->
   </div>
 </section>
 
