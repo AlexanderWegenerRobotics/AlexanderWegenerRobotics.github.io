@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 572" width="100%" role="img" aria-labelledby="avTitle avDesc">
+  <title id="avTitle">Robot-side control architecture</title>
+  <desc id="avDesc">An avatar master running a 200 Hz state machine coordinates three device instances — left arm, right arm and pan-tilt head — each pairing its own 200 Hz state machine with a 1 kHz controller. A self-collision filter sits between the two arms. Underneath, a hardware abstraction layer makes a MuJoCo simulation and a real Franka interchangeable at build time. Commands and state cross a ZeroTier link to the operator.</desc>
+
+  <style>
+    svg{
+      --ink:#14181A; --body:#3D4548; --mute:#788386; --faint:#A6AFB1;
+      --rule:#DCE2E3; --panel:#FFFFFF; --accent:#17697B; --tint:#F1F7F8;
+      --font: Archivo, ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+    .bx   { fill:var(--panel); stroke:var(--rule); stroke-width:1.5 }
+    .bxT  { fill:var(--tint);  stroke:var(--accent); stroke-width:1.5 }
+    .shell{ fill:none; stroke:var(--rule); stroke-width:1.5 }
+    .hd   { font-family:var(--mono); font-size:11.5px; font-weight:700;
+            letter-spacing:.16em; fill:var(--accent) }
+    .hdN  { font-family:var(--mono); font-size:11.5px; font-weight:700;
+            letter-spacing:.16em; fill:var(--ink) }
+    .ln   { font-family:var(--font); font-size:12.5px; fill:var(--body) }
+    .lbl  { font-family:var(--mono); font-size:10.5px; fill:var(--mute); letter-spacing:.08em }
+    .lblA { font-family:var(--mono); font-size:10.5px; fill:var(--accent); letter-spacing:.08em }
+    .rate { font-family:var(--mono); font-size:10.5px; font-weight:700; fill:var(--ink); letter-spacing:.08em; text-anchor:end }
+    .fl   { stroke:#9AA3A5; stroke-width:1.75; fill:none }
+    .fb   { stroke:var(--accent); stroke-width:1.75; fill:none; stroke-dasharray:6 4; stroke-linecap:round }
+  </style>
+
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9AA3A5"/></marker>
+    <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#17697B"/></marker>
+  </defs>
+
+  <!-- ============ PROCESS SHELL ============ -->
+  <rect class="shell" x="16" y="40" width="884" height="470" rx="3"/>
+  <text class="lbl" x="34" y="30">AVATAR PROCESS &#183; ABU DHABI</text>
+
+  <!-- ============ AVATAR MASTER ============ -->
+  <rect class="bx" x="40" y="66" width="836" height="74" rx="3"/>
+  <text class="hdN" x="60" y="92">AVATAR MASTER</text>
+  <text class="ln"  x="60"  y="120">State machine</text>
+  <text class="rate" x="300" y="120">200 Hz</text>
+  <text class="ln"  x="330" y="120">Fault handling and recovery</text>
+  <text class="ln"  x="620" y="120">Device coordination</text>
+
+  <path class="fl" marker-end="url(#b1)" d="M 172 142 L 172 176"/>
+  <path class="fl" marker-end="url(#b1)" d="M 452 142 L 452 176"/>
+  <path class="fl" marker-end="url(#b1)" d="M 736 142 L 736 176"/>
+
+  <!-- ============ DEVICE INSTANCES ============ -->
+  <rect class="bx" x="40" y="178" width="264" height="118" rx="3"/>
+  <text class="hd"  x="60" y="204">ARM &#183; LEFT</text>
+  <text class="ln"  x="60"  y="230">State machine</text>
+  <text class="rate" x="284" y="230">200 Hz</text>
+  <text class="ln"  x="60"  y="254">Cartesian impedance</text>
+  <text class="rate" x="284" y="254">1 kHz</text>
+  <text class="lbl" x="60"  y="278">NULLSPACE POSTURE, IK, LIMITS</text>
+
+  <rect class="bx" x="320" y="178" width="264" height="118" rx="3"/>
+  <text class="hd"  x="340" y="204">ARM &#183; RIGHT</text>
+  <text class="ln"  x="340" y="230">State machine</text>
+  <text class="rate" x="564" y="230">200 Hz</text>
+  <text class="ln"  x="340" y="254">Cartesian impedance</text>
+  <text class="rate" x="564" y="254">1 kHz</text>
+  <text class="lbl" x="340" y="278">NULLSPACE POSTURE, IK, LIMITS</text>
+
+  <rect class="bx" x="600" y="178" width="276" height="118" rx="3"/>
+  <text class="hd"  x="620" y="204">HEAD &#183; PAN-TILT</text>
+  <text class="ln"  x="620" y="230">State machine</text>
+  <text class="rate" x="856" y="230">200 Hz</text>
+  <text class="ln"  x="620" y="254">Joint impedance</text>
+  <text class="rate" x="856" y="254">1 kHz</text>
+  <text class="lbl" x="620" y="278">FOLLOWS HEADSET YAW / PITCH</text>
+
+  <!-- arms into the safety filter -->
+  <path class="fb" marker-end="url(#b2)" d="M 172 298 L 172 322"/>
+  <path class="fb" marker-end="url(#b2)" d="M 452 298 L 452 322"/>
+
+  <!-- ============ SELF-COLLISION FILTER ============ -->
+  <rect class="bxT" x="40" y="324" width="544" height="72" rx="3"/>
+  <text class="hd" x="60" y="350">SELF-COLLISION FILTER</text>
+  <text class="ln" x="60" y="376">Barrier on commanded velocity, margin grows with closing speed</text>
+
+  <!-- head bypasses the filter -->
+  <path class="fl" marker-end="url(#b1)" d="M 736 298 L 736 414"/>
+  <path class="fl" marker-end="url(#b1)" d="M 312 398 L 312 414"/>
+
+  <!-- ============ HARDWARE ABSTRACTION LAYER ============ -->
+  <rect class="bx" x="40" y="416" width="836" height="74" rx="3"/>
+  <text class="hdN" x="60" y="442">HARDWARE ABSTRACTION LAYER</text>
+  <text class="ln"  x="60"  y="470">Simulation &#8212; MuJoCo, scene built from config</text>
+  <text class="lbl" x="460" y="470">OR</text>
+  <text class="ln"  x="502" y="470">Hardware &#8212; libfranka and head driver</text>
+
+  <!-- ============ NETWORK ============ -->
+  <rect class="bxT" x="932" y="40" width="132" height="470" rx="3"/>
+  <text class="hd"  x="952" y="66">ZEROTIER</text>
+  <text class="ln"  x="952" y="94">Per-device</text>
+  <text class="ln"  x="952" y="112">UDP streams</text>
+  <text class="lblA" x="952" y="140">CMD / STATE</text>
+
+  <line x1="952" y1="168" x2="1044" y2="168" stroke="#BCD5DA" stroke-width="1"/>
+
+  <text class="lbl" x="952" y="196">VIDEO SHARES</text>
+  <text class="lbl" x="952" y="212">THIS LINK &#8212;</text>
+  <text class="lbl" x="952" y="228">SEE COLLECT</text>
+
+  <path class="fb" d="M 876 250 L 932 250" marker-end="url(#b2)" marker-start="url(#b2)"/>
+
+  <!-- ============ FOOTNOTE ============ -->
+  <line x1="16" y1="534" x2="1064" y2="534" stroke="#DCE2E3" stroke-width="1"/>
+  <text class="lbl" x="16" y="556">Simulation and hardware expose the identical state space, so the backend is chosen at build time and no control code changes.</text>
+</svg>

@@ -58,21 +58,26 @@ a{ color:inherit }
    TELEMETRY RAIL — the signature element
    A scope channel strip. Shows which loop stage you're reading.
    ============================================================ */
+/* Vertical text does not shrink, so once the column's content exceeds the
+   viewport height the items overlap. Scroll the whole rail instead. */
 .rail{
   position:fixed; top:0; left:0; bottom:0; width:var(--rail);
   background:var(--panel);
   border-right:1px solid var(--rule);
   display:flex; flex-direction:column; align-items:center;
   padding:22px 0; z-index:50;
+  overflow-y:auto; scrollbar-width:none;
 }
+.rail::-webkit-scrollbar{ display:none }
+.rail__mark, .rail__more{ flex:none }
 .rail__mark{
   font-family:var(--data); font-size:10px; font-weight:700;
-  letter-spacing:.18em; color:var(--ink);
+  letter-spacing:.18em; color:var(--ink); text-decoration:none;
   writing-mode:vertical-rl; text-orientation:mixed;
 }
 .rail__stages{
-  flex:1; display:flex; flex-direction:column; justify-content:center;
-  gap:26px; padding:34px 0;
+  flex:1 0 auto; display:flex; flex-direction:column; justify-content:center;
+  gap:22px; padding:28px 0;
 }
 .rail__stage{
   display:flex; flex-direction:column; align-items:center; gap:9px;
@@ -90,6 +95,8 @@ a{ color:inherit }
 .rail__stage:hover{ color:var(--body) }
 .rail__stage.is-active{ color:var(--ink); font-weight:700 }
 .rail__stage.is-active .rail__dot{ background:var(--stage) }
+/* Control is the substrate the loop runs on, not a loop stage — neutral dot. */
+.rail__stage[data-stage="control"]  { --stage:var(--ink) }
 .rail__stage[data-stage="collect"]  { --stage:var(--collect) }
 .rail__stage[data-stage="curate"]   { --stage:var(--curate) }
 .rail__stage[data-stage="train"]    { --stage:var(--train) }
@@ -100,19 +107,26 @@ a{ color:inherit }
   color:var(--faint); writing-mode:vertical-rl;
 }
 .rail__more{
-  display:flex; flex-direction:column; align-items:center; gap:14px;
-  padding-top:22px; margin-top:4px;
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding-top:20px; margin-top:4px;
   border-top:1px solid var(--rule);
 }
 .rail__sub{
-  text-decoration:none; color:var(--faint);
-  font-family:var(--data); font-size:8.5px; font-weight:500;
-  letter-spacing:.13em; text-transform:uppercase;
+  text-decoration:none; color:var(--mute);
+  font-family:var(--data); font-size:9.5px; font-weight:600;
+  letter-spacing:.15em; text-transform:uppercase;
   writing-mode:vertical-rl; text-orientation:mixed;
   transition:color .25s ease;
 }
-.rail__sub:hover{ color:var(--body) }
-.rail__sub.is-current{ color:var(--mute); font-weight:700 }
+.rail__sub:hover{ color:var(--ink) }
+.rail__sub.is-current{ color:var(--ink); font-weight:700 }
+/* label that says the stage dots belong to the flagship, not the whole site */
+.rail__label{
+  font-family:var(--data); font-size:8px; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--faint);
+  writing-mode:vertical-rl; text-orientation:mixed;
+  padding-bottom:14px;
+}
 
 /* ============================================================
    SHELL
@@ -133,8 +147,9 @@ h2{ font-size:clamp(27px,3.6vw,40px); line-height:1.1; font-weight:650; letter-s
 h3{ font-size:20px; line-height:1.28; font-weight:650; letter-spacing:-.012em }
 h4{ font-size:15.5px; line-height:1.35; font-weight:650; letter-spacing:-.005em }
 
-p{ margin:0 0 1.05em }
+p{ margin:0 0 1.05em; text-wrap:pretty }
 p:last-child{ margin-bottom:0 }
+h1,h2,h3{ text-wrap:balance }
 
 .lede{ font-size:clamp(17px,1.9vw,20.5px); line-height:1.5; color:var(--body) }
 .small{ font-size:14.5px; line-height:1.58 }
@@ -150,6 +165,8 @@ strong{ font-weight:650; color:var(--ink) }
 }
 .stage-rule{ height:3px; width:56px; background:var(--mute); margin-bottom:20px }
 
+[data-stage="control"]  .eyebrow{ color:var(--ink) }
+[data-stage="control"]  .stage-rule{ background:var(--ink) }
 [data-stage="collect"]  .eyebrow{ color:var(--collect) }
 [data-stage="collect"]  .stage-rule{ background:var(--collect) }
 [data-stage="curate"]   .eyebrow{ color:var(--curate) }
@@ -165,19 +182,100 @@ strong{ font-weight:650; color:var(--ink) }
 .sechead h2{ margin-bottom:14px }
 
 /* ============================================================
-   HERO
+   HERO — identity first. A reader must know whose site this is
+   and what it contains before they meet the flagship project.
    ============================================================ */
-.hero{ padding-top:118px; padding-bottom:92px }
-.hero__name{
-  font-family:var(--data); font-size:11px; font-weight:700;
-  letter-spacing:.28em; text-transform:uppercase; color:var(--ink);
-  margin-bottom:30px;
+.hero{ padding-top:104px; padding-bottom:78px }
+
+.hero__eyebrow{
+  font-family:var(--data); font-size:10.5px; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--mute);
+  display:block; margin-bottom:26px;
 }
-.hero h1{ max-width:19ch; margin-bottom:26px }
-.hero__lede{ max-width:60ch; margin-bottom:26px }
+.hero h1{
+  font-size:clamp(44px,8.2vw,104px); line-height:.94;
+  letter-spacing:-.045em; margin-bottom:26px; max-width:none;
+}
+/* Broken manually at the em dash — the sentence hinges there, and left to
+   itself it wrapped onto "— at" and "when". `balance` is the fallback for
+   narrow screens, where .brk is suppressed. */
+.hero__role{
+  font-family:var(--display); color:var(--ink);
+  font-size:clamp(20px,2.5vw,28px); line-height:1.24;
+  font-weight:600; letter-spacing:-.02em;
+  max-width:none; margin-bottom:26px;
+  text-wrap:balance;
+}
+@media (max-width:760px){
+  .hero__role .brk{ display:none }
+  .hero__role{ max-width:32ch }
+}
+.hero__lede{ max-width:62ch; margin-bottom:28px }
 .hero__affil{
-  font-family:var(--data); font-size:11.5px; letter-spacing:.1em;
-  color:var(--mute); margin-bottom:44px;
+  font-family:var(--data); font-size:11.5px; line-height:1.9;
+  letter-spacing:.08em; color:var(--mute); margin-bottom:40px;
+}
+.hero__affil b{
+  color:var(--ink); font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; font-size:10px;
+  margin-right:10px;
+}
+
+/* contents row — the explicit signal that this is a portfolio */
+.contents{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  border-top:1px solid var(--rule); margin-top:40px;
+}
+.contents a{
+  display:block; text-decoration:none; padding:18px 22px 18px 0;
+  border-right:1px solid var(--rule-2);
+  transition:background .2s ease;
+}
+.contents a:last-child{ border-right:0 }
+.contents a:hover .contents__t{ border-bottom-color:var(--ink) }
+.contents__n{
+  display:block; font-family:var(--data); font-size:9.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+  margin-bottom:9px;
+}
+.contents__t{
+  display:inline; font-family:var(--display); font-size:15px;
+  font-weight:650; color:var(--ink); letter-spacing:-.01em;
+  border-bottom:1px solid var(--rule); padding-bottom:2px;
+  transition:border-color .2s ease;
+}
+.contents__d{
+  display:block; font-size:12.5px; line-height:1.45;
+  color:var(--mute); margin-top:9px;
+}
+@media (max-width:900px){
+  .contents{ grid-template-columns:1fr 1fr }
+  .contents a{ padding-right:18px; border-bottom:1px solid var(--rule-2) }
+  .contents a:nth-child(2n){ border-right:0 }
+}
+@media (max-width:560px){
+  .contents{ grid-template-columns:1fr }
+  .contents a{ border-right:0 }
+}
+
+/* ============================================================
+   FLAGSHIP — the lead exhibit, framed as one of several projects
+   ============================================================ */
+.flagship .sechead{ margin-bottom:30px }
+.flagship .lede{ max-width:64ch; margin-top:20px }
+.flagship .specs{ margin-top:34px }
+/* Headline is manually broken — "Bimanual teleoperation" must not split. */
+.flagship__h{
+  max-width:none; text-wrap:nowrap;
+  font-size:clamp(26px,4.4vw,48px); letter-spacing:-.028em; line-height:1.06;
+}
+.flagship__h .arrow{
+  display:inline-block; font-family:var(--data); font-weight:400;
+  font-size:.66em; color:var(--ink); vertical-align:.08em;
+  margin:0 .14em; letter-spacing:0;
+}
+@media (max-width:620px){
+  .flagship__h{ text-wrap:balance; font-size:clamp(24px,7vw,34px) }
 }
 
 /* status line — reads as a system readout, because it is one */
@@ -199,6 +297,12 @@ strong{ font-weight:650; color:var(--ink) }
   border-top:2px solid var(--ink); border-bottom:1px solid var(--rule);
   margin:22px 0 0;
 }
+.specs--4{ grid-template-columns:repeat(4,1fr) }
+.specs--3{ grid-template-columns:repeat(3,1fr) }
+/* scope strip: figures that describe the body of work, set larger */
+.specs--scope > div{ padding:22px 22px 20px }
+.specs--scope b{ font-size:26px; letter-spacing:-.03em }
+@media (max-width:1080px){ .specs--scope b{ font-size:22px } }
 .specs > div{ padding:17px 20px 16px; border-right:1px solid var(--rule-2) }
 .specs > div:last-child{ border-right:0 }
 .specs b{
@@ -218,6 +322,8 @@ figure{ margin:0 }
 figcaption{
   font-size:13.5px; line-height:1.5; color:var(--mute); margin-top:12px;
   max-width:78ch;
+  /* stops single-word last lines like "not nominal." hanging alone */
+  text-wrap:pretty;
 }
 figcaption .sim{
   font-family:var(--data); font-size:10px; font-weight:700; letter-spacing:.14em;
@@ -278,15 +384,22 @@ video{ border-radius:2px; background:#000 }
 }
 .finding--done .finding__tag{ color:var(--nudge) }
 .finding--open .finding__tag{ color:var(--mute) }
+.finding--train .finding__tag{ color:var(--train) }
+/* the two models are separated top-to-bottom, not side by side, so a
+   result can never be read against the wrong model */
+.finding--train{ border-top-width:2px; border-top-color:var(--ink); padding-top:24px }
 
 /* ============================================================
    DATA LISTS & TABLES
    ============================================================ */
 .deflist{ margin:0; font-size:14.5px }
+/* Fixed term column — `auto` sized every row independently, which made the
+   definitions start at a different x on every line and read as crooked. */
 .deflist div{
-  display:grid; grid-template-columns:minmax(120px,auto) 1fr; gap:18px;
+  display:grid; grid-template-columns:186px 1fr; gap:18px;
   padding:11px 0; border-bottom:1px solid var(--rule-2);
 }
+.deflist--narrow div{ grid-template-columns:132px 1fr }
 .deflist div:last-child{ border-bottom:0 }
 .deflist dt{
   font-family:var(--data); font-size:11px; letter-spacing:.1em;
@@ -320,6 +433,22 @@ td.num{ font-family:var(--data); font-variant-numeric:tabular-nums }
 }
 .ladder b.crit{ color:#8A3A3A; border-color:#E0C4C4 }
 .ladder i{ color:var(--faint); font-style:normal; font-size:12px }
+
+/* stacked variant: one state per row, parameters aligned in a column */
+.ladder--rows{
+  display:grid; grid-template-columns:max-content 1fr;
+  gap:8px 16px; align-items:center; flex-wrap:nowrap;
+}
+.ladder--rows b{ text-align:center }
+.ladder--rows i{
+  font-family:var(--data); font-size:11.5px; letter-spacing:.02em;
+  color:var(--mute);
+}
+@media (max-width:560px){
+  .ladder--rows{ grid-template-columns:1fr; gap:4px 0 }
+  .ladder--rows b{ justify-self:start }
+  .ladder--rows i{ margin-bottom:8px }
+}
 
 /* ============================================================
    LINKS
@@ -375,6 +504,11 @@ footer{ border-top:1px solid var(--rule); padding:76px 0 96px }
   .g-2-1,.g-1-1{ grid-template-columns:1fr; gap:28px }
   .specs{ grid-template-columns:repeat(3,1fr) }
   .specs > div:nth-child(3){ border-right:0 }
+  .specs--4{ grid-template-columns:repeat(2,1fr) }
+  .specs--4 > div:nth-child(2n){ border-right:0 }
+  .specs--4 > div:nth-child(3){ border-right:1px solid var(--rule-2) }
+  .specs--4 > div:nth-child(1),
+  .specs--4 > div:nth-child(2){ border-bottom:1px solid var(--rule-2) }
 }
 
 @media (max-width:900px){
@@ -387,7 +521,8 @@ footer{ border-top:1px solid var(--rule); padding:76px 0 96px }
     overflow-x:auto; -webkit-overflow-scrolling:touch;
   }
   .rail__mark{ writing-mode:horizontal-tb; font-size:9.5px; margin-right:18px; flex:none }
-  .rail__stages{ flex-direction:row; gap:18px; padding:12px 0; flex:none }
+  .rail__stages{ flex-direction:row; gap:18px; padding:12px 0; flex:none; overflow:visible }
+  .rail__label{ display:none }
   .rail__stage{ writing-mode:horizontal-tb; flex-direction:row; gap:7px; font-size:9px }
   .rail__more{
     flex-direction:row; gap:16px; padding:0 0 0 18px; margin:0;

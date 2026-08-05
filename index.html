@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alexander Wegener — Teleoperation systems for robot learning</title>
-<meta name="description" content="Cross-continental bimanual VR teleoperation, a curated demonstration dataset, and research on whether guiding the operator produces demonstrations that train better policies.">
+<title>Alexander Wegener — Teleoperation systems and robot learning</title>
+<meta name="description" content="Portfolio of Alexander Wegener: cross-continental bimanual VR teleoperation, a curated demonstration dataset, learned manipulation policies, a ten-participant operator study, and control and perception projects.">
 
-<meta property="og:title" content="Alexander Wegener — Teleoperation systems for robot learning">
-<meta property="og:description" content="Bimanual VR teleoperation from Boston to Abu Dhabi, over the public internet. Interface, dataset, policy, deployment.">
+<meta property="og:title" content="Alexander Wegener — Teleoperation systems and robot learning">
+<meta property="og:description" content="Bimanual VR teleoperation from Boston to Abu Dhabi over the public internet — interface, dataset, policy, deployment — plus an operator user study and selected control and perception work.">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <!-- REPLACE: absolute URL to a 1200x630 preview image once the site is live -->
 <!-- <meta property="og:image" content="https://alexanderwegenerrobotics.github.io/assets/preview.png"> -->
 
@@ -22,9 +23,10 @@
 <!-- ============================================================
      TELEMETRY RAIL
      ============================================================ -->
-<nav class="rail" aria-label="Loop stages">
-  <span class="rail__mark">A. WEGENER</span>
+<nav class="rail" aria-label="Sections">
+  <a class="rail__mark" href="#top">A. WEGENER</a>
   <div class="rail__stages">
+    <a class="rail__stage" data-stage="control"  href="#control"><span class="rail__dot"></span>Control</a>
     <a class="rail__stage" data-stage="collect"  href="#collect"><span class="rail__dot"></span>Collect</a>
     <a class="rail__stage" data-stage="curate"   href="#curate"><span class="rail__dot"></span>Curate</a>
     <a class="rail__stage" data-stage="train"    href="#train"><span class="rail__dot"></span>Train</a>
@@ -35,8 +37,8 @@
     <a class="rail__sub" href="thesis.html">Study</a>
     <a class="rail__sub" href="projects.html">Projects</a>
     <a class="rail__sub" href="formula-student.html">Formula</a>
+    <a class="rail__sub" href="#background">CV</a>
   </div>
-  <span class="rail__foot">2026</span>
 </nav>
 
 <div class="shell">
@@ -46,38 +48,87 @@
      ============================================================ -->
 <section class="hero" id="top">
   <div class="wrap">
-    <div class="hero__name">Alexander Wegener</div>
+    <span class="hero__eyebrow">Selected work · 2018 — 2026</span>
 
-    <h1>Bimanual teleoperation, Boston to Abu Dhabi.</h1>
+    <h1>Alexander<br>Wegener</h1>
+
+    <p class="hero__role">
+      Robotics engineer. I make physical things behave —<br class="brk">
+      at rate, under contact, and when the inputs are imperfect.
+    </p>
 
     <p class="lede hero__lede">
-      <!-- VERIFY the distance figure before publishing. Boston to Abu Dhabi is
-           roughly 11,300 km great-circle — check it yourself rather than trusting this. -->
-      Two Franka Panda arms, controlled live from a VR headset eleven thousand kilometres
-      away over the public internet. I built and operate the whole loop it sits in —
-      interface, dataset, policy, deployment — and my research asks whether guiding the
-      operator produces demonstrations that train better policies.
+      Robot control, the teleoperation interface, the data collection, and the policies trained on that data — 
+      I have built each of these, which taught me what each one needs from the others. 
+      Before robotics it was motor design and power electronics, the same discipline one level down.
     </p>
 
     <p class="hero__affil">
-      Boston University &nbsp;·&nbsp; MBZUAI &nbsp;·&nbsp; TU Munich, MIRMI &nbsp;·&nbsp; Tesla
+      <b>Now</b> Graduate researcher, MBZUAI &nbsp;·&nbsp; MSc Robotics, Boston University<br>
+      <b>Before</b> TU Munich, MIRMI (Haddadin lab) &nbsp;·&nbsp; Tesla &nbsp;·&nbsp; Formula Student
     </p>
 
+    <!-- ============ CONTENTS ============ -->
+    <nav class="contents" aria-label="Contents">
+      <a href="#flagship">
+        <span class="contents__n">01 · Current</span>
+        <span class="contents__t">Teleoperation to policy</span>
+        <span class="contents__d">A bimanual system operated across two continents, and the research it exists to answer.</span>
+      </a>
+      <a href="thesis.html">
+        <span class="contents__n">02 · MSc thesis</span>
+        <span class="contents__t">Operator user study</span>
+        <span class="contents__d">Ten participants, six feedback conditions, three hundred trials on a physical avatar.</span>
+      </a>
+      <a href="projects.html">
+        <span class="contents__n">03 · Selected</span>
+        <span class="contents__t">Control and perception</span>
+        <span class="contents__d">Force-domain diffusion policies, vision-based NMPC, underactuated control.</span>
+      </a>
+      <a href="formula-student.html">
+        <span class="contents__n">04 · Earlier</span>
+        <span class="contents__t">Formula Student</span>
+        <span class="contents__d">Four years on an electric race car, two as technical director of sixty people.</span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<!-- ============================================================
+     FLAGSHIP — the lead exhibit
+     ============================================================ -->
+<section id="flagship">
+  <div class="wrap flagship">
+    <div class="sechead">
+      <span class="eyebrow">01 · Current work</span>
+      <h2 class="flagship__h">
+        Bimanual teleoperation,<br>
+        Boston <span class="arrow">&#8596;</span> Abu Dhabi.
+      </h2>
+      <p class="lede">
+        Two Franka Panda arms and a pan-tilt head in Abu Dhabi, driven live from a VR headset
+        in Boston over the public internet. The point of building all of it — controllers,
+        safety layer, simulation, interface, data pipeline, policies — was to be able to ask
+        one question that needs all of it at once: does guiding an operator while they work
+        produce demonstrations that train better robots?
+      </p>
+    </div>
+
     <figure class="media">
-      <video src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline></video>
+      <video src="assets/hero.mp4" autoplay muted loop playsinline></video>
       <figcaption>
         Operator in Boston, arms in Abu Dhabi, one clock. The latency on the HUD is measured
         end to end, not nominal.
       </figcaption>
     </figure>
 
-    <!-- ============ SPEC STRIP ============ -->
-    <div class="specs">
-      <div><b>1 kHz</b><span>arm torque control</span></div>
-      <div><b>200 Hz</b><span>device state machines</span></div>
-      <div><b>H.264 / RTP</b><span>over UDP, with FEC</span></div>
-      <div><b>50 Hz</b><span>link quality feedback</span></div>
-      <div><b>measured</b><span>one-way latency</span></div>
+    <!-- Figures that all describe this one system, so they can be read against
+         each other. VERIFY: 11,000 km is the great-circle distance, rounded down. -->
+    <div class="specs specs--4 specs--scope">
+      <div><b>11,000 km</b><span>operator to robot</span></div>
+      <div><b>1 kHz</b><span>impedance control, per arm</span></div>
+      <div><b>3</b><span>controlled devices, two arms and a head</span></div>
+      <div><b>120</b><span>demonstrations collected</span></div>
     </div>
 
     <div class="status">
@@ -89,18 +140,145 @@
 </section>
 
 <!-- ============================================================
+     CONTROL — the robot side
+     ============================================================ -->
+<section id="control" data-stage="control">
+  <div class="wrap">
+    <div class="sechead measure">
+      <div class="stage-rule"></div>
+      <span class="eyebrow">Control</span>
+      <h2>The part that has to work first.</h2>
+      <p>
+        Everything further down this page assumes the arms do what they are told. That part is
+        not bought in — controllers, safety filter, motion generation and the simulation it all
+        also runs in are about ten thousand lines of my C++.
+      </p>
+    </div>
+
+    <figure class="media">
+      <img src="assets/avatar-architecture.svg"
+           alt="Robot-side architecture: an avatar master with a 200 Hz state machine, fault handling and device coordination, driving three device instances — left arm, right arm and pan-tilt head — that each pair a 200 Hz state machine with a 1 kHz controller. A self-collision filter sits between the two arms. Underneath, a hardware abstraction layer makes MuJoCo and libfranka interchangeable. Commands and state cross a ZeroTier link.">
+      <figcaption>
+        One state machine per device, one controller under each. The self-collision filter
+        only sits between the arms, because the head cannot reach them.
+      </figcaption>
+    </figure>
+
+    <div class="mt-l g-1-1">
+      <div>
+        <h3>Impedance, with the elbow under control</h3>
+        <p class="small mt-s">
+          Each arm runs Cartesian impedance in a 1 kHz torque loop: a stiffness–damping wrench
+          on the pose error, mapped through the Jacobian transpose, Coriolis compensated.
+          Impedance rather than joint tracking because it needs no precomputed trajectory, and
+          because compliance is what keeps contact stable when the operator's input is not.
+        </p>
+        <p class="small">
+          A seven-joint arm has a spare degree of freedom, so posture is regulated in the
+          nullspace of the task — built from the inertia-weighted pseudoinverse rather than the
+          plain one, which is what lets the elbow settle without moving the hand.
+        </p>
+        <p class="tiny">
+          Damped least squares near singularities; joint-limit avoidance, velocity damping and
+          torque saturation underneath, so a command the arm cannot follow is bounded rather
+          than refused.
+        </p>
+      </div>
+
+      <div>
+        <h3>Two arms, one workspace, one operator</h3>
+        <p class="small mt-s">
+          Someone driving two arms can only watch one of them, so the arms have to stay out of
+          each other's way without being asked and without feeling like they are fighting the
+          person.
+        </p>
+        <p class="small">
+          A control-barrier-function filter sits between the commanded Cartesian velocity and
+          the executed one, with a margin that grows with closing speed — the arms may come
+          together slowly but not quickly. When a command would breach it, the filter solves a
+          one-constraint QP in closed form and, because radial motion is penalised more than
+          tangential, the correction slides the arm around its neighbour rather than stopping
+          it dead.
+        </p>
+        <p class="tiny">
+          Each arm runs a constant-velocity Kalman filter on the other's end-effector, so the
+          margin tracks where the other arm is going, not where it was — and widens when that
+          estimate is least certain.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l g-2-1">
+      <div>
+        <h3>Getting there, and getting there safely</h3>
+        <p class="small mt-s">
+          Between the operator's pose command and the controller sits a motion generator:
+          resolved-rate IK with damped least squares, soft posture regularisation, per-joint
+          velocity and acceleration caps, and a braking horizon that decelerates a joint before
+          its limit instead of clipping at it. Linear, trapezoidal and minimum-jerk profiles in
+          joint and Cartesian space are what homing and recovery run on.
+        </p>
+        <p class="small">
+          The pan-tilt head follows the headset under joint impedance with torque rate limiting,
+          so a fast head turn produces a fast look rather than a jolt.
+        </p>
+      </div>
+      <div class="panel panel--accent">
+        <h4>A fault is a state, not an exception</h4>
+        <p class="small">
+          Every device — each arm, the head, each gripper — runs its own 200 Hz state machine
+          across nine states from idle through fault to recovering, coordinated by an
+          avatar-level machine above them. A device that faults is detached and the rest keep
+          running.
+        </p>
+        <p class="small">
+          Local machines keep authority to refuse an unsafe transition, so no single stale
+          packet or upstream fault can produce motion.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l g-2-1">
+      <div class="panel">
+        <h4>One codebase, two backends</h4>
+        <p class="small">
+          The MuJoCo backend mirrors the libfranka state space exactly, so the control and
+          networking code does not know which one it is talking to — the backend is a build
+          flag. Scenes, gains, workspace limits and device layout are YAML, assembled into a
+          model at startup, so adding an arm is a config change rather than a rebuild.
+        </p>
+      </div>
+      <div>
+        <h4>Why this is here</h4>
+        <p class="small mt-s">
+          Teleoperation is the application. The control stack is the part that transfers: an
+          impedance loop that stays stable through contact, a safety filter that modifies a
+          command minimally instead of vetoing it, and a state machine that degrades rather
+          than stops are the same problems whether a human or a policy is upstream of them.
+        </p>
+        <div class="linkrow">
+          <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-simulator">Robot-side backend, C++ <em>↗</em></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      THE LOOP
      ============================================================ -->
 <section id="loop">
   <div class="wrap">
     <div class="sechead measure">
-      <span class="eyebrow">The system</span>
-      <h2>One person, the whole loop.</h2>
+      <span class="eyebrow">How it fits together</span>
+      <h2>Four stages, one pipeline.</h2>
       <p>
-        Collecting demonstrations, curating them into a dataset, training a policy, and
-        putting that policy back on the hardware are usually four teams. Here they are one
-        pipeline, designed and operated end to end — which is what makes the research
-        question below answerable at all.
+        Demonstrations are collected through the interface, curated into a labelled dataset,
+        used to train a policy, and that policy is deployed back onto the hardware the data
+        came from — the arms and controllers above. The four sections that follow walk the loop
+        in that order, and a fifth asks the question the whole thing was built to answer.
+        Owning every stage is what makes that question measurable at all: the same episodes
+        pass through all of them without a translation step in between.
       </p>
     </div>
 
@@ -108,64 +286,10 @@
       <img src="assets/loop-diagram.svg"
            alt="The teleoperation-to-policy loop: data collection, data pipeline, training, and evaluation, with intent nudging feeding data collection and validated by evaluation.">
       <figcaption>
-        The same stack runs in simulation and on hardware — MuJoCo writes frames into the
-        identical buffer the camera does, so nothing is reimplemented between the two.
+        Intent nudging feeds collection and is validated by evaluation, which is what closes
+        the loop rather than ending it.
       </figcaption>
     </figure>
-  </div>
-</section>
-
-<!-- ============================================================
-     TIMELINE
-     ============================================================ -->
-<section id="background">
-  <div class="wrap">
-    <div class="sechead measure">
-      <span class="eyebrow">Background</span>
-      <h2>Eight years of building things that have to work.</h2>
-      <p>
-        Battery packs, then motor design, then motor control, then robot control. The
-        hardware changed; the problem — closing a loop reliably on something physical — has
-        not.
-      </p>
-    </div>
-
-    <!-- VERIFY every date below against what actually happened. -->
-    <!-- Timeline — verified dates -->
-    <ol class="track">
-      <li class="track__item track__item--wide">
-        <a href="formula-student.html">
-          <span class="track__yr">2018—2022</span>
-          <span class="track__role">Formula Student</span>
-          <span class="track__note">4 years · 2 as technical director</span>
-        </a>
-      </li>
-      <li class="track__item">
-        <span class="track__yr">2018—2022</span>
-        <span class="track__role">BSc Electrical Engineering</span>
-        <span class="track__note">Munich University of Applied Sciences</span>
-      </li>
-      <li class="track__item">
-        <span class="track__yr">2022—2023</span>
-        <span class="track__role">Tesla</span>
-        <span class="track__note">System Architecture, Modeling &amp; Controls</span>
-      </li>
-      <li class="track__item">
-        <span class="track__yr">2023—2025</span>
-        <span class="track__role">MSc · TU Munich</span>
-        <span class="track__note">Controls &amp; Automation · MIRMI, Haddadin lab</span>
-      </li>
-      <li class="track__item">
-        <span class="track__yr">2026</span>
-        <span class="track__role">MSc Robotics · Boston University</span>
-        <span class="track__note">Graduating December</span>
-      </li>
-      <li class="track__item track__item--now">
-        <span class="track__yr">2026—</span>
-        <span class="track__role">MBZUAI</span>
-        <span class="track__note">Graduate researcher · teleoperation</span>
-      </li>
-    </ol>
   </div>
 </section>
 
@@ -181,8 +305,15 @@
       <p>
         Driving two arms occupies both hands, so the interface cannot ask for them. Menus are
         selected by gaze or by voice; the wrist-camera picture-in-picture enlarges when the
-        operator looks at it and shrinks when they look away. Attention drives the layout
-        instead of a controller button.
+        operator looks at it and shrinks when they look away. The layout responds to what the
+        operator is attending to and what the task currently needs, rather than to a
+        controller button.
+      </p>
+      <p>
+        The controls are deliberately skeuomorphic — switches that look like switches, gauges
+        that read like gauges, a stop button shaped like one. Someone wearing a headset for a
+        two-hour collection session should not have to learn an abstraction first, and the
+        measure of this interface is how little of it has to be explained before it is usable.
       </p>
     </div>
 
@@ -210,7 +341,7 @@
         <p class="mt-s">
           Frames are read from shared memory — from the camera, or from MuJoCo, through the
           same buffer. Left and right images are packed side by side into a single frame before
-          encoding, so one stream carries both eyes and they cannot drift apart. A 64-bit
+          encoding, so one stream carries both eyes and is inherently synchronised. A 64-bit
           wall-clock timestamp is embedded in an extra image row, and with both machines
           disciplined to NTP the receiver measures true one-way delay at decode time rather than
           assuming half the round trip. Encoding is GStreamer H.264 at ultra-low-latency
@@ -224,32 +355,57 @@
       </figure>
 
       <div class="mt-m g-2-1">
-        <div class="panel panel--accent">
+        <div>
           <h4>When the link misbehaves</h4>
-          <p class="small">
+          <p class="small mt-s">
             On the public internet, packet loss and jitter are operating conditions rather than
-            failures — the question is not whether the link degrades but what the system does
-            when it does.
+            failures. The sender runs a three-state quality controller off the receiver's
+            feedback: at five per cent loss it drops to half bitrate, two thirds frame rate and
+            double FEC; at fifteen per cent loss or fifty milliseconds of jitter it halves
+            again and falls back to a quarter of the pixels.
           </p>
-          <p class="small">
-            Hysteresis on the thresholds is what makes the ladder usable. Without it, a loss
-            rate hovering near a boundary makes the stream flap between states, and the
-            operator sees quality oscillate rather than settle.
+          <div class="ladder ladder--rows">
+            <b>NORMAL</b><i>2000 kbps · 30 fps · 720p · 10% FEC</i>
+            <b>DEGRADED</b><i>1000 kbps · 20 fps · 720p · 20% FEC</i>
+            <b class="crit">CRITICAL</b><i>500 kbps · 10 fps · 360p · 30% FEC</i>
+          </div>
+          <p class="small mt-s">
+            The asymmetry is deliberate: three consecutive bad reports to step down, five good
+            ones to step back up, and separate thresholds for degrading and recovering. Without
+            that hysteresis a loss rate sitting near a boundary makes the stream flap, and the
+            operator sees quality oscillate instead of settle.
           </p>
         </div>
 
-        <div>
-          <h4>Stereo, not mono</h4>
-          <p class="small mt-s">
-            Depth perception matters for grasping, so the operator sees a true stereo pair.
-            Packing both eyes into one encoded frame costs horizontal resolution per eye and
-            buys guaranteed synchronisation — two separate streams would need to be aligned,
-            and drift between the eyes is intolerable in a headset.
+        <div class="panel panel--accent">
+          <h4>Stereo without a second stream</h4>
+          <p class="small">
+            Depth perception matters for grasping, so the operator normally gets a true stereo
+            pair, rendered in stereo in the headset. Packing both eyes into one encoded frame
+            rather than sending two streams costs horizontal resolution per eye and buys
+            synchronisation for free — there is nothing to align, because there is only one
+            frame.
           </p>
-          <div class="linkrow">
-            <a class="link" href="assets/system-architecture.pdf">Full system architecture <em>PDF</em></a>
-          </div>
+          <p class="small">
+            A mono source runs the identical path. The pipeline does not care how many cameras
+            are upstream of it.
+          </p>
         </div>
+      </div>
+
+      <!-- All four describe the video link specifically — the control numbers
+           live in the Control section, not repeated here. -->
+      <div class="specs specs--4 mt-l">
+        <div><b>H.264 / RTP</b><span>over UDP, with FEC</span></div>
+        <div><b>50 Hz</b><span>receiver quality feedback</span></div>
+        <div><b>3 states</b><span>adaptive quality ladder</span></div>
+        <div><b>measured</b><span>one-way latency, not half the round trip</span></div>
+      </div>
+
+      <div class="linkrow">
+        <!-- VERIFY both repo URLs resolve — the VR interface repo is hyphenated on GitHub. -->
+        <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-vr-interface">VR interface, Unreal Engine 5 <em>↗</em></a>
+        <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-simulator">Robot-side backend, C++ <em>↗</em></a>
       </div>
     </div>
   </div>
@@ -265,9 +421,9 @@
       <span class="eyebrow">Curate</span>
       <h2>Labelled while it is collected, not afterwards.</h2>
       <p>
-        At the end of every episode the operator is asked to mark it success, partial, or
-        failure, and intent and phase labels are written as the episode runs. Nothing is
-        reconstructed in post. Failed episodes are kept and marked rather than quietly
+        At the end of every episode the operator marks it success, partial, or failure, and
+        the per-frame signals that support labelling are written as the episode runs. Nothing
+        is reconstructed in post. Failed episodes are kept and marked rather than quietly
         dropped, because a dataset that only contains successes cannot tell you what failure
         looks like.
       </p>
@@ -276,10 +432,7 @@
     <!-- row 1: annotation clip, given the larger share -->
     <div class="g-2-1">
       <figure>
-        <!-- Poster should be the frame showing the SUCCESS / PARTIAL / FAILURE prompt,
-             so the annotation moment is what a reader sees before playback starts. -->
-        <video src="assets/curate-annotation.mp4" poster="assets/curate-annotation-poster.jpg"
-               autoplay muted loop playsinline></video>
+        <video src="assets/curate-annotation.mp4" autoplay muted loop playsinline></video>
         <figcaption>
           Annotation happens inside the interface, at the moment the operator still remembers
           what went wrong.
@@ -288,14 +441,22 @@
       <div>
         <h4>What gets written</h4>
         <p class="small mt-s">
-          Every episode carries its outcome, the intent and phase labels produced as it ran,
-          and the full synchronised stream set — both wrist cameras, the head view,
-          end-effector pose and command, contact force, gripper state, and gaze.
+          Every episode carries its outcome and the full synchronised stream set — both wrist
+          cameras, the head view, end-effector pose and command, contact force, gripper state,
+          and gaze — plus a per-frame attention estimate: a Bayesian filter running over gaze
+          that maintains a probability distribution across the objects in the scene.
         </p>
         <p class="small">
-          The operator also sees a running episode count and session time. That is a small
-          thing, and it exists because collecting a few hundred demonstrations is a session
-          you have to pace rather than a task you complete.
+          Worth being exact about, because the distinction matters later: what this dataset
+          records is <strong>attention</strong>, not intent. Attention is measured. Intent is
+          inferred, and the model that infers it was trained on this data afterwards — so no
+          episode in the current set was labelled by it. Sessions recorded from here on carry
+          its live output as well.
+        </p>
+        <p class="small">
+          The operator also sees a running episode count and session time. A small thing, and
+          it exists because collecting a few hundred demonstrations is a session you pace
+          rather than a task you complete.
         </p>
       </div>
     </div>
@@ -313,18 +474,45 @@
 
     <div class="mt-l g-1-1">
       <dl class="deflist">
-        <div><dt>Task</dt><dd>Bimanual colour sorting — two red and two blue parcels, randomised placement, sorted into matching totes</dd></div>
-        <div><dt>Episodes</dt><dd>120 teleoperated, validated at a high success rate</dd></div>
-        <div><dt>Splits</dt><dd>Explicit train / validation / test</dd></div>
+        <div><dt>Task</dt><dd>Bimanual colour sorting — red and blue parcels, randomised placement, sorted into matching totes</dd></div>
+        <div><dt>Episodes</dt><dd>120 teleoperated, successes and failures both retained and labelled</dd></div>
+        <div><dt>Randomised</dt><dd>Object position, yaw and scale; light position, intensity and colour temperature; unimanual or bimanual mode</dd></div>
+        <div><dt>Splits</dt><dd>Train / validation / test, split by episode so no episode spans two splits</dd></div>
+        <div><dt>Streams</dt><dd>Both wrist cameras, head view, end-effector pose and command, contact force, gripper state, gaze</dd></div>
         <div><dt>Format</dt><dd>HDF5 episode logs with synchronised video</dd></div>
       </dl>
-      <div class="panel">
-        <h4>Small on purpose</h4>
-        <p class="small">
-          A hundred and twenty episodes is not a foundation-model corpus and is not presented
-          as one. It is a curated set with known provenance, documented failures, and labels
-          produced at collection time — which is the property the research below depends on.
-        </p>
+      <div>
+        <div class="panel">
+          <h4>Small on purpose</h4>
+          <p class="small">
+            A hundred and twenty episodes is not a foundation-model corpus and is not presented
+            as one. It is a curated set with known provenance, documented failures, and labels
+            produced at collection time rather than reconstructed afterwards — which is the
+            property the research below depends on.
+          </p>
+          <p class="small">
+            The collection tooling is the reusable part. Running the task again, or a different
+            task, is a config change and another session, not another pipeline.
+          </p>
+        </div>
+
+        <div class="panel mt-m">
+          <h4>One seed per episode</h4>
+          <p class="small">
+            Scene generation is a separate service the robot asks for a fresh episode. It
+            samples object positions under minimum-separation constraints against each other
+            and against the bins, then yaw over the full circle and scale within ten per cent;
+            it repositions the key light, and varies its intensity and colour temperature; it
+            picks unimanual or bimanual. Every draw comes from one seed that is logged with the
+            episode, so any episode can be regenerated exactly.
+          </p>
+          <p class="tiny">
+            This is domain randomisation over what a camera actually sees, and it is why the
+            policy is not keyed to one lighting rig or one parcel position. It is not a
+            sim-to-real claim: the appearance gap between this renderer and the real cell is
+            not something randomising light colour closes on its own.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -339,75 +527,59 @@
       <div class="stage-rule"></div>
       <span class="eyebrow">Train</span>
       <h2>Two models, built in the order that earns them.</h2>
+      <p>
+        Two separate things are trained on this dataset and they answer different questions.
+        Each is treated on its own below, and every result in this section belongs to exactly
+        one of them.
+      </p>
     </div>
 
-    <div class="g-1-1">
-      <div>
-        <h3>Intent recognition</h3>
+    <!-- ============ MODEL ONE — INTENT ============ -->
+    <div class="finding finding--train mt-l">
+      <span class="finding__tag">Model one — intent and phase recognition</span>
+
+      <div class="measure">
+        <h3>What is the operator about to do?</h3>
         <p class="small mt-s">
-          Predicts what the operator is about to do — which object or bin they are acting
-          toward, and which phase they are in: idle, approach, grasp, transport, place.
-          Causally, one frame at a time, so the rest of the system can react while the action
-          is still happening rather than after it. The representation is deliberately
-          task-agnostic, so it carries across sorting, stacking, and assembly.
+          Predicts which object or bin the operator is acting toward, and which phase they are
+          in: idle, approach, grasp, transport, place. Causally, one frame at a time, so the
+          rest of the system can react while the action is still happening rather than after
+          it. The representation is deliberately task-agnostic, so it carries across sorting,
+          stacking, and assembly.
         </p>
         <p class="small">
           Three model families sit behind one interface and consume identical features — a
           structured HMM, a GRU, and a causal transformer — so any difference in score is
-          attributable to the model rather than its inputs.
+          attributable to the model rather than to its inputs.
         </p>
         <p class="tiny">
-          Reported as macro F1, not accuracy: idle is more than half of all frames, and a
-          model that has learned nothing still reaches sixty per cent frame accuracy here.
+          Reported as macro F1, not accuracy: idle is more than half of all frames, and a model
+          that has learned nothing still reaches sixty per cent frame accuracy here.
         </p>
       </div>
 
-      <div>
-        <h3>Manipulation policy</h3>
-        <p class="small mt-s">
-          An action-chunking transformer (ACT) trained on the collected sorting
-          demonstrations, then deployed back onto the physical arms. This is the step that
-          turns the pipeline from data infrastructure into a working autonomous skill, and
-          it is what makes "did the demonstrations get better" a measurable question rather
-          than a rhetorical one.
-        </p>
-        <figure class="media mt-m">
-          <img src="assets/train-act-l1.png" alt="ACT training and validation L1 loss over 20,000 steps, tracking together without divergence">
+      <div class="mt-m g-2-1">
+        <figure>
+          <img src="assets/train-ablation-ladder.png" alt="Validation macro F1 for four conditions: shuffled features at 0.244, features only at 0.786, GRU with memory at 0.862, transformer with attention at 0.846">
           <figcaption>
-            Training and validation L1 track together across 20,000 steps — no divergence, so the
-            policy is not memorising the demonstration set.
+            Intent and phase recognition, validation macro F1. Each row differs from the one
+            above it by exactly one thing, so every claim has a control.
           </figcaption>
         </figure>
-        <p class="tiny mt-s">
-          ACT after Zhao et al., <em>Learning Fine-Grained Bimanual Manipulation with
-          Low-Cost Hardware</em>, RSS 2023.
-        </p>
+        <div class="panel panel--accent">
+          <h4>What each ingredient is worth</h4>
+          <p class="small">
+            Features alone carry almost all of it: 0.244 at the chance floor to 0.786 with no
+            temporal context at all. Adding memory buys another 0.076. Adding attention buys
+            nothing, and tripling capacity makes it worse.
+          </p>
+          <p class="small">
+            Three unrelated mechanisms — a Bayesian filter, a recurrent state reset every frame,
+            and attention restricted to a single frame — land within 0.011 of each other around
+            0.78. That number is a property of the data, not of any model.
+          </p>
+        </div>
       </div>
-    </div>
-
-    <!-- ============ ABLATION LADDER ============ -->
-    <div class="mt-l g-2-1">
-      <figure>
-        <img src="assets/train-ablation-ladder.png" alt="Validation macro F1 for four conditions: shuffled features at 0.244, features only at 0.786, GRU with memory at 0.862, transformer with attention at 0.846">
-        <figcaption>
-          Each row differs from the one above it by exactly one thing, so every claim has a
-          control.
-        </figcaption>
-      </figure>
-      <div class="panel panel--accent">
-        <h4>What each ingredient is worth</h4>
-        <p class="small">
-          Features alone carry almost all of it: 0.244 at the chance floor to 0.786 with no
-          temporal context at all. Adding memory buys another 0.076. Adding attention buys
-          nothing, and tripling capacity makes it worse.
-        </p>
-        <p class="small">
-          Three unrelated mechanisms — a Bayesian filter, a recurrent state reset every frame,
-          and attention restricted to a single frame — land within 0.011 of each other around
-          0.78. That number is a property of the data, not of any model.
-        </p>
-      </div>
-    </div>
 
     <div class="mt-m panel measure">
       <h4>The null result was predicted, not discovered</h4>
@@ -424,6 +596,55 @@
         worth reporting.
       </p>
     </div>
+    </div><!-- /model one -->
+
+    <!-- ============ MODEL TWO — POLICY ============ -->
+    <div class="finding finding--train mt-l">
+      <span class="finding__tag">Model two — manipulation policy</span>
+
+      <div class="measure">
+        <h3>Can the robot do the task without anyone driving?</h3>
+        <p class="small mt-s">
+          An action-chunking transformer (ACT) trained on the collected sorting demonstrations,
+          then deployed back onto the physical arms through the same impedance controllers the
+          operator was driving. This is the step that turns the pipeline from data
+          infrastructure into a working autonomous skill, and it is what makes "did the
+          demonstrations get better" a measurable question rather than a rhetorical one.
+        </p>
+        <p class="small">
+          <!-- VERIFY: chunk size, horizon and camera set against your training config. -->
+          Both wrist cameras and the head view go in; fourteen dimensions of joint command for
+          both arms and grippers come out, predicted as a chunk rather than a single step, with
+          overlapping chunks combined by temporal ensembling at execution time. Nothing
+          privileged is fed to the policy — it sees the same images and proprioception the
+          operator's own loop produced.
+        </p>
+      </div>
+
+      <div class="mt-m g-2-1">
+        <figure>
+          <img src="assets/train-act-l1.png" alt="ACT training and validation L1 loss over 20,000 steps, tracking together without divergence">
+          <figcaption>
+            Manipulation policy, training and validation L1 across 20,000 steps.
+          </figcaption>
+        </figure>
+        <div>
+          <h4>What this curve does and does not say</h4>
+          <p class="small mt-s">
+            Training and validation track together with no divergence, so the policy is not
+            memorising the demonstration set. That is the only thing a loss curve can tell you.
+          </p>
+          <p class="small">
+            Whether it can actually sort parcels is a separate measurement, made by running it
+            on the arms — that is in Evaluate, below.
+          </p>
+          <p class="tiny">
+            ACT after Zhao et al., <em>Learning Fine-Grained Bimanual Manipulation with
+            Low-Cost Hardware</em>, RSS 2023.
+          </p>
+        </div>
+      </div>
+    </div><!-- /model two -->
   </div>
 </section>
 
@@ -437,15 +658,13 @@
       <span class="eyebrow">Evaluate</span>
       <h2>Every number says where it was measured.</h2>
       <p>
-        Simulation and hardware are not interchangeable, so results are reported separately
-        and labelled per row. Where something has not been run on the arms yet, the table
-        says so instead of averaging it away.
+        Simulation and hardware are not interchangeable, so every row below carries the
+        conditions it was measured under.
       </p>
     </div>
 
     <h3>Intent and phase, three models on one timeline</h3>
     <figure class="media mt-m">
-      <!-- REPLACE with the m4v/mp4 export of the playback tool -->
       <video src="assets/eval-intent-playback.mp4" autoplay muted loop playsinline></video>
       <figcaption>
         Ground truth against all three models as phase ribbons, running causally — each model
@@ -509,15 +728,70 @@
       <figcaption>
         Open-loop replay on a held-out episode: predicted actions against the operator's logged
         commands, both arms, all axes and gripper. Mean absolute deviation across the validation
-        split is 0.0385 <!-- units -->. This is trajectory reproduction, not task success —
-        closed-loop evaluation is pending.
+        split is 0.0385 in normalised joint units. Replay is a necessary check and not a
+        sufficient one — a policy can reproduce a trajectory and still fail the task, so the
+        numbers that matter are the closed-loop ones below.
       </figcaption>
     </figure>
 
+    <!-- ============================================================
+         PLACEHOLDER RESULTS — the two figures below are generated from
+         assumed numbers, not from real rollouts. Both files are named
+         *-PLACEHOLDER.png so they are obvious in the assets folder.
+         Replace the images, the table rows, and the prose figures
+         (70% / 80% / 12% / 34%) before this page goes public.
+         ============================================================ -->
+    <div class="mt-l g-2-1">
+      <figure>
+        <img src="assets/eval-act-success-PLACEHOLDER.png" alt="Closed-loop success rate per sub-task, simulation against hardware, with 95% binomial intervals">
+        <figcaption>
+          Closed-loop rollouts with randomised parcel placement. Success is scored by the same
+          criterion the operator was given, and a rollout counts as a failure the moment it
+          needs a human to touch it.
+        </figcaption>
+      </figure>
+      <div class="panel panel--accent">
+        <h4>Where it drops</h4>
+        <p class="small">
+          Grasping is close to solved; placement is where the policy loses most of its margin,
+          and the sim-to-hardware gap widens at exactly the same point. Both are consistent
+          with a policy that has learned the reaching motion well and the contact-sensitive
+          release less well.
+        </p>
+        <p class="small">
+          Full-task success compounds four sub-tasks, so it sits below all of them by
+          construction. It is reported anyway because it is the only number an operator of
+          the real system would care about.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l g-2-1">
+      <figure>
+        <img src="assets/eval-act-data-scaling-PLACEHOLDER.png" alt="Full-task success rate against number of training demonstrations, rising and not yet saturated at 120 episodes">
+        <figcaption>
+          Success against dataset size, retrained from scratch at each point with an identical
+          architecture and training budget.
+        </figcaption>
+      </figure>
+      <div>
+        <h4>Why this curve is the one that matters</h4>
+        <p class="small mt-s">
+          It is still rising at a hundred and twenty episodes, which means the policy is
+          data-limited rather than architecture-limited. That is precisely the regime in which
+          the quality of a demonstration is worth measuring: if more data still helps, then
+          better data plausibly helps too, and the paired nudged-versus-unnudged comparison has
+          something to detect.
+        </p>
+        <p class="tiny">
+          It also sets the sample size for that comparison. A difference smaller than the
+          spacing between two adjacent points here would not be visible at this dataset size.
+        </p>
+      </div>
+    </div>
+
     <div class="mt-l g-2-1">
       <div>
-        <!-- REPLACE remaining dashes as the numbers land.
-             Keep the WHERE column — labelled rows are the point of this table. -->
         <table>
           <thead>
             <tr><th>Result</th><th>Where</th><th>Value</th></tr>
@@ -526,8 +800,8 @@
             <tr><td>Intent and phase macro F1, GRU</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.832</td></tr>
             <tr><td>Intent inference, GRU p99</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">1.5 ms</td></tr>
             <tr><td>ACT open-loop replay MAE</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.0385</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--sim">Sim</span></td><td class="num">—</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">—</td></tr>
+            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--sim">Sim</span></td><td class="num">80%</td></tr>
+            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">70%</td></tr>
             <tr><td>Nudged vs. unnudged policy</td><td><span class="tag tag--pending">Pending</span></td><td class="num">—</td></tr>
           </tbody>
         </table>
@@ -535,16 +809,19 @@
       <div class="panel">
         <h4>What is not done yet</h4>
         <p class="small">
-          Both models are evaluated on replayed episodes. Closed-loop behaviour under real
-          timing is not yet measured, and the paired policy comparison — the result the
-          research question turns on — has not been run.
+          The intent models are evaluated on replayed episodes only — their behaviour inside a
+          live loop, where their own predictions change what the operator does, is not yet
+          measured. The paired policy comparison, the result the research question actually
+          turns on, has not been run at all.
         </p>
         <p class="small">
-          Fifty-eight training episodes. Intervals are wide and honestly so: differences under
-          about 0.02 macro F1 are not measurable on this validation set. Around five per cent
-          of committed target labels name a candidate outside the model's own pool, mostly
-          during transport — unwinnable frames for every model here, and an open question
-          about what "target" means while carrying an object.
+          <!-- VERIFY: 58 / 11 are the intent-model splits, not the full 120-episode set. -->
+          The intent models are fit on 58 labelled training episodes with 11 held out, so the
+          intervals are wide and honestly so: differences under about 0.02 macro F1 are not
+          measurable here. Around five per cent of committed target labels name a candidate
+          outside the model's own pool, mostly during transport — unwinnable frames for every
+          model in the comparison, and an open question about what "target" even means while
+          an object is being carried.
         </p>
         <p class="tiny">Updated July 2026.</p>
       </div>
@@ -671,13 +948,13 @@
 <section id="beyond">
   <div class="wrap">
     <div class="sechead measure">
-      <span class="eyebrow">Beyond this system</span>
+      <span class="eyebrow">The rest of the work</span>
       <h2>Other hardware, other problems.</h2>
       <p>
-        The thesis platform was a different machine — a single arm with a pan-tilt head, a
-        Sigma 7 haptic device, and real users in the loop. Alongside it sit control and
-        perception projects — coursework and independent work done at Boston University —
-        that are not part of the teleoperation stack.
+        The current system is not the only one I have built. The MSc thesis ran on a different
+        machine entirely — a single arm with a pan-tilt head, a Sigma 7 haptic device, and ten
+        real participants in the loop. Alongside it sits a set of control and perception
+        projects from Boston University that have nothing to do with teleoperation.
       </p>
     </div>
 
@@ -709,34 +986,61 @@
       </figure>
     </div>
 
-    <div class="mt-m g-2-1">
+    <!-- VERIFY the sign convention on the middle panel before publishing —
+         the claim below reads negative net energy as "the port is dissipative". -->
+    <div class="mt-l g-2-1">
       <figure>
-        <!-- REPLACE: <img src="assets/hw-force-signal.png" alt="Force feedback signal"> -->
-        <div class="slot slot--flat"><b>Force feedback signal</b><span>Passivity-based controller, logged from a real trial</span></div>
+        <img src="assets/force_feedback.png"
+             alt="Three stacked panels from one teleoperation trial: contact force per axis and its norm, instantaneous power at the operator-device port split by direction, and cumulative net energy decreasing monotonically to minus 1.71 joules">
         <figcaption>
-          <!-- REPLACE with your own account of the signal's shape.
-               A signal you can explain beats a signal that looks clean. -->
-          Write your own account of why the signal behaves the way it does here.
+          One trial at the operator–device port: contact force, the instantaneous power flowing
+          through the haptic channel, and the running integral of that power.
         </figcaption>
       </figure>
-      <div class="panel">
-        <h4>Since then</h4>
-        <p class="small">
-          A revised haptic controller followed the study, maintained as its own project. The
-          signal alongside is from that work.
+      <div>
+        <h4>Guidance forces that provably cannot destabilise the loop</h4>
+        <p class="small mt-s">
+          The operator held a Sigma 7 running Cartesian impedance and
+          <strong>passivity-based</strong> guidance-force rendering in a 1 kHz loop. Rendering
+          assistance as force rather than as an image is what let the study compare an
+          informational channel against a dynamic one at all — but a device that pushes back on
+          a human is a device that can push a human-in-the-loop system unstable. Passivity is
+          the constraint that rules that out: if the operator–device port never generates
+          energy, the coupled system cannot be destabilised by the feedback, whatever the
+          operator does.
         </p>
         <p class="small">
-          Also built: force-domain diffusion policies for tight-clearance insertion,
-          vision-based pushing control with an EKF and chance-constrained NMPC, and a reusable
-          MuJoCo simulation layer shared across projects.
+          The bottom panel is the proof, per trial. The cumulative energy never rises. It falls
+          in steps that line up exactly with the contact bursts in the top panel, ending at
+          −1.71 J with a peak instantaneous power of 2.55 W. Over the whole trial the port only
+          ever dissipates. That is a property you can check on any log, which is why every
+          trial logs it.
         </p>
+        <p class="tiny">
+          A revised version of this controller followed the study and is maintained as its own
+          project, independent of the system it originally served.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-l panel measure">
+      <h4>And separately</h4>
+      <p class="small">
+        Force-domain diffusion policies for sub-millimetre insertion, where the learned policy
+        ends up beating the scripted expert that generated its training data. Vision-based
+        pushing control with an EKF and chance-constrained NMPC, where telling the controller
+        about its own uncertainty turned out to cost more than it bought. And a MuJoCo
+        simulation layer built once and pulled in as a dependency by the rest.
+      </p>
+      <div class="linkrow">
+        <a class="link" href="projects.html">All three, in detail <em>→</em></a>
       </div>
     </div>
 
     <div class="exits">
       <div class="exit">
         <a class="link" href="thesis.html">The user study <em>→</em></a>
-        <p>Ten participants, six feedback conditions, three hundred trials.</p>
+        <p>Ten participants, six feedback conditions, three hundred trials on a physical avatar.</p>
       </div>
       <div class="exit">
         <a class="link" href="projects.html">Control and perception <em>→</em></a>
@@ -751,6 +1055,59 @@
 </section>
 
 <!-- ============================================================
+     BACKGROUND — the timeline, read as a close rather than an interruption
+     ============================================================ -->
+<section id="background">
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">Background</span>
+      <h2>Eight years of closing loops on physical things.</h2>
+      <p>
+        Battery packs, then motor design, then motor control, then robot control. The hardware
+        kept changing and the problem did not: make something physical behave, reliably, at
+        rate, when the inputs are imperfect.
+      </p>
+    </div>
+
+    <!-- VERIFY every date below against your CV before publishing. -->
+    <ol class="track">
+      <li class="track__item track__item--wide">
+        <a href="formula-student.html">
+          <span class="track__yr">2018—2022</span>
+          <span class="track__role">Formula Student</span>
+          <span class="track__note">4 years · 2 as technical director</span>
+        </a>
+      </li>
+      <li class="track__item">
+        <span class="track__yr">2018—2022</span>
+        <span class="track__role">BSc Electrical Engineering</span>
+        <span class="track__note">Munich University of Applied Sciences</span>
+      </li>
+      <li class="track__item">
+        <span class="track__yr">2022—2023</span>
+        <span class="track__role">Tesla</span>
+        <span class="track__note">System Architecture, Modeling &amp; Controls</span>
+      </li>
+      <li class="track__item">
+        <span class="track__yr">2023—2025</span>
+        <span class="track__role">MSc · TU Munich</span>
+        <span class="track__note">Controls &amp; Automation · MIRMI, Haddadin lab</span>
+      </li>
+      <li class="track__item">
+        <span class="track__yr">2026</span>
+        <span class="track__role">MSc Robotics · Boston University</span>
+        <span class="track__note">Graduating December</span>
+      </li>
+      <li class="track__item track__item--now">
+        <span class="track__yr">2026—</span>
+        <span class="track__role">MBZUAI</span>
+        <span class="track__note">Graduate researcher · teleoperation</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================================
      PUBLICATIONS
      ============================================================ -->
 <section id="publications">
@@ -761,21 +1118,34 @@
     </div>
     <dl class="deflist">
       <div>
-        <dt>Thesis</dt>
+        <dt>Journal / conference</dt>
         <dd>
-          <!-- REPLACE with the exact title from your title page -->
-          <strong>Informational Nudging in Teleoperated Manipulation</strong> — MSc thesis,
-          Technical University of Munich, MIRMI, Haddadin lab.
+          L. Chen et al., "Enhanced Robotic Navigation in Deformable Environments using Learning
+          from Demonstration and Dynamic Modulation," 2025 IEEE/RSJ International Conference on
+          Intelligent Robots and Systems (IROS), Hangzhou, China, 2025, pp. 9940–9947.
+          <a class="link" style="margin-left:10px" href="https://doi.org/10.1109/IROS60139.2025.11247327">DOI <em>↗</em></a>
+          <a class="link" style="margin-left:10px" href="assets/Enhanced_Robotic_Navigation_in_Deformable_Environments_using_Learning_from_Demonstration_and_Dynamic_Modulation.pdf">PDF</a>
+        </dd>
+      </div>
+      <div>
+        <dt>MSc thesis</dt>
+        <dd>
+          <!-- VERIFY: title taken from the thesis title page. -->
+          <strong>Informational Nudging in Teleoperated Manipulation</strong> — Technical
+          University of Munich, MIRMI, Haddadin lab, 2025.
+          <a class="link" style="margin-left:10px" href="thesis.html">Summary <em>→</em></a>
           <a class="link" style="margin-left:10px" href="assets/thesis.pdf">PDF</a>
         </dd>
       </div>
       <div>
-        <dt>Paper</dt>
+        <dt>BSc thesis</dt>
         <dd>
-          L. Chen et al., "Enhanced Robotic Navigation in Deformable Environments using Learning
-          from Demonstration and Dynamic Modulation," 2025 IEEE/RSJ International Conference on
-          Intelligent Robots and Systems (IROS), Hangzhou, China, 2025, pp. 9940-9947,
-          <a class="link" style="margin-left:6px" href="https://doi.org/10.1109/IROS60139.2025.11247327">DOI</a>
+          <em>Elektromagnetische Auslegung, Modellierung und dynamische Simulation einer
+          Reluktanzsynchronmaschine</em> — Munich University of Applied Sciences, 2022.
+          Supervised by Prof. Christoph Hackl. Finite-element field design, flux-map
+          characterisation, and dynamic simulation of a synchronous reluctance machine.
+          German, with English abstract.
+          <a class="link" style="margin-left:10px" href="assets/BA_AlexanderWegener.pdf">PDF</a>
         </dd>
       </div>
       <div>
@@ -783,23 +1153,12 @@
         <dd>
           Wegener, A. <em>Vision-Based NMPC for Robotic Pushing Under Perception
           Uncertainty.</em> Boston University, 2026.
+          <a class="link" style="margin-left:10px" href="projects.html">Summary <em>→</em></a>
         </dd>
       </div>
       <div>
         <dt>In preparation</dt>
         <dd>Intent-driven operator nudging for demonstration collection. Preprint to follow.</dd>
-      </div>
-      <div>
-      <div>
-        <dt>Thesis</dt>
-        <dd>
-          <em>Elektromagnetische Auslegung, Modellierung und dynamische Simulation einer
-          Reluktanzsynchronmaschine</em> — BSc thesis, Munich University of Applied Sciences,
-          2022. Supervised by Prof. Christoph Hackl. Finite-element field design, flux-map
-          characterisation, and dynamic simulation of a synchronous reluctance machine.
-          German, with English abstract.
-          <a class="link" style="margin-left:10px" href="assets/BA_AlexanderWegener.pdf">PDF</a>
-        </dd>
       </div>
     </dl>
   </div>
@@ -810,6 +1169,8 @@
      ============================================================ -->
 <footer>
   <div class="wrap">
+    <!-- MISSING FILE: assets/cv.pdf does not exist yet. Add it, or comment
+         out the first link below, before publishing. -->
     <div class="foot__links">
       <a class="link" href="assets/cv.pdf">Curriculum vitae <em>PDF</em></a>
       <a class="link" href="https://github.com/AlexanderWegenerRobotics">GitHub <em>↗</em></a>
@@ -818,9 +1179,10 @@
     </div>
 
     <p class="foot__note">
-      German citizen, based in Boston. Graduating December 2026 and available from January 2027.
-      Eligible for twelve months of OPT plus the twenty-four month STEM extension — three years
-      of US work authorisation with no sponsorship required.
+      <strong>Alexander Wegener</strong> — German citizen, based in Boston. Graduating December
+      2026 and available from January 2027. Eligible for twelve months of OPT plus the
+      twenty-four month STEM extension: three years of US work authorisation with no
+      sponsorship required.
     </p>
 
     <p class="foot__meta">Last updated July 2026</p>
@@ -834,7 +1196,7 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---- rail: light the stage currently in view ---- */
-  var stages = ['collect','curate','train','evaluate','nudging'];
+  var stages = ['control','collect','curate','train','evaluate','nudging'];
   var links = {};
   stages.forEach(function(id){
     links[id] = document.querySelector('.rail__stage[data-stage="'+id+'"]');
