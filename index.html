@@ -9,9 +9,14 @@
 <meta property="og:title" content="Alexander Wegener — Teleoperation systems and robot learning">
 <meta property="og:description" content="Bimanual VR teleoperation from Boston to Abu Dhabi over the public internet — interface, dataset, policy, deployment — plus an operator user study and selected control and perception work.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://alexanderwegener.com/">
+<meta property="og:image" content="https://alexanderwegener.com/assets/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A Franka Panda arm reaching over red and blue parcels in the operator's VR view, with a heads-up display reading 61.2 ms end-to-end latency.">
 <meta name="twitter:card" content="summary_large_image">
-<!-- REPLACE: absolute URL to a 1200x630 preview image once the site is live -->
-<!-- <meta property="og:image" content="https://alexanderwegenerrobotics.github.io/assets/preview.png"> -->
+<meta name="twitter:image" content="https://alexanderwegener.com/assets/preview.png">
+<link rel="canonical" href="https://alexanderwegener.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -735,59 +740,56 @@
     </figure>
 
     <!-- ============================================================
-         PLACEHOLDER RESULTS — the two figures below are generated from
-         assumed numbers, not from real rollouts. Both files are named
-         *-PLACEHOLDER.png so they are obvious in the assets folder.
-         Replace the images, the table rows, and the prose figures
-         (70% / 80% / 12% / 34%) before this page goes public.
-         ============================================================ -->
-    <div class="mt-l g-2-1">
-      <figure>
-        <img src="assets/eval-act-success-PLACEHOLDER.png" alt="Closed-loop success rate per sub-task, simulation against hardware, with 95% binomial intervals">
-        <figcaption>
-          Closed-loop rollouts with randomised parcel placement. Success is scored by the same
-          criterion the operator was given, and a rollout counts as a failure the moment it
-          needs a human to touch it.
-        </figcaption>
-      </figure>
-      <div class="panel panel--accent">
-        <h4>Where it drops</h4>
-        <p class="small">
-          Grasping is close to solved; placement is where the policy loses most of its margin,
-          and the sim-to-hardware gap widens at exactly the same point. Both are consistent
-          with a policy that has learned the reaching motion well and the contact-sensitive
-          release less well.
-        </p>
-        <p class="small">
-          Full-task success compounds four sub-tasks, so it sits below all of them by
-          construction. It is reported anyway because it is the only number an operator of
-          the real system would care about.
-        </p>
-      </div>
-    </div>
+         CLOSED-LOOP RESULTS GO HERE.
 
-    <div class="mt-l g-2-1">
-      <figure>
-        <img src="assets/eval-act-data-scaling-PLACEHOLDER.png" alt="Full-task success rate against number of training demonstrations, rising and not yet saturated at 120 episodes">
-        <figcaption>
-          Success against dataset size, retrained from scratch at each point with an identical
-          architecture and training budget.
-        </figcaption>
-      </figure>
-      <div>
-        <h4>Why this curve is the one that matters</h4>
-        <p class="small mt-s">
-          It is still rising at a hundred and twenty episodes, which means the policy is
-          data-limited rather than architecture-limited. That is precisely the regime in which
-          the quality of a demonstration is worth measuring: if more data still helps, then
-          better data plausibly helps too, and the paired nudged-versus-unnudged comparison has
-          something to detect.
-        </p>
-        <p class="tiny">
-          It also sets the sample size for that comparison. A difference smaller than the
-          spacing between two adjacent points here would not be visible at this dataset size.
-        </p>
-      </div>
+         When the sim rollouts land, paste this block back in and drop the
+         real figures into assets/. Both placeholder PNGs were deleted, so
+         nothing fabricated can ship by accident.
+
+         <div class="mt-l g-2-1">
+           <figure>
+             <img src="assets/eval-act-success.png" alt="Closed-loop success rate per sub-task, simulation against hardware, with 95% binomial intervals">
+             <figcaption>
+               Closed-loop rollouts with randomised parcel placement. Success is scored by the
+               same criterion the operator was given, and a rollout counts as a failure the
+               moment it needs a human to touch it.
+             </figcaption>
+           </figure>
+           <div class="panel panel--accent">
+             <h4>Where it drops</h4>
+             <p class="small">Which sub-task loses the most margin, and whether the
+             sim-to-hardware gap widens at the same point.</p>
+           </div>
+         </div>
+
+         <div class="mt-l g-2-1">
+           <figure>
+             <img src="assets/eval-act-data-scaling.png" alt="Full-task success rate against number of training demonstrations">
+             <figcaption>Success against dataset size, retrained from scratch at each point
+             with an identical architecture and training budget.</figcaption>
+           </figure>
+           <div>
+             <h4>Why this curve is the one that matters</h4>
+             <p class="small mt-s">If it is still rising at a hundred and twenty episodes the
+             policy is data-limited rather than architecture-limited — which is the regime in
+             which demonstration quality is worth measuring at all, and the regime the paired
+             comparison needs to be detectable.</p>
+           </div>
+         </div>
+         ============================================================ -->
+
+    <div class="mt-l panel panel--accent measure">
+      <h4>Closed-loop evaluation is running now</h4>
+      <p class="small">
+        Open-loop replay above shows the policy reproduces the operator's commands. Whether it
+        completes the task unattended is a different measurement, and it is the one in progress:
+        rollouts with randomised parcel placement, scored by the criterion the operator was
+        given, with a rollout counting as a failure the moment it needs a human to touch it.
+      </p>
+      <p class="small">
+        Simulation results first, then hardware. Both go in the table below, labelled, when they
+        exist — not before.
+      </p>
     </div>
 
     <div class="mt-l g-2-1">
@@ -800,8 +802,8 @@
             <tr><td>Intent and phase macro F1, GRU</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.832</td></tr>
             <tr><td>Intent inference, GRU p99</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">1.5 ms</td></tr>
             <tr><td>ACT open-loop replay MAE</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.0385</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--sim">Sim</span></td><td class="num">80%</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">70%</td></tr>
+            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--pending">Sim, pending</span></td><td class="num">—</td></tr>
+            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--pending">Hardware, pending</span></td><td class="num">—</td></tr>
             <tr><td>Nudged vs. unnudged policy</td><td><span class="tag tag--pending">Pending</span></td><td class="num">—</td></tr>
           </tbody>
         </table>
