@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexander Wegener — Curriculum vitae</title>
+<meta name="description" content="Robotics engineer. Real-time control, teleoperation and robot learning. MSc Robotics, Boston University; MSc TU Munich.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CV — one page, US Letter.
+   PRINT: Cmd/Ctrl-P → Save as PDF → Paper: Letter →
+          Margins: None → Headers and footers: OFF →
+          Background graphics: ON → save to assets/cv.pdf
+   The @page rule supplies the margins. If you leave the dialog on
+   "Default" they get added twice and it spills to a second page.
+   ============================================================ */
+:root{
+  --ink:#14181A; --body:#3D4548; --mute:#6E7A7D; --faint:#A6AFB1;
+  --rule:#D5DCDD; --rule-2:#E9EDEE; --accent:#17697B; --tint:#F1F7F8;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --data:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*,*::before,*::after{ box-sizing:border-box }
+body{
+  margin:0; background:#E8ECED; color:var(--body);
+  font-family:var(--display); font-size:9pt; line-height:1.34;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{
+  width:215.9mm; min-height:279.4mm; margin:0 auto; background:#fff;
+  padding:10mm 13mm;
+}
+a{ color:inherit; text-decoration:none }
+
+/* ---------- header: name left, contact right ---------- */
+.head{
+  display:grid; grid-template-columns:1fr auto; gap:18pt; align-items:end;
+  padding-bottom:6pt; border-bottom:2pt solid var(--ink);
+}
+.name{
+  font-size:24pt; font-weight:700; line-height:.98; letter-spacing:-.038em;
+  color:var(--ink); margin:0 0 4pt;
+}
+.role{
+  font-size:9.6pt; font-weight:600; line-height:1.25; letter-spacing:-.012em;
+  color:var(--accent); margin:0; max-width:52ch;
+}
+.contact{
+  font-family:var(--data); font-size:7.1pt; line-height:1.72;
+  letter-spacing:.02em; color:var(--mute); text-align:right; white-space:nowrap;
+}
+.contact b{ color:var(--ink); font-weight:700 }
+.contact .site{ color:var(--accent); font-weight:700 }
+
+/* ---------- status strip ---------- */
+/* Border as well as tint, so this still reads as a panel if someone
+   exports with "background graphics" off. */
+.status{
+  margin-top:6pt; padding:3.5pt 8pt; background:var(--tint);
+  border:.5pt solid var(--rule); border-left:2pt solid var(--accent);
+  font-family:var(--data); font-size:7.1pt; line-height:1.6;
+  letter-spacing:.02em; color:var(--body);
+}
+.status b{ color:var(--ink); font-weight:700 }
+
+/* ---------- sections ---------- */
+h2{
+  font-family:var(--data); font-size:7.2pt; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--accent);
+  margin:6pt 0 0; padding-top:2.5pt; border-top:1.2pt solid var(--ink);
+}
+
+/* continuous hairline down the date gutter, echoing the site rail */
+.tl{ position:relative }
+.tl::before{
+  content:""; position:absolute; left:52pt; top:4pt; bottom:2pt;
+  width:.6pt; background:var(--rule);
+}
+.entry{
+  display:grid; grid-template-columns:52pt 1fr; gap:0;
+  padding:3.6pt 0 0; break-inside:avoid;
+}
+.when{
+  font-family:var(--data); font-size:6.9pt; letter-spacing:.02em;
+  color:var(--mute); padding:1.5pt 9pt 0 0; line-height:1.45;
+}
+.what{ padding-left:11pt }
+.what h3{
+  font-family:var(--display); font-size:9.5pt; font-weight:650;
+  letter-spacing:-.01em; color:var(--ink); margin:0; line-height:1.24;
+}
+.what .org{ font-size:8.4pt; color:var(--body); margin:.5pt 0 0 }
+.what .org em{ font-style:normal; color:var(--mute) }
+ul{ margin:2.4pt 0 0; padding-left:9pt }
+li{ margin:0 0 1.3pt; font-size:8.4pt; line-height:1.32 }
+li::marker{ color:var(--accent) }
+li strong{ color:var(--ink); font-weight:600 }
+.n{ font-family:var(--data); font-size:7.9pt; font-variant-numeric:tabular-nums; color:var(--ink) }
+
+/* ---------- compact rows ---------- */
+.row{
+  display:grid; grid-template-columns:52pt 1fr; gap:0;
+  padding:2.2pt 0; border-bottom:.5pt solid var(--rule-2);
+  font-size:8.4pt; line-height:1.32; break-inside:avoid;
+}
+.row:last-of-type{ border-bottom:0 }
+.row .k{
+  font-family:var(--data); font-size:6.9pt; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--accent); padding:1pt 9pt 0 0;
+}
+.row .v{ padding-left:11pt }
+.row b{ color:var(--ink); font-weight:650 }
+.row em{ font-style:italic }
+
+.foot{
+  margin-top:5pt; padding-top:3.5pt; border-top:.5pt solid var(--rule);
+  font-family:var(--data); font-size:6.8pt; letter-spacing:.05em;
+  color:var(--faint); display:flex; justify-content:space-between;
+}
+
+@page{ size:letter; margin:10mm 13mm }
+@media print{
+  body{ background:#fff }
+  .sheet{ width:auto; min-height:0; margin:0; padding:0 }
+  h2{ break-after:avoid }
+  .entry,.row{ break-inside:avoid }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="head">
+    <div>
+      <h1 class="name">Alexander Wegener</h1>
+      <p class="role">Robotics engineer — real-time control, teleoperation, and imitation learning.</p>
+    </div>
+    <div class="contact">
+      <b>Boston, MA</b> &#183; +1 617 375 9325 &#183; wegener@bu.edu<br>
+      <a class="site" href="https://alexanderwegener.com">alexanderwegener.com</a> &#183; write-ups and video<br>
+      <a href="https://github.com/AlexanderWegenerRobotics">github.com/AlexanderWegenerRobotics</a>
+      &#183; <a href="https://www.linkedin.com/in/alexmauricewegener">in/alexmauricewegener</a>
+    </div>
+  </div>
+
+  <div class="status">
+    <b>MSc Robotics, Boston University &#183; graduating December 2026, available January 2027</b><br>
+    German citizen &#183; three years of US work eligibility via OPT and the STEM extension
+  </div>
+
+  <h2>Experience</h2>
+  <div class="tl">
+
+    <div class="entry">
+      <div class="when">2026 —<br>present</div>
+      <div class="what">
+        <h3>Graduate Researcher, Robotics</h3>
+        <p class="org">MBZUAI <em>· Abu Dhabi, operated from Boston</em></p>
+        <ul>
+          <li>Built a <strong>full-stack teleoperation system operating Boston to Abu Dhabi</strong>
+            over the public internet — self-developed low-latency H.264/RTP video with FEC and
+            adaptive quality control, plus per-device UDP state streams and a reliable
+            acknowledged channel for commands that must not be dropped.</li>
+          <li>Bimanual VR teleoperation: <strong>Cartesian impedance control with nullspace posture
+            regulation</strong>, resolved-rate IK with damped least squares, pan-tilt joint
+            impedance, and a <strong>control-barrier-function self-collision filter</strong> — running
+            interchangeably against MuJoCo and libfranka.</li>
+          <li><strong>Unreal Engine 5</strong> VR interface driven entirely by gaze and speech with an
+            attention-adaptive layout, keeping both hands on the arms, plus a live HUD of measured
+            end-to-end latency, jitter and loss.</li>
+          <li>Collected and labelled a bimanual parcel-sorting dataset for intent recognition and
+            imitation learning (<strong>ACT</strong>).</li>
+          <li>Research question: does guiding an operator during collection produce
+            <strong>demonstrations that train better policies</strong>? Paired policy comparison
+            in progress.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">04/2024 —<br>2025</div>
+      <div class="what">
+        <h3>Researcher — Teleoperation and Shared Control</h3>
+        <p class="org">MIRMI, TU Munich <em>· Haddadin Lab</em></p>
+        <ul>
+          <li>Built a <strong>distributed real-time robotic control stack</strong> over a local
+            network: 7-DoF robot arm, pan-tilt head, and passivity-based haptic feedback control.</li>
+          <li>Ran a <strong>ten-participant, six-condition, ~300-trial user study</strong> on
+            operator guidance — assistance cut NASA-TLX workload by over 40 points and median contact
+            force from <span class="n">~21 N to ~12 N</span> with no cost in completion time.</li>
+          <li>Co-authored "Enhanced Robotic Navigation in Deformable Environments using Learning
+            from Demonstration and Dynamic Modulation," <strong>IEEE/RSJ IROS 2025</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">09/2022 —<br>04/2023</div>
+      <div class="what">
+        <h3>Intern, Motor Controls</h3>
+        <p class="org">Tesla <em>· System Architecture, Modeling &amp; Controls</em></p>
+        <ul>
+          <li>Automated regression test tooling validating control algorithms across multiple
+            thermal motor models; Python post-processing for test data analysis.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2018 —<br>2022</div>
+      <div class="what">
+        <h3>Technical Director, then Head of Drivetrain Development</h3>
+        <p class="org">Formula Student (Formula SAE) <em>· Munich University of Applied Sciences</em></p>
+        <ul>
+          <li><strong>Technical director for ~60 people across seven subteams</strong> (two years):
+            vehicle concept, cross-subsystem integration, budget, and sponsors including BMW,
+            Knorr-Bremse and Infineon.</li>
+          <li>Designed a <strong>20,000 rpm, 29 Nm traction motor</strong>, wrote its
+            field-oriented control, and built the test bench that characterised it.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Education</h2>
+  <div class="row"><div class="k">2026</div><div class="v"><b>MSc Robotics</b> — Boston University. <em>Expected December 2026.</em></div></div>
+  <div class="row"><div class="k">2023 — 25</div><div class="v"><b>MSc Controls &amp; Automation</b> — Technical University of Munich. Thesis at MIRMI, Haddadin Lab on operator nudging and shared control in teleoperation.</div></div>
+  <div class="row"><div class="k">2018 — 22</div><div class="v"><b>BSc Electrical Engineering</b>, electromobility focus — Munich University of Applied Sciences.</div></div>
+
+  <h2>Selected projects</h2>
+  <div class="row"><div class="k">Policy</div><div class="v"><b>Force-domain diffusion policy for sub-millimetre insertion.</b> Contact-rich insertion from force alone, no vision. DDIM-10 reached <span class="n">78%</span> against the scripted expert's <span class="n">61%</span>, and transferred zero-shot to unseen peg geometries.</div></div>
+  <div class="row"><div class="k">Control</div><div class="v"><b>Vision-based NMPC for pushing under perception uncertainty.</b> ArUco/PnP at 60 Hz feeding an EKF and acados SQP-RTI NMPC at 100 Hz; nominal, certainty-equivalent and chance-constrained control compared over a 360-run sweep.</div></div>
+
+  <h2>Skills</h2>
+  <div class="row"><div class="k">Control</div><div class="v">Nullspace redundancy resolution, resolved-rate IK, control barrier functions, NMPC, LQR / iLQR, EKF</div></div>
+  <div class="row"><div class="k">Learning</div><div class="v">Imitation learning (ACT), diffusion policies (DDPM / DDIM), causal sequence models (GRU, transformer), reinforcement learning</div></div>
+  <div class="row"><div class="k">Software</div><div class="v">C++17 (real-time), Python, MATLAB / Simulink &#183; MuJoCo, libfranka, Pinocchio, acados, CasADi, PyTorch, Unreal Engine 5, OpenXR, GStreamer, CMake, Linux, Git &#183; German (native), English (fluent)</div></div>
+
+</div>
+</body>
+</html>

@@ -2,3 +2,7 @@
 .vscode/
 *.mov
 assets/raw/
+node_modules/
+make-cv-pdf.js
+package-lock.json
+package.json
