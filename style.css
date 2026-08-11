@@ -325,11 +325,88 @@ figcaption{
   /* stops single-word last lines like "not nominal." hanging alone */
   text-wrap:pretty;
 }
-figcaption .sim{
+figcaption .sim,
+figcaption .hw{
   font-family:var(--data); font-size:10px; font-weight:700; letter-spacing:.14em;
   color:#8A3A3A; border:1px solid #E0C4C4; padding:2px 6px; border-radius:2px;
   margin-right:8px; vertical-align:1px;
 }
+/* counterpart to .sim — marks footage that ran on real hardware */
+figcaption .hw{ color:var(--collect); border-color:#BCD5DA }
+
+/* ============================================================
+   TWIN
+   Not a loop stage, so it takes the same unaccented ink treatment
+   as Control rather than one of the five stage colours.
+   ============================================================ */
+.sec--twin .eyebrow{ color:var(--ink) }
+.sec--twin .stage-rule{ background:var(--ink) }
+.sec--twin .panel--accent{ border-left-color:var(--ink) }
+
+/* Composited side-by-side clip, roughly 3.5:1. Each pane is only half the
+   frame, so at the 1120px column each robot renders too small to read the
+   lead off. Breaks out of .wrap to the viewport, capped so it does not
+   dominate on very wide displays. The caption stays on the text column. */
+.media--wide{
+  /* classic full-bleed. The earlier margin-left:50% + translateX(-50%) version
+     resolved its two percentages against different boxes, which threw the figure
+     off to the right — and once it sat mostly outside the viewport Chrome would
+     not autoplay it, since autoplay requires intersection. */
+  position:relative;
+  left:50%; right:50%;
+  width:100vw;
+  margin-left:-50vw; margin-right:-50vw;
+  padding:0 28px;
+  box-sizing:border-box;
+}
+.media--wide video{
+  display:block;
+  width:100%; max-width:1500px;
+  margin:0 auto;
+  background:var(--ink);
+}
+/* 100vw ignores the scrollbar, so clip the overflow it can cause.
+   clip rather than hidden — hidden would break the sticky rail. */
+.sec--twin{ overflow-x:clip }
+/* caption returns to reading width, centred under the wide frame */
+.media--wide figcaption{
+  max-width:min(78ch, 100%);
+  margin-left:auto; margin-right:auto;
+  padding:0 44px;
+  box-sizing:border-box;
+}
+@media (max-width:760px){
+  .media--wide{
+    position:static; width:100%;
+    left:auto; right:auto;
+    margin-left:0; margin-right:0;
+    padding:0;
+  }
+  .media--wide figcaption{ padding:0 }
+}
+
+/* Second clip under a hero figure. Same width as the one above it — these two
+   are the same shot type (robot view plus operator inset) and sizing them
+   differently reads as an accident rather than as hierarchy. The Sim/Hardware
+   badges carry the distinction instead. */
+.media--second{ margin-top:38px }
+
+.figure--twin{
+  margin:56px 0 0;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.figure--twin svg{
+  display:block;
+  /* the diagram is authored at 660 units wide; stretching past that
+     inflates the label type, so cap it and centre instead */
+  width:100%;
+  max-width:660px;
+  min-width:520px;   /* below this it scrolls rather than shrinking */
+  height:auto;
+  margin:0 auto;
+}
+.figure--twin figcaption{ max-width:66ch }
 
 /* placeholder slot — replace with <video> */
 .slot{
