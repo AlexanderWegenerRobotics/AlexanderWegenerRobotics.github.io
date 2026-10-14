@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Policy and human-gated DAgger — Alexander Wegener</title>
+<meta name="description" content="An ACT manipulation policy trained on VR teleoperation demonstrations, improved over three rounds of human-gated corrections through the same interface: 50 to 72 percent of parcels sorted.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .g3 figure video{ width:100%; aspect-ratio:4/3; object-fit:cover }
+  .states{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:18px 0 }
+  .states b{
+    font-family:var(--data); font-size:11px; font-weight:700; letter-spacing:.12em;
+    padding:8px 12px; border:1px solid var(--rule); background:var(--panel); border-radius:2px; color:var(--ink);
+  }
+  .states i{ font-style:normal; font-family:var(--data); font-size:11px; color:var(--mute) }
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Navigation">
+  <a class="rail__mark" href="index.html">A. WEGENER</a>
+  <div class="rail__stages">
+    <a class="rail__stage is-active" data-stage="train" href="index.html#results"><span class="rail__dot"></span>Back</a>
+  </div>
+  <div class="rail__more">
+    <a class="rail__sub" href="system.html">System</a>
+    <span class="rail__sub is-current">Policy</span>
+    <a class="rail__sub" href="thesis.html">Study</a>
+    <a class="rail__sub" href="projects.html">Projects</a>
+  </div>
+</nav>
+
+<div class="shell">
+
+<section class="hero" data-stage="train">
+  <div class="wrap">
+    <div class="stage-rule"></div>
+    <span class="eyebrow">Policy &nbsp;·&nbsp; bimanual parcel sorting, MuJoCo</span>
+    <h1>From demonstrations to a policy that sorts.</h1>
+    <p class="lede measure" style="margin-top:24px">
+      An action-chunking transformer trained on my own teleoperated demonstrations fit the data
+      and failed closed-loop. Three rounds of human-gated corrections through the same VR
+      interface took it from half the parcels to nearly three quarters.
+    </p>
+
+    <div class="specs" style="margin-top:44px">
+      <div><b>50 → 72 %</b><span>parcels sorted correctly</span></div>
+      <div><b>1 → 8 of 20</b><span>full sorts completed</span></div>
+      <div><b>31 → 14 %</b><span>human share of rollout time</span></div>
+      <div><b>84</b><span>supervised rollouts, three rounds</span></div>
+      <div><b>10 min</b><span>human-authored chunks kept</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-stage="train">
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">Three clips</span>
+      <h2>Before, during, after.</h2>
+    </div>
+    <div class="g3">
+      <figure>
+        <video src="assets/dagger-fail.mp4" autoplay muted loop playsinline></video>
+        <figcaption><span class="sim">Sim</span>Policy alone: hits the bin, drops the parcel, loses the next one in transport.</figcaption>
+      </figure>
+      <figure>
+        <video src="assets/dagger-takeover.mp4" autoplay muted loop playsinline></video>
+        <figcaption><span class="sim">Sim</span>Operator view: grip to take over, tap to hand back. Two takeovers, the rest autonomous.</figcaption>
+      </figure>
+      <figure>
+        <video src="assets/dagger-success.mp4" autoplay muted loop playsinline></video>
+        <figcaption><span class="sim">Sim</span>After three rounds: two grasps and places, no intervention.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section data-stage="train">
+  <div class="wrap">
+    <div class="g-1-1">
+      <div>
+        <h3>Why plain behaviour cloning stalled</h3>
+        <p class="small mt-s">
+          Offline the policy looked fine: validation loss fell, open-loop replay followed the
+          operator's commands closely. Closed-loop the arms moved toward the objects and stopped
+          a few centimetres short. The final approach is the rarest and most precise part of
+          every demonstration, and it is where the robot's own small errors produce states the
+          dataset never contained. More demonstrations help slowly, because they cover the
+          expert's states again rather than the policy's.
+        </p>
+      </div>
+      <div>
+        <h3>Human-gated corrections</h3>
+        <p class="small mt-s">
+          The policy runs; the operator watches through the same stereo VR interface used for
+          demonstration and takes over only when it drifts toward failure. Control is a
+          three-state machine owned by the robot side, so the operator and the policy can never
+          command an arm at the same time.
+        </p>
+        <div class="states">
+          <b>POLICY</b><i>grip →</i><b>HUMAN</b><i>release →</i><b>HOLD</b><i>tap → POLICY</i>
+        </div>
+        <p class="small">
+          The command origin is re-anchored at takeover so the handover has no jump, the
+          policy's pending chunk is flushed, and every intervention is logged with its phase.
+          Human-authored chunks are aggregated with the demonstrations and the policy is
+          retrained from scratch each round.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-stage="train">
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">Results</span>
+      <h2>Each round the policy does more and the operator does less.</h2>
+    </div>
+    <figure class="media">
+      <img src="assets/dagger_rounds.png" alt="Bar charts: parcels sorted correctly rises from 50 percent at baseline to 72 percent after intervention round three; full sorts completed rise from 1 of 20 to 8 of 20.">
+      <figcaption>
+        Ten scene seeds × two repeats per checkpoint, 90 s limit, Wilson 95 % intervals. Grey:
+        no interventions, including a checkpoint with extra plain demonstrations. Blue: human-gated rounds.
+      </figcaption>
+    </figure>
+    <figure class="media mt-m">
+      <img src="assets/dagger_burden.png" alt="Human share of rollout time falls from 31 to 14 percent, interventions per episode from 3.7 to 1.6, mean intervention length from 6.8 to 4.5 seconds.">
+      <figcaption>
+        Operator burden across the three rounds: 72 min of wall time, 16.5 min of human control,
+        10 min of chunks kept for training.
+      </figcaption>
+    </figure>
+    <figure class="media mt-m">
+      <img src="assets/dagger_phases.png" alt="Where interventions happen, by task phase and round.">
+      <figcaption>Where the operator had to step in, by phase. Grasp dominates; that is where the policy was failing.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section data-stage="train">
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">Data</span>
+      <h2>What the policy was trained on.</h2>
+    </div>
+    <dl class="deflist">
+      <div><dt>Parcel sorting</dt><dd>120 teleoperated episodes, bimanual, red and blue parcels into matching totes, randomised placement, lighting and scale. Successes and failures both kept and labelled.</dd></div>
+      <div><dt>Board assembly</dt><dd>80 episodes on a modified FMB board (Luo et al., 2024) with 1 mm clearance, in simulation.</dd></div>
+      <div><dt>Streams</dt><dd>Both wrist cameras, head view, end-effector pose and command, contact force, gripper state, gaze, and a per-frame attention estimate. HDF5 with synchronised video.</dd></div>
+      <div><dt>Policy</dt><dd>ACT (Zhao et al., RSS 2023): three camera views in, chunked joint commands for both arms, grippers and head out, temporal ensembling at execution. Same recipe at every checkpoint.</dd></div>
+      <div><dt>Intent model</dt><dd>GRU over gaze belief and state, 0.832 macro F1 on held-out episodes, p99 inference 1.5 ms inside the 30 Hz loop. Chosen over a transformer that scored the same and cost ten times more per frame.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section data-stage="train">
+  <div class="wrap">
+    <div class="sechead measure">
+      <span class="eyebrow">Open</span>
+      <h2>What is not done.</h2>
+    </div>
+    <div class="g3">
+      <div class="panel">
+        <h4>Simulation only</h4>
+        <p class="tiny">The policy runs in MuJoCo against the same controller as the hardware. Closed-loop success on the physical arms has not been measured.</p>
+      </div>
+      <div class="panel">
+        <h4>Per-arm takeover</h4>
+        <p class="tiny">Taking over one arm under a joint-action policy produced no usable chunks. The fix was whole-robot handover; per-arm loss masking is the alternative.</p>
+      </div>
+      <div class="panel">
+        <h4>The paired comparison</h4>
+        <p class="tiny">Whether nudged demonstrations train a better policy than unassisted ones is the question this pipeline exists for. The study is in design.</p>
+      </div>
+    </div>
+    <div class="linkrow mt-l">
+      <a class="link" href="assets/dagger-report.pdf">Report <em>PDF</em></a>
+      <a class="link" href="system.html">The system it runs on <em>→</em></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__links">
+      <a class="link" href="index.html">Back to the main page <em>←</em></a>
+      <a class="link" href="thesis.html">Operator study <em>→</em></a>
+    </div>
+    <p class="foot__meta">Alexander Wegener · Last updated October 2026</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

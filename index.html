@@ -4,16 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alexander Wegener — Teleoperation systems and robot learning</title>
-<meta name="description" content="Portfolio of Alexander Wegener: cross-continental bimanual VR teleoperation, a curated demonstration dataset, learned manipulation policies, a ten-participant operator study, and control and perception projects.">
+<meta name="description" content="Alexander Wegener: VR teleoperation from Boston to robots in Abu Dhabi, a measured low-latency pipeline, learned manipulation policies with human-gated corrections, and a ten-participant operator study. Available January 2027.">
 
 <meta property="og:title" content="Alexander Wegener — Teleoperation systems and robot learning">
-<meta property="og:description" content="Bimanual VR teleoperation from Boston to Abu Dhabi over the public internet — interface, dataset, policy, deployment — plus an operator user study and selected control and perception work.">
+<meta property="og:description" content="VR teleoperation Boston → Abu Dhabi, measured latency budget, ACT policies improved with human-gated DAgger, and a ten-participant operator study.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alexanderwegener.com/">
 <meta property="og:image" content="https://alexanderwegener.com/assets/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A Franka Panda arm reaching over red and blue parcels in the operator's VR view, with a heads-up display reading 61.2 ms end-to-end latency.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://alexanderwegener.com/assets/preview.png">
 <link rel="canonical" href="https://alexanderwegener.com/">
@@ -25,1288 +24,189 @@
 </head>
 <body>
 
-<!-- ============================================================
-     TELEMETRY RAIL
-     ============================================================ -->
-<nav class="rail" aria-label="Sections">
+<nav class="rail" aria-label="Navigation">
   <a class="rail__mark" href="#top">A. WEGENER</a>
   <div class="rail__stages">
-    <a class="rail__stage" data-stage="control"  href="#control"><span class="rail__dot"></span>Control</a>
-    <a class="rail__stage" data-stage="collect"  href="#collect"><span class="rail__dot"></span>Collect</a>
-    <a class="rail__stage" data-stage="curate"   href="#curate"><span class="rail__dot"></span>Curate</a>
-    <a class="rail__stage" data-stage="train"    href="#train"><span class="rail__dot"></span>Train</a>
-    <a class="rail__stage" data-stage="evaluate" href="#evaluate"><span class="rail__dot"></span>Evaluate</a>
-    <a class="rail__stage" data-stage="nudging"  href="#nudging"><span class="rail__dot"></span>Nudging</a>
+    <a class="rail__stage" data-stage="results" href="#results"><span class="rail__dot"></span>Results</a>
+    <a class="rail__stage" data-stage="built" href="#built"><span class="rail__dot"></span>Built</a>
+    <a class="rail__stage" data-stage="research" href="#research"><span class="rail__dot"></span>Research</a>
+    <a class="rail__stage" data-stage="background" href="#background"><span class="rail__dot"></span>CV</a>
   </div>
   <div class="rail__more">
+    <a class="rail__sub" href="system.html">System</a>
+    <a class="rail__sub" href="policy.html">Policy</a>
     <a class="rail__sub" href="thesis.html">Study</a>
     <a class="rail__sub" href="projects.html">Projects</a>
     <a class="rail__sub" href="formula-student.html">Formula</a>
-    <a class="rail__sub" href="#background">CV</a>
   </div>
 </nav>
 
 <div class="shell">
 
 <!-- ============================================================
-     HERO
+     HERO — who, what, proof, availability. One screen.
      ============================================================ -->
-<section class="hero" id="top">
+<section class="hero hero--short" id="top">
   <div class="wrap">
-    <span class="hero__eyebrow">Selected work · 2018 — 2026</span>
+    <span class="hero__eyebrow">Robotics engineer &nbsp;·&nbsp; Boston &nbsp;·&nbsp; available January 2027</span>
 
-    <h1>Alexander<br>Wegener</h1>
+    <h1>Alexander Wegener</h1>
 
-    <p class="hero__role">
-      Robotics engineer. I make physical things behave —<br class="brk">
-      at rate, under contact, and when the inputs are imperfect.
-    </p>
+    <p class="hero__role">Teleoperation systems and robot learning.</p>
 
     <p class="lede hero__lede">
-      Robot control, the teleoperation interface, the data collection, and the policies trained on that data — 
-      I have built each of these, which taught me what each one needs from the others. 
-      Before robotics it was motor design and power electronics, the same discipline one level down.
+      I build the full stack between a VR operator and a robot — 1 kHz control, low-latency
+      video, the interface, the data pipeline and the policies trained on it — and run user
+      studies to find out what helps the operator and what helps the data.
     </p>
 
     <p class="hero__affil">
-      <b>Now</b> Graduate researcher, MBZUAI &nbsp;·&nbsp; MSc Robotics, Boston University<br>
+      <b>Now</b> Graduate researcher, MBZUAI &nbsp;·&nbsp; MSc Robotics, Boston University, Dec 2026<br>
       <b>Before</b> TU Munich, MIRMI (Haddadin lab) &nbsp;·&nbsp; Tesla &nbsp;·&nbsp; Formula Student
     </p>
 
-    <!-- ============ CONTENTS ============ -->
-    <nav class="contents" aria-label="Contents">
-      <a href="#flagship">
-        <span class="contents__n">01 · Current</span>
-        <span class="contents__t">Teleoperation to policy</span>
-        <span class="contents__d">A bimanual system operated across two continents, and the research it exists to answer.</span>
-      </a>
-      <a href="thesis.html">
-        <span class="contents__n">02 · MSc thesis</span>
-        <span class="contents__t">Operator user study</span>
-        <span class="contents__d">Ten participants, six feedback conditions, three hundred trials on a physical avatar.</span>
-      </a>
-      <a href="projects.html">
-        <span class="contents__n">03 · Selected</span>
-        <span class="contents__t">Control and perception</span>
-        <span class="contents__d">Force-domain diffusion policies, vision-based NMPC, underactuated control.</span>
-      </a>
-      <a href="formula-student.html">
-        <span class="contents__n">04 · Earlier</span>
-        <span class="contents__t">Formula Student</span>
-        <span class="contents__d">Four years on an electric race car, two as technical director of sixty people.</span>
-      </a>
-    </nav>
-  </div>
-</section>
-
-<!-- ============================================================
-     FLAGSHIP — the lead exhibit
-     ============================================================ -->
-<section id="flagship">
-  <div class="wrap flagship">
-    <div class="sechead">
-      <span class="eyebrow">01 · Current work</span>
-      <h2 class="flagship__h">
-        Bimanual teleoperation,<br>
-        Boston <span class="arrow">&#8596;</span> Abu Dhabi.
-      </h2>
-      <p class="lede">
-        Two Franka Panda arms and a pan-tilt head in Abu Dhabi, driven live from a VR headset
-        in Boston over the public internet. The point of building all of it — controllers,
-        safety layer, simulation, interface, data pipeline, policies — was to be able to ask
-        one question that needs all of it at once: does guiding an operator while they work
-        produce demonstrations that train better robots?
-      </p>
-    </div>
-
     <figure class="media">
-      <video src="assets/hero.mp4" autoplay muted loop playsinline></video>
+      <video src="assets/fmb-hardware-16x.mp4" poster="assets/fmb-hardware-poster.jpg" autoplay muted loop playsinline></video>
       <figcaption>
-        <span class="sim">Sim</span>The bimanual system driven in simulation — both arms, the ghost showing where the
-        operator's hands are against where the arms actually are, and a grasp closed under
-        the impedance controller. The MuJoCo backend and the hardware backend are the same
-        control stack behind one interface, so this is the real controller against a
-        simulated plant. The latency on the HUD is measured end to end, not nominal.
+        <span class="hw">Hardware</span>Board assembly in Abu Dhabi, driven from Boston over the public
+        internet, 16×. The HUD shows the measured round trip.
       </figcaption>
     </figure>
 
-    <!-- The evidence for the claim the lede makes. Sim above shows the interface;
-         this shows the same stack driving hardware across the real link. -->
-    <figure class="media media--second">
-      <video src="assets/hw-crosscontinental.mp4" autoplay muted loop playsinline></video>
-      <figcaption>
-        <span class="hw">Hardware</span>The same stack on hardware, Boston to Abu Dhabi over the public internet. A single
-        desk-mounted Panda and free motion rather than a manipulation task — this was the
-        first cross-continental run, and the tracking is visibly looser than the simulated
-        clip above because the gains had not yet been tuned against the real link. It is
-        here because it is the part that cannot be simulated.
-      </figcaption>
-    </figure>
-
-    <!-- Figures that all describe this one system, so they can be read against each other. -->
     <div class="specs specs--4 specs--scope">
       <div><b>11,000 km</b><span>operator to robot</span></div>
-      <div><b>1 kHz</b><span>impedance control, per arm</span></div>
-      <div><b>3</b><span>controlled devices, two arms and a head</span></div>
-      <div><b>120</b><span>demonstrations collected</span></div>
-    </div>
-
-    <div class="status">
-      <span><i></i>Interface and data pipeline complete</span>
-      <span><i></i>Cross-continental validation, July 2026</span>
-      <span><i class="wip"></i>Perception stack in integration</span>
+      <div><b>≈ 200 ms</b><span>hand to robot motion, measured</span></div>
+      <div><b>1 kHz</b><span>Cartesian impedance, per arm</span></div>
+      <div><b>200</b><span>demonstrations, two tasks</span></div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     CONTROL — the robot side
+     RESULTS — three numbers, each with a page behind it
      ============================================================ -->
-<section id="control" data-stage="control">
+<section id="results" data-stage="results">
   <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Control</span>
-      <h2>The part that has to work first.</h2>
-      <p>
-        Everything further down this page assumes the arms do what they are told. That part is
-        not bought in. The controllers, the safety filter, the motion generation and the
-        simulation they all also run in are mine, written in C++ directly against libfranka
-        rather than assembled out of a vendor stack — which is why the same code can drive a
-        simulated arm and a real one without knowing the difference.
-      </p>
+    <div class="sechead">
+      <span class="eyebrow">Results</span>
+      <h2>Three numbers.</h2>
     </div>
 
-    <figure class="media">
-      <img src="assets/avatar-architecture.svg"
-           alt="Robot-side architecture: an avatar master with a 200 Hz state machine, fault handling and device coordination, driving three device instances — left arm, right arm and pan-tilt head — that each pair a 200 Hz state machine with a 1 kHz controller. A self-collision filter sits between the two arms. Underneath, a hardware abstraction layer makes MuJoCo and libfranka interchangeable. Commands and state cross a ZeroTier link.">
-      <figcaption>
-        One state machine per device, one controller under each. The self-collision filter
-        only sits between the arms, because the head cannot reach them.
-      </figcaption>
-    </figure>
-
-    <div class="mt-l g-1-1">
-      <div>
-        <h3>Impedance, with the elbow under control</h3>
-        <p class="small mt-s">
-          Each arm runs Cartesian impedance in a 1 kHz torque loop: a stiffness–damping wrench
-          on the pose error, mapped through the Jacobian transpose, Coriolis compensated.
-          Impedance rather than joint tracking because it needs no precomputed trajectory, and
-          because compliance is what keeps contact stable when the operator's input is not.
+    <div class="g3 results">
+      <a class="result" href="policy.html">
+        <video src="assets/dagger-success.mp4" autoplay muted loop playsinline></video>
+        <b>50 → 72 %</b>
+        <span class="result__what">parcels sorted by the policy</span>
+        <p>
+          ACT policy trained on my demonstrations, then three rounds of human-gated
+          corrections through the same VR interface. Full sorts 1 → 8 of 20, operator
+          share of rollout time 31 → 14 %. <span class="tag tag--sim">Sim</span>
         </p>
-        <p class="small">
-          A seven-joint arm has a spare degree of freedom, so posture is regulated in the
-          nullspace of the task — built from the inertia-weighted pseudoinverse rather than the
-          plain one, which is what lets the elbow settle without moving the hand.
-        </p>
-        <p class="tiny">
-          Damped least squares near singularities; joint-limit avoidance, velocity damping and
-          torque saturation underneath, so a command the arm cannot follow is bounded rather
-          than refused.
-        </p>
-      </div>
+        <span class="link">Policy and DAgger <em>→</em></span>
+      </a>
 
-      <div>
-        <h3>Two arms, one workspace, one operator</h3>
-        <p class="small mt-s">
-          Someone driving two arms can only watch one of them, so the arms have to stay out of
-          each other's way without being asked and without feeling like they are fighting the
-          person.
-        </p>
-        <p class="small">
-          A control-barrier-function filter sits between the commanded Cartesian velocity and
-          the executed one, with a margin that grows with closing speed — the arms may come
-          together slowly but not quickly. When a command would breach it, the filter solves a
-          one-constraint QP in closed form and, because radial motion is penalised more than
-          tangential, the correction slides the arm around its neighbour rather than stopping
-          it dead.
-        </p>
-        <p class="tiny">
-          Each arm runs a constant-velocity Kalman filter on the other's end-effector, so the
-          margin tracks where the other arm is going, not where it was — and widens when that
-          estimate is least certain.
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-l g-2-1">
-      <div>
-        <h3>Getting there, and getting there safely</h3>
-        <p class="small mt-s">
-          Between the operator's pose command and the controller sits a motion generator:
-          resolved-rate IK with damped least squares, soft posture regularisation, per-joint
-          velocity and acceleration caps, and a braking horizon that decelerates a joint before
-          its limit instead of clipping at it. Linear, trapezoidal and minimum-jerk profiles in
-          joint and Cartesian space are what homing and recovery run on.
-        </p>
-        <p class="small">
-          The pan-tilt head follows the headset under joint impedance with torque rate limiting,
-          so a fast head turn produces a fast look rather than a jolt.
-        </p>
-      </div>
-      <div class="panel panel--accent">
-        <h4>A fault is a state, not an exception</h4>
-        <p class="small">
-          Every device — each arm, the head, each gripper — runs its own 200 Hz state machine
-          across nine states from idle through fault to recovering, coordinated by an
-          avatar-level machine above them. A device that faults is detached and the rest keep
-          running.
-        </p>
-        <p class="small">
-          Local machines keep authority to refuse an unsafe transition, so no single stale
-          packet or upstream fault can produce motion.
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-l g-2-1">
-      <div class="panel">
-        <h4>One codebase, two backends</h4>
-        <p class="small">
-          The MuJoCo backend mirrors the libfranka state space exactly, so the control and
-          networking code does not know which one it is talking to — the backend is a build
-          flag. Scenes, gains, workspace limits and device layout are YAML, assembled into a
-          model at startup, so adding an arm is a config change rather than a rebuild.
-        </p>
-      </div>
-      <div>
-        <h4>Why this is here</h4>
-        <p class="small mt-s">
-          Teleoperation is the application. The control stack is the part that transfers: an
-          impedance loop that stays stable through contact, a safety filter that modifies a
-          command minimally instead of vetoing it, and a state machine that degrades rather
-          than stops are the same problems whether a human or a policy is upstream of them.
-        </p>
-        <div class="linkrow">
-          <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-simulator">Robot-side backend, C++ <em>↗</em></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PREDICTIVE TWIN — sits here because it is the payoff of the
-     hardware abstraction layer described directly above, not a
-     separate capability. Deliberately NOT in the rail: the rail is
-     the five loop stages and the loop section promises exactly four
-     sections plus a fifth.
-     ============================================================ -->
-<section id="twin" class="sec--twin">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Latency</span>
-      <h2>Showing the operator a present they have already caused.</h2>
-      <p>
-        Across 11,000 km the video feed is the slowest thing the operator sees, and with no
-        force feedback on the Boston side it is the <em>only</em> thing telling them what the
-        arm is doing. Every input is judged against a picture of the past. The fix is not to
-        make the picture faster — it is to stop making the operator wait for it.
-      </p>
-    </div>
-
-    <div class="mt-l g-2-1">
-      <div>
-        <h3>The same stack, twice</h3>
-        <p class="small mt-s">
-          Because the MuJoCo and libfranka backends are interchangeable behind the abstraction
-          layer above, a second instance of the identical control stack runs locally on a
-          simulated plant. The command stream is teed before it reaches the network, so the
-          twin sees every command at the moment the operator issues it and the hardware sees
-          it one forward delay later. The operator watches the twin. It responds at zero
-          latency and leads the hardware by exactly the time the packet spends in flight.
-        </p>
-        <p class="small">
-          A reconciler thread compares delayed telemetry against a ring buffer of past twin
-          states at matched phase, replays the buffered commands forward to the present, and
-          returns a filtered correction through a mailbox applied at the next tick boundary —
-          so a correction never lands mid-step.
-        </p>
-      </div>
-      <div class="panel panel--accent">
-        <h4>Nothing here extrapolates</h4>
-        <p class="small">
-          The obvious way to hide delay is to predict measured state forward. That is also the
-          way to make it unstable, because it forecasts a signal the operator does not control.
-        </p>
-        <p class="small">
-          This does not forecast. The command is known locally before the network sees it, so
-          the lead is not a prediction — it is the tee. The twin renders a consequence the
-          operator has already caused.
-        </p>
-      </div>
-    </div>
-
-    <figure class="figure--twin">
-      <svg viewBox="0 0 660 600" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-labelledby="twinTitle twinDesc"
-           font-family="Archivo, 'Helvetica Neue', Arial, sans-serif">
-        <title id="twinTitle">Predictive twin architecture</title>
-        <desc id="twinDesc">Operator commands in Boston are teed locally to a twin running the same
-        control stack on a MuJoCo plant, so the twin leads the remote Franka Panda in Abu Dhabi by the
-        forward network delay. A reconciler thread compares delayed telemetry against a ring buffer of
-        past twin states, replays the buffered commands forward to the present, and returns a correction
-        to the control loop through a mailbox.</desc>
-
-        <defs>
-          <marker id="tw-arr" viewBox="0 0 10 10" refX="9" refY="5"
-                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#14181A"/>
-          </marker>
-          <marker id="tw-arrA" viewBox="0 0 10 10" refX="9" refY="5"
-                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#17697B"/>
-          </marker>
-        </defs>
-
-        <style>
-          .box   { fill:#FFFFFF; stroke:#14181A; stroke-width:1.4 }
-          .boxA  { fill:#FFFFFF; stroke:#17697B; stroke-width:2 }
-          .boxAt { fill:#EBEFF0; stroke:#17697B; stroke-width:2 }
-          .ttl   { font-size:16px; font-weight:700; fill:#14181A }
-          .ttlA  { font-size:16px; font-weight:700; fill:#17697B }
-          .txt   { font-size:13px; fill:#3D4548 }
-          .note  { font-size:11.5px; fill:#788386 }
-          .noteA { font-size:11.5px; fill:#17697B }
-          .eyebrow { font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;
-                     font-size:11px; font-weight:600; fill:#A6AFB1; letter-spacing:0.09em }
-          .ln   { stroke:#14181A; stroke-width:1.4; fill:none }
-          .lnA  { stroke:#17697B; stroke-width:1.6; fill:none }
-          .lnAd { stroke:#17697B; stroke-width:1.6; fill:none; stroke-dasharray:6 4 }
-        </style>
-
-        <text class="eyebrow" x="30" y="32">OPERATOR SIDE · BOSTON</text>
-        <text class="eyebrow" x="400" y="32">REMOTE · ABU DHABI</text>
-
-        <!-- Interface -->
-        <rect class="box" x="30" y="56" width="220" height="64" rx="5"/>
-        <text class="ttl" x="140" y="83" text-anchor="middle">VR interface</text>
-
-        <!-- Forward network path -->
-        <line class="ln" x1="250" y1="88" x2="400" y2="88" marker-end="url(#tw-arr)"/>
-
-        <!-- Remote hardware -->
-        <rect class="box" x="400" y="56" width="210" height="94" rx="5"/>
-        <text class="ttl"  x="505" y="83" text-anchor="middle">Franka Panda</text>
-        <text class="note" x="505" y="142" text-anchor="middle">Cartesian impedance control</text>
-
-        <!-- Local command tee -->
-        <circle cx="300" cy="88" r="4" fill="#14181A"/>
-        <path class="ln" d="M 300 88 L 300 152 L 160 152 L 160 180" marker-end="url(#tw-arr)"/>
-        <text class="note" x="292" y="145" text-anchor="end">local tee · zero latency</text>
-
-        <!-- Twin -->
-        <rect class="boxA" x="30" y="180" width="260" height="112" rx="5"/>
-        <text class="ttlA" x="160" y="205" text-anchor="middle">Twin — role: twin</text>
-        <text class="txt"  x="160" y="229" text-anchor="middle">same C++ stack, same control law</text>
-        <text class="txt"  x="160" y="249" text-anchor="middle">MuJoCo plant behind robot interface</text>
-        <text class="note" x="160" y="287" text-anchor="middle">control-loop thread</text>
-
-        <!-- Twin to display -->
-        <line class="ln" x1="290" y1="212" x2="400" y2="212" marker-end="url(#tw-arr)"/>
-        <text class="note" x="345" y="204" text-anchor="middle">twin/state</text>
-
-        <!-- Display layers -->
-        <rect class="box" x="400" y="180" width="210" height="118" rx="5"/>
-        <text class="ttl" x="505" y="205" text-anchor="middle">Display layers</text>
-        <text class="txt" x="418" y="231">1 · ghost — intent</text>
-        <text class="txt" x="418" y="253">2 · twin — prediction</text>
-        <text class="txt" x="418" y="275">3 · video — truth, delayed</text>
-
-        <!-- Ring buffer -->
-        <line class="ln" x1="160" y1="292" x2="160" y2="320" marker-end="url(#tw-arr)"/>
-        <text class="note" x="168" y="311">producer</text>
-        <rect class="box" x="30" y="320" width="220" height="54" rx="5"/>
-        <text class="ttl" x="140" y="344" text-anchor="middle">Ring buffer ~1 s</text>
-
-        <!-- Reconciler -->
-        <line class="ln" x1="160" y1="374" x2="160" y2="400" marker-end="url(#tw-arr)"/>
-        <text class="note" x="168" y="393">consumer</text>
-        <rect class="boxAt" x="30" y="400" width="260" height="128" rx="5"/>
-        <text class="ttlA" x="160" y="426" text-anchor="middle">Reconciler — own thread</text>
-        <text class="note" x="160" y="514" text-anchor="middle">private headless mjData</text>
-
-        <!-- Mailbox return path -->
-        <path class="lnAd" d="M 290 440 L 340 440 L 340 250 L 290 250" marker-end="url(#tw-arrA)"/>
-        <rect x="308" y="318" width="64" height="44" rx="5"
-              fill="#FFFFFF" stroke="#17697B" stroke-width="1.4"/>
-        <text x="340" y="339" text-anchor="middle" font-size="12" font-weight="700" fill="#17697B">Mailbox</text>
-        <text class="noteA" x="362" y="437" text-anchor="middle"
-              transform="rotate(-90 362 437)">applied at tick boundary</text>
-
-        <!-- Telemetry return -->
-        <path class="lnA" d="M 610 103 L 634 103 L 634 490 L 290 490" marker-end="url(#tw-arrA)"/>
-
-        <!-- Legend -->
-        <rect x="400" y="330" width="210" height="140" rx="6" fill="#FFFFFF" stroke="#DCE2E3"/>
-        <text class="eyebrow" x="416" y="354" fill="#788386">LOOPS</text>
-        <line class="ln"   x1="416" y1="374" x2="446" y2="374"/>
-        <text class="txt"  x="454" y="378">outer · truth, full RTT</text>
-        <line class="lnA"  x1="416" y1="402" x2="446" y2="402"/>
-        <text class="txt"  x="454" y="406">reconciliation · delayed</text>
-        <line class="lnAd" x1="416" y1="430" x2="446" y2="430"/>
-        <text class="txt"  x="454" y="434">mailbox · thread handoff</text>
-        <text class="note" x="416" y="457">inner · operator→twin→display: 0 ms</text>
-
-        <!-- Logging strip -->
-        <rect x="30" y="545" width="580" height="28" rx="4"
-              fill="#FFFFFF" stroke="#A6AFB1" stroke-dasharray="4 3"/>
-        <text class="note" x="320" y="564" text-anchor="middle">RunLogger — innovation, measured delays, applied corrections, resync events, phase-aligned error</text>
-
-        <!-- Math, typeset in Computer Modern and outlined -->
-        <g id="math">
-              <path d="M 1.5 1.5 Q 1.5 2.0 1.6 2.5 Q 1.7 2.9 2.0 3.5 Q 2.2 4.1 2.3 4.6 Q 2.5 5.1 2.5 5.4 Q 2.5 5.8 2.2 5.8 Q 1.7 5.8 1.3 5.3 Q 0.9 4.7 0.8 4.0 Q 0.7 3.9 0.7 3.9 L 0.5 3.9 Q 0.4 3.9 0.4 4.0 L 0.4 4.1 Q 0.6 4.9 1.1 5.5 Q 1.5 6.2 2.2 6.2 Q 2.7 6.2 3.1 5.9 Q 3.4 5.5 3.4 5.0 Q 3.4 4.8 3.3 4.5 Q 3.3 4.3 3.0 3.7 Q 2.8 3.2 2.7 2.8 Q 2.6 2.4 2.5 2.0 Q 2.4 1.7 2.4 1.3 Q 2.4 0.9 2.6 0.5 Q 2.8 0.2 3.3 0.2 Q 4.2 0.2 4.8 1.3 Q 4.9 1.4 4.9 1.4 Q 4.9 1.5 4.9 1.5 L 5.9 5.6 Q 5.9 5.8 6.1 5.9 Q 6.3 6.0 6.5 6.0 Q 6.7 6.0 6.8 5.9 Q 6.9 5.8 6.9 5.6 Q 6.9 5.6 6.9 5.5 L 5.9 1.5 Q 5.8 1.1 5.8 0.8 Q 5.8 0.2 6.2 0.2 Q 6.6 0.2 6.9 0.8 Q 7.1 1.3 7.2 2.1 Q 7.3 2.1 7.3 2.1 L 7.5 2.1 Q 7.6 2.1 7.6 2.1 Q 7.6 2.0 7.6 2.0 Q 7.5 1.4 7.4 1.0 Q 7.2 0.5 6.9 0.2 Q 6.6 -0.2 6.2 -0.2 Q 5.7 -0.2 5.4 0.1 Q 5.0 0.3 4.9 0.7 Q 4.6 0.3 4.1 0.1 Q 3.7 -0.2 3.2 -0.2 Q 2.4 -0.2 2.0 0.3 Q 1.5 0.7 1.5 1.5 Z M 12.3 -3.5 Q 11.6 -2.9 11.0 -2.1 Q 10.4 -1.3 10.1 -0.4 Q 9.7 0.5 9.5 1.5 Q 9.4 2.5 9.4 3.5 Q 9.4 4.5 9.5 5.5 Q 9.7 6.5 10.1 7.4 Q 10.5 8.3 11.0 9.1 Q 11.6 9.9 12.3 10.5 Q 12.3 10.5 12.4 10.5 L 12.5 10.5 Q 12.6 10.5 12.6 10.5 Q 12.7 10.4 12.7 10.4 Q 12.7 10.3 12.6 10.3 Q 11.9 9.6 11.5 8.9 Q 11.0 8.1 10.8 7.2 Q 10.5 6.4 10.4 5.4 Q 10.2 4.5 10.2 3.5 Q 10.2 -0.9 12.6 -3.3 Q 12.7 -3.3 12.7 -3.4 Q 12.7 -3.4 12.6 -3.5 Q 12.6 -3.5 12.5 -3.5 L 12.4 -3.5 Q 12.3 -3.5 12.3 -3.5 Z M 14.3 1.1 Q 14.3 1.3 14.3 1.5 L 15.4 5.5 L 13.9 5.5 Q 13.7 5.5 13.7 5.7 Q 13.8 6.0 13.9 6.0 L 15.5 6.0 L 16.0 8.3 Q 16.1 8.5 16.3 8.6 Q 16.4 8.8 16.6 8.8 Q 16.8 8.8 16.9 8.7 Q 17.0 8.6 17.0 8.4 Q 17.0 8.3 17.0 8.3 Q 17.0 8.3 17.0 8.3 L 16.5 6.0 L 17.9 6.0 Q 18.1 6.0 18.1 5.9 Q 18.1 5.8 18.0 5.7 Q 18.0 5.7 18.0 5.6 Q 17.9 5.5 17.9 5.5 L 16.4 5.5 L 15.3 1.5 Q 15.2 1.1 15.2 0.8 Q 15.2 0.2 15.7 0.2 Q 16.3 0.2 16.7 0.8 Q 17.2 1.4 17.5 2.1 Q 17.5 2.1 17.6 2.1 L 17.8 2.1 Q 17.8 2.1 17.8 2.1 Q 17.9 2.1 17.9 2.0 Q 17.9 2.0 17.9 2.0 Q 17.6 1.1 17.0 0.5 Q 16.4 -0.2 15.6 -0.2 Q 15.1 -0.2 14.7 0.2 Q 14.3 0.6 14.3 1.1 Z M 19.4 -3.5 Q 19.3 -3.5 19.3 -3.4 Q 19.3 -3.3 19.3 -3.3 Q 21.7 -0.9 21.7 3.5 Q 21.7 7.9 19.3 10.3 Q 19.3 10.3 19.3 10.4 Q 19.3 10.4 19.3 10.5 Q 19.4 10.5 19.4 10.5 L 19.5 10.5 Q 19.6 10.5 19.6 10.5 Q 20.6 9.7 21.3 8.5 Q 21.9 7.4 22.3 6.1 Q 22.6 4.8 22.6 3.5 Q 22.6 2.5 22.4 1.5 Q 22.2 0.6 21.9 -0.3 Q 21.5 -1.3 20.9 -2.1 Q 20.4 -2.9 19.6 -3.5 Q 19.6 -3.5 19.5 -3.5 L 19.4 -3.5 Z" fill="#3D4548" transform="translate(128.53 105) scale(1 -1)"/>
-          <path d="M 0.4 0.1 L 0.4 0.5 Q 0.8 0.5 1.0 0.6 Q 1.3 0.6 1.3 0.9 L 1.3 4.2 Q 1.3 4.5 1.2 4.6 Q 1.1 4.8 0.9 4.8 Q 0.7 4.8 0.4 4.8 L 0.4 5.2 L 2.1 5.4 L 2.1 4.2 Q 2.3 4.7 2.8 5.0 Q 3.3 5.4 3.8 5.4 Q 4.7 5.4 5.1 5.0 Q 5.5 4.6 5.5 3.8 L 5.5 0.9 Q 5.5 0.6 5.8 0.6 Q 6.0 0.5 6.4 0.5 L 6.4 0.1 L 3.7 0.1 L 3.7 0.5 Q 4.1 0.5 4.4 0.6 Q 4.6 0.6 4.6 0.9 L 4.6 3.7 Q 4.6 4.3 4.5 4.7 Q 4.3 5.1 3.8 5.1 Q 3.1 5.1 2.6 4.5 Q 2.2 4.0 2.2 3.2 L 2.2 0.9 Q 2.2 0.6 2.4 0.6 Q 2.7 0.5 3.1 0.5 L 3.1 0.1 L 0.4 0.1 Z M 9.7 -0.1 Q 8.9 -0.1 8.3 0.3 Q 7.7 0.7 7.3 1.3 Q 7.0 2.0 7.0 2.7 Q 7.0 3.4 7.3 4.0 Q 7.6 4.7 8.2 5.1 Q 8.8 5.5 9.5 5.5 Q 10.0 5.5 10.4 5.3 Q 10.8 5.1 11.1 4.8 Q 11.4 4.4 11.5 4.0 Q 11.6 3.5 11.6 3.0 Q 11.6 2.8 11.5 2.8 L 8.0 2.8 L 8.0 2.7 Q 8.0 1.7 8.4 1.0 Q 8.8 0.3 9.8 0.3 Q 10.1 0.3 10.4 0.5 Q 10.8 0.6 11.0 0.9 Q 11.2 1.2 11.3 1.5 Q 11.3 1.6 11.3 1.6 Q 11.4 1.6 11.4 1.6 L 11.5 1.6 Q 11.6 1.6 11.6 1.5 Q 11.5 0.8 10.9 0.4 Q 10.3 -0.1 9.7 -0.1 Z M 8.1 3.1 L 10.8 3.1 Q 10.8 3.6 10.7 4.1 Q 10.5 4.5 10.2 4.8 Q 10.0 5.1 9.5 5.1 Q 8.8 5.1 8.4 4.5 Q 8.1 3.9 8.1 3.1 Z M 13.2 1.5 L 13.2 4.8 L 12.2 4.8 L 12.2 5.1 Q 13.0 5.1 13.4 5.9 Q 13.7 6.6 13.7 7.5 L 14.1 7.5 L 14.1 5.2 L 15.8 5.2 L 15.8 4.8 L 14.1 4.8 L 14.1 1.5 Q 14.1 1.0 14.3 0.7 Q 14.4 0.3 14.9 0.3 Q 15.3 0.3 15.4 0.7 Q 15.6 1.1 15.6 1.5 L 15.6 2.2 L 16.0 2.2 L 16.0 1.5 Q 16.0 1.1 15.8 0.8 Q 15.7 0.4 15.4 0.2 Q 15.2 -0.1 14.8 -0.1 Q 14.1 -0.1 13.6 0.4 Q 13.2 0.8 13.2 1.5 Z M 19.3 0.1 L 17.7 4.4 Q 17.6 4.7 17.4 4.8 Q 17.2 4.8 16.9 4.8 L 16.9 5.2 L 19.3 5.2 L 19.3 4.8 Q 18.6 4.8 18.6 4.5 Q 18.6 4.5 18.6 4.5 Q 18.6 4.5 18.6 4.4 L 19.8 1.2 L 20.8 4.0 L 20.6 4.4 Q 20.5 4.7 20.3 4.8 Q 20.1 4.8 19.8 4.8 L 19.8 5.2 L 22.1 5.2 L 22.1 4.8 Q 21.4 4.8 21.4 4.5 Q 21.4 4.5 21.4 4.4 L 22.6 1.1 L 23.7 4.1 Q 23.7 4.2 23.7 4.3 Q 23.7 4.5 23.5 4.7 Q 23.3 4.8 23.0 4.8 L 23.0 5.2 L 25.1 5.2 L 25.1 4.8 Q 24.7 4.8 24.5 4.6 Q 24.2 4.4 24.1 4.1 L 22.6 0.1 Q 22.6 -0.1 22.5 -0.1 L 22.4 -0.1 Q 22.2 -0.1 22.2 0.1 L 21.0 3.5 L 19.8 0.1 Q 19.7 -0.1 19.6 -0.1 L 19.5 -0.1 Q 19.3 -0.1 19.3 0.1 Z M 28.3 -0.1 Q 27.6 -0.1 27.0 0.3 Q 26.4 0.7 26.0 1.3 Q 25.6 1.9 25.6 2.6 Q 25.6 3.2 25.8 3.7 Q 26.0 4.2 26.4 4.6 Q 26.8 5.0 27.3 5.2 Q 27.7 5.5 28.3 5.5 Q 29.1 5.5 29.7 5.1 Q 30.3 4.7 30.6 4.0 Q 31.0 3.4 31.0 2.6 Q 31.0 1.9 30.6 1.3 Q 30.3 0.7 29.6 0.3 Q 29.0 -0.1 28.3 -0.1 Z M 28.3 0.3 Q 29.3 0.3 29.6 1.0 Q 29.9 1.7 29.9 2.8 Q 29.9 3.4 29.9 3.8 Q 29.8 4.2 29.6 4.5 Q 29.4 4.7 29.2 4.8 Q 29.0 5.0 28.8 5.1 Q 28.6 5.1 28.3 5.1 Q 27.9 5.1 27.6 5.0 Q 27.3 4.8 27.0 4.5 Q 26.8 4.1 26.8 3.7 Q 26.7 3.3 26.7 2.8 Q 26.7 2.1 26.8 1.6 Q 26.9 1.0 27.3 0.7 Q 27.6 0.3 28.3 0.3 Z M 31.6 0.1 L 31.6 0.5 Q 32.0 0.5 32.3 0.6 Q 32.6 0.6 32.6 0.9 L 32.6 4.2 Q 32.6 4.5 32.5 4.6 Q 32.4 4.8 32.2 4.8 Q 32.0 4.8 31.6 4.8 L 31.6 5.2 L 33.3 5.4 L 33.3 4.2 Q 33.5 4.7 33.9 5.0 Q 34.2 5.4 34.8 5.4 Q 35.1 5.4 35.4 5.2 Q 35.7 5.0 35.7 4.6 Q 35.7 4.4 35.5 4.2 Q 35.4 4.1 35.1 4.1 Q 34.9 4.1 34.8 4.2 Q 34.6 4.4 34.6 4.6 Q 34.6 4.9 34.8 5.1 L 34.8 5.1 Q 34.3 5.1 34.0 4.7 Q 33.7 4.4 33.5 3.8 Q 33.4 3.3 33.4 2.8 L 33.4 0.9 Q 33.4 0.5 34.6 0.5 L 34.6 0.1 L 31.6 0.1 Z M 36.3 0.1 L 36.3 0.5 Q 36.7 0.5 37.0 0.6 Q 37.3 0.6 37.3 0.9 L 37.3 7.2 Q 37.3 7.5 37.2 7.6 Q 37.1 7.8 36.9 7.8 Q 36.7 7.8 36.3 7.8 L 36.3 8.3 L 38.1 8.4 L 38.1 2.7 L 39.7 4.1 Q 39.9 4.3 39.9 4.5 Q 39.9 4.7 39.8 4.8 Q 39.7 4.8 39.6 4.8 L 39.6 5.2 L 41.9 5.2 L 41.9 4.8 Q 41.0 4.8 40.2 4.1 L 39.4 3.4 L 40.9 1.2 Q 41.2 0.8 41.4 0.6 Q 41.6 0.5 42.1 0.5 L 42.1 0.1 L 39.8 0.1 L 39.8 0.5 Q 40.2 0.5 40.2 0.7 Q 40.2 0.9 39.9 1.2 L 38.8 2.8 L 38.1 2.2 L 38.1 0.9 Q 38.1 0.6 38.3 0.6 Q 38.6 0.5 39.0 0.5 L 39.0 0.1 L 36.3 0.1 Z M 45.4 3.1 Q 45.4 3.2 45.5 3.4 Q 45.6 3.5 45.8 3.6 Q 45.9 3.7 46.1 3.7 Q 46.3 3.7 46.4 3.6 Q 46.6 3.5 46.7 3.4 Q 46.8 3.2 46.8 3.1 Q 46.8 2.8 46.6 2.6 Q 46.4 2.4 46.1 2.4 Q 45.8 2.4 45.6 2.6 Q 45.4 2.8 45.4 3.1 Z M 52.0 -0.1 Q 51.2 -0.1 50.8 0.5 Q 50.3 1.1 50.3 1.9 Q 50.3 2.6 50.7 3.5 Q 51.1 4.3 51.8 4.8 Q 52.5 5.4 53.3 5.4 Q 53.6 5.4 53.9 5.2 Q 54.2 5.0 54.3 4.7 L 55.0 7.3 Q 55.1 7.5 55.1 7.7 Q 55.1 7.8 54.3 7.8 Q 54.2 7.8 54.2 8.0 Q 54.2 8.0 54.2 8.1 Q 54.2 8.2 54.2 8.2 Q 54.3 8.3 54.3 8.3 L 55.9 8.4 Q 56.1 8.4 56.1 8.2 L 54.4 1.3 Q 54.3 1.1 54.3 0.8 Q 54.3 0.3 54.6 0.3 Q 55.0 0.3 55.2 0.7 Q 55.4 1.2 55.5 1.8 Q 55.6 1.9 55.6 1.9 L 55.8 1.9 Q 55.8 1.9 55.8 1.9 Q 55.9 1.8 55.9 1.8 Q 55.7 1.0 55.4 0.4 Q 55.2 -0.1 54.6 -0.1 Q 54.2 -0.1 53.9 0.2 Q 53.6 0.4 53.5 0.8 Q 52.7 -0.1 52.0 -0.1 Z M 52.0 0.3 Q 52.4 0.3 52.8 0.6 Q 53.2 0.9 53.5 1.3 Q 53.5 1.4 53.5 1.4 L 54.2 4.0 Q 54.1 4.5 53.9 4.8 Q 53.6 5.1 53.2 5.1 Q 52.8 5.1 52.5 4.7 Q 52.1 4.4 51.9 4.0 Q 51.6 3.5 51.4 2.6 Q 51.2 1.8 51.2 1.3 Q 51.2 0.9 51.4 0.6 Q 51.6 0.3 52.0 0.3 Z M 56.9 -3.4 Q 57.1 -3.5 57.3 -3.5 Q 57.6 -3.5 57.8 -2.8 Q 57.9 -2.5 58.2 -0.7 L 58.6 1.4 L 57.9 1.4 Q 57.8 1.4 57.8 1.5 Q 57.8 1.7 57.9 1.7 L 58.7 1.7 L 58.8 2.2 Q 58.8 2.5 58.8 2.6 Q 58.9 2.8 58.9 3.0 Q 59.0 3.1 59.1 3.3 Q 59.2 3.6 59.5 3.8 Q 59.7 4.0 60.0 4.0 Q 60.2 4.0 60.3 3.9 Q 60.5 3.8 60.6 3.7 Q 60.7 3.5 60.7 3.4 Q 60.7 3.2 60.6 3.0 Q 60.5 2.8 60.3 2.8 Q 60.1 2.8 60.0 2.9 Q 59.9 3.0 59.9 3.1 Q 59.9 3.3 60.1 3.5 Q 60.2 3.6 60.4 3.6 Q 60.2 3.7 60.0 3.7 Q 59.8 3.7 59.7 3.6 Q 59.6 3.5 59.6 3.4 Q 59.5 3.2 59.4 2.2 L 59.3 1.7 L 60.1 1.7 Q 60.2 1.7 60.2 1.5 Q 60.2 1.5 60.2 1.5 Q 60.2 1.4 60.2 1.4 Q 60.1 1.4 60.1 1.4 L 59.2 1.4 L 58.8 -0.7 Q 58.7 -1.1 58.6 -1.6 Q 58.5 -2.1 58.4 -2.5 Q 58.2 -3.0 57.9 -3.4 Q 57.7 -3.7 57.3 -3.7 Q 57.0 -3.7 56.8 -3.5 Q 56.6 -3.4 56.6 -3.1 Q 56.6 -2.9 56.7 -2.7 Q 56.8 -2.6 57.0 -2.6 Q 57.2 -2.6 57.3 -2.7 Q 57.4 -2.7 57.4 -2.9 Q 57.4 -3.1 57.2 -3.2 Q 57.1 -3.4 56.9 -3.4 Z" fill="#788386" transform="translate(294.45 79) scale(1 -1)"/>
-          <path d="M 3.4 -0.2 Q 2.5 -0.2 1.8 0.3 Q 1.2 0.7 0.8 1.4 Q 0.4 2.2 0.4 3.0 Q 0.4 3.8 0.7 4.5 Q 1.1 5.2 1.7 5.6 Q 2.4 6.1 3.2 6.1 Q 3.8 6.1 4.2 5.8 Q 4.7 5.6 5.0 5.3 Q 5.3 4.9 5.5 4.4 Q 5.6 3.9 5.6 3.3 Q 5.6 3.1 5.5 3.1 L 1.6 3.1 L 1.6 3.0 Q 1.6 1.9 2.0 1.0 Q 2.5 0.2 3.5 0.2 Q 3.9 0.2 4.2 0.4 Q 4.6 0.6 4.9 0.9 Q 5.1 1.3 5.2 1.6 Q 5.2 1.7 5.3 1.7 Q 5.3 1.8 5.3 1.8 L 5.5 1.8 Q 5.6 1.8 5.6 1.6 Q 5.4 0.8 4.8 0.3 Q 4.1 -0.2 3.4 -0.2 Z M 1.6 3.5 L 4.6 3.5 Q 4.6 4.0 4.5 4.5 Q 4.4 5.0 4.0 5.3 Q 3.7 5.7 3.2 5.7 Q 2.4 5.7 2.0 5.0 Q 1.6 4.3 1.6 3.5 Z M 6.2 0.0 L 6.2 0.5 Q 6.7 0.5 7.1 0.7 Q 7.6 0.9 7.9 1.3 L 9.1 2.8 L 7.5 4.9 Q 7.3 5.2 7.0 5.3 Q 6.7 5.3 6.2 5.3 L 6.2 5.8 L 9.0 5.8 L 9.0 5.3 Q 8.9 5.3 8.7 5.3 Q 8.5 5.2 8.5 5.0 Q 8.5 5.0 8.6 4.9 L 9.7 3.5 L 10.5 4.5 Q 10.6 4.7 10.6 4.9 Q 10.6 5.1 10.5 5.2 Q 10.4 5.3 10.2 5.3 L 10.2 5.8 L 12.7 5.8 L 12.7 5.3 Q 12.2 5.3 11.8 5.1 Q 11.3 4.9 11.0 4.5 L 9.9 3.2 L 11.6 0.9 Q 11.9 0.6 12.2 0.5 Q 12.4 0.5 13.0 0.5 L 13.0 0.0 L 10.2 0.0 L 10.2 0.5 Q 10.3 0.5 10.5 0.6 Q 10.6 0.6 10.6 0.8 Q 10.6 0.8 10.6 0.9 L 9.4 2.5 L 8.4 1.3 Q 8.2 1.1 8.2 0.9 Q 8.2 0.7 8.4 0.6 Q 8.5 0.5 8.6 0.5 L 8.6 0.0 L 6.2 0.0 Z M 16.5 -0.2 Q 15.6 -0.2 15.0 0.3 Q 14.3 0.7 13.9 1.4 Q 13.5 2.2 13.5 3.0 Q 13.5 3.8 13.8 4.5 Q 14.2 5.2 14.8 5.6 Q 15.5 6.1 16.3 6.1 Q 16.9 6.1 17.4 5.8 Q 17.8 5.6 18.1 5.3 Q 18.4 4.9 18.6 4.4 Q 18.7 3.9 18.7 3.3 Q 18.7 3.1 18.6 3.1 L 14.7 3.1 L 14.7 3.0 Q 14.7 1.9 15.1 1.0 Q 15.6 0.2 16.6 0.2 Q 17.0 0.2 17.4 0.4 Q 17.7 0.6 18.0 0.9 Q 18.2 1.3 18.3 1.6 Q 18.3 1.7 18.4 1.7 Q 18.4 1.8 18.4 1.8 L 18.6 1.8 Q 18.7 1.8 18.7 1.6 Q 18.5 0.8 17.9 0.3 Q 17.3 -0.2 16.5 -0.2 Z M 14.7 3.5 L 17.8 3.5 Q 17.8 4.0 17.6 4.5 Q 17.5 5.0 17.1 5.3 Q 16.8 5.7 16.3 5.7 Q 15.5 5.7 15.1 5.0 Q 14.7 4.3 14.7 3.5 Z M 22.5 -0.2 Q 21.6 -0.2 21.0 0.3 Q 20.3 0.7 19.9 1.4 Q 19.5 2.1 19.5 2.9 Q 19.5 3.7 19.9 4.4 Q 20.3 5.2 21.0 5.6 Q 21.6 6.1 22.5 6.1 Q 23.2 6.1 23.9 5.7 Q 24.5 5.4 24.5 4.7 Q 24.5 4.5 24.4 4.3 Q 24.2 4.1 23.9 4.1 Q 23.6 4.1 23.4 4.3 Q 23.3 4.5 23.3 4.7 Q 23.3 5.0 23.4 5.1 Q 23.6 5.3 23.8 5.4 Q 23.3 5.7 22.5 5.7 Q 21.8 5.7 21.4 5.2 Q 21.0 4.8 20.9 4.2 Q 20.7 3.5 20.7 2.9 Q 20.7 2.3 20.9 1.7 Q 21.1 1.0 21.5 0.6 Q 22.0 0.2 22.6 0.2 Q 23.3 0.2 23.7 0.6 Q 24.2 1.0 24.3 1.7 Q 24.3 1.7 24.4 1.7 L 24.6 1.7 Q 24.6 1.7 24.7 1.7 Q 24.7 1.7 24.7 1.6 L 24.7 1.6 Q 24.5 0.8 23.9 0.3 Q 23.3 -0.2 22.5 -0.2 Z M 26.5 1.6 L 26.5 4.6 Q 26.5 5.0 26.4 5.1 Q 26.3 5.3 26.1 5.3 Q 25.9 5.3 25.5 5.3 L 25.5 5.8 L 27.5 6.0 L 27.5 1.6 Q 27.5 1.1 27.6 0.8 Q 27.7 0.5 27.9 0.3 Q 28.2 0.2 28.7 0.2 Q 29.4 0.2 29.9 0.8 Q 30.3 1.4 30.3 2.2 L 30.3 4.6 Q 30.3 5.0 30.2 5.1 Q 30.1 5.3 29.9 5.3 Q 29.7 5.3 29.2 5.3 L 29.2 5.8 L 31.3 6.0 L 31.3 1.2 Q 31.3 0.9 31.4 0.7 Q 31.5 0.5 31.7 0.5 Q 31.9 0.5 32.3 0.5 L 32.3 0.0 L 30.3 -0.2 L 30.3 1.0 Q 30.1 0.5 29.6 0.2 Q 29.2 -0.2 28.7 -0.2 Q 27.7 -0.2 27.1 0.3 Q 26.5 0.7 26.5 1.6 Z M 34.0 1.6 L 34.0 5.3 L 32.8 5.3 L 32.8 5.7 Q 33.7 5.7 34.1 6.5 Q 34.6 7.3 34.6 8.3 L 34.9 8.3 L 34.9 5.8 L 36.8 5.8 L 36.8 5.3 L 34.9 5.3 L 34.9 1.6 Q 34.9 1.1 35.1 0.7 Q 35.3 0.2 35.8 0.2 Q 36.3 0.2 36.5 0.7 Q 36.7 1.1 36.7 1.6 L 36.7 2.4 L 37.1 2.4 L 37.1 1.6 Q 37.1 1.2 36.9 0.8 Q 36.8 0.4 36.5 0.1 Q 36.2 -0.2 35.7 -0.2 Q 34.9 -0.2 34.4 0.3 Q 34.0 0.8 34.0 1.6 Z M 41.2 -0.2 Q 40.4 -0.2 39.7 0.3 Q 39.0 0.7 38.6 1.4 Q 38.2 2.2 38.2 3.0 Q 38.2 3.8 38.6 4.5 Q 38.9 5.2 39.6 5.6 Q 40.2 6.1 41.0 6.1 Q 41.6 6.1 42.1 5.8 Q 42.5 5.6 42.8 5.3 Q 43.1 4.9 43.3 4.4 Q 43.4 3.9 43.4 3.3 Q 43.4 3.1 43.3 3.1 L 39.4 3.1 L 39.4 3.0 Q 39.4 1.9 39.8 1.0 Q 40.3 0.2 41.3 0.2 Q 41.7 0.2 42.1 0.4 Q 42.4 0.6 42.7 0.9 Q 42.9 1.3 43.0 1.6 Q 43.1 1.7 43.1 1.7 Q 43.1 1.8 43.2 1.8 L 43.3 1.8 Q 43.4 1.8 43.4 1.6 Q 43.2 0.8 42.6 0.3 Q 42.0 -0.2 41.2 -0.2 Z M 39.4 3.5 L 42.5 3.5 Q 42.5 4.0 42.3 4.5 Q 42.2 5.0 41.9 5.3 Q 41.5 5.7 41.0 5.7 Q 40.2 5.7 39.8 5.0 Q 39.4 4.3 39.4 3.5 Z M 44.3 -0.0 L 44.3 2.2 Q 44.3 2.3 44.4 2.3 L 44.5 2.3 Q 44.6 2.3 44.7 2.2 Q 45.0 0.2 46.5 0.2 Q 47.1 0.2 47.5 0.5 Q 48.0 0.8 48.0 1.4 Q 48.0 1.8 47.6 2.1 Q 47.3 2.4 46.8 2.6 L 45.9 2.7 Q 45.5 2.8 45.1 3.0 Q 44.7 3.2 44.5 3.6 Q 44.3 3.9 44.3 4.4 Q 44.3 5.0 44.6 5.3 Q 44.9 5.7 45.4 5.9 Q 45.9 6.1 46.5 6.1 Q 47.2 6.1 47.7 5.7 L 48.1 6.0 Q 48.1 6.1 48.1 6.1 L 48.2 6.1 Q 48.3 6.1 48.3 6.0 Q 48.3 6.0 48.3 5.9 L 48.3 4.2 Q 48.3 4.0 48.2 4.0 L 48.1 4.0 Q 47.9 4.0 47.9 4.2 Q 47.9 4.9 47.6 5.3 Q 47.2 5.7 46.5 5.7 Q 45.9 5.7 45.4 5.5 Q 45.0 5.3 45.0 4.7 Q 45.0 4.4 45.3 4.1 Q 45.6 3.9 46.0 3.8 L 46.9 3.6 Q 47.4 3.5 47.8 3.2 Q 48.2 3.0 48.4 2.6 Q 48.7 2.2 48.7 1.8 Q 48.7 1.3 48.5 0.9 Q 48.3 0.5 48.0 0.3 Q 47.7 0.1 47.3 -0.0 Q 46.9 -0.2 46.5 -0.2 Q 45.6 -0.2 45.0 0.4 L 44.5 -0.1 Q 44.5 -0.2 44.5 -0.2 L 44.4 -0.2 Q 44.3 -0.2 44.3 -0.0 Z M 54.5 1.5 Q 54.5 1.9 54.6 2.4 Q 54.8 2.8 55.0 3.4 Q 55.2 4.0 55.3 4.4 Q 55.5 4.9 55.5 5.2 Q 55.5 5.6 55.2 5.6 Q 54.7 5.6 54.3 5.1 Q 54.0 4.5 53.8 3.8 Q 53.8 3.8 53.7 3.8 L 53.6 3.8 Q 53.4 3.8 53.4 3.9 L 53.4 3.9 Q 53.7 4.7 54.1 5.3 Q 54.6 6.0 55.2 6.0 Q 55.7 6.0 56.1 5.6 Q 56.4 5.3 56.4 4.8 Q 56.4 4.6 56.3 4.3 Q 56.2 4.2 56.0 3.6 Q 55.8 3.0 55.7 2.7 Q 55.6 2.3 55.5 2.0 Q 55.4 1.6 55.4 1.3 Q 55.4 0.8 55.6 0.5 Q 55.8 0.2 56.2 0.2 Q 57.1 0.2 57.8 1.3 Q 57.8 1.3 57.8 1.4 Q 57.8 1.4 57.8 1.5 L 58.8 5.4 Q 58.8 5.6 59.0 5.7 Q 59.1 5.8 59.3 5.8 Q 59.5 5.8 59.6 5.7 Q 59.7 5.6 59.7 5.4 Q 59.7 5.4 59.7 5.3 L 58.8 1.4 Q 58.7 1.0 58.7 0.8 Q 58.7 0.2 59.1 0.2 Q 59.5 0.2 59.7 0.7 Q 59.9 1.3 60.1 2.0 Q 60.1 2.1 60.2 2.1 L 60.3 2.1 Q 60.4 2.1 60.4 2.0 Q 60.5 2.0 60.5 1.9 Q 60.3 1.4 60.2 0.9 Q 60.0 0.5 59.7 0.2 Q 59.5 -0.2 59.0 -0.2 Q 58.6 -0.2 58.3 0.1 Q 57.9 0.3 57.8 0.7 Q 57.5 0.3 57.1 0.1 Q 56.7 -0.2 56.2 -0.2 Q 55.4 -0.2 55.0 0.3 Q 54.5 0.7 54.5 1.5 Z M 65.0 -3.3 Q 64.2 -2.8 63.7 -2.0 Q 63.2 -1.2 62.8 -0.3 Q 62.5 0.5 62.3 1.5 Q 62.1 2.4 62.1 3.4 Q 62.1 4.3 62.3 5.3 Q 62.5 6.2 62.8 7.1 Q 63.2 8.0 63.7 8.8 Q 64.3 9.5 65.0 10.1 Q 65.0 10.1 65.1 10.1 L 65.2 10.1 Q 65.2 10.1 65.3 10.1 Q 65.3 10.1 65.3 10.0 Q 65.3 9.9 65.3 9.9 Q 64.6 9.3 64.2 8.5 Q 63.7 7.8 63.5 7.0 Q 63.2 6.1 63.1 5.2 Q 63.0 4.3 63.0 3.4 Q 63.0 -0.9 65.2 -3.1 Q 65.3 -3.2 65.3 -3.3 Q 65.3 -3.3 65.3 -3.3 Q 65.2 -3.4 65.2 -3.4 L 65.1 -3.4 Q 65.0 -3.4 65.0 -3.3 Z M 66.9 1.1 Q 66.9 1.3 66.9 1.5 L 67.9 5.3 L 66.5 5.3 Q 66.3 5.3 66.3 5.5 Q 66.4 5.8 66.5 5.8 L 68.0 5.8 L 68.6 8.0 Q 68.6 8.2 68.8 8.3 Q 68.9 8.5 69.1 8.5 Q 69.3 8.5 69.4 8.3 Q 69.5 8.2 69.5 8.1 Q 69.5 8.0 69.5 8.0 Q 69.5 8.0 69.5 8.0 L 69.0 5.8 L 70.4 5.8 Q 70.5 5.8 70.5 5.6 Q 70.5 5.6 70.5 5.5 Q 70.5 5.5 70.4 5.4 Q 70.4 5.3 70.3 5.3 L 68.9 5.3 L 67.9 1.4 Q 67.8 1.1 67.8 0.8 Q 67.8 0.2 68.2 0.2 Q 68.8 0.2 69.2 0.8 Q 69.7 1.3 69.9 2.0 Q 70.0 2.1 70.0 2.1 L 70.2 2.1 Q 70.3 2.1 70.3 2.0 Q 70.3 2.0 70.3 1.9 Q 70.3 1.9 70.3 1.9 Q 70.0 1.1 69.4 0.5 Q 68.9 -0.2 68.1 -0.2 Q 67.6 -0.2 67.2 0.2 Q 66.9 0.5 66.9 1.1 Z M 74.7 3.1 Q 74.6 3.1 74.5 3.2 Q 74.4 3.3 74.4 3.4 Q 74.4 3.5 74.5 3.6 Q 74.6 3.6 74.7 3.6 L 82.4 3.6 Q 82.5 3.6 82.6 3.6 Q 82.7 3.5 82.7 3.4 Q 82.7 3.3 82.6 3.2 Q 82.5 3.1 82.4 3.1 L 74.7 3.1 Z M 88.5 -0.2 Q 87.6 -0.2 87.1 0.5 Q 86.7 1.1 86.7 2.0 Q 86.7 2.9 87.1 3.8 Q 87.6 4.7 88.3 5.3 Q 89.1 6.0 90.0 6.0 Q 90.4 6.0 90.7 5.7 Q 91.0 5.5 91.2 5.2 L 91.9 8.2 Q 92.0 8.4 92.0 8.5 Q 92.0 8.7 91.1 8.7 Q 91.0 8.7 91.0 8.9 Q 91.0 9.0 91.0 9.0 Q 91.0 9.1 91.1 9.2 Q 91.1 9.2 91.2 9.2 L 93.0 9.4 Q 93.2 9.4 93.2 9.2 L 91.2 1.4 Q 91.1 1.2 91.1 0.8 Q 91.1 0.2 91.5 0.2 Q 91.9 0.2 92.1 0.7 Q 92.4 1.3 92.5 2.0 Q 92.5 2.1 92.6 2.1 L 92.8 2.1 Q 92.8 2.1 92.9 2.0 Q 92.9 2.0 92.9 1.9 Q 92.7 1.0 92.4 0.4 Q 92.1 -0.2 91.5 -0.2 Q 91.0 -0.2 90.7 0.1 Q 90.3 0.4 90.2 0.8 Q 89.4 -0.2 88.5 -0.2 Z M 88.5 0.2 Q 89.0 0.2 89.5 0.6 Q 89.9 0.9 90.2 1.4 Q 90.3 1.4 90.3 1.5 L 91.0 4.5 Q 90.9 4.9 90.6 5.3 Q 90.4 5.6 89.9 5.6 Q 89.5 5.6 89.1 5.2 Q 88.7 4.9 88.4 4.4 Q 88.1 3.8 87.9 2.9 Q 87.7 1.9 87.7 1.4 Q 87.7 0.9 87.9 0.6 Q 88.1 0.2 88.5 0.2 Z M 94.1 -3.9 Q 94.3 -4.0 94.5 -4.0 Q 94.8 -4.0 95.1 -3.2 Q 95.1 -2.9 95.5 -0.9 L 96.0 1.4 L 95.2 1.4 Q 95.1 1.4 95.1 1.6 Q 95.1 1.8 95.2 1.8 L 96.0 1.8 L 96.1 2.4 Q 96.2 2.7 96.2 2.9 Q 96.3 3.1 96.3 3.3 Q 96.4 3.4 96.5 3.7 Q 96.7 4.0 96.9 4.2 Q 97.2 4.4 97.5 4.4 Q 97.7 4.4 97.9 4.3 Q 98.1 4.2 98.3 4.1 Q 98.4 3.9 98.4 3.7 Q 98.4 3.5 98.2 3.3 Q 98.1 3.1 97.8 3.1 Q 97.7 3.1 97.6 3.2 Q 97.5 3.3 97.5 3.4 Q 97.5 3.7 97.6 3.8 Q 97.7 4.0 98.0 4.0 Q 97.8 4.1 97.5 4.1 Q 97.4 4.1 97.3 4.0 Q 97.1 3.9 97.1 3.7 Q 97.0 3.5 96.8 2.4 L 96.7 1.8 L 97.7 1.8 Q 97.8 1.8 97.8 1.7 Q 97.8 1.6 97.8 1.6 Q 97.7 1.5 97.7 1.5 Q 97.7 1.4 97.7 1.4 L 96.6 1.4 L 96.2 -0.9 Q 96.1 -1.4 96.0 -1.9 Q 95.9 -2.4 95.7 -2.9 Q 95.5 -3.5 95.2 -3.9 Q 94.9 -4.2 94.5 -4.2 Q 94.2 -4.2 93.9 -4.1 Q 93.7 -3.9 93.7 -3.6 Q 93.7 -3.3 93.8 -3.2 Q 94.0 -3.0 94.2 -3.0 Q 94.4 -3.0 94.5 -3.1 Q 94.6 -3.2 94.6 -3.3 Q 94.6 -3.5 94.4 -3.7 Q 94.3 -3.9 94.1 -3.9 Z M 99.5 -3.4 Q 99.4 -3.4 99.4 -3.3 Q 99.4 -3.2 99.4 -3.2 Q 101.7 -0.9 101.7 3.4 Q 101.7 7.7 99.5 9.9 Q 99.4 9.9 99.4 10.0 Q 99.4 10.1 99.4 10.1 Q 99.5 10.1 99.5 10.1 L 99.6 10.1 Q 99.7 10.1 99.7 10.1 Q 100.7 9.3 101.3 8.2 Q 102.0 7.1 102.3 5.9 Q 102.6 4.7 102.6 3.4 Q 102.6 2.4 102.4 1.5 Q 102.3 0.6 101.9 -0.3 Q 101.5 -1.2 101.0 -2.0 Q 100.5 -2.8 99.7 -3.3 Q 99.7 -3.4 99.6 -3.4 L 99.5 -3.4 Z" fill="#3D4548" transform="translate(453.52 105) scale(1 -1)"/>
-          <path d="M 0.4 -2.6 L 0.4 -2.1 Q 0.8 -2.1 1.1 -2.1 Q 1.4 -2.0 1.4 -1.7 L 1.4 4.8 Q 1.4 5.2 1.1 5.3 Q 0.9 5.3 0.4 5.3 L 0.4 5.8 L 2.3 6.0 L 2.3 5.1 Q 2.7 5.5 3.2 5.8 Q 3.7 6.0 4.3 6.0 Q 5.0 6.0 5.7 5.5 Q 6.3 5.1 6.7 4.4 Q 7.0 3.7 7.0 2.9 Q 7.0 2.1 6.6 1.4 Q 6.3 0.7 5.6 0.3 Q 4.9 -0.2 4.0 -0.2 Q 3.1 -0.2 2.4 0.6 L 2.4 -1.7 Q 2.4 -2.0 2.7 -2.1 Q 3.0 -2.1 3.4 -2.1 L 3.4 -2.6 L 0.4 -2.6 Z M 2.4 1.3 Q 2.6 0.8 3.0 0.5 Q 3.5 0.2 4.0 0.2 Q 4.4 0.2 4.8 0.5 Q 5.2 0.7 5.4 1.1 Q 5.6 1.5 5.8 2.0 Q 5.9 2.5 5.9 2.9 Q 5.9 3.5 5.7 4.1 Q 5.5 4.7 5.1 5.1 Q 4.7 5.6 4.1 5.6 Q 3.6 5.6 3.1 5.3 Q 2.7 5.0 2.4 4.5 L 2.4 1.3 Z M 9.0 1.6 L 9.0 4.6 Q 9.0 5.0 8.8 5.1 Q 8.7 5.3 8.5 5.3 Q 8.3 5.3 7.9 5.3 L 7.9 5.8 L 9.9 6.0 L 9.9 1.6 Q 9.9 1.1 10.0 0.8 Q 10.1 0.5 10.3 0.3 Q 10.6 0.2 11.1 0.2 Q 11.9 0.2 12.3 0.8 Q 12.7 1.4 12.7 2.2 L 12.7 4.6 Q 12.7 5.0 12.6 5.1 Q 12.5 5.3 12.3 5.3 Q 12.1 5.3 11.7 5.3 L 11.7 5.8 L 13.7 6.0 L 13.7 1.2 Q 13.7 0.9 13.8 0.7 Q 13.9 0.5 14.1 0.5 Q 14.3 0.5 14.7 0.5 L 14.7 0.0 L 12.7 -0.2 L 12.7 1.0 Q 12.5 0.5 12.0 0.2 Q 11.6 -0.2 11.1 -0.2 Q 10.1 -0.2 9.5 0.3 Q 9.0 0.7 9.0 1.6 Z M 16.4 0.0 L 16.4 8.0 Q 16.4 8.4 16.3 8.5 Q 16.2 8.7 16.0 8.7 Q 15.8 8.7 15.3 8.7 L 15.3 9.2 L 17.3 9.4 L 17.3 5.1 Q 17.6 5.4 17.9 5.6 Q 18.2 5.8 18.5 5.9 Q 18.8 6.0 19.2 6.0 Q 19.8 6.0 20.3 5.7 Q 20.8 5.5 21.2 5.0 Q 21.6 4.6 21.8 4.1 Q 22.0 3.5 22.0 2.9 Q 22.0 2.1 21.6 1.4 Q 21.2 0.7 20.6 0.3 Q 19.9 -0.2 19.0 -0.2 Q 18.5 -0.2 18.0 0.1 Q 17.6 0.4 17.2 0.8 L 16.8 0.0 L 16.4 0.0 Z M 17.4 1.3 Q 17.6 0.8 18.0 0.5 Q 18.4 0.2 19.0 0.2 Q 19.7 0.2 20.1 0.6 Q 20.5 1.0 20.7 1.6 Q 20.9 2.2 20.9 2.9 Q 20.9 4.1 20.6 4.6 Q 20.4 4.9 20.2 5.1 Q 20.0 5.4 19.7 5.5 Q 19.4 5.6 19.1 5.6 Q 18.6 5.6 18.1 5.3 Q 17.6 5.0 17.4 4.6 L 17.4 1.3 Z M 22.9 0.0 L 22.9 0.5 Q 23.4 0.5 23.7 0.5 Q 24.0 0.6 24.0 0.9 L 24.0 8.0 Q 24.0 8.4 23.8 8.5 Q 23.7 8.7 23.5 8.7 Q 23.3 8.7 22.9 8.7 L 22.9 9.2 L 24.9 9.4 L 24.9 0.9 Q 24.9 0.6 25.2 0.5 Q 25.5 0.5 26.0 0.5 L 26.0 0.0 L 22.9 0.0 Z M 26.6 0.0 L 26.6 0.5 Q 27.1 0.5 27.4 0.5 Q 27.7 0.6 27.7 0.9 L 27.7 4.6 Q 27.7 5.1 27.5 5.2 Q 27.3 5.3 26.7 5.3 L 26.7 5.8 L 28.6 6.0 L 28.6 0.9 Q 28.6 0.6 28.9 0.5 Q 29.2 0.5 29.6 0.5 L 29.6 0.0 L 26.6 0.0 Z M 27.2 8.3 Q 27.2 8.6 27.4 8.8 Q 27.7 9.0 27.9 9.0 Q 28.1 9.0 28.3 8.9 Q 28.5 8.8 28.6 8.7 Q 28.7 8.5 28.7 8.3 Q 28.7 8.0 28.5 7.8 Q 28.2 7.5 27.9 7.5 Q 27.7 7.5 27.4 7.8 Q 27.2 8.0 27.2 8.3 Z M 30.4 -0.0 L 30.4 2.2 Q 30.4 2.3 30.5 2.3 L 30.7 2.3 Q 30.8 2.3 30.8 2.2 Q 31.2 0.2 32.6 0.2 Q 33.3 0.2 33.7 0.5 Q 34.1 0.8 34.1 1.4 Q 34.1 1.8 33.8 2.1 Q 33.4 2.4 33.0 2.6 L 32.1 2.7 Q 31.6 2.8 31.3 3.0 Q 30.9 3.2 30.6 3.6 Q 30.4 3.9 30.4 4.4 Q 30.4 5.0 30.7 5.3 Q 31.0 5.7 31.5 5.9 Q 32.0 6.1 32.6 6.1 Q 33.3 6.1 33.8 5.7 L 34.2 6.0 Q 34.2 6.1 34.3 6.1 L 34.4 6.1 Q 34.4 6.1 34.4 6.0 Q 34.5 6.0 34.5 5.9 L 34.5 4.2 Q 34.5 4.0 34.4 4.0 L 34.2 4.0 Q 34.1 4.0 34.1 4.2 Q 34.1 4.9 33.7 5.3 Q 33.3 5.7 32.6 5.7 Q 32.0 5.7 31.6 5.5 Q 31.1 5.3 31.1 4.7 Q 31.1 4.4 31.4 4.1 Q 31.7 3.9 32.2 3.8 L 33.1 3.6 Q 33.6 3.5 34.0 3.2 Q 34.3 3.0 34.6 2.6 Q 34.8 2.2 34.8 1.8 Q 34.8 1.3 34.6 0.9 Q 34.5 0.5 34.2 0.3 Q 33.9 0.1 33.5 -0.0 Q 33.1 -0.2 32.6 -0.2 Q 31.8 -0.2 31.2 0.4 L 30.7 -0.1 Q 30.7 -0.2 30.6 -0.2 L 30.5 -0.2 Q 30.4 -0.2 30.4 -0.0 Z M 35.7 0.0 L 35.7 0.5 Q 36.1 0.5 36.4 0.5 Q 36.7 0.6 36.7 0.9 L 36.7 8.0 Q 36.7 8.4 36.6 8.5 Q 36.5 8.7 36.3 8.7 Q 36.1 8.7 35.7 8.7 L 35.7 9.2 L 37.7 9.4 L 37.7 4.7 Q 38.0 5.3 38.5 5.6 Q 39.0 6.0 39.6 6.0 Q 40.5 6.0 41.0 5.5 Q 41.5 5.1 41.5 4.1 L 41.5 0.9 Q 41.5 0.6 41.8 0.5 Q 42.1 0.5 42.5 0.5 L 42.5 0.0 L 39.4 0.0 L 39.4 0.5 Q 39.9 0.5 40.2 0.5 Q 40.5 0.6 40.5 0.9 L 40.5 4.1 Q 40.5 4.8 40.3 5.2 Q 40.1 5.6 39.5 5.6 Q 38.7 5.6 38.2 5.0 Q 37.7 4.4 37.7 3.6 L 37.7 0.9 Q 37.7 0.6 38.0 0.5 Q 38.3 0.5 38.8 0.5 L 38.8 0.0 L 35.7 0.0 Z M 46.1 -0.2 Q 45.3 -0.2 44.6 0.3 Q 43.9 0.7 43.5 1.4 Q 43.1 2.2 43.1 3.0 Q 43.1 3.8 43.5 4.5 Q 43.9 5.2 44.5 5.6 Q 45.2 6.1 45.9 6.1 Q 46.6 6.1 47.0 5.8 Q 47.5 5.6 47.8 5.3 Q 48.1 4.9 48.2 4.4 Q 48.4 3.9 48.4 3.3 Q 48.4 3.1 48.2 3.1 L 44.3 3.1 L 44.3 3.0 Q 44.3 1.9 44.8 1.0 Q 45.2 0.2 46.3 0.2 Q 46.7 0.2 47.0 0.4 Q 47.4 0.6 47.6 0.9 Q 47.9 1.3 48.0 1.6 Q 48.0 1.7 48.0 1.7 Q 48.1 1.8 48.1 1.8 L 48.2 1.8 Q 48.4 1.8 48.4 1.6 Q 48.2 0.8 47.6 0.3 Q 46.9 -0.2 46.1 -0.2 Z M 44.3 3.5 L 47.4 3.5 Q 47.4 4.0 47.3 4.5 Q 47.1 5.0 46.8 5.3 Q 46.5 5.7 45.9 5.7 Q 45.2 5.7 44.8 5.0 Q 44.3 4.3 44.3 3.5 Z M 49.2 -0.0 L 49.2 2.2 Q 49.2 2.3 49.3 2.3 L 49.5 2.3 Q 49.6 2.3 49.6 2.2 Q 50.0 0.2 51.4 0.2 Q 52.1 0.2 52.5 0.5 Q 52.9 0.8 52.9 1.4 Q 52.9 1.8 52.6 2.1 Q 52.3 2.4 51.8 2.6 L 50.9 2.7 Q 50.4 2.8 50.1 3.0 Q 49.7 3.2 49.5 3.6 Q 49.2 3.9 49.2 4.4 Q 49.2 5.0 49.5 5.3 Q 49.8 5.7 50.3 5.9 Q 50.8 6.1 51.4 6.1 Q 52.1 6.1 52.6 5.7 L 53.0 6.0 Q 53.0 6.1 53.1 6.1 L 53.2 6.1 Q 53.2 6.1 53.3 6.0 Q 53.3 6.0 53.3 5.9 L 53.3 4.2 Q 53.3 4.0 53.2 4.0 L 53.0 4.0 Q 52.9 4.0 52.9 4.2 Q 52.9 4.9 52.5 5.3 Q 52.1 5.7 51.4 5.7 Q 50.8 5.7 50.4 5.5 Q 49.9 5.3 49.9 4.7 Q 49.9 4.4 50.2 4.1 Q 50.6 3.9 51.0 3.8 L 51.9 3.6 Q 52.4 3.5 52.8 3.2 Q 53.2 3.0 53.4 2.6 Q 53.6 2.2 53.6 1.8 Q 53.6 1.3 53.5 0.9 Q 53.3 0.5 53.0 0.3 Q 52.7 0.1 52.3 -0.0 Q 51.9 -0.2 51.4 -0.2 Q 50.6 -0.2 50.0 0.4 L 49.5 -0.1 Q 49.5 -0.2 49.4 -0.2 L 49.3 -0.2 Q 49.2 -0.2 49.2 -0.0 Z M 59.2 -1.9 Q 59.5 -2.4 60.2 -2.4 Q 60.8 -2.4 61.3 -2.0 Q 61.7 -1.5 62.0 -0.9 Q 62.3 -0.3 62.5 0.4 Q 61.9 -0.2 61.2 -0.2 Q 60.6 -0.2 60.3 0.0 Q 59.9 0.2 59.7 0.6 Q 59.5 0.9 59.5 1.5 Q 59.5 1.9 59.6 2.4 Q 59.7 2.8 59.9 3.4 Q 60.1 4.0 60.3 4.4 Q 60.5 4.9 60.5 5.2 Q 60.5 5.6 60.2 5.6 Q 59.6 5.6 59.3 5.1 Q 58.9 4.5 58.8 3.8 Q 58.8 3.8 58.7 3.8 L 58.5 3.8 Q 58.4 3.8 58.4 3.9 L 58.4 3.9 Q 58.6 4.7 59.1 5.3 Q 59.5 6.0 60.2 6.0 Q 60.7 6.0 61.0 5.6 Q 61.3 5.3 61.3 4.8 Q 61.3 4.6 61.2 4.3 Q 61.2 4.2 61.0 3.6 Q 60.8 3.0 60.6 2.7 Q 60.5 2.3 60.5 2.0 Q 60.4 1.6 60.4 1.3 Q 60.4 0.8 60.6 0.5 Q 60.8 0.2 61.2 0.2 Q 62.0 0.2 62.7 1.2 L 63.7 5.4 Q 63.8 5.6 63.9 5.7 Q 64.1 5.8 64.3 5.8 Q 64.4 5.8 64.6 5.7 Q 64.7 5.6 64.7 5.4 Q 64.7 5.4 64.7 5.3 L 63.3 -0.0 Q 63.2 -0.7 62.7 -1.4 Q 62.2 -2.0 61.5 -2.4 Q 60.9 -2.8 60.1 -2.8 Q 59.8 -2.8 59.4 -2.6 Q 59.1 -2.5 58.9 -2.2 Q 58.7 -2.0 58.7 -1.6 Q 58.7 -1.2 58.9 -1.0 Q 59.1 -0.7 59.5 -0.7 Q 59.7 -0.7 59.8 -0.8 Q 60.0 -1.0 60.0 -1.2 Q 60.0 -1.5 59.8 -1.7 Q 59.5 -1.9 59.2 -1.9 Q 59.2 -1.9 59.2 -1.9 Q 59.2 -1.9 59.2 -1.9 Z M 68.8 -3.3 Q 68.1 -2.8 67.5 -2.0 Q 67.0 -1.2 66.7 -0.3 Q 66.3 0.5 66.1 1.5 Q 66.0 2.4 66.0 3.4 Q 66.0 4.3 66.1 5.3 Q 66.3 6.2 66.7 7.1 Q 67.0 8.0 67.6 8.8 Q 68.1 9.5 68.8 10.1 Q 68.8 10.1 68.9 10.1 L 69.0 10.1 Q 69.1 10.1 69.1 10.1 Q 69.1 10.1 69.1 10.0 Q 69.1 9.9 69.1 9.9 Q 68.5 9.3 68.0 8.5 Q 67.6 7.8 67.3 7.0 Q 67.0 6.1 66.9 5.2 Q 66.8 4.3 66.8 3.4 Q 66.8 -0.9 69.1 -3.1 Q 69.1 -3.2 69.1 -3.3 Q 69.1 -3.3 69.1 -3.3 Q 69.1 -3.4 69.0 -3.4 L 68.9 -3.4 Q 68.8 -3.4 68.8 -3.3 Z M 70.7 1.1 Q 70.7 1.3 70.8 1.5 L 71.7 5.3 L 70.3 5.3 Q 70.2 5.3 70.2 5.5 Q 70.2 5.8 70.4 5.8 L 71.9 5.8 L 72.4 8.0 Q 72.5 8.2 72.6 8.3 Q 72.8 8.5 73.0 8.5 Q 73.1 8.5 73.3 8.3 Q 73.4 8.2 73.4 8.1 Q 73.4 8.0 73.4 8.0 Q 73.4 8.0 73.4 8.0 L 72.8 5.8 L 74.2 5.8 Q 74.4 5.8 74.4 5.6 Q 74.3 5.6 74.3 5.5 Q 74.3 5.5 74.3 5.4 Q 74.2 5.3 74.2 5.3 L 72.7 5.3 L 71.7 1.4 Q 71.6 1.1 71.6 0.8 Q 71.6 0.2 72.0 0.2 Q 72.6 0.2 73.1 0.8 Q 73.5 1.3 73.8 2.0 Q 73.8 2.1 73.9 2.1 L 74.1 2.1 Q 74.1 2.1 74.1 2.0 Q 74.2 2.0 74.2 1.9 Q 74.2 1.9 74.2 1.9 Q 73.9 1.1 73.3 0.5 Q 72.7 -0.2 72.0 -0.2 Q 71.5 -0.2 71.1 0.2 Q 70.7 0.5 70.7 1.1 Z M 75.6 -1.7 Q 75.8 -2.2 76.6 -2.2 Q 76.9 -2.2 77.2 -2.0 Q 77.5 -1.9 77.7 -1.7 Q 77.9 -1.5 77.9 -1.2 Q 77.9 -0.9 77.8 -0.7 Q 77.6 -0.6 77.3 -0.5 L 76.8 -0.4 Q 76.5 -0.3 76.2 -0.1 Q 76.0 0.1 76.0 0.5 Q 76.0 0.9 76.2 1.2 Q 76.5 1.5 76.8 1.7 Q 77.2 1.9 77.6 1.9 Q 78.0 1.9 78.4 1.7 Q 78.7 1.5 78.7 1.1 Q 78.7 0.9 78.6 0.7 Q 78.5 0.5 78.3 0.5 Q 78.1 0.5 78.0 0.6 Q 78.0 0.7 78.0 0.8 Q 78.0 0.9 78.0 1.0 Q 78.1 1.1 78.2 1.2 Q 78.3 1.2 78.4 1.2 Q 78.3 1.5 78.1 1.5 Q 77.9 1.6 77.6 1.6 Q 77.4 1.6 77.1 1.5 Q 76.9 1.4 76.7 1.3 Q 76.6 1.1 76.6 0.8 Q 76.6 0.6 76.7 0.5 Q 76.8 0.4 77.0 0.3 L 77.6 0.2 Q 77.8 0.2 78.0 0.0 Q 78.3 -0.1 78.4 -0.3 Q 78.5 -0.5 78.5 -0.8 Q 78.5 -1.2 78.3 -1.5 Q 78.1 -1.9 77.8 -2.1 Q 77.3 -2.4 76.6 -2.4 Q 76.1 -2.4 75.7 -2.2 Q 75.3 -1.9 75.3 -1.5 Q 75.3 -1.2 75.4 -1.0 Q 75.6 -0.8 75.8 -0.8 Q 76.0 -0.8 76.1 -0.9 Q 76.2 -1.0 76.2 -1.2 Q 76.2 -1.4 76.0 -1.6 Q 75.9 -1.7 75.6 -1.7 L 75.6 -1.7 Z M 80.9 -3.4 Q 80.8 -3.4 80.8 -3.3 Q 80.8 -3.2 80.8 -3.2 Q 83.1 -0.9 83.1 3.4 Q 83.1 7.7 80.9 9.9 Q 80.8 9.9 80.8 10.0 Q 80.8 10.1 80.8 10.1 Q 80.9 10.1 80.9 10.1 L 81.0 10.1 Q 81.1 10.1 81.1 10.1 Q 82.1 9.3 82.7 8.2 Q 83.4 7.1 83.7 5.9 Q 84.0 4.7 84.0 3.4 Q 84.0 2.4 83.8 1.5 Q 83.7 0.6 83.3 -0.3 Q 82.9 -1.2 82.4 -2.0 Q 81.9 -2.8 81.1 -3.3 Q 81.1 -3.4 81.0 -3.4 L 80.9 -3.4 Z" fill="#3D4548" transform="translate(462.84 124) scale(1 -1)"/>
-          <path d="M 3.1 7.4 L 2.9 7.6 L 4.6 9.4 L 6.4 7.6 L 6.1 7.4 L 4.6 8.7 L 3.1 7.4 Z M 1.0 0.4 Q 1.2 0.2 1.7 0.2 Q 2.1 0.2 2.4 0.6 Q 2.7 1.0 2.8 1.4 L 3.4 3.7 Q 3.5 4.4 3.5 4.6 Q 3.5 4.9 3.4 5.2 Q 3.2 5.4 2.8 5.4 Q 2.4 5.4 2.1 5.2 Q 1.7 4.9 1.5 4.5 Q 1.2 4.1 1.1 3.7 Q 1.1 3.6 1.0 3.6 L 0.9 3.6 Q 0.8 3.6 0.8 3.7 L 0.8 3.8 Q 0.9 4.3 1.2 4.7 Q 1.5 5.2 1.9 5.5 Q 2.4 5.7 2.9 5.7 Q 3.4 5.7 3.7 5.5 Q 4.1 5.2 4.3 4.8 Q 4.5 5.2 4.8 5.5 Q 5.2 5.7 5.6 5.7 Q 5.9 5.7 6.2 5.6 Q 6.5 5.5 6.7 5.3 Q 6.8 5.1 6.8 4.8 Q 6.8 4.5 6.6 4.3 Q 6.4 4.0 6.1 4.0 Q 5.9 4.0 5.7 4.2 Q 5.6 4.3 5.6 4.5 Q 5.6 4.8 5.8 5.0 Q 6.0 5.2 6.2 5.2 Q 6.0 5.4 5.6 5.4 Q 5.2 5.4 4.9 5.0 Q 4.5 4.6 4.4 4.2 L 3.8 1.9 Q 3.7 1.3 3.7 1.0 Q 3.7 0.7 3.9 0.4 Q 4.1 0.2 4.4 0.2 Q 5.0 0.2 5.5 0.7 Q 6.0 1.3 6.1 1.9 Q 6.1 2.0 6.2 2.0 L 6.4 2.0 Q 6.4 2.0 6.5 2.0 Q 6.5 1.9 6.5 1.9 Q 6.5 1.9 6.5 1.8 Q 6.3 1.1 5.7 0.5 Q 5.1 -0.1 4.4 -0.1 Q 3.9 -0.1 3.5 0.1 Q 3.1 0.4 3.0 0.8 Q 2.8 0.4 2.4 0.1 Q 2.0 -0.1 1.6 -0.1 Q 1.4 -0.1 1.1 -0.0 Q 0.8 0.1 0.6 0.3 Q 0.4 0.5 0.4 0.8 Q 0.4 1.1 0.6 1.3 Q 0.8 1.6 1.1 1.6 Q 1.4 1.6 1.5 1.4 Q 1.7 1.3 1.7 1.1 Q 1.7 0.8 1.5 0.6 Q 1.3 0.4 1.0 0.4 Z M 11.5 -3.2 Q 10.7 -2.7 10.2 -1.9 Q 9.7 -1.2 9.3 -0.3 Q 9.0 0.5 8.8 1.4 Q 8.7 2.3 8.7 3.2 Q 8.7 4.2 8.8 5.1 Q 9.0 6.0 9.4 6.9 Q 9.7 7.7 10.2 8.4 Q 10.7 9.2 11.5 9.7 Q 11.5 9.8 11.5 9.8 L 11.6 9.8 Q 11.7 9.8 11.7 9.7 Q 11.7 9.7 11.7 9.6 Q 11.7 9.6 11.7 9.6 Q 11.1 8.9 10.7 8.2 Q 10.2 7.5 10.0 6.7 Q 9.7 5.9 9.6 5.0 Q 9.5 4.2 9.5 3.2 Q 9.5 -0.9 11.7 -3.0 Q 11.7 -3.1 11.7 -3.1 Q 11.7 -3.2 11.7 -3.2 Q 11.7 -3.2 11.6 -3.2 L 11.5 -3.2 Q 11.5 -3.2 11.5 -3.2 Z M 13.3 1.1 Q 13.3 1.2 13.3 1.4 L 14.3 5.1 L 12.9 5.1 Q 12.8 5.1 12.8 5.3 Q 12.8 5.6 12.9 5.6 L 14.4 5.6 L 14.9 7.7 Q 14.9 7.9 15.1 8.0 Q 15.2 8.1 15.4 8.1 Q 15.6 8.1 15.7 8.0 Q 15.8 7.9 15.8 7.8 Q 15.8 7.7 15.8 7.7 Q 15.8 7.7 15.8 7.7 L 15.3 5.6 L 16.6 5.6 Q 16.8 5.6 16.8 5.4 Q 16.8 5.4 16.7 5.3 Q 16.7 5.2 16.7 5.2 Q 16.6 5.1 16.6 5.1 L 15.2 5.1 L 14.2 1.4 Q 14.1 1.0 14.1 0.8 Q 14.1 0.2 14.5 0.2 Q 15.1 0.2 15.5 0.7 Q 16.0 1.3 16.2 1.9 Q 16.3 2.0 16.3 2.0 L 16.5 2.0 Q 16.5 2.0 16.6 2.0 Q 16.6 1.9 16.6 1.9 Q 16.6 1.8 16.6 1.8 Q 16.3 1.0 15.7 0.5 Q 15.2 -0.1 14.5 -0.1 Q 14.0 -0.1 13.6 0.2 Q 13.3 0.5 13.3 1.1 Z M 18.0 -3.2 Q 17.9 -3.2 17.9 -3.1 Q 17.9 -3.1 17.9 -3.1 Q 20.1 -0.9 20.1 3.2 Q 20.1 7.4 17.9 9.5 Q 17.9 9.6 17.9 9.6 Q 17.9 9.7 17.9 9.7 Q 18.0 9.8 18.0 9.8 L 18.1 9.8 Q 18.2 9.8 18.2 9.7 Q 19.1 9.0 19.7 7.9 Q 20.4 6.9 20.7 5.7 Q 20.9 4.5 20.9 3.2 Q 20.9 2.3 20.8 1.4 Q 20.6 0.5 20.3 -0.3 Q 20.0 -1.2 19.4 -1.9 Q 18.9 -2.7 18.2 -3.2 Q 18.2 -3.2 18.1 -3.2 L 18.0 -3.2 Z M 28.0 -0.0 Q 27.9 0.5 27.7 1.0 Q 27.4 1.5 27.1 1.9 Q 26.7 2.3 26.3 2.6 Q 25.8 2.9 25.3 3.1 Q 25.2 3.1 25.2 3.2 Q 25.2 3.3 25.3 3.4 Q 25.8 3.6 26.3 3.9 Q 26.7 4.2 27.1 4.6 Q 27.4 5.0 27.7 5.5 Q 27.9 6.0 28.0 6.5 Q 28.0 6.6 28.1 6.6 L 28.4 6.6 Q 28.5 6.6 28.5 6.5 Q 28.4 5.6 27.9 4.8 Q 27.4 4.1 26.6 3.5 L 36.5 3.5 Q 36.6 3.5 36.7 3.4 Q 36.7 3.3 36.7 3.2 Q 36.7 3.2 36.7 3.1 Q 36.6 3.0 36.5 3.0 L 26.6 3.0 Q 27.4 2.5 27.9 1.7 Q 28.4 0.9 28.5 0.0 Q 28.5 -0.1 28.4 -0.1 L 28.1 -0.1 Q 28.0 -0.1 28.0 -0.0 Z M 41.1 1.4 Q 41.1 1.8 41.3 2.3 Q 41.4 2.7 41.6 3.3 Q 41.8 3.8 41.9 4.2 Q 42.1 4.7 42.1 5.0 Q 42.1 5.4 41.8 5.4 Q 41.3 5.4 41.0 4.9 Q 40.6 4.3 40.5 3.7 Q 40.5 3.6 40.4 3.6 L 40.2 3.6 Q 40.1 3.6 40.1 3.7 L 40.1 3.8 Q 40.3 4.5 40.8 5.1 Q 41.2 5.7 41.9 5.7 Q 42.3 5.7 42.6 5.4 Q 43.0 5.1 43.0 4.7 Q 43.0 4.4 42.8 4.2 Q 42.8 4.0 42.6 3.5 Q 42.4 2.9 42.3 2.6 Q 42.2 2.2 42.1 1.9 Q 42.0 1.6 42.0 1.2 Q 42.0 0.8 42.2 0.5 Q 42.4 0.2 42.8 0.2 Q 43.6 0.2 44.3 1.2 Q 44.3 1.3 44.3 1.3 Q 44.3 1.4 44.3 1.4 L 45.2 5.2 Q 45.3 5.4 45.4 5.5 Q 45.6 5.6 45.8 5.6 Q 45.9 5.6 46.1 5.5 Q 46.2 5.4 46.2 5.2 Q 46.2 5.2 46.2 5.1 L 45.2 1.4 Q 45.1 1.0 45.1 0.8 Q 45.1 0.2 45.5 0.2 Q 45.9 0.2 46.1 0.7 Q 46.3 1.2 46.5 1.9 Q 46.5 2.0 46.6 2.0 L 46.8 2.0 Q 46.8 2.0 46.8 1.9 Q 46.9 1.9 46.9 1.9 Q 46.7 1.3 46.6 0.9 Q 46.5 0.5 46.2 0.2 Q 45.9 -0.1 45.5 -0.1 Q 45.1 -0.1 44.7 0.1 Q 44.4 0.3 44.3 0.7 Q 44.0 0.3 43.6 0.1 Q 43.2 -0.1 42.8 -0.1 Q 42.0 -0.1 41.6 0.3 Q 41.1 0.7 41.1 1.4 Z M 51.2 -3.2 Q 50.5 -2.7 50.0 -1.9 Q 49.5 -1.2 49.1 -0.3 Q 48.8 0.5 48.6 1.4 Q 48.5 2.3 48.5 3.2 Q 48.5 4.2 48.6 5.1 Q 48.8 6.0 49.1 6.9 Q 49.5 7.7 50.0 8.4 Q 50.5 9.2 51.2 9.7 Q 51.2 9.8 51.3 9.8 L 51.4 9.8 Q 51.5 9.8 51.5 9.7 Q 51.5 9.7 51.5 9.6 Q 51.5 9.6 51.5 9.6 Q 50.9 8.9 50.4 8.2 Q 50.0 7.5 49.8 6.7 Q 49.5 5.9 49.4 5.0 Q 49.3 4.2 49.3 3.2 Q 49.3 -0.9 51.5 -3.0 Q 51.5 -3.1 51.5 -3.1 Q 51.5 -3.2 51.5 -3.2 Q 51.4 -3.2 51.4 -3.2 L 51.3 -3.2 Q 51.2 -3.2 51.2 -3.2 Z M 53.1 1.1 Q 53.1 1.2 53.1 1.4 L 54.0 5.1 L 52.7 5.1 Q 52.5 5.1 52.5 5.3 Q 52.6 5.6 52.7 5.6 L 54.1 5.6 L 54.7 7.7 Q 54.7 7.9 54.9 8.0 Q 55.0 8.1 55.2 8.1 Q 55.4 8.1 55.5 8.0 Q 55.6 7.9 55.6 7.8 Q 55.6 7.7 55.6 7.7 Q 55.6 7.7 55.6 7.7 L 55.1 5.6 L 56.4 5.6 Q 56.5 5.6 56.5 5.4 Q 56.5 5.4 56.5 5.3 Q 56.5 5.2 56.5 5.2 Q 56.4 5.1 56.4 5.1 L 55.0 5.1 L 54.0 1.4 Q 53.9 1.0 53.9 0.8 Q 53.9 0.2 54.3 0.2 Q 54.9 0.2 55.3 0.7 Q 55.8 1.3 56.0 1.9 Q 56.0 2.0 56.1 2.0 L 56.3 2.0 Q 56.3 2.0 56.3 2.0 Q 56.4 1.9 56.4 1.9 Q 56.4 1.8 56.4 1.8 Q 56.1 1.0 55.5 0.5 Q 55.0 -0.1 54.3 -0.1 Q 53.8 -0.1 53.4 0.2 Q 53.1 0.5 53.1 1.1 Z M 57.8 -3.2 Q 57.7 -3.2 57.7 -3.1 Q 57.7 -3.1 57.7 -3.1 Q 59.9 -0.9 59.9 3.2 Q 59.9 7.4 57.7 9.5 Q 57.7 9.6 57.7 9.6 Q 57.7 9.7 57.7 9.7 Q 57.7 9.8 57.8 9.8 L 57.9 9.8 Q 57.9 9.8 58.0 9.7 Q 58.9 9.0 59.5 7.9 Q 60.1 6.9 60.4 5.7 Q 60.7 4.5 60.7 3.2 Q 60.7 2.3 60.6 1.4 Q 60.4 0.5 60.1 -0.3 Q 59.7 -1.2 59.2 -1.9 Q 58.7 -2.7 58.0 -3.2 Q 57.9 -3.2 57.9 -3.2 L 57.8 -3.2 Z M 63.3 -2.3 Q 63.3 -2.3 63.3 -2.2 Q 63.8 -1.8 64.1 -1.2 Q 64.3 -0.6 64.3 0.1 L 64.3 0.2 Q 64.1 0.0 63.8 0.0 Q 63.5 0.0 63.3 0.2 Q 63.1 0.4 63.1 0.7 Q 63.1 1.0 63.3 1.2 Q 63.5 1.4 63.8 1.4 Q 64.3 1.4 64.5 1.0 Q 64.7 0.6 64.7 0.1 Q 64.7 -0.7 64.4 -1.3 Q 64.1 -2.0 63.5 -2.5 Q 63.5 -2.5 63.5 -2.5 Q 63.4 -2.5 63.3 -2.5 Q 63.3 -2.4 63.3 -2.3 Z M 79.7 0.0 L 79.7 0.5 Q 80.1 0.5 80.4 0.5 Q 80.7 0.6 80.7 0.9 L 80.7 7.7 Q 80.7 8.0 80.6 8.2 Q 80.5 8.4 80.3 8.4 Q 80.1 8.4 79.7 8.4 L 79.7 8.9 L 81.6 9.0 L 81.6 0.9 Q 81.6 0.6 81.9 0.5 Q 82.2 0.5 82.6 0.5 L 82.6 0.0 L 79.7 0.0 Z M 86.1 -0.1 Q 85.3 -0.1 84.7 0.3 Q 84.0 0.7 83.6 1.4 Q 83.2 2.1 83.2 2.8 Q 83.2 3.6 83.6 4.3 Q 83.9 5.0 84.6 5.4 Q 85.2 5.8 85.9 5.8 Q 86.5 5.8 87.0 5.6 Q 87.4 5.4 87.7 5.1 Q 88.0 4.7 88.1 4.2 Q 88.3 3.8 88.3 3.2 Q 88.3 3.0 88.1 3.0 L 84.4 3.0 L 84.4 2.9 Q 84.4 1.8 84.8 1.0 Q 85.2 0.2 86.2 0.2 Q 86.6 0.2 87.0 0.4 Q 87.3 0.6 87.6 0.9 Q 87.8 1.2 87.9 1.6 Q 87.9 1.6 87.9 1.7 Q 88.0 1.7 88.0 1.7 L 88.1 1.7 Q 88.3 1.7 88.3 1.5 Q 88.1 0.8 87.5 0.3 Q 86.9 -0.1 86.1 -0.1 Z M 84.4 3.3 L 87.4 3.3 Q 87.4 3.8 87.2 4.3 Q 87.1 4.8 86.8 5.2 Q 86.4 5.5 85.9 5.5 Q 85.2 5.5 84.8 4.8 Q 84.4 4.1 84.4 3.3 Z M 89.2 1.3 Q 89.2 2.0 89.8 2.5 Q 90.4 3.0 91.2 3.2 Q 92.1 3.4 92.9 3.4 L 92.9 4.0 Q 92.9 4.3 92.7 4.7 Q 92.5 5.0 92.2 5.3 Q 91.9 5.5 91.5 5.5 Q 90.7 5.5 90.2 5.1 Q 90.5 5.1 90.6 4.9 Q 90.8 4.7 90.8 4.5 Q 90.8 4.2 90.6 4.0 Q 90.4 3.8 90.2 3.8 Q 89.9 3.8 89.7 4.0 Q 89.5 4.2 89.5 4.5 Q 89.5 5.2 90.2 5.5 Q 90.8 5.8 91.5 5.8 Q 92.1 5.8 92.6 5.6 Q 93.1 5.4 93.5 5.0 Q 93.8 4.5 93.8 4.0 L 93.8 1.1 Q 93.8 0.8 93.9 0.6 Q 94.0 0.4 94.3 0.4 Q 94.5 0.4 94.6 0.6 Q 94.7 0.8 94.7 1.1 L 94.7 1.9 L 95.1 1.9 L 95.1 1.1 Q 95.1 0.8 94.9 0.5 Q 94.8 0.2 94.5 0.1 Q 94.2 -0.1 93.9 -0.1 Q 93.6 -0.1 93.3 0.2 Q 93.0 0.5 93.0 0.9 Q 92.7 0.4 92.3 0.1 Q 91.8 -0.1 91.3 -0.1 Q 90.8 -0.1 90.3 0.0 Q 89.8 0.1 89.5 0.5 Q 89.2 0.8 89.2 1.3 Z M 90.2 1.3 Q 90.2 0.8 90.6 0.5 Q 90.9 0.2 91.4 0.2 Q 91.8 0.2 92.1 0.4 Q 92.5 0.6 92.7 1.0 Q 92.9 1.3 92.9 1.7 L 92.9 3.1 Q 92.3 3.1 91.7 2.9 Q 91.0 2.7 90.6 2.3 Q 90.2 1.9 90.2 1.3 Z M 98.3 -0.1 Q 97.6 -0.1 96.9 0.3 Q 96.3 0.7 95.9 1.4 Q 95.6 2.0 95.6 2.8 Q 95.6 3.6 96.0 4.3 Q 96.4 4.9 97.0 5.3 Q 97.7 5.7 98.5 5.7 Q 98.9 5.7 99.4 5.5 Q 99.8 5.3 100.1 5.0 L 100.1 7.7 Q 100.1 8.0 100.0 8.2 Q 99.9 8.4 99.7 8.4 Q 99.5 8.4 99.1 8.4 L 99.1 8.9 L 101.0 9.0 L 101.0 1.2 Q 101.0 0.8 101.1 0.7 Q 101.2 0.5 101.4 0.5 Q 101.6 0.5 102.0 0.5 L 102.0 0.0 L 100.1 -0.1 L 100.1 0.7 Q 99.7 0.3 99.3 0.1 Q 98.8 -0.1 98.3 -0.1 Z M 97.0 1.1 Q 97.2 0.7 97.6 0.5 Q 98.0 0.2 98.4 0.2 Q 98.9 0.2 99.4 0.5 Q 99.8 0.8 100.1 1.3 L 100.1 4.4 Q 99.9 4.7 99.7 4.9 Q 99.4 5.2 99.2 5.3 Q 98.9 5.4 98.5 5.4 Q 97.9 5.4 97.5 5.0 Q 97.0 4.6 96.9 4.0 Q 96.7 3.4 96.7 2.8 Q 96.7 2.3 96.8 1.9 Q 96.8 1.5 97.0 1.1 Z M 102.8 -0.0 L 102.8 2.1 Q 102.8 2.2 102.9 2.2 L 103.1 2.2 Q 103.1 2.2 103.2 2.1 Q 103.5 0.2 104.9 0.2 Q 105.5 0.2 106.0 0.5 Q 106.4 0.8 106.4 1.3 Q 106.4 1.8 106.0 2.1 Q 105.7 2.3 105.3 2.5 L 104.4 2.6 Q 104.0 2.7 103.6 2.9 Q 103.3 3.1 103.0 3.4 Q 102.8 3.8 102.8 4.2 Q 102.8 4.8 103.1 5.1 Q 103.4 5.5 103.9 5.7 Q 104.4 5.8 104.9 5.8 Q 105.6 5.8 106.1 5.5 L 106.5 5.8 Q 106.5 5.8 106.5 5.8 L 106.6 5.8 Q 106.7 5.8 106.7 5.8 Q 106.7 5.8 106.7 5.7 L 106.7 4.0 Q 106.7 3.9 106.6 3.9 L 106.5 3.9 Q 106.3 3.9 106.3 4.0 Q 106.3 4.7 106.0 5.1 Q 105.6 5.5 104.9 5.5 Q 104.3 5.5 103.9 5.3 Q 103.5 5.1 103.5 4.6 Q 103.5 4.2 103.8 4.0 Q 104.1 3.7 104.5 3.6 L 105.4 3.5 Q 105.8 3.4 106.2 3.1 Q 106.6 2.9 106.8 2.5 Q 107.0 2.2 107.0 1.7 Q 107.0 1.2 106.9 0.9 Q 106.7 0.5 106.4 0.3 Q 106.1 0.1 105.7 -0.0 Q 105.4 -0.1 104.9 -0.1 Q 104.1 -0.1 103.5 0.4 L 103.1 -0.1 Q 103.1 -0.1 103.0 -0.1 L 102.9 -0.1 Q 102.8 -0.1 102.8 -0.0 Z M 112.6 0.0 L 112.6 7.7 Q 112.6 8.0 112.5 8.2 Q 112.4 8.4 112.2 8.4 Q 112.0 8.4 111.6 8.4 L 111.6 8.9 L 113.6 9.0 L 113.6 5.0 Q 113.8 5.2 114.1 5.4 Q 114.3 5.6 114.7 5.6 Q 115.0 5.7 115.4 5.7 Q 115.9 5.7 116.4 5.5 Q 116.9 5.3 117.3 4.9 Q 117.7 4.5 117.9 3.9 Q 118.1 3.4 118.1 2.8 Q 118.1 2.0 117.7 1.3 Q 117.3 0.7 116.6 0.3 Q 116.0 -0.1 115.2 -0.1 Q 114.7 -0.1 114.2 0.1 Q 113.8 0.4 113.5 0.8 L 113.0 0.0 L 112.6 0.0 Z M 113.6 1.3 Q 113.8 0.8 114.2 0.5 Q 114.6 0.2 115.1 0.2 Q 115.8 0.2 116.2 0.6 Q 116.6 1.0 116.8 1.6 Q 116.9 2.2 116.9 2.8 Q 116.9 3.9 116.7 4.5 Q 116.5 4.7 116.3 4.9 Q 116.1 5.2 115.8 5.3 Q 115.6 5.4 115.3 5.4 Q 114.7 5.4 114.3 5.1 Q 113.9 4.9 113.6 4.4 L 113.6 1.3 Z M 119.4 -2.1 Q 119.7 -2.3 120.0 -2.3 Q 120.8 -2.3 121.3 -1.1 L 121.7 0.0 L 119.8 4.8 Q 119.7 5.0 119.4 5.1 Q 119.2 5.1 118.8 5.1 L 118.8 5.6 L 121.5 5.6 L 121.5 5.1 Q 120.8 5.1 120.8 4.8 Q 120.8 4.8 120.8 4.8 L 122.2 1.2 L 123.5 4.4 Q 123.6 4.5 123.6 4.6 Q 123.6 4.8 123.5 4.9 Q 123.4 5.0 123.3 5.1 Q 123.1 5.1 123.0 5.1 L 123.0 5.6 L 125.1 5.6 L 125.1 5.1 Q 124.7 5.1 124.4 5.0 Q 124.1 4.8 123.9 4.4 L 121.7 -1.1 Q 121.5 -1.5 121.3 -1.9 Q 121.0 -2.2 120.7 -2.4 Q 120.4 -2.7 120.0 -2.7 Q 119.5 -2.7 119.1 -2.4 Q 118.8 -2.0 118.8 -1.6 Q 118.8 -1.3 118.9 -1.2 Q 119.1 -1.0 119.3 -1.0 Q 119.5 -1.0 119.6 -1.1 Q 119.8 -1.1 119.8 -1.3 Q 119.9 -1.4 119.9 -1.6 Q 119.9 -1.8 119.8 -1.9 Q 119.6 -2.1 119.4 -2.1 Z M 131.4 -0.1 Q 130.6 -0.1 130.1 0.5 Q 129.7 1.1 129.7 1.9 Q 129.7 2.8 130.1 3.7 Q 130.5 4.6 131.3 5.2 Q 132.0 5.7 132.8 5.7 Q 133.2 5.7 133.5 5.5 Q 133.8 5.3 134.0 5.0 L 134.7 7.9 Q 134.8 8.1 134.8 8.2 Q 134.8 8.4 134.0 8.4 Q 133.8 8.4 133.8 8.6 Q 133.8 8.6 133.8 8.7 Q 133.9 8.8 133.9 8.8 Q 133.9 8.9 134.0 8.9 L 135.8 9.0 Q 135.9 9.0 135.9 8.9 L 134.0 1.4 Q 134.0 1.2 134.0 0.8 Q 134.0 0.2 134.3 0.2 Q 134.7 0.2 134.9 0.7 Q 135.2 1.2 135.3 1.9 Q 135.3 2.0 135.4 2.0 L 135.6 2.0 Q 135.6 2.0 135.6 1.9 Q 135.7 1.9 135.7 1.9 Q 135.4 1.0 135.2 0.4 Q 134.9 -0.1 134.3 -0.1 Q 133.9 -0.1 133.5 0.1 Q 133.2 0.4 133.1 0.8 Q 132.3 -0.1 131.4 -0.1 Z M 131.4 0.2 Q 131.9 0.2 132.3 0.5 Q 132.8 0.9 133.1 1.4 Q 133.1 1.4 133.1 1.4 L 133.8 4.3 Q 133.8 4.7 133.5 5.1 Q 133.2 5.4 132.8 5.4 Q 132.4 5.4 132.0 5.0 Q 131.6 4.7 131.3 4.2 Q 131.1 3.7 130.9 2.8 Q 130.6 1.9 130.6 1.4 Q 130.6 0.9 130.8 0.6 Q 131.0 0.2 131.4 0.2 Z M 136.8 -3.7 Q 137.0 -3.8 137.2 -3.8 Q 137.5 -3.8 137.7 -3.1 Q 137.8 -2.8 138.2 -0.8 L 138.6 1.4 L 137.8 1.4 Q 137.8 1.4 137.8 1.5 Q 137.8 1.7 137.9 1.7 L 138.7 1.7 L 138.8 2.3 Q 138.8 2.6 138.9 2.8 Q 138.9 3.0 139.0 3.1 Q 139.0 3.3 139.1 3.5 Q 139.3 3.8 139.6 4.0 Q 139.8 4.2 140.1 4.2 Q 140.3 4.2 140.5 4.1 Q 140.7 4.1 140.8 3.9 Q 140.9 3.8 140.9 3.6 Q 140.9 3.3 140.8 3.2 Q 140.6 3.0 140.4 3.0 Q 140.3 3.0 140.2 3.1 Q 140.1 3.2 140.1 3.3 Q 140.1 3.5 140.2 3.7 Q 140.3 3.8 140.5 3.8 Q 140.4 4.0 140.1 4.0 Q 140.0 4.0 139.9 3.8 Q 139.7 3.7 139.7 3.6 Q 139.6 3.3 139.4 2.3 L 139.3 1.7 L 140.3 1.7 Q 140.4 1.7 140.4 1.6 Q 140.4 1.6 140.3 1.5 Q 140.3 1.5 140.3 1.4 Q 140.3 1.4 140.2 1.4 L 139.3 1.4 L 138.9 -0.8 Q 138.8 -1.3 138.7 -1.8 Q 138.6 -2.3 138.4 -2.8 Q 138.2 -3.4 137.9 -3.7 Q 137.6 -4.1 137.2 -4.1 Q 136.9 -4.1 136.7 -3.9 Q 136.4 -3.7 136.4 -3.4 Q 136.4 -3.2 136.6 -3.0 Q 136.7 -2.9 136.9 -2.9 Q 137.1 -2.9 137.2 -3.0 Q 137.3 -3.0 137.3 -3.2 Q 137.3 -3.4 137.1 -3.6 Q 137.0 -3.7 136.8 -3.7 Z" fill="#3D4548" transform="translate(89.33 271) scale(1 -1)"/>
-          <path d="M 3.9 -3.1 Q 3.2 -2.6 2.7 -1.8 Q 2.2 -1.1 1.9 -0.3 Q 1.5 0.5 1.4 1.4 Q 1.2 2.2 1.2 3.1 Q 1.2 4.0 1.4 4.9 Q 1.5 5.8 1.9 6.6 Q 2.2 7.4 2.7 8.1 Q 3.2 8.8 3.9 9.4 Q 3.9 9.4 3.9 9.4 L 4.1 9.4 Q 4.1 9.4 4.1 9.3 Q 4.2 9.3 4.2 9.3 Q 4.2 9.2 4.1 9.2 Q 3.5 8.6 3.1 7.9 Q 2.7 7.2 2.5 6.4 Q 2.2 5.7 2.1 4.8 Q 2.0 4.0 2.0 3.1 Q 2.0 -0.8 4.1 -2.9 Q 4.2 -2.9 4.2 -3.0 Q 4.2 -3.0 4.1 -3.1 Q 4.1 -3.1 4.1 -3.1 L 3.9 -3.1 Q 3.9 -3.1 3.9 -3.1 Z M 5.6 1.0 Q 5.6 1.2 5.7 1.4 L 6.6 4.9 L 5.3 4.9 Q 5.1 4.9 5.1 5.1 Q 5.2 5.4 5.3 5.4 L 6.7 5.4 L 7.2 7.4 Q 7.2 7.6 7.4 7.7 Q 7.5 7.8 7.7 7.8 Q 7.9 7.8 8.0 7.7 Q 8.1 7.6 8.1 7.5 Q 8.1 7.4 8.1 7.4 Q 8.1 7.4 8.1 7.4 L 7.6 5.4 L 8.9 5.4 Q 9.0 5.4 9.0 5.2 Q 9.0 5.2 9.0 5.1 Q 8.9 5.0 8.9 5.0 Q 8.9 4.9 8.8 4.9 L 7.5 4.9 L 6.6 1.3 Q 6.5 1.0 6.5 0.7 Q 6.5 0.2 6.8 0.2 Q 7.4 0.2 7.8 0.7 Q 8.2 1.2 8.5 1.8 Q 8.5 1.9 8.6 1.9 L 8.7 1.9 Q 8.8 1.9 8.8 1.9 Q 8.8 1.8 8.8 1.8 Q 8.8 1.8 8.8 1.8 Q 8.5 1.0 8.0 0.4 Q 7.5 -0.1 6.8 -0.1 Q 6.3 -0.1 6.0 0.2 Q 5.6 0.5 5.6 1.0 Z M 9.8 -2.0 Q 9.8 -1.9 9.8 -1.9 L 11.1 3.2 Q 11.1 3.3 11.1 3.4 Q 11.1 3.5 10.6 3.5 Q 10.5 3.5 10.5 3.7 Q 10.5 3.7 10.5 3.7 Q 10.5 3.8 10.5 3.8 Q 10.6 3.9 10.6 3.9 L 11.8 3.9 L 11.8 3.9 Q 11.8 3.9 11.8 3.9 Q 11.9 3.9 11.9 3.9 Q 11.9 3.9 11.9 3.8 L 11.0 0.2 Q 11.3 0.3 11.8 0.8 Q 12.3 1.3 12.5 1.5 Q 12.8 1.7 13.2 1.7 Q 13.5 1.7 13.6 1.6 Q 13.8 1.4 13.8 1.2 Q 13.8 1.0 13.7 0.9 Q 13.7 0.7 13.6 0.7 Q 13.4 0.6 13.3 0.6 Q 13.1 0.6 13.0 0.7 Q 13.0 0.8 13.0 0.9 Q 13.0 1.1 13.1 1.3 Q 13.2 1.4 13.5 1.4 Q 13.4 1.5 13.2 1.5 Q 12.9 1.5 12.7 1.4 Q 12.5 1.2 12.2 0.9 Q 11.9 0.7 11.7 0.4 Q 11.4 0.2 11.2 0.1 Q 11.8 0.0 12.1 -0.2 Q 12.5 -0.4 12.5 -0.8 Q 12.5 -0.9 12.5 -1.1 Q 12.4 -1.4 12.4 -1.6 Q 12.4 -2.0 12.7 -2.0 Q 13.0 -2.0 13.1 -1.6 Q 13.3 -1.3 13.4 -0.8 Q 13.4 -0.8 13.5 -0.8 L 13.6 -0.8 Q 13.6 -0.8 13.7 -0.8 Q 13.7 -0.8 13.7 -0.9 Q 13.7 -0.9 13.7 -0.9 Q 13.3 -2.2 12.7 -2.2 Q 12.4 -2.2 12.2 -2.1 Q 12.0 -2.0 11.9 -1.8 Q 11.8 -1.6 11.8 -1.3 Q 11.8 -1.2 11.9 -1.1 Q 11.9 -1.0 11.9 -0.9 Q 11.9 -0.5 11.6 -0.4 Q 11.3 -0.2 10.9 -0.1 L 10.5 -1.9 Q 10.4 -2.1 10.3 -2.1 Q 10.2 -2.2 10.1 -2.2 Q 10.0 -2.2 9.9 -2.1 Q 9.8 -2.1 9.8 -2.0 Z M 15.9 -2.3 Q 15.9 -2.2 16.0 -2.1 Q 16.5 -1.7 16.7 -1.1 Q 17.0 -0.6 17.0 0.0 L 17.0 0.2 Q 16.7 0.0 16.5 0.0 Q 16.2 0.0 16.0 0.2 Q 15.8 0.4 15.8 0.7 Q 15.8 1.0 16.0 1.2 Q 16.2 1.4 16.5 1.4 Q 16.9 1.4 17.1 1.0 Q 17.3 0.5 17.3 0.0 Q 17.3 -0.6 17.0 -1.3 Q 16.7 -1.9 16.2 -2.4 Q 16.2 -2.4 16.1 -2.4 Q 16.1 -2.4 16.0 -2.4 Q 15.9 -2.3 15.9 -2.3 Z M 25.3 1.4 Q 25.3 1.8 25.5 2.2 Q 25.6 2.6 25.8 3.2 Q 26.0 3.7 26.1 4.1 Q 26.3 4.5 26.3 4.8 Q 26.3 5.2 26.0 5.2 Q 25.5 5.2 25.2 4.7 Q 24.9 4.2 24.7 3.6 Q 24.7 3.5 24.6 3.5 L 24.5 3.5 Q 24.4 3.5 24.4 3.6 L 24.4 3.6 Q 24.6 4.4 25.0 4.9 Q 25.4 5.5 26.0 5.5 Q 26.5 5.5 26.8 5.2 Q 27.1 4.9 27.1 4.5 Q 27.1 4.3 27.0 4.0 Q 26.9 3.8 26.7 3.3 Q 26.5 2.8 26.4 2.5 Q 26.3 2.1 26.3 1.8 Q 26.2 1.5 26.2 1.2 Q 26.2 0.8 26.4 0.5 Q 26.6 0.2 26.9 0.2 Q 27.7 0.2 28.4 1.2 Q 28.4 1.2 28.4 1.3 Q 28.4 1.3 28.4 1.4 L 29.3 5.0 Q 29.3 5.2 29.5 5.3 Q 29.6 5.4 29.8 5.4 Q 30.0 5.4 30.1 5.3 Q 30.2 5.2 30.2 5.0 Q 30.2 5.0 30.2 4.9 L 29.3 1.3 Q 29.2 1.0 29.2 0.7 Q 29.2 0.2 29.5 0.2 Q 29.9 0.2 30.1 0.7 Q 30.3 1.2 30.5 1.8 Q 30.5 1.9 30.6 1.9 L 30.7 1.9 Q 30.8 1.9 30.8 1.9 Q 30.8 1.8 30.8 1.8 Q 30.7 1.3 30.6 0.9 Q 30.5 0.5 30.2 0.2 Q 29.9 -0.1 29.5 -0.1 Q 29.1 -0.1 28.8 0.1 Q 28.5 0.3 28.4 0.7 Q 28.1 0.3 27.7 0.1 Q 27.3 -0.1 26.9 -0.1 Q 26.2 -0.1 25.8 0.3 Q 25.3 0.6 25.3 1.4 Z M 31.6 -2.0 Q 31.6 -1.9 31.6 -1.9 L 32.9 3.2 Q 32.9 3.3 33.0 3.4 Q 33.0 3.5 32.4 3.5 Q 32.3 3.5 32.3 3.7 Q 32.3 3.7 32.3 3.7 Q 32.3 3.8 32.4 3.8 Q 32.4 3.9 32.4 3.9 L 33.6 3.9 L 33.6 3.9 Q 33.6 3.9 33.7 3.9 Q 33.7 3.9 33.7 3.9 Q 33.7 3.9 33.7 3.8 L 32.8 0.2 Q 33.1 0.3 33.6 0.8 Q 34.1 1.3 34.3 1.5 Q 34.6 1.7 35.0 1.7 Q 35.3 1.7 35.4 1.6 Q 35.6 1.4 35.6 1.2 Q 35.6 1.0 35.5 0.9 Q 35.5 0.7 35.4 0.7 Q 35.2 0.6 35.1 0.6 Q 35.0 0.6 34.9 0.7 Q 34.8 0.8 34.8 0.9 Q 34.8 1.1 34.9 1.3 Q 35.1 1.4 35.3 1.4 Q 35.2 1.5 35.0 1.5 Q 34.7 1.5 34.5 1.4 Q 34.3 1.2 34.0 0.9 Q 33.7 0.7 33.5 0.4 Q 33.2 0.2 33.0 0.1 Q 33.6 0.0 33.9 -0.2 Q 34.3 -0.4 34.3 -0.8 Q 34.3 -0.9 34.3 -1.1 Q 34.2 -1.4 34.2 -1.6 Q 34.2 -2.0 34.5 -2.0 Q 34.8 -2.0 35.0 -1.6 Q 35.1 -1.3 35.2 -0.8 Q 35.2 -0.8 35.3 -0.8 L 35.4 -0.8 Q 35.4 -0.8 35.5 -0.8 Q 35.5 -0.8 35.5 -0.9 Q 35.5 -0.9 35.5 -0.9 Q 35.1 -2.2 34.5 -2.2 Q 34.2 -2.2 34.0 -2.1 Q 33.8 -2.0 33.7 -1.8 Q 33.6 -1.6 33.6 -1.3 Q 33.6 -1.2 33.7 -1.1 Q 33.7 -1.0 33.7 -0.9 Q 33.7 -0.5 33.4 -0.4 Q 33.1 -0.2 32.7 -0.1 L 32.3 -1.9 Q 32.2 -2.1 32.1 -2.1 Q 32.0 -2.2 31.9 -2.2 Q 31.8 -2.2 31.7 -2.1 Q 31.6 -2.1 31.6 -2.0 Z M 37.8 -2.3 Q 37.8 -2.2 37.8 -2.1 Q 38.3 -1.7 38.5 -1.1 Q 38.8 -0.6 38.8 0.0 L 38.8 0.2 Q 38.6 0.0 38.3 0.0 Q 38.0 0.0 37.8 0.2 Q 37.6 0.4 37.6 0.7 Q 37.6 1.0 37.8 1.2 Q 38.0 1.4 38.3 1.4 Q 38.7 1.4 38.9 1.0 Q 39.1 0.5 39.1 0.0 Q 39.1 -0.6 38.8 -1.3 Q 38.5 -1.9 38.0 -2.4 Q 38.0 -2.4 37.9 -2.4 Q 37.9 -2.4 37.8 -2.4 Q 37.8 -2.3 37.8 -2.3 Z M 48.9 7.1 L 48.6 7.3 L 50.3 9.0 L 52.0 7.3 L 51.7 7.1 L 50.3 8.3 L 48.9 7.1 Z M 46.8 0.4 Q 47.0 0.2 47.4 0.2 Q 47.8 0.2 48.1 0.6 Q 48.4 0.9 48.5 1.4 L 49.1 3.6 Q 49.2 4.2 49.2 4.4 Q 49.2 4.7 49.1 5.0 Q 48.9 5.2 48.6 5.2 Q 48.2 5.2 47.8 5.0 Q 47.5 4.7 47.2 4.3 Q 47.0 3.9 46.9 3.6 Q 46.9 3.5 46.8 3.5 L 46.7 3.5 Q 46.6 3.5 46.6 3.6 L 46.6 3.6 Q 46.7 4.1 47.0 4.5 Q 47.3 5.0 47.7 5.2 Q 48.1 5.5 48.6 5.5 Q 49.1 5.5 49.4 5.3 Q 49.8 5.0 49.9 4.6 Q 50.2 5.0 50.5 5.3 Q 50.8 5.5 51.2 5.5 Q 51.5 5.5 51.8 5.4 Q 52.1 5.3 52.2 5.1 Q 52.4 4.9 52.4 4.7 Q 52.4 4.3 52.2 4.1 Q 52.0 3.9 51.7 3.9 Q 51.5 3.9 51.3 4.0 Q 51.2 4.1 51.2 4.3 Q 51.2 4.6 51.4 4.8 Q 51.6 5.0 51.8 5.0 Q 51.6 5.2 51.2 5.2 Q 50.8 5.2 50.5 4.8 Q 50.2 4.5 50.1 4.0 L 49.5 1.8 Q 49.4 1.3 49.4 1.0 Q 49.4 0.6 49.6 0.4 Q 49.8 0.2 50.1 0.2 Q 50.6 0.2 51.1 0.7 Q 51.6 1.2 51.7 1.8 Q 51.7 1.9 51.8 1.9 L 52.0 1.9 Q 52.0 1.9 52.0 1.9 Q 52.1 1.8 52.1 1.8 Q 52.1 1.8 52.1 1.8 Q 51.9 1.0 51.3 0.4 Q 50.7 -0.1 50.0 -0.1 Q 49.6 -0.1 49.2 0.1 Q 48.8 0.4 48.7 0.8 Q 48.5 0.4 48.1 0.1 Q 47.8 -0.1 47.4 -0.1 Q 47.1 -0.1 46.9 -0.0 Q 46.6 0.0 46.4 0.2 Q 46.2 0.4 46.2 0.7 Q 46.2 1.0 46.4 1.3 Q 46.6 1.5 46.9 1.5 Q 47.1 1.5 47.3 1.4 Q 47.4 1.3 47.4 1.1 Q 47.4 0.8 47.2 0.6 Q 47.1 0.4 46.8 0.4 Z M 54.0 -2.0 Q 54.0 -1.9 54.0 -1.9 L 55.3 3.2 Q 55.3 3.3 55.3 3.4 Q 55.3 3.5 54.7 3.5 Q 54.7 3.5 54.7 3.7 Q 54.7 3.7 54.7 3.7 Q 54.7 3.8 54.7 3.8 Q 54.7 3.9 54.8 3.9 L 56.0 3.9 L 56.0 3.9 Q 56.0 3.9 56.0 3.9 Q 56.0 3.9 56.0 3.9 Q 56.1 3.9 56.1 3.8 L 55.1 0.2 Q 55.5 0.3 55.9 0.8 Q 56.4 1.3 56.7 1.5 Q 57.0 1.7 57.4 1.7 Q 57.6 1.7 57.8 1.6 Q 58.0 1.4 58.0 1.2 Q 58.0 1.0 57.9 0.9 Q 57.8 0.7 57.7 0.7 Q 57.6 0.6 57.4 0.6 Q 57.3 0.6 57.2 0.7 Q 57.1 0.8 57.1 0.9 Q 57.1 1.1 57.3 1.3 Q 57.4 1.4 57.6 1.4 Q 57.5 1.5 57.4 1.5 Q 57.1 1.5 56.9 1.4 Q 56.6 1.2 56.3 0.9 Q 56.1 0.7 55.8 0.4 Q 55.6 0.2 55.4 0.1 Q 55.9 0.0 56.3 -0.2 Q 56.7 -0.4 56.7 -0.8 Q 56.7 -0.9 56.6 -1.1 Q 56.6 -1.4 56.6 -1.6 Q 56.6 -2.0 56.8 -2.0 Q 57.1 -2.0 57.3 -1.6 Q 57.5 -1.3 57.6 -0.8 Q 57.6 -0.8 57.7 -0.8 L 57.8 -0.8 Q 57.8 -0.8 57.8 -0.8 Q 57.8 -0.8 57.8 -0.9 Q 57.8 -0.9 57.8 -0.9 Q 57.5 -2.2 56.8 -2.2 Q 56.6 -2.2 56.4 -2.1 Q 56.2 -2.0 56.1 -1.8 Q 56.0 -1.6 56.0 -1.3 Q 56.0 -1.2 56.0 -1.1 Q 56.0 -1.0 56.0 -0.9 Q 56.0 -0.5 55.7 -0.4 Q 55.4 -0.2 55.1 -0.1 L 54.6 -1.9 Q 54.6 -2.1 54.5 -2.1 Q 54.4 -2.2 54.3 -2.2 Q 54.1 -2.2 54.1 -2.1 Q 54.0 -2.1 54.0 -2.0 Z M 59.7 -3.1 Q 59.6 -3.1 59.6 -3.0 Q 59.6 -3.0 59.6 -2.9 Q 61.7 -0.8 61.7 3.1 Q 61.7 7.1 59.6 9.2 Q 59.6 9.2 59.6 9.3 Q 59.6 9.3 59.6 9.3 Q 59.6 9.4 59.7 9.4 L 59.8 9.4 Q 59.8 9.4 59.9 9.4 Q 60.8 8.6 61.4 7.6 Q 62.0 6.6 62.2 5.5 Q 62.5 4.3 62.5 3.1 Q 62.5 2.2 62.4 1.4 Q 62.2 0.5 61.9 -0.3 Q 61.6 -1.1 61.1 -1.8 Q 60.6 -2.6 59.9 -3.1 Q 59.8 -3.1 59.8 -3.1 L 59.7 -3.1 Z M 70.6 3.1 Q 70.6 3.3 70.7 3.5 Q 70.8 3.6 71.0 3.7 Q 71.1 3.8 71.3 3.8 Q 71.5 3.8 71.7 3.7 Q 71.8 3.6 71.9 3.5 Q 72.0 3.3 72.0 3.1 Q 72.0 2.8 71.8 2.6 Q 71.6 2.4 71.3 2.4 Q 71.0 2.4 70.8 2.6 Q 70.6 2.8 70.6 3.1 Z M 79.6 -0.2 L 79.6 2.7 Q 79.6 2.8 79.7 2.8 L 79.9 2.8 Q 79.9 2.8 79.9 2.8 Q 80.0 2.8 80.0 2.7 Q 80.0 1.5 80.7 0.8 Q 81.5 0.2 82.7 0.2 Q 83.1 0.2 83.5 0.4 Q 83.9 0.7 84.1 1.1 Q 84.3 1.5 84.3 1.9 Q 84.3 2.3 84.1 2.6 Q 84.0 3.0 83.7 3.3 Q 83.4 3.5 83.0 3.6 L 81.4 4.0 Q 80.6 4.2 80.1 4.9 Q 79.6 5.5 79.6 6.4 Q 79.6 7.0 79.9 7.6 Q 80.3 8.2 80.8 8.5 Q 81.4 8.8 82.0 8.8 Q 83.3 8.8 84.0 8.0 L 84.5 8.8 Q 84.6 8.8 84.6 8.8 L 84.7 8.8 Q 84.7 8.8 84.8 8.8 Q 84.8 8.8 84.8 8.7 L 84.8 5.8 Q 84.8 5.7 84.7 5.7 L 84.5 5.7 Q 84.4 5.7 84.4 5.8 Q 84.4 6.1 84.3 6.5 Q 84.2 6.9 84.0 7.2 Q 83.8 7.6 83.6 7.8 Q 83.0 8.4 82.0 8.4 Q 81.6 8.4 81.2 8.2 Q 80.9 8.0 80.7 7.6 Q 80.4 7.2 80.4 6.8 Q 80.4 6.3 80.8 5.8 Q 81.1 5.4 81.6 5.3 L 83.3 4.9 Q 83.7 4.8 84.0 4.5 Q 84.4 4.3 84.6 3.9 Q 84.9 3.6 85.0 3.2 Q 85.1 2.8 85.1 2.3 Q 85.1 1.7 84.8 1.1 Q 84.5 0.5 83.9 0.1 Q 83.4 -0.3 82.7 -0.3 Q 82.3 -0.3 81.9 -0.2 Q 81.4 -0.1 81.1 0.1 Q 80.7 0.3 80.4 0.6 L 79.9 -0.2 Q 79.8 -0.3 79.8 -0.3 L 79.7 -0.3 Q 79.6 -0.3 79.6 -0.2 Z M 86.2 0.0 L 86.2 0.4 Q 87.5 0.4 87.5 0.8 L 87.5 7.7 Q 87.5 8.1 86.2 8.1 L 86.2 8.5 L 90.7 8.5 Q 91.4 8.5 92.1 8.3 Q 92.7 8.0 93.2 7.4 Q 93.6 6.9 93.6 6.2 Q 93.6 5.5 93.2 5.0 Q 92.7 4.4 92.1 4.2 Q 91.4 3.9 90.7 3.9 L 88.7 3.9 L 88.7 0.8 Q 88.7 0.4 90.0 0.4 L 90.0 0.0 L 86.2 0.0 Z M 88.7 4.3 L 90.4 4.3 Q 91.0 4.3 91.5 4.5 Q 91.9 4.7 92.1 5.1 Q 92.3 5.5 92.3 6.2 Q 92.3 7.2 91.8 7.7 Q 91.4 8.1 90.4 8.1 L 89.3 8.1 Q 89.1 8.1 88.9 8.1 Q 88.8 8.1 88.7 8.0 Q 88.7 7.9 88.7 7.7 L 88.7 4.3 Z M 95.0 -0.2 L 95.0 2.7 Q 95.0 2.8 95.1 2.8 L 95.3 2.8 Q 95.3 2.8 95.4 2.8 Q 95.4 2.8 95.4 2.7 Q 95.4 1.5 96.2 0.8 Q 96.9 0.2 98.1 0.2 Q 98.6 0.2 98.9 0.4 Q 99.3 0.7 99.5 1.1 Q 99.7 1.5 99.7 1.9 Q 99.7 2.3 99.6 2.6 Q 99.4 3.0 99.1 3.3 Q 98.8 3.5 98.5 3.6 L 96.9 4.0 Q 96.1 4.2 95.5 4.9 Q 95.0 5.5 95.0 6.4 Q 95.0 7.0 95.4 7.6 Q 95.7 8.2 96.3 8.5 Q 96.8 8.8 97.5 8.8 Q 98.7 8.8 99.4 8.0 L 100.0 8.8 Q 100.0 8.8 100.0 8.8 L 100.1 8.8 Q 100.2 8.8 100.2 8.8 Q 100.2 8.8 100.2 8.7 L 100.2 5.8 Q 100.2 5.7 100.1 5.7 L 100.0 5.7 Q 99.9 5.7 99.9 5.8 Q 99.9 6.1 99.8 6.5 Q 99.7 6.9 99.5 7.2 Q 99.3 7.6 99.1 7.8 Q 98.5 8.4 97.5 8.4 Q 97.0 8.4 96.7 8.2 Q 96.3 8.0 96.1 7.6 Q 95.9 7.2 95.9 6.8 Q 95.9 6.3 96.2 5.8 Q 96.5 5.4 97.1 5.3 L 98.7 4.9 Q 99.1 4.8 99.5 4.5 Q 99.8 4.3 100.1 3.9 Q 100.3 3.6 100.4 3.2 Q 100.6 2.8 100.6 2.3 Q 100.6 1.7 100.3 1.1 Q 99.9 0.5 99.4 0.1 Q 98.8 -0.3 98.1 -0.3 Q 97.7 -0.3 97.3 -0.2 Q 96.9 -0.1 96.5 0.1 Q 96.1 0.3 95.8 0.6 L 95.3 -0.2 Q 95.3 -0.3 95.2 -0.3 L 95.1 -0.3 Q 95.0 -0.3 95.0 -0.2 Z M 104.1 1.3 Q 104.5 0.8 105.2 0.5 Q 105.8 0.2 106.5 0.2 Q 107.1 0.2 107.6 0.4 Q 108.1 0.6 108.5 1.0 Q 108.8 1.4 109.0 2.0 Q 109.2 2.5 109.2 3.1 Q 109.2 3.2 109.3 3.2 L 109.5 3.2 Q 109.6 3.2 109.6 3.0 Q 109.6 2.4 109.3 1.8 Q 109.1 1.2 108.6 0.7 Q 108.2 0.2 107.6 -0.0 Q 107.0 -0.3 106.3 -0.3 Q 105.4 -0.3 104.6 0.1 Q 103.8 0.5 103.2 1.1 Q 102.6 1.7 102.3 2.5 Q 102.0 3.4 102.0 4.3 Q 102.0 5.2 102.3 6.0 Q 102.6 6.8 103.2 7.5 Q 103.8 8.1 104.6 8.5 Q 105.4 8.8 106.3 8.8 Q 107.0 8.8 107.6 8.5 Q 108.1 8.3 108.6 7.8 L 109.3 8.8 Q 109.4 8.8 109.4 8.8 L 109.5 8.8 Q 109.5 8.8 109.6 8.8 Q 109.6 8.8 109.6 8.7 L 109.6 5.3 Q 109.6 5.2 109.5 5.2 L 109.3 5.2 Q 109.1 5.2 109.1 5.3 Q 109.1 5.7 109.0 6.1 Q 108.9 6.6 108.6 7.0 Q 108.4 7.4 108.1 7.7 Q 107.4 8.4 106.5 8.4 Q 105.8 8.4 105.2 8.1 Q 104.6 7.8 104.1 7.2 Q 103.7 6.6 103.5 5.9 Q 103.3 5.1 103.3 4.3 Q 103.3 3.4 103.5 2.7 Q 103.7 1.9 104.1 1.3 Z" fill="#3D4548" transform="translate(84.60 365) scale(1 -1)"/>
-          <path d="M 2.8 -0.2 Q 2.1 -0.2 1.6 0.2 Q 1.1 0.5 0.9 1.1 Q 0.6 1.7 0.6 2.4 Q 0.6 3.4 1.1 4.3 Q 1.6 5.1 2.5 5.7 Q 3.3 6.2 4.3 6.2 Q 4.9 6.2 5.4 5.9 Q 5.8 5.6 5.8 5.0 Q 5.8 4.2 5.2 3.8 Q 4.5 3.4 3.7 3.3 Q 2.9 3.2 1.9 3.2 L 1.9 3.2 Q 1.7 2.4 1.7 1.8 Q 1.7 1.2 2.0 0.7 Q 2.3 0.2 2.8 0.2 Q 3.7 0.2 4.4 0.6 Q 5.2 1.0 5.7 1.7 Q 5.7 1.7 5.8 1.7 Q 5.9 1.7 6.0 1.6 Q 6.0 1.5 6.0 1.5 Q 6.0 1.4 6.0 1.4 Q 5.5 0.7 4.6 0.3 Q 3.7 -0.2 2.8 -0.2 Z M 2.0 3.6 Q 2.8 3.6 3.5 3.6 Q 4.2 3.7 4.7 4.0 Q 5.3 4.3 5.3 5.0 Q 5.3 5.2 5.2 5.4 Q 5.0 5.6 4.8 5.7 Q 4.6 5.8 4.3 5.8 Q 3.7 5.8 3.2 5.5 Q 2.8 5.2 2.5 4.7 Q 2.2 4.1 2.0 3.6 Z M 10.0 1.9 Q 9.9 1.9 9.8 1.9 Q 9.8 2.0 9.8 2.1 Q 9.8 2.3 9.8 2.3 Q 9.9 2.4 10.0 2.4 L 18.8 2.4 Q 18.9 2.4 19.0 2.3 Q 19.1 2.3 19.1 2.1 Q 19.1 2.0 19.0 1.9 Q 18.9 1.9 18.8 1.9 L 10.0 1.9 Z M 10.0 4.6 Q 9.9 4.6 9.8 4.7 Q 9.8 4.7 9.8 4.9 Q 9.8 5.0 9.8 5.1 Q 9.9 5.1 10.0 5.1 L 18.8 5.1 Q 18.9 5.1 19.0 5.1 Q 19.1 5.0 19.1 4.9 Q 19.1 4.7 19.0 4.7 Q 18.9 4.6 18.8 4.6 L 10.0 4.6 Z M 23.5 -2.0 Q 23.8 -2.5 24.5 -2.5 Q 25.2 -2.5 25.6 -2.0 Q 26.1 -1.6 26.4 -0.9 Q 26.7 -0.3 26.9 0.4 Q 26.3 -0.2 25.5 -0.2 Q 25.0 -0.2 24.6 0.0 Q 24.2 0.2 24.0 0.6 Q 23.8 1.0 23.8 1.5 Q 23.8 2.0 23.9 2.5 Q 24.0 2.9 24.3 3.5 Q 24.5 4.1 24.6 4.6 Q 24.8 5.1 24.8 5.4 Q 24.8 5.8 24.5 5.8 Q 24.0 5.8 23.6 5.3 Q 23.2 4.7 23.1 4.0 Q 23.0 3.9 23.0 3.9 L 22.8 3.9 Q 22.7 3.9 22.7 4.0 L 22.7 4.1 Q 22.9 4.9 23.4 5.5 Q 23.8 6.2 24.5 6.2 Q 25.0 6.2 25.4 5.9 Q 25.7 5.5 25.7 5.0 Q 25.7 4.8 25.6 4.5 Q 25.6 4.3 25.3 3.7 Q 25.1 3.2 25.0 2.8 Q 24.9 2.4 24.8 2.0 Q 24.7 1.7 24.7 1.3 Q 24.7 0.9 24.9 0.5 Q 25.1 0.2 25.6 0.2 Q 26.4 0.2 27.1 1.3 L 28.2 5.6 Q 28.2 5.8 28.4 5.9 Q 28.6 6.0 28.8 6.0 Q 28.9 6.0 29.1 5.9 Q 29.2 5.8 29.2 5.6 Q 29.2 5.6 29.2 5.5 L 27.8 -0.0 Q 27.6 -0.8 27.1 -1.4 Q 26.6 -2.1 25.9 -2.5 Q 25.2 -2.9 24.5 -2.9 Q 24.1 -2.9 23.8 -2.7 Q 23.4 -2.6 23.2 -2.3 Q 23.0 -2.0 23.0 -1.7 Q 23.0 -1.3 23.2 -1.0 Q 23.4 -0.7 23.8 -0.7 Q 24.0 -0.7 24.2 -0.9 Q 24.3 -1.0 24.3 -1.2 Q 24.3 -1.5 24.1 -1.8 Q 23.9 -2.0 23.5 -2.0 Q 23.5 -2.0 23.5 -2.0 Q 23.5 -2.0 23.5 -2.0 Z M 33.1 3.2 Q 32.9 3.2 32.9 3.3 Q 32.8 3.4 32.8 3.5 Q 32.8 3.6 32.9 3.7 Q 32.9 3.8 33.1 3.8 L 41.1 3.8 Q 41.2 3.8 41.3 3.7 Q 41.3 3.6 41.3 3.5 Q 41.3 3.4 41.3 3.3 Q 41.2 3.2 41.1 3.2 L 33.1 3.2 Z M 48.3 7.9 L 48.1 8.2 L 50.0 10.1 L 51.8 8.2 L 51.6 7.9 L 50.0 9.3 L 48.3 7.9 Z M 46.0 0.4 Q 46.3 0.2 46.7 0.2 Q 47.2 0.2 47.5 0.6 Q 47.9 1.1 48.0 1.6 L 48.6 4.0 Q 48.8 4.7 48.8 5.0 Q 48.8 5.3 48.6 5.6 Q 48.4 5.8 48.0 5.8 Q 47.6 5.8 47.2 5.5 Q 46.8 5.3 46.5 4.8 Q 46.3 4.4 46.2 4.0 Q 46.1 3.9 46.0 3.9 L 45.9 3.9 Q 45.8 3.9 45.8 4.0 L 45.8 4.1 Q 45.9 4.6 46.2 5.1 Q 46.6 5.6 47.0 5.9 Q 47.5 6.2 48.1 6.2 Q 48.6 6.2 49.0 5.9 Q 49.4 5.6 49.6 5.2 Q 49.8 5.6 50.2 5.9 Q 50.5 6.2 51.0 6.2 Q 51.3 6.2 51.6 6.1 Q 51.9 6.0 52.1 5.8 Q 52.3 5.5 52.3 5.2 Q 52.3 4.9 52.1 4.6 Q 51.9 4.3 51.5 4.3 Q 51.3 4.3 51.1 4.5 Q 51.0 4.6 51.0 4.8 Q 51.0 5.1 51.2 5.4 Q 51.4 5.6 51.7 5.6 Q 51.4 5.8 51.0 5.8 Q 50.5 5.8 50.2 5.4 Q 49.9 5.0 49.7 4.5 L 49.1 2.0 Q 48.9 1.4 48.9 1.1 Q 48.9 0.7 49.1 0.5 Q 49.4 0.2 49.7 0.2 Q 50.3 0.2 50.9 0.8 Q 51.4 1.4 51.5 2.1 Q 51.6 2.1 51.6 2.1 L 51.8 2.1 Q 51.9 2.1 51.9 2.1 Q 51.9 2.1 51.9 2.0 Q 51.9 2.0 51.9 2.0 Q 51.7 1.1 51.1 0.5 Q 50.5 -0.2 49.7 -0.2 Q 49.1 -0.2 48.7 0.1 Q 48.3 0.4 48.1 0.9 Q 47.9 0.5 47.5 0.1 Q 47.2 -0.2 46.7 -0.2 Q 46.4 -0.2 46.1 -0.1 Q 45.8 0.1 45.6 0.3 Q 45.4 0.5 45.4 0.8 Q 45.4 1.2 45.6 1.4 Q 45.8 1.7 46.2 1.7 Q 46.4 1.7 46.6 1.6 Q 46.7 1.4 46.7 1.2 Q 46.7 0.9 46.5 0.7 Q 46.3 0.5 46.0 0.4 Z M 57.3 -3.5 Q 56.5 -2.9 55.9 -2.1 Q 55.4 -1.3 55.0 -0.4 Q 54.7 0.5 54.5 1.5 Q 54.3 2.5 54.3 3.5 Q 54.3 4.5 54.5 5.5 Q 54.7 6.5 55.0 7.4 Q 55.4 8.3 56.0 9.1 Q 56.5 9.9 57.3 10.5 Q 57.3 10.5 57.4 10.5 L 57.5 10.5 Q 57.5 10.5 57.6 10.5 Q 57.6 10.4 57.6 10.4 Q 57.6 10.3 57.6 10.3 Q 56.9 9.6 56.4 8.9 Q 56.0 8.1 55.7 7.2 Q 55.4 6.4 55.3 5.4 Q 55.2 4.5 55.2 3.5 Q 55.2 -0.9 57.6 -3.3 Q 57.6 -3.3 57.6 -3.4 Q 57.6 -3.4 57.6 -3.5 Q 57.5 -3.5 57.5 -3.5 L 57.4 -3.5 Q 57.3 -3.5 57.3 -3.5 Z M 59.3 1.1 Q 59.3 1.3 59.3 1.5 L 60.3 5.5 L 58.8 5.5 Q 58.7 5.5 58.7 5.7 Q 58.7 6.0 58.9 6.0 L 60.4 6.0 L 61.0 8.3 Q 61.0 8.5 61.2 8.6 Q 61.4 8.8 61.6 8.8 Q 61.8 8.8 61.9 8.7 Q 62.0 8.6 62.0 8.4 Q 62.0 8.3 62.0 8.3 Q 62.0 8.3 62.0 8.3 L 61.4 6.0 L 62.9 6.0 Q 63.0 6.0 63.0 5.9 Q 63.0 5.8 63.0 5.7 Q 63.0 5.7 62.9 5.6 Q 62.9 5.5 62.8 5.5 L 61.3 5.5 L 60.3 1.5 Q 60.2 1.1 60.2 0.8 Q 60.2 0.2 60.6 0.2 Q 61.2 0.2 61.7 0.8 Q 62.2 1.4 62.4 2.1 Q 62.5 2.1 62.5 2.1 L 62.7 2.1 Q 62.8 2.1 62.8 2.1 Q 62.8 2.1 62.8 2.0 Q 62.8 2.0 62.8 2.0 Q 62.5 1.1 61.9 0.5 Q 61.3 -0.2 60.6 -0.2 Q 60.0 -0.2 59.6 0.2 Q 59.3 0.6 59.3 1.1 Z M 64.3 -1.8 Q 64.5 -2.2 65.3 -2.2 Q 65.7 -2.2 66.0 -2.1 Q 66.3 -2.0 66.5 -1.8 Q 66.7 -1.5 66.7 -1.2 Q 66.7 -0.9 66.5 -0.8 Q 66.4 -0.6 66.1 -0.6 L 65.6 -0.5 Q 65.2 -0.4 65.0 -0.1 Q 64.7 0.1 64.7 0.5 Q 64.7 0.9 65.0 1.3 Q 65.2 1.6 65.6 1.8 Q 66.0 1.9 66.4 1.9 Q 66.8 1.9 67.2 1.7 Q 67.5 1.5 67.5 1.1 Q 67.5 0.9 67.4 0.7 Q 67.3 0.5 67.1 0.5 Q 66.9 0.5 66.8 0.6 Q 66.7 0.7 66.7 0.8 Q 66.7 0.9 66.8 1.1 Q 66.9 1.2 67.0 1.2 Q 67.1 1.3 67.2 1.3 Q 67.1 1.5 66.9 1.6 Q 66.6 1.7 66.4 1.7 Q 66.1 1.7 65.9 1.6 Q 65.6 1.5 65.5 1.3 Q 65.3 1.1 65.3 0.8 Q 65.3 0.7 65.4 0.5 Q 65.6 0.4 65.8 0.3 L 66.3 0.2 Q 66.6 0.2 66.8 0.0 Q 67.1 -0.1 67.2 -0.3 Q 67.3 -0.6 67.3 -0.9 Q 67.3 -1.2 67.1 -1.6 Q 66.9 -1.9 66.6 -2.1 Q 66.1 -2.5 65.3 -2.5 Q 64.8 -2.5 64.4 -2.3 Q 63.9 -2.0 63.9 -1.5 Q 63.9 -1.3 64.1 -1.1 Q 64.3 -0.9 64.5 -0.9 Q 64.7 -0.9 64.8 -1.0 Q 64.9 -1.1 64.9 -1.2 Q 64.9 -1.4 64.7 -1.6 Q 64.6 -1.8 64.3 -1.8 L 64.3 -1.8 Z M 72.8 3.2 Q 72.7 3.2 72.6 3.3 Q 72.5 3.4 72.5 3.5 Q 72.5 3.6 72.6 3.7 Q 72.7 3.8 72.8 3.8 L 80.8 3.8 Q 80.9 3.8 81.0 3.7 Q 81.1 3.6 81.1 3.5 Q 81.1 3.4 81.0 3.3 Q 80.9 3.2 80.8 3.2 L 72.8 3.2 Z M 87.1 -0.2 Q 86.3 -0.2 85.7 0.5 Q 85.2 1.2 85.2 2.1 Q 85.2 3.0 85.7 3.9 Q 86.2 4.9 87.0 5.5 Q 87.7 6.2 88.7 6.2 Q 89.1 6.2 89.4 6.0 Q 89.7 5.7 89.9 5.3 L 90.7 8.5 Q 90.8 8.7 90.8 8.8 Q 90.8 9.1 89.9 9.1 Q 89.7 9.1 89.7 9.3 Q 89.7 9.3 89.7 9.4 Q 89.8 9.5 89.8 9.5 Q 89.8 9.6 89.9 9.6 L 91.8 9.7 Q 92.0 9.7 92.0 9.5 L 90.0 1.5 Q 89.9 1.3 89.9 0.8 Q 89.9 0.2 90.3 0.2 Q 90.7 0.2 90.9 0.8 Q 91.2 1.3 91.3 2.1 Q 91.3 2.1 91.4 2.1 L 91.6 2.1 Q 91.6 2.1 91.7 2.1 Q 91.7 2.0 91.7 2.0 Q 91.5 1.0 91.2 0.4 Q 90.9 -0.2 90.2 -0.2 Q 89.8 -0.2 89.4 0.1 Q 89.0 0.4 88.9 0.9 Q 88.0 -0.2 87.1 -0.2 Z M 87.2 0.2 Q 87.7 0.2 88.1 0.6 Q 88.6 1.0 88.9 1.5 Q 89.0 1.5 89.0 1.5 L 89.7 4.6 Q 89.6 5.1 89.4 5.5 Q 89.1 5.8 88.6 5.8 Q 88.1 5.8 87.7 5.4 Q 87.3 5.1 87.1 4.5 Q 86.8 4.0 86.5 3.0 Q 86.3 2.0 86.3 1.5 Q 86.3 1.0 86.5 0.6 Q 86.7 0.2 87.2 0.2 Z M 92.9 -4.0 Q 93.1 -4.1 93.4 -4.1 Q 93.7 -4.1 93.9 -3.4 Q 94.0 -3.0 94.4 -0.9 L 94.9 1.5 L 94.1 1.5 Q 94.0 1.5 94.0 1.6 Q 94.0 1.8 94.1 1.8 L 95.0 1.8 L 95.1 2.5 Q 95.1 2.8 95.2 3.0 Q 95.2 3.2 95.3 3.4 Q 95.3 3.6 95.4 3.8 Q 95.6 4.1 95.9 4.3 Q 96.2 4.5 96.5 4.5 Q 96.7 4.5 96.9 4.5 Q 97.1 4.4 97.3 4.2 Q 97.4 4.1 97.4 3.8 Q 97.4 3.6 97.2 3.4 Q 97.1 3.2 96.8 3.2 Q 96.7 3.2 96.6 3.3 Q 96.4 3.4 96.4 3.6 Q 96.4 3.8 96.6 4.0 Q 96.7 4.1 97.0 4.1 Q 96.8 4.3 96.5 4.3 Q 96.4 4.3 96.2 4.1 Q 96.1 4.0 96.1 3.8 Q 96.0 3.6 95.8 2.5 L 95.7 1.8 L 96.7 1.8 Q 96.8 1.8 96.8 1.7 Q 96.8 1.7 96.7 1.6 Q 96.7 1.6 96.7 1.5 Q 96.7 1.5 96.6 1.5 L 95.6 1.5 L 95.1 -0.9 Q 95.1 -1.4 94.9 -2.0 Q 94.8 -2.5 94.6 -3.1 Q 94.4 -3.6 94.1 -4.0 Q 93.8 -4.4 93.4 -4.4 Q 93.0 -4.4 92.8 -4.2 Q 92.5 -4.0 92.5 -3.7 Q 92.5 -3.5 92.7 -3.3 Q 92.8 -3.1 93.1 -3.1 Q 93.2 -3.1 93.3 -3.2 Q 93.5 -3.3 93.5 -3.4 Q 93.5 -3.6 93.3 -3.8 Q 93.1 -4.0 92.9 -4.0 Z M 98.6 -3.5 Q 98.5 -3.5 98.5 -3.4 Q 98.5 -3.3 98.5 -3.3 Q 100.9 -0.9 100.9 3.5 Q 100.9 7.9 98.5 10.3 Q 98.5 10.3 98.5 10.4 Q 98.5 10.4 98.5 10.5 Q 98.5 10.5 98.6 10.5 L 98.7 10.5 Q 98.7 10.5 98.8 10.5 Q 99.8 9.7 100.4 8.5 Q 101.1 7.4 101.4 6.1 Q 101.7 4.8 101.7 3.5 Q 101.7 2.5 101.6 1.5 Q 101.4 0.6 101.0 -0.3 Q 100.7 -1.3 100.1 -2.1 Q 99.6 -2.9 98.8 -3.5 Q 98.7 -3.5 98.7 -3.5 L 98.6 -3.5 Z" fill="#3D4548" transform="translate(108.82 450) scale(1 -1)"/>
-          <path d="M 2.7 8.3 L 3.1 8.8 Q 3.6 9.4 4.2 9.4 Q 4.5 9.4 4.8 9.2 Q 5.1 9.1 5.4 8.9 Q 5.7 8.8 6.0 8.8 Q 6.6 8.8 7.1 9.4 L 7.4 9.1 L 7.0 8.7 Q 6.4 8.0 5.9 8.0 Q 5.6 8.0 5.3 8.2 Q 5.0 8.4 4.6 8.5 Q 4.3 8.7 4.1 8.7 Q 3.5 8.7 3.0 8.0 L 2.7 8.3 Z M 1.1 0.5 Q 1.3 0.3 1.8 0.3 Q 2.2 0.3 2.6 0.7 Q 2.9 1.2 3.0 1.6 L 3.7 4.1 Q 3.8 4.8 3.8 5.1 Q 3.8 5.4 3.6 5.7 Q 3.4 5.9 3.1 5.9 Q 2.6 5.9 2.2 5.6 Q 1.8 5.4 1.6 4.9 Q 1.3 4.5 1.2 4.1 Q 1.2 4.0 1.1 4.0 L 0.9 4.0 Q 0.8 4.0 0.8 4.1 L 0.8 4.2 Q 0.9 4.7 1.3 5.2 Q 1.6 5.7 2.1 6.0 Q 2.6 6.3 3.1 6.3 Q 3.6 6.3 4.0 6.0 Q 4.4 5.7 4.6 5.3 Q 4.8 5.7 5.2 6.0 Q 5.6 6.3 6.0 6.3 Q 6.3 6.3 6.7 6.2 Q 7.0 6.1 7.2 5.9 Q 7.4 5.6 7.4 5.3 Q 7.4 5.0 7.1 4.7 Q 6.9 4.4 6.5 4.4 Q 6.3 4.4 6.2 4.6 Q 6.0 4.7 6.0 4.9 Q 6.0 5.2 6.2 5.5 Q 6.4 5.7 6.7 5.7 Q 6.5 5.9 6.0 5.9 Q 5.6 5.9 5.2 5.5 Q 4.9 5.1 4.8 4.6 L 4.1 2.1 Q 4.0 1.5 4.0 1.2 Q 4.0 0.8 4.2 0.6 Q 4.4 0.3 4.7 0.3 Q 5.4 0.3 5.9 0.9 Q 6.4 1.5 6.6 2.2 Q 6.6 2.2 6.7 2.2 L 6.9 2.2 Q 6.9 2.2 7.0 2.2 Q 7.0 2.2 7.0 2.1 Q 7.0 2.1 7.0 2.1 Q 6.8 1.2 6.1 0.6 Q 5.5 -0.1 4.7 -0.1 Q 4.2 -0.1 3.8 0.2 Q 3.4 0.5 3.2 1.0 Q 3.0 0.6 2.6 0.2 Q 2.2 -0.1 1.8 -0.1 Q 1.5 -0.1 1.1 0.0 Q 0.8 0.2 0.6 0.4 Q 0.4 0.6 0.4 0.9 Q 0.4 1.3 0.7 1.5 Q 0.9 1.8 1.2 1.8 Q 1.5 1.8 1.6 1.7 Q 1.8 1.5 1.8 1.3 Q 1.8 1.0 1.6 0.8 Q 1.4 0.6 1.1 0.5 Z M 11.5 2.0 Q 11.4 2.0 11.3 2.0 Q 11.2 2.1 11.2 2.2 Q 11.2 2.4 11.3 2.4 Q 11.4 2.5 11.5 2.5 L 20.3 2.5 Q 20.4 2.5 20.5 2.4 Q 20.5 2.4 20.5 2.2 Q 20.5 2.1 20.5 2.0 Q 20.4 2.0 20.3 2.0 L 11.5 2.0 Z M 11.5 4.7 Q 11.4 4.7 11.3 4.8 Q 11.2 4.8 11.2 5.0 Q 11.2 5.1 11.3 5.1 Q 11.4 5.2 11.5 5.2 L 20.3 5.2 Q 20.4 5.2 20.5 5.1 Q 20.5 5.1 20.5 5.0 Q 20.5 4.8 20.5 4.8 Q 20.4 4.7 20.3 4.7 L 11.5 4.7 Z M 26.4 0.1 L 26.4 0.6 Q 28.2 0.6 28.2 1.0 L 28.2 2.0 Q 26.8 2.2 25.8 2.9 Q 25.3 3.2 24.9 3.7 Q 24.6 4.3 24.6 4.9 Q 24.6 5.5 24.9 6.0 Q 25.3 6.6 25.8 6.9 Q 26.3 7.3 26.9 7.5 Q 27.5 7.6 28.2 7.7 L 28.2 8.7 Q 28.2 9.2 26.4 9.2 L 26.4 9.7 L 31.2 9.7 L 31.2 9.2 Q 29.4 9.2 29.4 8.7 L 29.4 7.7 Q 30.0 7.7 30.6 7.5 Q 31.3 7.3 31.8 6.9 Q 32.4 6.5 32.7 6.0 Q 33.1 5.5 33.1 4.9 Q 33.1 4.3 32.7 3.8 Q 32.4 3.2 31.8 2.8 Q 31.2 2.5 30.6 2.3 Q 29.9 2.0 29.4 2.0 L 29.4 1.0 Q 29.4 0.6 31.2 0.6 L 31.2 0.1 L 26.4 0.1 Z M 29.4 2.4 Q 30.5 2.6 31.1 3.2 Q 31.6 3.8 31.6 4.9 Q 31.6 6.0 31.1 6.6 Q 30.5 7.2 29.4 7.4 L 29.4 2.4 Z M 28.2 2.4 L 28.2 7.3 Q 26.0 7.0 26.0 4.9 Q 26.0 2.7 28.2 2.4 Z M 38.2 -3.4 Q 37.5 -2.8 36.9 -2.0 Q 36.3 -1.2 36.0 -0.3 Q 35.6 0.6 35.4 1.6 Q 35.3 2.6 35.3 3.6 Q 35.3 4.6 35.4 5.6 Q 35.6 6.6 36.0 7.5 Q 36.3 8.4 36.9 9.2 Q 37.5 10.0 38.2 10.6 Q 38.2 10.6 38.3 10.6 L 38.4 10.6 Q 38.5 10.6 38.5 10.6 Q 38.5 10.5 38.5 10.5 Q 38.5 10.4 38.5 10.4 Q 37.8 9.7 37.4 9.0 Q 36.9 8.2 36.6 7.3 Q 36.4 6.5 36.2 5.5 Q 36.1 4.6 36.1 3.6 Q 36.1 -0.9 38.5 -3.2 Q 38.5 -3.2 38.5 -3.3 Q 38.5 -3.3 38.5 -3.4 Q 38.5 -3.4 38.4 -3.4 L 38.3 -3.4 Q 38.2 -3.4 38.2 -3.4 Z M 40.5 -1.9 Q 40.8 -2.4 41.5 -2.4 Q 42.2 -2.4 42.7 -1.9 Q 43.2 -1.5 43.5 -0.8 Q 43.8 -0.2 43.9 0.5 Q 43.3 -0.1 42.6 -0.1 Q 42.0 -0.1 41.6 0.1 Q 41.2 0.3 41.0 0.7 Q 40.8 1.1 40.8 1.6 Q 40.8 2.1 40.9 2.6 Q 41.1 3.0 41.3 3.6 Q 41.5 4.2 41.7 4.7 Q 41.9 5.2 41.9 5.5 Q 41.9 5.9 41.5 5.9 Q 41.0 5.9 40.6 5.4 Q 40.3 4.8 40.1 4.1 Q 40.1 4.0 40.0 4.0 L 39.8 4.0 Q 39.7 4.0 39.7 4.1 L 39.7 4.2 Q 39.9 5.0 40.4 5.6 Q 40.9 6.3 41.6 6.3 Q 42.1 6.3 42.4 6.0 Q 42.8 5.6 42.8 5.1 Q 42.8 4.9 42.6 4.6 Q 42.6 4.4 42.4 3.8 Q 42.1 3.3 42.0 2.9 Q 41.9 2.5 41.8 2.1 Q 41.8 1.8 41.8 1.4 Q 41.8 1.0 42.0 0.6 Q 42.2 0.3 42.6 0.3 Q 43.5 0.3 44.1 1.4 L 45.2 5.7 Q 45.3 5.9 45.4 6.0 Q 45.6 6.1 45.8 6.1 Q 46.0 6.1 46.1 6.0 Q 46.2 5.9 46.2 5.7 Q 46.2 5.7 46.2 5.6 L 44.8 0.1 Q 44.6 -0.7 44.1 -1.3 Q 43.6 -2.0 43.0 -2.4 Q 42.3 -2.8 41.5 -2.8 Q 41.1 -2.8 40.8 -2.6 Q 40.4 -2.5 40.2 -2.2 Q 40.0 -1.9 40.0 -1.6 Q 40.0 -1.2 40.2 -0.9 Q 40.5 -0.6 40.8 -0.6 Q 41.1 -0.6 41.2 -0.8 Q 41.4 -0.9 41.4 -1.1 Q 41.4 -1.4 41.1 -1.7 Q 40.9 -1.9 40.6 -1.9 Q 40.5 -1.9 40.5 -1.9 Q 40.5 -1.9 40.5 -1.9 Z M 47.6 -2.4 Q 47.6 -2.4 47.6 -2.3 Q 48.1 -1.8 48.4 -1.2 Q 48.7 -0.6 48.7 0.2 L 48.7 0.3 Q 48.5 0.1 48.1 0.1 Q 47.8 0.1 47.6 0.3 Q 47.4 0.5 47.4 0.9 Q 47.4 1.2 47.6 1.4 Q 47.8 1.6 48.1 1.6 Q 48.6 1.6 48.9 1.2 Q 49.1 0.7 49.1 0.2 Q 49.1 -0.6 48.8 -1.3 Q 48.4 -2.0 47.9 -2.6 Q 47.8 -2.6 47.8 -2.6 Q 47.7 -2.6 47.6 -2.6 Q 47.6 -2.5 47.6 -2.4 Z M 60.2 -0.9 L 60.2 3.2 Q 60.2 3.7 59.9 4.1 Q 59.6 4.5 59.2 4.7 Q 58.8 5.0 58.3 5.1 Q 58.2 5.2 58.2 5.2 L 58.2 5.4 Q 58.2 5.5 58.3 5.5 Q 59.1 5.8 59.6 6.3 Q 60.2 6.7 60.2 7.5 L 60.2 11.5 Q 60.2 12.4 61.0 13.0 Q 61.8 13.5 62.9 13.7 L 63.1 13.7 Q 63.1 13.7 63.2 13.7 Q 63.2 13.7 63.2 13.6 L 63.2 13.4 Q 63.2 13.4 63.1 13.3 Q 62.4 13.1 61.8 12.7 Q 61.2 12.2 61.2 11.5 L 61.2 7.4 Q 61.2 6.6 60.6 6.1 Q 59.9 5.6 58.9 5.3 Q 59.9 5.0 60.6 4.5 Q 61.2 4.1 61.2 3.2 L 61.2 -0.9 Q 61.2 -1.3 61.5 -1.7 Q 61.8 -2.0 62.2 -2.3 Q 62.6 -2.5 63.1 -2.7 Q 63.2 -2.7 63.2 -2.8 L 63.2 -3.0 Q 63.2 -3.0 63.2 -3.0 Q 63.1 -3.1 63.1 -3.1 L 62.9 -3.1 Q 62.2 -2.9 61.6 -2.6 Q 61.1 -2.4 60.6 -2.0 Q 60.2 -1.5 60.2 -0.9 Z M 66.3 1.6 Q 66.3 2.1 66.4 2.6 Q 66.5 3.0 66.7 3.6 Q 67.0 4.2 67.1 4.7 Q 67.3 5.2 67.3 5.5 Q 67.3 5.9 67.0 5.9 Q 66.4 5.9 66.1 5.4 Q 65.7 4.8 65.6 4.1 Q 65.5 4.0 65.4 4.0 L 65.3 4.0 Q 65.2 4.0 65.2 4.1 L 65.2 4.2 Q 65.4 5.0 65.9 5.6 Q 66.3 6.3 67.0 6.3 Q 67.5 6.3 67.9 6.0 Q 68.2 5.6 68.2 5.1 Q 68.2 4.9 68.1 4.6 Q 68.0 4.4 67.8 3.8 Q 67.6 3.3 67.5 2.9 Q 67.4 2.5 67.3 2.1 Q 67.2 1.8 67.2 1.4 Q 67.2 1.0 67.4 0.6 Q 67.6 0.3 68.1 0.3 Q 69.0 0.3 69.6 1.4 Q 69.6 1.5 69.7 1.5 Q 69.7 1.6 69.7 1.6 L 70.7 5.7 Q 70.7 5.9 70.9 6.0 Q 71.1 6.1 71.3 6.1 Q 71.4 6.1 71.6 6.0 Q 71.7 5.9 71.7 5.7 Q 71.7 5.7 71.7 5.6 L 70.7 1.6 Q 70.6 1.2 70.6 0.9 Q 70.6 0.3 71.0 0.3 Q 71.4 0.3 71.6 0.9 Q 71.9 1.4 72.0 2.2 Q 72.1 2.2 72.1 2.2 L 72.3 2.2 Q 72.4 2.2 72.4 2.2 Q 72.4 2.1 72.4 2.1 Q 72.3 1.5 72.1 1.1 Q 72.0 0.6 71.7 0.3 Q 71.4 -0.1 70.9 -0.1 Q 70.5 -0.1 70.1 0.2 Q 69.8 0.4 69.7 0.8 Q 69.4 0.4 68.9 0.2 Q 68.5 -0.1 68.0 -0.1 Q 67.2 -0.1 66.7 0.4 Q 66.3 0.8 66.3 1.6 Z M 73.3 -2.1 Q 73.3 -2.0 73.3 -2.0 L 74.7 3.6 Q 74.8 3.8 74.8 3.9 Q 74.8 4.1 74.2 4.1 Q 74.1 4.1 74.1 4.2 Q 74.1 4.2 74.1 4.3 Q 74.1 4.3 74.1 4.4 Q 74.1 4.4 74.2 4.4 L 75.5 4.5 L 75.5 4.5 Q 75.5 4.5 75.6 4.5 Q 75.6 4.5 75.6 4.5 Q 75.6 4.4 75.6 4.4 L 74.6 0.3 Q 75.0 0.4 75.5 1.0 Q 76.0 1.6 76.3 1.8 Q 76.6 2.0 77.1 2.0 Q 77.4 2.0 77.6 1.9 Q 77.8 1.7 77.8 1.4 Q 77.8 1.2 77.7 1.1 Q 77.6 0.9 77.5 0.8 Q 77.4 0.8 77.2 0.8 Q 77.0 0.8 76.9 0.9 Q 76.8 1.0 76.8 1.1 Q 76.8 1.3 77.0 1.5 Q 77.1 1.7 77.4 1.7 Q 77.3 1.8 77.1 1.8 Q 76.8 1.8 76.5 1.6 Q 76.2 1.5 75.9 1.1 Q 75.6 0.8 75.4 0.6 Q 75.1 0.3 74.9 0.2 Q 75.5 0.1 75.9 -0.1 Q 76.3 -0.4 76.3 -0.9 Q 76.3 -1.0 76.3 -1.1 Q 76.2 -1.5 76.2 -1.7 Q 76.2 -2.1 76.5 -2.1 Q 76.8 -2.1 77.0 -1.7 Q 77.2 -1.4 77.3 -0.8 Q 77.4 -0.8 77.4 -0.8 L 77.5 -0.8 Q 77.6 -0.8 77.6 -0.8 Q 77.6 -0.8 77.6 -0.9 Q 77.6 -0.9 77.6 -0.9 Q 77.2 -2.4 76.5 -2.4 Q 76.2 -2.4 76.0 -2.3 Q 75.8 -2.1 75.7 -1.9 Q 75.5 -1.7 75.5 -1.4 Q 75.5 -1.3 75.6 -1.1 Q 75.6 -1.0 75.6 -0.9 Q 75.6 -0.5 75.3 -0.3 Q 74.9 -0.1 74.5 -0.1 L 74.0 -2.1 Q 74.0 -2.2 73.9 -2.3 Q 73.8 -2.4 73.6 -2.4 Q 73.5 -2.4 73.4 -2.3 Q 73.3 -2.2 73.3 -2.1 Z M 80.3 -3.0 L 80.3 -2.8 Q 80.3 -2.7 80.4 -2.7 Q 82.3 -2.0 82.3 -0.9 L 82.3 3.2 Q 82.3 4.6 84.6 5.3 Q 83.6 5.7 83.0 6.1 Q 82.3 6.6 82.3 7.4 L 82.3 11.5 Q 82.3 12.7 80.4 13.3 Q 80.3 13.4 80.3 13.4 L 80.3 13.6 Q 80.3 13.7 80.5 13.7 L 80.6 13.7 Q 81.8 13.4 82.6 12.9 Q 83.4 12.4 83.4 11.5 L 83.4 7.5 Q 83.4 6.8 83.9 6.3 Q 84.5 5.8 85.3 5.5 Q 85.4 5.5 85.4 5.4 L 85.4 5.2 Q 85.4 5.2 85.3 5.1 Q 84.8 5.0 84.4 4.7 Q 83.9 4.4 83.7 4.1 Q 83.4 3.7 83.4 3.2 L 83.4 -0.9 Q 83.4 -1.5 82.9 -2.0 Q 82.5 -2.4 81.9 -2.6 Q 81.3 -2.9 80.6 -3.1 L 80.5 -3.1 Q 80.4 -3.1 80.4 -3.0 Q 80.3 -3.0 80.3 -3.0 Z M 87.9 -3.4 Q 87.7 -3.4 87.7 -3.3 Q 87.7 -3.2 87.8 -3.2 Q 90.1 -0.9 90.1 3.6 Q 90.1 8.0 87.8 10.4 Q 87.7 10.4 87.7 10.5 Q 87.7 10.5 87.8 10.6 Q 87.8 10.6 87.9 10.6 L 88.0 10.6 Q 88.0 10.6 88.0 10.6 Q 89.1 9.8 89.7 8.6 Q 90.4 7.5 90.7 6.2 Q 91.0 4.9 91.0 3.6 Q 91.0 2.6 90.8 1.6 Q 90.7 0.7 90.3 -0.2 Q 89.9 -1.2 89.4 -2.0 Q 88.8 -2.8 88.0 -3.4 Q 88.0 -3.4 88.0 -3.4 L 87.9 -3.4 Z" fill="#3D4548" transform="translate(114.28 472) scale(1 -1)"/>
-          <path d="M 1.7 -3.0 L 1.7 9.5 Q 1.7 9.6 1.8 9.7 Q 1.9 9.8 2.0 9.8 Q 2.1 9.8 2.2 9.7 Q 2.2 9.6 2.2 9.5 L 2.2 -3.0 Q 2.2 -3.1 2.2 -3.2 Q 2.1 -3.2 2.0 -3.2 Q 1.9 -3.2 1.8 -3.2 Q 1.7 -3.1 1.7 -3.0 Z M 4.3 -3.0 L 4.3 9.5 Q 4.3 9.6 4.3 9.7 Q 4.4 9.8 4.5 9.8 Q 4.6 9.8 4.7 9.7 Q 4.8 9.6 4.8 9.5 L 4.8 -3.0 Q 4.8 -3.1 4.7 -3.2 Q 4.6 -3.2 4.5 -3.2 Q 4.4 -3.2 4.3 -3.2 Q 4.3 -3.1 4.3 -3.0 Z M 9.1 -0.1 Q 8.5 -0.1 8.0 0.2 Q 7.6 0.5 7.3 1.1 Q 7.1 1.6 7.1 2.2 Q 7.1 3.1 7.5 4.0 Q 8.0 4.8 8.8 5.3 Q 9.6 5.7 10.5 5.7 Q 11.1 5.7 11.5 5.5 Q 11.9 5.2 11.9 4.6 Q 11.9 3.9 11.3 3.5 Q 10.7 3.1 10.0 3.1 Q 9.2 3.0 8.3 3.0 L 8.3 3.0 Q 8.1 2.2 8.1 1.7 Q 8.1 1.1 8.3 0.6 Q 8.6 0.2 9.1 0.2 Q 9.9 0.2 10.6 0.6 Q 11.3 0.9 11.8 1.5 Q 11.8 1.6 11.9 1.6 Q 12.0 1.6 12.0 1.5 Q 12.1 1.4 12.1 1.4 Q 12.1 1.3 12.1 1.3 Q 11.6 0.6 10.8 0.2 Q 10.0 -0.1 9.1 -0.1 Z M 8.3 3.3 Q 9.1 3.3 9.7 3.4 Q 10.4 3.5 10.9 3.7 Q 11.4 4.0 11.4 4.6 Q 11.4 4.9 11.3 5.0 Q 11.2 5.2 10.9 5.3 Q 10.7 5.4 10.5 5.4 Q 10.0 5.4 9.5 5.1 Q 9.1 4.8 8.8 4.3 Q 8.5 3.9 8.3 3.3 Z M 14.3 -3.0 L 14.3 9.5 Q 14.3 9.6 14.4 9.7 Q 14.4 9.8 14.5 9.8 Q 14.6 9.8 14.7 9.7 Q 14.8 9.6 14.8 9.5 L 14.8 -3.0 Q 14.8 -3.1 14.7 -3.2 Q 14.6 -3.2 14.5 -3.2 Q 14.4 -3.2 14.4 -3.2 Q 14.3 -3.1 14.3 -3.0 Z M 16.8 -3.0 L 16.8 9.5 Q 16.8 9.6 16.9 9.7 Q 16.9 9.8 17.1 9.8 Q 17.2 9.8 17.2 9.7 Q 17.3 9.6 17.3 9.5 L 17.3 -3.0 Q 17.3 -3.1 17.2 -3.2 Q 17.2 -3.2 17.1 -3.2 Q 16.9 -3.2 16.9 -3.2 Q 16.8 -3.1 16.8 -3.0 Z M 22.5 3.0 Q 22.4 3.1 22.4 3.2 Q 22.4 3.4 22.6 3.5 L 30.0 7.0 Q 30.0 7.0 30.1 7.0 Q 30.2 7.0 30.3 6.9 Q 30.3 6.9 30.3 6.8 Q 30.3 6.6 30.2 6.5 L 23.3 3.2 L 30.2 -0.0 Q 30.3 -0.1 30.3 -0.3 Q 30.3 -0.4 30.3 -0.4 Q 30.2 -0.5 30.1 -0.5 Q 30.0 -0.5 30.0 -0.5 L 22.5 3.0 Z M 34.1 1.4 Q 34.1 1.7 34.2 2.0 Q 34.4 2.4 34.6 2.6 Q 34.9 2.9 35.2 3.1 Q 34.7 3.5 34.7 4.0 Q 34.7 4.6 35.2 5.0 Q 35.7 5.5 36.4 5.7 Q 37.1 5.9 37.6 5.9 Q 37.9 5.9 38.3 5.8 Q 38.7 5.7 39.0 5.5 Q 39.3 5.3 39.3 5.1 Q 39.3 5.0 39.1 4.9 Q 39.0 4.7 38.9 4.7 Q 38.8 4.7 38.6 4.9 Q 38.4 5.0 38.1 5.1 Q 37.8 5.2 37.5 5.2 Q 37.1 5.2 36.5 5.1 Q 35.9 5.0 35.5 4.7 Q 35.1 4.5 35.1 4.0 Q 35.1 3.6 35.6 3.3 Q 36.1 3.5 36.7 3.5 Q 37.7 3.5 37.7 3.2 Q 37.7 2.9 37.4 2.8 Q 37.0 2.7 36.6 2.7 Q 35.9 2.7 35.6 2.9 Q 35.1 2.7 34.8 2.3 Q 34.5 1.9 34.5 1.4 Q 34.5 1.0 34.7 0.8 Q 35.0 0.5 35.4 0.5 Q 35.8 0.4 36.3 0.4 Q 37.0 0.4 37.5 0.5 Q 38.1 0.7 38.3 1.2 Q 38.4 1.3 38.5 1.3 Q 38.6 1.2 38.6 1.1 Q 38.6 1.1 38.6 1.0 Q 38.4 0.5 38.0 0.3 Q 37.6 -0.0 37.1 -0.2 Q 36.6 -0.3 36.2 -0.3 Q 35.3 -0.3 34.7 0.1 Q 34.1 0.6 34.1 1.4 Z M 36.1 3.1 Q 36.3 3.1 36.6 3.1 Q 37.2 3.1 37.3 3.2 Q 37.1 3.2 36.7 3.2 Q 36.3 3.2 36.1 3.1 Z M 40.1 -2.2 L 40.1 -0.8 Q 40.1 -0.7 40.1 -0.7 L 40.3 -0.7 Q 40.3 -0.7 40.3 -0.8 Q 40.6 -2.1 41.6 -2.1 Q 42.0 -2.1 42.3 -1.9 Q 42.6 -1.7 42.6 -1.3 Q 42.6 -1.0 42.3 -0.8 Q 42.1 -0.6 41.8 -0.5 L 41.2 -0.4 Q 40.9 -0.3 40.6 -0.2 Q 40.4 -0.0 40.2 0.2 Q 40.1 0.4 40.1 0.7 Q 40.1 1.1 40.3 1.4 Q 40.5 1.6 40.8 1.8 Q 41.2 1.9 41.6 1.9 Q 42.0 1.9 42.4 1.6 L 42.6 1.8 Q 42.6 1.9 42.7 1.9 L 42.7 1.9 Q 42.8 1.9 42.8 1.8 Q 42.8 1.8 42.8 1.8 L 42.8 0.6 Q 42.8 0.5 42.7 0.5 L 42.6 0.5 Q 42.5 0.5 42.5 0.6 Q 42.5 1.1 42.3 1.4 Q 42.0 1.7 41.5 1.7 Q 41.1 1.7 40.8 1.5 Q 40.5 1.4 40.5 1.0 Q 40.5 0.7 40.8 0.6 Q 41.0 0.4 41.3 0.3 L 41.9 0.2 Q 42.2 0.1 42.5 -0.0 Q 42.7 -0.2 42.9 -0.4 Q 43.0 -0.7 43.0 -1.0 Q 43.0 -1.4 42.9 -1.6 Q 42.8 -1.8 42.6 -2.0 Q 42.4 -2.2 42.1 -2.2 Q 41.9 -2.3 41.6 -2.3 Q 41.0 -2.3 40.6 -1.9 L 40.2 -2.3 Q 40.2 -2.3 40.2 -2.3 L 40.1 -2.3 Q 40.1 -2.3 40.1 -2.2 Z M 45.6 -2.3 Q 45.1 -2.3 44.6 -2.0 Q 44.1 -1.8 43.9 -1.3 Q 43.6 -0.8 43.6 -0.3 Q 43.6 0.1 43.8 0.5 Q 43.9 0.9 44.2 1.2 Q 44.5 1.5 44.8 1.7 Q 45.2 1.9 45.6 1.9 Q 46.2 1.9 46.6 1.6 Q 47.1 1.3 47.4 0.8 Q 47.6 0.3 47.6 -0.3 Q 47.6 -0.8 47.4 -1.3 Q 47.1 -1.8 46.6 -2.0 Q 46.2 -2.3 45.6 -2.3 Z M 45.6 -2.0 Q 46.4 -2.0 46.6 -1.5 Q 46.8 -1.0 46.8 -0.2 Q 46.8 0.3 46.8 0.6 Q 46.7 0.9 46.6 1.1 Q 46.5 1.3 46.3 1.4 Q 46.2 1.5 46.0 1.6 Q 45.8 1.6 45.6 1.6 Q 45.3 1.6 45.1 1.5 Q 44.8 1.4 44.7 1.1 Q 44.5 0.9 44.4 0.6 Q 44.4 0.3 44.4 -0.2 Q 44.4 -0.7 44.5 -1.1 Q 44.6 -1.5 44.8 -1.8 Q 45.1 -2.0 45.6 -2.0 Z M 48.2 -2.2 L 48.2 -1.9 Q 48.5 -1.9 48.7 -1.8 Q 48.9 -1.8 48.9 -1.6 L 48.9 1.4 L 48.2 1.4 L 48.2 1.7 L 48.9 1.7 L 48.9 2.8 Q 48.9 3.1 49.0 3.4 Q 49.1 3.6 49.3 3.8 Q 49.6 4.0 49.8 4.1 Q 50.1 4.2 50.4 4.2 Q 50.7 4.2 50.9 4.0 Q 51.2 3.8 51.2 3.5 Q 51.2 3.4 51.1 3.2 Q 50.9 3.1 50.8 3.1 Q 50.6 3.1 50.5 3.2 Q 50.4 3.4 50.4 3.5 Q 50.4 3.8 50.6 3.9 Q 50.5 4.0 50.3 4.0 Q 50.1 4.0 49.9 3.8 Q 49.7 3.6 49.6 3.3 Q 49.5 3.1 49.5 2.8 L 49.5 1.7 L 50.6 1.7 L 50.6 1.4 L 49.5 1.4 L 49.5 -1.6 Q 49.5 -1.8 49.8 -1.8 Q 50.1 -1.9 50.4 -1.9 L 50.4 -2.2 L 48.2 -2.2 Z M 51.6 -1.1 L 51.6 1.4 L 50.8 1.4 L 50.8 1.6 Q 51.4 1.6 51.7 2.2 Q 52.0 2.7 52.0 3.4 L 52.3 3.4 L 52.3 1.7 L 53.6 1.7 L 53.6 1.4 L 52.3 1.4 L 52.3 -1.1 Q 52.3 -1.5 52.4 -1.8 Q 52.5 -2.0 52.8 -2.0 Q 53.2 -2.0 53.3 -1.7 Q 53.4 -1.4 53.4 -1.1 L 53.4 -0.6 L 53.7 -0.6 L 53.7 -1.1 Q 53.7 -1.4 53.6 -1.7 Q 53.5 -2.0 53.3 -2.1 Q 53.1 -2.3 52.8 -2.3 Q 52.2 -2.3 51.9 -2.0 Q 51.6 -1.7 51.6 -1.1 Z M 58.3 3.0 Q 58.2 3.0 58.1 3.1 Q 58.0 3.2 58.0 3.2 Q 58.0 3.3 58.1 3.4 Q 58.2 3.5 58.3 3.5 L 68.2 3.5 Q 67.7 3.9 67.3 4.3 Q 66.9 4.8 66.7 5.3 Q 66.4 5.9 66.3 6.5 Q 66.3 6.6 66.4 6.6 L 66.7 6.6 Q 66.7 6.6 66.8 6.6 Q 66.8 6.6 66.8 6.5 Q 66.9 6.0 67.1 5.5 Q 67.4 5.0 67.7 4.6 Q 68.1 4.2 68.5 3.9 Q 68.9 3.6 69.5 3.4 Q 69.6 3.3 69.6 3.2 Q 69.6 3.1 69.5 3.1 Q 68.8 2.9 68.2 2.4 Q 67.7 2.0 67.3 1.3 Q 66.9 0.7 66.8 -0.0 Q 66.8 -0.1 66.8 -0.1 Q 66.7 -0.1 66.7 -0.1 L 66.4 -0.1 Q 66.3 -0.1 66.3 0.0 Q 66.5 0.9 66.9 1.7 Q 67.4 2.5 68.2 3.0 L 58.3 3.0 Z M 73.0 -0.0 L 73.0 2.1 Q 73.0 2.2 73.1 2.2 L 73.3 2.2 Q 73.4 2.2 73.4 2.1 Q 73.8 0.2 75.2 0.2 Q 75.8 0.2 76.2 0.5 Q 76.6 0.8 76.6 1.3 Q 76.6 1.8 76.3 2.1 Q 76.0 2.3 75.5 2.5 L 74.6 2.6 Q 74.2 2.7 73.8 2.9 Q 73.5 3.1 73.3 3.4 Q 73.0 3.8 73.0 4.2 Q 73.0 4.8 73.3 5.1 Q 73.6 5.5 74.1 5.7 Q 74.6 5.8 75.2 5.8 Q 75.8 5.8 76.3 5.5 L 76.7 5.8 Q 76.7 5.8 76.8 5.8 L 76.9 5.8 Q 76.9 5.8 76.9 5.8 Q 77.0 5.8 77.0 5.7 L 77.0 4.0 Q 77.0 3.9 76.9 3.9 L 76.7 3.9 Q 76.6 3.9 76.6 4.0 Q 76.6 4.7 76.2 5.1 Q 75.8 5.5 75.1 5.5 Q 74.6 5.5 74.1 5.3 Q 73.7 5.1 73.7 4.6 Q 73.7 4.2 74.0 4.0 Q 74.3 3.7 74.7 3.6 L 75.6 3.5 Q 76.1 3.4 76.4 3.1 Q 76.8 2.9 77.1 2.5 Q 77.3 2.2 77.3 1.7 Q 77.3 1.2 77.1 0.9 Q 77.0 0.5 76.7 0.3 Q 76.4 0.1 76.0 -0.0 Q 75.6 -0.1 75.2 -0.1 Q 74.3 -0.1 73.8 0.4 L 73.3 -0.1 Q 73.3 -0.1 73.2 -0.1 L 73.1 -0.1 Q 73.0 -0.1 73.0 -0.0 Z M 81.0 -0.1 Q 80.2 -0.1 79.5 0.3 Q 78.8 0.7 78.5 1.4 Q 78.1 2.1 78.1 2.8 Q 78.1 3.6 78.4 4.3 Q 78.8 5.0 79.4 5.4 Q 80.0 5.8 80.8 5.8 Q 81.4 5.8 81.8 5.6 Q 82.3 5.4 82.5 5.1 Q 82.8 4.7 83.0 4.2 Q 83.1 3.8 83.1 3.2 Q 83.1 3.0 83.0 3.0 L 79.2 3.0 L 79.2 2.9 Q 79.2 1.8 79.7 1.0 Q 80.1 0.2 81.1 0.2 Q 81.5 0.2 81.8 0.4 Q 82.2 0.6 82.4 0.9 Q 82.7 1.2 82.7 1.6 Q 82.8 1.6 82.8 1.7 Q 82.8 1.7 82.9 1.7 L 83.0 1.7 Q 83.1 1.7 83.1 1.5 Q 82.9 0.8 82.3 0.3 Q 81.7 -0.1 81.0 -0.1 Z M 79.2 3.3 L 82.2 3.3 Q 82.2 3.8 82.1 4.3 Q 81.9 4.8 81.6 5.2 Q 81.3 5.5 80.8 5.5 Q 80.0 5.5 79.6 4.8 Q 79.2 4.1 79.2 3.3 Z M 83.8 0.0 L 83.8 0.5 Q 84.3 0.5 84.6 0.5 Q 84.8 0.6 84.8 0.9 L 84.8 4.4 Q 84.8 4.8 84.7 4.9 Q 84.6 5.1 84.4 5.1 Q 84.2 5.1 83.8 5.1 L 83.8 5.6 L 85.7 5.7 L 85.7 4.5 Q 85.9 5.0 86.3 5.4 Q 86.7 5.7 87.2 5.7 Q 87.6 5.7 87.9 5.5 Q 88.2 5.3 88.2 4.9 Q 88.2 4.7 88.1 4.5 Q 87.9 4.3 87.6 4.3 Q 87.4 4.3 87.2 4.5 Q 87.1 4.7 87.1 4.9 Q 87.1 5.3 87.3 5.4 L 87.2 5.4 Q 86.7 5.4 86.4 5.0 Q 86.0 4.6 85.9 4.1 Q 85.8 3.5 85.8 3.0 L 85.8 0.9 Q 85.8 0.5 87.0 0.5 L 87.0 0.0 L 83.8 0.0 Z M 91.8 0.0 L 89.9 4.8 Q 89.7 5.0 89.5 5.1 Q 89.2 5.1 88.8 5.1 L 88.8 5.6 L 91.6 5.6 L 91.6 5.1 Q 90.8 5.1 90.8 4.8 Q 90.8 4.8 90.8 4.8 L 92.3 1.1 L 93.6 4.4 Q 93.7 4.5 93.7 4.6 Q 93.7 4.9 93.5 5.0 Q 93.3 5.1 93.0 5.1 L 93.0 5.6 L 95.2 5.6 L 95.2 5.1 Q 94.8 5.1 94.5 5.0 Q 94.2 4.8 94.0 4.4 L 92.3 0.0 Q 92.2 -0.1 92.1 -0.1 L 92.0 -0.1 Q 91.8 -0.1 91.8 0.0 Z M 98.7 -0.1 Q 97.9 -0.1 97.2 0.2 Q 96.6 0.6 96.2 1.3 Q 95.8 2.0 95.8 2.8 Q 95.8 3.4 96.0 3.9 Q 96.2 4.5 96.6 4.9 Q 97.0 5.3 97.5 5.6 Q 98.1 5.8 98.7 5.8 Q 99.5 5.8 100.1 5.4 Q 100.8 5.0 101.2 4.3 Q 101.6 3.6 101.6 2.8 Q 101.6 2.0 101.2 1.3 Q 100.8 0.6 100.1 0.2 Q 99.5 -0.1 98.7 -0.1 Z M 98.7 0.2 Q 99.7 0.2 100.1 1.0 Q 100.4 1.7 100.4 2.9 Q 100.4 3.6 100.3 4.0 Q 100.3 4.4 100.0 4.8 Q 99.9 5.0 99.7 5.2 Q 99.4 5.3 99.2 5.4 Q 98.9 5.5 98.7 5.5 Q 98.3 5.5 97.9 5.3 Q 97.5 5.1 97.3 4.8 Q 97.1 4.4 97.0 4.0 Q 96.9 3.5 96.9 2.9 Q 96.9 2.2 97.1 1.6 Q 97.2 1.0 97.6 0.6 Q 97.9 0.2 98.7 0.2 Z M 103.2 -2.3 Q 103.2 -2.3 103.3 -2.2 Q 103.7 -1.8 104.0 -1.2 Q 104.3 -0.6 104.3 0.1 L 104.3 0.2 Q 104.0 0.0 103.7 0.0 Q 103.4 0.0 103.2 0.2 Q 103.0 0.4 103.0 0.7 Q 103.0 1.0 103.2 1.2 Q 103.4 1.4 103.7 1.4 Q 104.2 1.4 104.4 1.0 Q 104.6 0.6 104.6 0.1 Q 104.6 -0.7 104.3 -1.3 Q 104.0 -2.0 103.5 -2.5 Q 103.4 -2.5 103.4 -2.5 Q 103.3 -2.5 103.3 -2.5 Q 103.2 -2.4 103.2 -2.3 Z M 114.9 -0.1 Q 114.1 -0.1 113.4 0.3 Q 112.7 0.7 112.4 1.4 Q 112.0 2.1 112.0 2.8 Q 112.0 3.6 112.3 4.3 Q 112.7 5.0 113.3 5.4 Q 113.9 5.8 114.7 5.8 Q 115.3 5.8 115.7 5.6 Q 116.1 5.4 116.4 5.1 Q 116.7 4.7 116.9 4.2 Q 117.0 3.8 117.0 3.2 Q 117.0 3.0 116.9 3.0 L 113.1 3.0 L 113.1 2.9 Q 113.1 1.8 113.5 1.0 Q 114.0 0.2 115.0 0.2 Q 115.4 0.2 115.7 0.4 Q 116.0 0.6 116.3 0.9 Q 116.5 1.2 116.6 1.6 Q 116.6 1.6 116.7 1.7 Q 116.7 1.7 116.8 1.7 L 116.9 1.7 Q 117.0 1.7 117.0 1.5 Q 116.8 0.8 116.2 0.3 Q 115.6 -0.1 114.9 -0.1 Z M 113.1 3.3 L 116.1 3.3 Q 116.1 3.8 116.0 4.3 Q 115.8 4.8 115.5 5.2 Q 115.2 5.5 114.7 5.5 Q 113.9 5.5 113.5 4.8 Q 113.1 4.1 113.1 3.3 Z M 117.8 0.0 L 117.8 0.5 Q 118.2 0.5 118.5 0.5 Q 118.8 0.6 118.8 0.9 L 118.8 7.7 Q 118.8 8.0 118.7 8.2 Q 118.6 8.4 118.4 8.4 Q 118.2 8.4 117.8 8.4 L 117.8 8.9 L 119.7 9.0 L 119.7 0.9 Q 119.7 0.6 120.0 0.5 Q 120.3 0.5 120.7 0.5 L 120.7 0.0 L 117.8 0.0 Z M 121.4 -0.0 L 121.4 2.1 Q 121.4 2.2 121.5 2.2 L 121.7 2.2 Q 121.8 2.2 121.8 2.1 Q 122.2 0.2 123.5 0.2 Q 124.2 0.2 124.6 0.5 Q 125.0 0.8 125.0 1.3 Q 125.0 1.8 124.7 2.1 Q 124.3 2.3 123.9 2.5 L 123.0 2.6 Q 122.6 2.7 122.2 2.9 Q 121.9 3.1 121.6 3.4 Q 121.4 3.8 121.4 4.2 Q 121.4 4.8 121.7 5.1 Q 122.0 5.5 122.5 5.7 Q 123.0 5.8 123.5 5.8 Q 124.2 5.8 124.7 5.5 L 125.1 5.8 Q 125.1 5.8 125.1 5.8 L 125.2 5.8 Q 125.3 5.8 125.3 5.8 Q 125.3 5.8 125.3 5.7 L 125.3 4.0 Q 125.3 3.9 125.2 3.9 L 125.1 3.9 Q 125.0 3.9 125.0 4.0 Q 125.0 4.7 124.6 5.1 Q 124.2 5.5 123.5 5.5 Q 122.9 5.5 122.5 5.3 Q 122.1 5.1 122.1 4.6 Q 122.1 4.2 122.4 4.0 Q 122.7 3.7 123.1 3.6 L 124.0 3.5 Q 124.4 3.4 124.8 3.1 Q 125.2 2.9 125.4 2.5 Q 125.7 2.2 125.7 1.7 Q 125.7 1.2 125.5 0.9 Q 125.3 0.5 125.0 0.3 Q 124.8 0.1 124.4 -0.0 Q 124.0 -0.1 123.5 -0.1 Q 122.7 -0.1 122.2 0.4 L 121.7 -0.1 Q 121.7 -0.1 121.6 -0.1 L 121.5 -0.1 Q 121.4 -0.1 121.4 -0.0 Z M 129.3 -0.1 Q 128.6 -0.1 127.9 0.3 Q 127.2 0.7 126.8 1.4 Q 126.5 2.1 126.5 2.8 Q 126.5 3.6 126.8 4.3 Q 127.2 5.0 127.8 5.4 Q 128.4 5.8 129.2 5.8 Q 129.8 5.8 130.2 5.6 Q 130.6 5.4 130.9 5.1 Q 131.2 4.7 131.4 4.2 Q 131.5 3.8 131.5 3.2 Q 131.5 3.0 131.4 3.0 L 127.6 3.0 L 127.6 2.9 Q 127.6 1.8 128.0 1.0 Q 128.5 0.2 129.5 0.2 Q 129.9 0.2 130.2 0.4 Q 130.5 0.6 130.8 0.9 Q 131.0 1.2 131.1 1.6 Q 131.1 1.6 131.2 1.7 Q 131.2 1.7 131.3 1.7 L 131.4 1.7 Q 131.5 1.7 131.5 1.5 Q 131.3 0.8 130.7 0.3 Q 130.1 -0.1 129.3 -0.1 Z M 127.6 3.3 L 130.6 3.3 Q 130.6 3.8 130.4 4.3 Q 130.3 4.8 130.0 5.2 Q 129.7 5.5 129.2 5.5 Q 128.4 5.5 128.0 4.8 Q 127.6 4.1 127.6 3.3 Z M 136.1 -0.0 L 136.1 2.1 Q 136.1 2.2 136.2 2.2 L 136.4 2.2 Q 136.5 2.2 136.5 2.1 Q 136.8 0.2 138.2 0.2 Q 138.9 0.2 139.3 0.5 Q 139.7 0.8 139.7 1.3 Q 139.7 1.8 139.4 2.1 Q 139.0 2.3 138.6 2.5 L 137.7 2.6 Q 137.3 2.7 136.9 2.9 Q 136.6 3.1 136.3 3.4 Q 136.1 3.8 136.1 4.2 Q 136.1 4.8 136.4 5.1 Q 136.7 5.5 137.2 5.7 Q 137.7 5.8 138.2 5.8 Q 138.9 5.8 139.4 5.5 L 139.8 5.8 Q 139.8 5.8 139.8 5.8 L 139.9 5.8 Q 140.0 5.8 140.0 5.8 Q 140.0 5.8 140.0 5.7 L 140.0 4.0 Q 140.0 3.9 139.9 3.9 L 139.8 3.9 Q 139.7 3.9 139.7 4.0 Q 139.7 4.7 139.3 5.1 Q 138.9 5.5 138.2 5.5 Q 137.6 5.5 137.2 5.3 Q 136.8 5.1 136.8 4.6 Q 136.8 4.2 137.1 4.0 Q 137.4 3.7 137.8 3.6 L 138.7 3.5 Q 139.1 3.4 139.5 3.1 Q 139.9 2.9 140.1 2.5 Q 140.4 2.2 140.4 1.7 Q 140.4 1.2 140.2 0.9 Q 140.0 0.5 139.7 0.3 Q 139.5 0.1 139.1 -0.0 Q 138.7 -0.1 138.2 -0.1 Q 137.4 -0.1 136.8 0.4 L 136.4 -0.1 Q 136.4 -0.1 136.3 -0.1 L 136.2 -0.1 Q 136.1 -0.1 136.1 -0.0 Z M 141.2 0.0 L 141.2 0.5 Q 141.6 0.5 141.9 0.5 Q 142.2 0.6 142.2 0.9 L 142.2 4.4 Q 142.2 4.8 142.1 4.9 Q 142.0 5.1 141.8 5.1 Q 141.6 5.1 141.2 5.1 L 141.2 5.6 L 143.1 5.7 L 143.1 4.5 Q 143.3 5.0 143.8 5.4 Q 144.4 5.7 145.0 5.7 Q 145.9 5.7 146.3 5.3 Q 146.8 4.9 146.8 4.0 L 146.8 0.9 Q 146.8 0.6 147.1 0.5 Q 147.3 0.5 147.8 0.5 L 147.8 0.0 L 144.8 0.0 L 144.8 0.5 Q 145.3 0.5 145.5 0.5 Q 145.8 0.6 145.8 0.9 L 145.8 4.0 Q 145.8 4.6 145.6 5.0 Q 145.5 5.4 144.9 5.4 Q 144.1 5.4 143.6 4.8 Q 143.2 4.2 143.2 3.4 L 143.2 0.9 Q 143.2 0.6 143.4 0.5 Q 143.7 0.5 144.2 0.5 L 144.2 0.0 L 141.2 0.0 Z M 148.5 1.3 Q 148.5 2.0 149.2 2.5 Q 149.8 3.0 150.6 3.2 Q 151.5 3.4 152.2 3.4 L 152.2 4.0 Q 152.2 4.3 152.1 4.7 Q 151.9 5.0 151.6 5.3 Q 151.3 5.5 150.9 5.5 Q 150.0 5.5 149.6 5.1 Q 149.8 5.1 150.0 4.9 Q 150.2 4.7 150.2 4.5 Q 150.2 4.2 150.0 4.0 Q 149.8 3.8 149.5 3.8 Q 149.3 3.8 149.1 4.0 Q 148.9 4.2 148.9 4.5 Q 148.9 5.2 149.5 5.5 Q 150.2 5.8 150.9 5.8 Q 151.4 5.8 152.0 5.6 Q 152.5 5.4 152.8 5.0 Q 153.2 4.5 153.2 4.0 L 153.2 1.1 Q 153.2 0.8 153.3 0.6 Q 153.4 0.4 153.6 0.4 Q 153.8 0.4 153.9 0.6 Q 154.1 0.8 154.1 1.1 L 154.1 1.9 L 154.4 1.9 L 154.4 1.1 Q 154.4 0.8 154.3 0.5 Q 154.1 0.2 153.9 0.1 Q 153.6 -0.1 153.3 -0.1 Q 152.9 -0.1 152.7 0.2 Q 152.4 0.5 152.3 0.9 Q 152.1 0.4 151.6 0.1 Q 151.2 -0.1 150.6 -0.1 Q 150.1 -0.1 149.7 0.0 Q 149.2 0.1 148.9 0.5 Q 148.5 0.8 148.5 1.3 Z M 149.6 1.3 Q 149.6 0.8 149.9 0.5 Q 150.3 0.2 150.7 0.2 Q 151.1 0.2 151.5 0.4 Q 151.8 0.6 152.0 1.0 Q 152.2 1.3 152.2 1.7 L 152.2 3.1 Q 151.6 3.1 151.0 2.9 Q 150.4 2.7 150.0 2.3 Q 149.6 1.9 149.6 1.3 Z M 154.9 -2.5 L 154.9 -2.1 Q 155.3 -2.1 155.6 -2.0 Q 155.9 -1.9 155.9 -1.7 L 155.9 4.6 Q 155.9 5.0 155.6 5.1 Q 155.4 5.1 154.9 5.1 L 154.9 5.6 L 156.8 5.7 L 156.8 4.9 Q 157.1 5.3 157.6 5.5 Q 158.1 5.7 158.6 5.7 Q 159.4 5.7 160.0 5.3 Q 160.6 4.9 161.0 4.2 Q 161.3 3.6 161.3 2.8 Q 161.3 2.0 160.9 1.3 Q 160.5 0.7 159.9 0.3 Q 159.2 -0.1 158.4 -0.1 Q 157.5 -0.1 156.8 0.6 L 156.8 -1.7 Q 156.8 -1.9 157.1 -2.0 Q 157.4 -2.1 157.8 -2.1 L 157.8 -2.5 L 154.9 -2.5 Z M 156.8 1.3 Q 157.0 0.8 157.5 0.5 Q 157.9 0.2 158.3 0.2 Q 158.8 0.2 159.1 0.4 Q 159.5 0.7 159.7 1.1 Q 160.0 1.5 160.1 1.9 Q 160.2 2.4 160.2 2.8 Q 160.2 3.3 160.0 3.9 Q 159.8 4.5 159.4 5.0 Q 159.0 5.4 158.5 5.4 Q 158.0 5.4 157.5 5.1 Q 157.1 4.8 156.8 4.4 L 156.8 1.3 Z" fill="#3D4548" transform="translate(78.48 494) scale(1 -1)"/>
-          <path d="M 0.8 0.1 Q 0.6 0.1 0.6 0.2 Q 0.6 0.2 0.7 0.2 Q 0.7 0.2 0.7 0.2 L 5.5 9.9 Q 5.5 10.1 5.7 10.1 L 5.9 10.1 Q 6.1 10.1 6.2 9.9 L 11.0 0.2 Q 11.0 0.2 11.0 0.2 Q 11.0 0.2 11.0 0.2 Q 11.0 0.1 10.9 0.1 L 0.8 0.1 Z M 1.7 1.2 L 9.1 1.2 L 5.4 8.6 L 1.7 1.2 Z" fill="#788386" transform="translate(334.18 357) scale(1 -1)"/>
-          <path d="M 1.0 -1.7 Q 1.3 -2.2 1.9 -2.2 Q 2.5 -2.2 2.9 -1.8 Q 3.3 -1.4 3.5 -0.8 Q 3.8 -0.2 3.9 0.4 Q 3.4 -0.1 2.8 -0.1 Q 2.3 -0.1 2.0 0.0 Q 1.6 0.2 1.5 0.5 Q 1.3 0.8 1.3 1.3 Q 1.3 1.7 1.4 2.1 Q 1.5 2.5 1.7 3.0 Q 1.9 3.5 2.0 3.9 Q 2.2 4.4 2.2 4.6 Q 2.2 5.0 1.9 5.0 Q 1.4 5.0 1.1 4.5 Q 0.8 4.0 0.7 3.4 Q 0.6 3.3 0.6 3.3 L 0.4 3.3 Q 0.3 3.3 0.3 3.4 L 0.3 3.5 Q 0.5 4.2 0.9 4.7 Q 1.3 5.3 1.9 5.3 Q 2.3 5.3 2.6 5.0 Q 2.9 4.7 2.9 4.3 Q 2.9 4.1 2.8 3.8 Q 2.8 3.7 2.6 3.2 Q 2.4 2.7 2.3 2.4 Q 2.2 2.1 2.2 1.8 Q 2.1 1.4 2.1 1.1 Q 2.1 0.7 2.3 0.5 Q 2.4 0.2 2.8 0.2 Q 3.5 0.2 4.1 1.1 L 5.0 4.8 Q 5.1 4.9 5.2 5.1 Q 5.4 5.2 5.5 5.2 Q 5.7 5.2 5.8 5.1 Q 5.9 5.0 5.9 4.8 Q 5.9 4.8 5.9 4.7 L 4.7 -0.0 Q 4.5 -0.7 4.1 -1.2 Q 3.7 -1.8 3.1 -2.1 Q 2.5 -2.5 1.9 -2.5 Q 1.6 -2.5 1.3 -2.3 Q 0.9 -2.2 0.8 -2.0 Q 0.6 -1.7 0.6 -1.4 Q 0.6 -1.1 0.8 -0.8 Q 1.0 -0.6 1.3 -0.6 Q 1.5 -0.6 1.6 -0.7 Q 1.7 -0.8 1.7 -1.0 Q 1.7 -1.3 1.5 -1.5 Q 1.3 -1.7 1.1 -1.7 Q 1.0 -1.7 1.0 -1.7 Q 1.0 -1.7 1.0 -1.7 Z M 9.6 -3.0 Q 8.9 -2.4 8.5 -1.8 Q 8.0 -1.1 7.7 -0.3 Q 7.4 0.5 7.2 1.3 Q 7.0 2.2 7.0 3.0 Q 7.0 3.9 7.2 4.7 Q 7.4 5.5 7.7 6.3 Q 8.0 7.1 8.5 7.8 Q 9.0 8.5 9.6 9.0 Q 9.6 9.0 9.7 9.0 L 9.8 9.0 Q 9.8 9.0 9.8 9.0 Q 9.9 8.9 9.9 8.9 Q 9.9 8.8 9.8 8.8 Q 9.3 8.2 8.9 7.6 Q 8.5 6.9 8.2 6.2 Q 8.0 5.4 7.9 4.7 Q 7.8 3.9 7.8 3.0 Q 7.8 -0.8 9.8 -2.8 Q 9.9 -2.8 9.9 -2.9 Q 9.9 -2.9 9.8 -3.0 Q 9.8 -3.0 9.8 -3.0 L 9.7 -3.0 Q 9.6 -3.0 9.6 -3.0 Z M 11.3 1.0 Q 11.3 1.1 11.3 1.3 L 12.2 4.8 L 10.9 4.8 Q 10.8 4.8 10.8 4.9 Q 10.9 5.2 11.0 5.2 L 12.3 5.2 L 12.8 7.1 Q 12.8 7.3 13.0 7.4 Q 13.1 7.5 13.3 7.5 Q 13.4 7.5 13.5 7.4 Q 13.6 7.3 13.6 7.2 Q 13.6 7.1 13.6 7.1 Q 13.6 7.1 13.6 7.1 L 13.1 5.2 L 14.4 5.2 Q 14.5 5.2 14.5 5.0 Q 14.5 5.0 14.5 4.9 Q 14.5 4.8 14.4 4.8 Q 14.4 4.8 14.3 4.8 L 13.0 4.8 L 12.2 1.3 Q 12.1 0.9 12.1 0.7 Q 12.1 0.2 12.4 0.2 Q 13.0 0.2 13.4 0.7 Q 13.8 1.2 14.0 1.8 Q 14.0 1.8 14.1 1.8 L 14.2 1.8 Q 14.3 1.8 14.3 1.8 Q 14.3 1.8 14.3 1.7 Q 14.3 1.7 14.3 1.7 Q 14.1 1.0 13.6 0.4 Q 13.1 -0.1 12.4 -0.1 Q 11.9 -0.1 11.6 0.2 Q 11.3 0.5 11.3 1.0 Z M 15.6 -1.5 Q 15.8 -1.9 16.5 -1.9 Q 16.8 -1.9 17.1 -1.8 Q 17.3 -1.7 17.5 -1.5 Q 17.7 -1.3 17.7 -1.0 Q 17.7 -0.8 17.5 -0.7 Q 17.4 -0.5 17.1 -0.5 L 16.7 -0.4 Q 16.4 -0.3 16.2 -0.1 Q 16.0 0.1 16.0 0.4 Q 16.0 0.8 16.2 1.1 Q 16.4 1.4 16.7 1.5 Q 17.0 1.7 17.4 1.7 Q 17.8 1.7 18.1 1.5 Q 18.4 1.3 18.4 0.9 Q 18.4 0.8 18.3 0.6 Q 18.2 0.5 18.0 0.5 Q 17.9 0.5 17.8 0.5 Q 17.7 0.6 17.7 0.7 Q 17.7 0.8 17.8 0.9 Q 17.8 1.0 17.9 1.1 Q 18.0 1.1 18.1 1.1 Q 18.0 1.3 17.8 1.4 Q 17.6 1.5 17.4 1.5 Q 17.2 1.5 17.0 1.4 Q 16.7 1.3 16.6 1.1 Q 16.5 0.9 16.5 0.7 Q 16.5 0.6 16.6 0.5 Q 16.7 0.3 16.9 0.3 L 17.3 0.2 Q 17.6 0.1 17.8 0.0 Q 18.0 -0.1 18.1 -0.3 Q 18.2 -0.5 18.2 -0.7 Q 18.2 -1.0 18.0 -1.3 Q 17.8 -1.7 17.6 -1.8 Q 17.1 -2.1 16.5 -2.1 Q 16.1 -2.1 15.7 -1.9 Q 15.3 -1.7 15.3 -1.3 Q 15.3 -1.1 15.4 -0.9 Q 15.6 -0.7 15.8 -0.7 Q 15.9 -0.7 16.0 -0.8 Q 16.1 -0.9 16.1 -1.0 Q 16.1 -1.2 16.0 -1.4 Q 15.8 -1.5 15.6 -1.5 L 15.6 -1.5 Z M 20.3 -3.0 Q 20.2 -3.0 20.2 -2.9 Q 20.2 -2.8 20.3 -2.8 Q 22.3 -0.8 22.3 3.0 Q 22.3 6.8 20.3 8.8 Q 20.2 8.8 20.2 8.9 Q 20.2 8.9 20.3 9.0 Q 20.3 9.0 20.3 9.0 L 20.5 9.0 Q 20.5 9.0 20.5 9.0 Q 21.4 8.3 22.0 7.3 Q 22.5 6.4 22.8 5.2 Q 23.1 4.1 23.1 3.0 Q 23.1 2.2 22.9 1.3 Q 22.8 0.5 22.5 -0.3 Q 22.1 -1.1 21.7 -1.8 Q 21.2 -2.4 20.5 -3.0 Q 20.5 -3.0 20.5 -3.0 L 20.3 -3.0 Z M 30.9 3.0 Q 30.9 3.2 30.9 3.3 Q 31.0 3.5 31.2 3.6 Q 31.3 3.7 31.5 3.7 Q 31.7 3.7 31.8 3.6 Q 32.0 3.5 32.1 3.3 Q 32.2 3.2 32.2 3.0 Q 32.2 2.7 32.0 2.5 Q 31.8 2.3 31.5 2.3 Q 31.2 2.3 31.0 2.5 Q 30.9 2.7 30.9 3.0 Z M 40.4 2.7 L 40.4 7.4 Q 40.4 7.8 39.2 7.8 L 39.2 8.2 L 42.7 8.2 L 42.7 7.8 Q 41.5 7.8 41.5 7.4 L 41.5 2.8 Q 41.5 2.1 41.7 1.5 Q 41.9 0.9 42.3 0.5 Q 42.8 0.2 43.5 0.2 Q 44.1 0.2 44.7 0.5 Q 45.2 0.9 45.5 1.5 Q 45.7 2.1 45.7 2.8 L 45.7 7.1 Q 45.7 7.8 44.5 7.8 L 44.5 8.2 L 47.4 8.2 L 47.4 7.8 Q 46.2 7.8 46.2 7.1 L 46.2 2.7 Q 46.2 2.2 46.0 1.6 Q 45.8 1.1 45.4 0.7 Q 45.0 0.2 44.5 -0.0 Q 44.0 -0.3 43.5 -0.3 Q 42.7 -0.3 41.9 0.1 Q 41.2 0.5 40.8 1.2 Q 40.4 1.9 40.4 2.7 Z M 48.2 0.0 L 48.2 0.4 Q 49.4 0.4 49.4 0.8 L 49.4 7.4 Q 49.4 7.8 48.2 7.8 L 48.2 8.2 L 52.6 8.2 Q 53.4 8.2 54.1 7.8 Q 54.8 7.5 55.3 6.9 Q 55.7 6.3 56.0 5.6 Q 56.3 4.8 56.3 4.0 Q 56.3 3.3 56.0 2.5 Q 55.7 1.8 55.2 1.2 Q 54.8 0.7 54.1 0.3 Q 53.4 0.0 52.6 0.0 L 48.2 0.0 Z M 50.5 0.8 Q 50.5 0.5 50.6 0.5 Q 50.8 0.4 51.1 0.4 L 52.3 0.4 Q 52.9 0.4 53.5 0.7 Q 54.0 1.0 54.4 1.4 Q 54.8 1.9 54.9 2.6 Q 55.0 3.2 55.0 4.0 Q 55.0 4.9 54.9 5.5 Q 54.8 6.2 54.4 6.7 Q 54.0 7.2 53.5 7.5 Q 52.9 7.8 52.3 7.8 L 51.1 7.8 Q 50.9 7.8 50.8 7.8 Q 50.6 7.7 50.6 7.7 Q 50.5 7.6 50.5 7.4 L 50.5 0.8 Z M 57.3 0.0 L 57.3 0.4 Q 58.6 0.4 58.6 0.8 L 58.6 7.4 Q 58.6 7.8 57.3 7.8 L 57.3 8.2 L 61.6 8.2 Q 62.3 8.2 62.9 7.9 Q 63.6 7.7 64.0 7.1 Q 64.4 6.6 64.4 5.9 Q 64.4 5.3 64.0 4.8 Q 63.6 4.3 62.9 4.0 Q 62.3 3.7 61.6 3.7 L 59.7 3.7 L 59.7 0.8 Q 59.7 0.4 60.9 0.4 L 60.9 0.0 L 57.3 0.0 Z M 59.7 4.1 L 61.3 4.1 Q 61.9 4.1 62.4 4.3 Q 62.8 4.5 63.0 4.9 Q 63.1 5.3 63.1 5.9 Q 63.1 6.9 62.7 7.3 Q 62.3 7.8 61.3 7.8 L 60.3 7.8 Q 60.0 7.8 59.9 7.8 Q 59.8 7.7 59.7 7.7 Q 59.7 7.6 59.7 7.4 L 59.7 4.1 Z" fill="#17697B" transform="translate(391.68 483) scale(1 -1)"/>
-          <g transform="rotate(-90 624 300)"><path d="M 1.2 1.5 L 1.2 4.8 L 0.2 4.8 L 0.2 5.1 Q 1.0 5.1 1.4 5.9 Q 1.8 6.6 1.8 7.5 L 2.1 7.5 L 2.1 5.2 L 3.8 5.2 L 3.8 4.8 L 2.1 4.8 L 2.1 1.5 Q 2.1 1.0 2.3 0.7 Q 2.4 0.3 2.9 0.3 Q 3.3 0.3 3.5 0.7 Q 3.6 1.1 3.6 1.5 L 3.6 2.2 L 4.0 2.2 L 4.0 1.5 Q 4.0 1.1 3.8 0.8 Q 3.7 0.4 3.4 0.2 Q 3.2 -0.1 2.8 -0.1 Q 2.1 -0.1 1.6 0.4 Q 1.2 0.8 1.2 1.5 Z M 7.6 -0.1 Q 6.9 -0.1 6.3 0.3 Q 5.7 0.7 5.3 1.3 Q 5.0 2.0 5.0 2.7 Q 5.0 3.4 5.3 4.0 Q 5.6 4.7 6.2 5.1 Q 6.8 5.5 7.5 5.5 Q 8.0 5.5 8.4 5.3 Q 8.8 5.1 9.1 4.8 Q 9.4 4.4 9.5 4.0 Q 9.6 3.5 9.6 3.0 Q 9.6 2.8 9.5 2.8 L 6.0 2.8 L 6.0 2.7 Q 6.0 1.7 6.4 1.0 Q 6.8 0.3 7.8 0.3 Q 8.1 0.3 8.4 0.5 Q 8.7 0.6 9.0 0.9 Q 9.2 1.2 9.3 1.5 Q 9.3 1.6 9.3 1.6 Q 9.4 1.6 9.4 1.6 L 9.5 1.6 Q 9.6 1.6 9.6 1.5 Q 9.5 0.8 8.9 0.4 Q 8.3 -0.1 7.6 -0.1 Z M 6.1 3.1 L 8.8 3.1 Q 8.8 3.6 8.7 4.1 Q 8.5 4.5 8.2 4.8 Q 8.0 5.1 7.5 5.1 Q 6.8 5.1 6.4 4.5 Q 6.1 3.9 6.1 3.1 Z M 10.4 0.1 L 10.4 0.5 Q 10.8 0.5 11.0 0.6 Q 11.3 0.6 11.3 0.9 L 11.3 7.2 Q 11.3 7.5 11.2 7.6 Q 11.1 7.8 10.9 7.8 Q 10.7 7.8 10.4 7.8 L 10.4 8.3 L 12.1 8.4 L 12.1 0.9 Q 12.1 0.6 12.4 0.6 Q 12.7 0.5 13.1 0.5 L 13.1 0.1 L 10.4 0.1 Z M 16.3 -0.1 Q 15.6 -0.1 14.9 0.3 Q 14.3 0.7 14.0 1.3 Q 13.6 2.0 13.6 2.7 Q 13.6 3.4 14.0 4.0 Q 14.3 4.7 14.8 5.1 Q 15.4 5.5 16.1 5.5 Q 16.7 5.5 17.1 5.3 Q 17.5 5.1 17.8 4.8 Q 18.0 4.4 18.2 4.0 Q 18.3 3.5 18.3 3.0 Q 18.3 2.8 18.2 2.8 L 14.7 2.8 L 14.7 2.7 Q 14.7 1.7 15.1 1.0 Q 15.5 0.3 16.4 0.3 Q 16.8 0.3 17.1 0.5 Q 17.4 0.6 17.6 0.9 Q 17.9 1.2 17.9 1.5 Q 18.0 1.6 18.0 1.6 Q 18.0 1.6 18.1 1.6 L 18.2 1.6 Q 18.3 1.6 18.3 1.5 Q 18.1 0.8 17.6 0.4 Q 17.0 -0.1 16.3 -0.1 Z M 14.7 3.1 L 17.4 3.1 Q 17.4 3.6 17.3 4.1 Q 17.2 4.5 16.9 4.8 Q 16.6 5.1 16.1 5.1 Q 15.4 5.1 15.1 4.5 Q 14.7 3.9 14.7 3.1 Z M 19.0 0.1 L 19.0 0.5 Q 19.4 0.5 19.7 0.6 Q 19.9 0.6 19.9 0.9 L 19.9 4.2 Q 19.9 4.5 19.8 4.6 Q 19.7 4.8 19.6 4.8 Q 19.4 4.8 19.0 4.8 L 19.0 5.2 L 20.7 5.4 L 20.7 4.2 Q 21.0 4.7 21.4 5.0 Q 21.9 5.4 22.5 5.4 Q 23.9 5.4 24.1 4.3 Q 24.3 4.8 24.8 5.1 Q 25.3 5.4 25.8 5.4 Q 26.4 5.4 26.7 5.2 Q 27.1 5.0 27.3 4.7 Q 27.5 4.3 27.5 3.8 L 27.5 0.9 Q 27.5 0.6 27.7 0.6 Q 28.0 0.5 28.4 0.5 L 28.4 0.1 L 25.7 0.1 L 25.7 0.5 Q 26.1 0.5 26.3 0.6 Q 26.6 0.6 26.6 0.9 L 26.6 3.7 Q 26.6 4.3 26.4 4.7 Q 26.3 5.1 25.7 5.1 Q 25.0 5.1 24.6 4.5 Q 24.1 4.0 24.1 3.2 L 24.1 0.9 Q 24.1 0.6 24.4 0.6 Q 24.7 0.5 25.1 0.5 L 25.1 0.1 L 22.3 0.1 L 22.3 0.5 Q 22.7 0.5 23.0 0.6 Q 23.3 0.6 23.3 0.9 L 23.3 3.7 Q 23.3 4.3 23.1 4.7 Q 22.9 5.1 22.4 5.1 Q 21.7 5.1 21.3 4.5 Q 20.8 4.0 20.8 3.2 L 20.8 0.9 Q 20.8 0.6 21.1 0.6 Q 21.3 0.5 21.7 0.5 L 21.7 0.1 L 19.0 0.1 Z M 31.6 -0.1 Q 30.9 -0.1 30.3 0.3 Q 29.7 0.7 29.3 1.3 Q 29.0 2.0 29.0 2.7 Q 29.0 3.4 29.3 4.0 Q 29.6 4.7 30.2 5.1 Q 30.7 5.5 31.4 5.5 Q 32.0 5.5 32.4 5.3 Q 32.8 5.1 33.1 4.8 Q 33.3 4.4 33.5 4.0 Q 33.6 3.5 33.6 3.0 Q 33.6 2.8 33.5 2.8 L 30.0 2.8 L 30.0 2.7 Q 30.0 1.7 30.4 1.0 Q 30.8 0.3 31.7 0.3 Q 32.1 0.3 32.4 0.5 Q 32.7 0.6 32.9 0.9 Q 33.2 1.2 33.3 1.5 Q 33.3 1.6 33.3 1.6 Q 33.3 1.6 33.4 1.6 L 33.5 1.6 Q 33.6 1.6 33.6 1.5 Q 33.4 0.8 32.9 0.4 Q 32.3 -0.1 31.6 -0.1 Z M 30.0 3.1 L 32.8 3.1 Q 32.8 3.6 32.6 4.1 Q 32.5 4.5 32.2 4.8 Q 31.9 5.1 31.4 5.1 Q 30.8 5.1 30.4 4.5 Q 30.0 3.9 30.0 3.1 Z M 35.2 1.5 L 35.2 4.8 L 34.2 4.8 L 34.2 5.1 Q 35.0 5.1 35.3 5.9 Q 35.7 6.6 35.7 7.5 L 36.1 7.5 L 36.1 5.2 L 37.7 5.2 L 37.7 4.8 L 36.1 4.8 L 36.1 1.5 Q 36.1 1.0 36.2 0.7 Q 36.4 0.3 36.8 0.3 Q 37.2 0.3 37.4 0.7 Q 37.6 1.1 37.6 1.5 L 37.6 2.2 L 37.9 2.2 L 37.9 1.5 Q 37.9 1.1 37.8 0.8 Q 37.7 0.4 37.4 0.2 Q 37.1 -0.1 36.7 -0.1 Q 36.0 -0.1 35.6 0.4 Q 35.2 0.8 35.2 1.5 Z M 38.9 0.1 L 38.9 0.5 Q 39.3 0.5 39.6 0.6 Q 39.9 0.6 39.9 0.9 L 39.9 4.2 Q 39.9 4.5 39.8 4.6 Q 39.7 4.8 39.5 4.8 Q 39.3 4.8 38.9 4.8 L 38.9 5.2 L 40.6 5.4 L 40.6 4.2 Q 40.8 4.7 41.2 5.0 Q 41.5 5.4 42.1 5.4 Q 42.4 5.4 42.7 5.2 Q 43.0 5.0 43.0 4.6 Q 43.0 4.4 42.8 4.2 Q 42.7 4.1 42.4 4.1 Q 42.2 4.1 42.1 4.2 Q 41.9 4.4 41.9 4.6 Q 41.9 4.9 42.1 5.1 L 42.1 5.1 Q 41.6 5.1 41.3 4.7 Q 41.0 4.4 40.8 3.8 Q 40.7 3.3 40.7 2.8 L 40.7 0.9 Q 40.7 0.5 41.9 0.5 L 41.9 0.1 L 38.9 0.1 Z M 44.1 -1.9 Q 44.4 -2.1 44.6 -2.1 Q 45.4 -2.1 45.9 -0.9 L 46.3 0.1 L 44.5 4.5 Q 44.4 4.7 44.1 4.8 Q 43.9 4.8 43.5 4.8 L 43.5 5.2 L 46.1 5.2 L 46.1 4.8 Q 45.4 4.8 45.4 4.5 Q 45.4 4.5 45.4 4.5 L 46.7 1.2 L 47.9 4.1 Q 48.0 4.2 48.0 4.3 Q 48.0 4.5 47.9 4.6 Q 47.8 4.7 47.7 4.8 Q 47.6 4.8 47.4 4.8 L 47.4 5.2 L 49.4 5.2 L 49.4 4.8 Q 49.0 4.8 48.8 4.7 Q 48.5 4.5 48.3 4.2 L 46.2 -0.9 Q 46.1 -1.3 45.9 -1.6 Q 45.6 -2.0 45.3 -2.2 Q 45.0 -2.4 44.6 -2.4 Q 44.2 -2.4 43.9 -2.1 Q 43.5 -1.8 43.5 -1.4 Q 43.5 -1.2 43.7 -1.0 Q 43.8 -0.9 44.1 -0.9 Q 44.2 -0.9 44.3 -0.9 Q 44.5 -1.0 44.5 -1.1 Q 44.6 -1.2 44.6 -1.4 Q 44.6 -1.6 44.5 -1.7 Q 44.3 -1.9 44.1 -1.9 Z M 52.7 3.1 Q 52.7 3.2 52.8 3.4 Q 52.9 3.5 53.1 3.6 Q 53.2 3.7 53.4 3.7 Q 53.6 3.7 53.7 3.6 Q 53.9 3.5 54.0 3.4 Q 54.1 3.2 54.1 3.1 Q 54.1 2.8 53.9 2.6 Q 53.7 2.4 53.4 2.4 Q 53.1 2.4 52.9 2.6 Q 52.7 2.8 52.7 3.1 Z M 59.3 -0.1 Q 58.5 -0.1 58.1 0.5 Q 57.6 1.1 57.6 1.9 Q 57.6 2.6 58.0 3.5 Q 58.4 4.3 59.1 4.8 Q 59.8 5.4 60.6 5.4 Q 60.9 5.4 61.2 5.2 Q 61.5 5.0 61.6 4.7 L 62.3 7.3 Q 62.4 7.5 62.4 7.7 Q 62.4 7.8 61.6 7.8 Q 61.5 7.8 61.5 8.0 Q 61.5 8.0 61.5 8.1 Q 61.5 8.2 61.5 8.2 Q 61.6 8.3 61.6 8.3 L 63.2 8.4 Q 63.4 8.4 63.4 8.2 L 61.7 1.3 Q 61.6 1.1 61.6 0.8 Q 61.6 0.3 61.9 0.3 Q 62.3 0.3 62.5 0.7 Q 62.7 1.2 62.8 1.8 Q 62.9 1.9 62.9 1.9 L 63.1 1.9 Q 63.1 1.9 63.1 1.9 Q 63.2 1.8 63.2 1.8 Q 63.0 1.0 62.7 0.4 Q 62.5 -0.1 61.9 -0.1 Q 61.5 -0.1 61.2 0.2 Q 60.9 0.4 60.8 0.8 Q 60.0 -0.1 59.3 -0.1 Z M 59.3 0.3 Q 59.7 0.3 60.1 0.6 Q 60.5 0.9 60.8 1.3 Q 60.8 1.4 60.8 1.4 L 61.5 4.0 Q 61.4 4.5 61.2 4.8 Q 60.9 5.1 60.5 5.1 Q 60.1 5.1 59.8 4.7 Q 59.4 4.4 59.2 4.0 Q 58.9 3.5 58.7 2.6 Q 58.5 1.8 58.5 1.3 Q 58.5 0.9 58.7 0.6 Q 58.9 0.3 59.3 0.3 Z M 64.9 -2.1 Q 64.3 -2.1 64.1 -1.7 Q 63.8 -1.3 63.8 -0.7 Q 63.8 -0.7 63.8 -0.4 Q 63.9 -0.2 63.9 -0.1 L 64.7 3.1 Q 64.7 3.3 64.7 3.3 Q 64.7 3.5 64.2 3.5 Q 64.1 3.5 64.1 3.6 Q 64.1 3.6 64.1 3.7 Q 64.1 3.7 64.1 3.7 Q 64.2 3.8 64.2 3.8 L 65.3 3.9 Q 65.4 3.9 65.4 3.8 L 64.8 1.3 Q 65.3 1.7 65.8 1.7 Q 66.1 1.7 66.4 1.6 Q 66.6 1.4 66.8 1.1 Q 66.9 0.8 66.9 0.4 Q 66.9 -0.0 66.7 -0.4 Q 66.6 -0.9 66.3 -1.2 Q 66.0 -1.6 65.7 -1.8 Q 65.3 -2.1 64.9 -2.1 Z M 64.9 -1.8 Q 65.2 -1.8 65.4 -1.6 Q 65.7 -1.4 65.8 -1.1 Q 66.0 -0.7 66.1 -0.1 Q 66.3 0.4 66.3 0.8 Q 66.3 1.1 66.2 1.3 Q 66.0 1.5 65.8 1.5 Q 65.5 1.5 65.2 1.3 Q 64.9 1.1 64.7 0.8 L 64.5 -0.2 Q 64.3 -0.7 64.3 -1.0 Q 64.3 -1.3 64.4 -1.6 Q 64.6 -1.8 64.9 -1.8 Z" fill="#17697B" transform="translate(590.44 300) scale(1 -1)"/></g>
-        </g>
-      </svg>
-      <figcaption>
-        The tee upstream of the network path is what creates the lead. Everything to the right
-        of it runs at the far end of the link; everything to the left responds immediately.
-        The reconciler is the only path back, and it is rate-limited and filtered rather than
-        applied directly.
-      </figcaption>
-    </figure>
-
-    <!-- One composited clip, both panes on a shared clock. The offset on screen is
-         therefore the actual forward delay — this figure IS the measurement, so do not
-         weaken the caption, and do not re-cut the panes independently. -->
-    <figure class="media media--wide mt-l">
-      <video src="assets/twin-operation.mp4" autoplay muted loop playsinline></video>
-      <figcaption>
-        <span class="sim">Sim</span><span class="hw">Hardware</span>
-        Left, the local twin in Boston. Right, the arm in Abu Dhabi, on the same clock. The two
-        cameras sit at different angles, so the arms are not meant to be read pose against
-        pose — what the shared clock gives you is timing. Both start from standstill: the twin
-        breaks first, and the hardware follows one forward delay later. Through the circular
-        motion that offset stays constant rather than accumulating, which is the reconciler
-        doing its job — an unreconciled twin would walk away from the hardware over a move
-        that long.
-      </figcaption>
-    </figure>
-
-    <div class="mt-l g3">
-      <div class="panel">
-        <h4>Robot model now, environment model next</h4>
-        <p class="tiny">The twin currently predicts the arm, not what the arm touches. Contact is the stage that makes this model-mediated control in full.</p>
-      </div>
-      <div class="panel">
-        <h4>The reconciler is the hard part</h4>
-        <p class="tiny">Matching phase and replaying forward is what keeps two clocks agreeing. It has to exist before any environment model can be plugged in above it.</p>
-      </div>
-      <div class="panel">
-        <h4>What is not yet measured</h4>
-        <p class="tiny">Whether this produces better demonstrations, rather than a more comfortable operator, is open. It needs the same paired design as the nudging study to answer honestly.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     THE LOOP
-     ============================================================ -->
-<section id="loop">
-  <div class="wrap">
-    <div class="sechead measure">
-      <span class="eyebrow">How it fits together</span>
-      <h2>Four stages, one pipeline.</h2>
-      <p>
-        Demonstrations are collected through the interface, curated into a labelled dataset,
-        used to train a policy, and that policy is deployed back onto the hardware the data
-        came from — the arms and controllers above. The four sections that follow walk the loop
-        in that order, and a fifth asks the question the whole thing was built to answer.
-        Owning every stage is what makes that question measurable at all: the same episodes
-        pass through all of them without a translation step in between.
-      </p>
-    </div>
-
-    <figure class="media">
-      <img src="assets/loop-diagram.svg"
-           alt="The teleoperation-to-policy loop: data collection, data pipeline, training, and evaluation, with intent nudging feeding data collection and validated by evaluation.">
-      <figcaption>
-        Intent nudging feeds collection and is validated by evaluation, which is what closes
-        the loop rather than ending it.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============================================================
-     COLLECT
-     ============================================================ -->
-<section id="collect" data-stage="collect">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Collect</span>
-      <h2>An interface built for hands that are already busy.</h2>
-      <p>
-        Driving two arms occupies both hands, so the interface cannot ask for them. Menus are
-        selected by gaze or by voice; the wrist-camera picture-in-picture enlarges when the
-        operator looks at it and shrinks when they look away. The layout responds to what the
-        operator is attending to and what the task currently needs, rather than to a
-        controller button.
-      </p>
-      <p>
-        The controls are deliberately skeuomorphic — switches that look like switches, gauges
-        that read like gauges, a stop button shaped like one. Someone wearing a headset for a
-        two-hour collection session should not have to learn an abstraction first, and the
-        measure of this interface is how little of it has to be explained before it is usable.
-      </p>
-    </div>
-
-    <div class="g2">
-      <figure>
-        <video src="assets/collect-gaze-menu.mp4" autoplay muted loop playsinline></video>
-        <figcaption>
-          Menu items are selected by looking at them. The wrist-camera inset grows on gaze and
-          shrinks again when attention returns to the task.
-        </figcaption>
-      </figure>
-      <figure>
-        <video src="assets/collect-ghost-overlay.mp4" autoplay muted loop playsinline></video>
-        <figcaption>
-          A translucent gripper shows the operator the motion they are currently commanding,
-          before the arm gets there — the gap opens under fast motion and closes at steady
-          state. Workspace limits are drawn in the view rather than discovered by hitting them.
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="mt-l">
-      <div class="measure">
-        <h3>Getting a frame across an ocean</h3>
-        <p class="mt-s">
-          Frames are read from shared memory — from the camera, or from MuJoCo, through the
-          same buffer. Left and right images are packed side by side into a single frame before
-          encoding, so one stream carries both eyes and is inherently synchronised. A 64-bit
-          wall-clock timestamp is embedded in an extra image row, and with both machines
-          disciplined to NTP the receiver measures true one-way delay at decode time rather than
-          assuming half the round trip. Encoding is GStreamer H.264 at ultra-low-latency
-          settings, streamed as RTP over UDP with ULP-FEC redundancy, across a ZeroTier link.
-        </p>
-      </div>
-
-      <figure class="media mt-m">
-        <img src="assets/video-pipeline.svg"
-             alt="Video transmission pipeline: stereo frames packed into one frame, timestamped, encoded and streamed, then split back to left and right at the receiver, with receiver measurements feeding a quality controller that adapts the sender.">
-      </figure>
-
-      <div class="mt-m g-2-1">
-        <div>
-          <h4>When the link misbehaves</h4>
-          <p class="small mt-s">
-            On the public internet, packet loss and jitter are operating conditions rather than
-            failures. The sender runs a three-state quality controller off the receiver's
-            feedback: at five per cent loss it drops to half bitrate, two thirds frame rate and
-            double FEC; at fifteen per cent loss or fifty milliseconds of jitter it halves
-            again and falls back to a quarter of the pixels.
-          </p>
-          <div class="ladder ladder--rows">
-            <b>NORMAL</b><i>2000 kbps · 30 fps · 720p · 10% FEC</i>
-            <b>DEGRADED</b><i>1000 kbps · 20 fps · 720p · 20% FEC</i>
-            <b class="crit">CRITICAL</b><i>500 kbps · 10 fps · 360p · 30% FEC</i>
-          </div>
-          <p class="small mt-s">
-            The asymmetry is deliberate: three consecutive bad reports to step down, five good
-            ones to step back up, and separate thresholds for degrading and recovering. Without
-            that hysteresis a loss rate sitting near a boundary makes the stream flap, and the
-            operator sees quality oscillate instead of settle.
-          </p>
-        </div>
-
-        <div class="panel panel--accent">
-          <h4>Stereo without a second stream</h4>
-          <p class="small">
-            Depth perception matters for grasping, so the operator normally gets a true stereo
-            pair, rendered in stereo in the headset. Packing both eyes into one encoded frame
-            rather than sending two streams costs horizontal resolution per eye and buys
-            synchronisation for free — there is nothing to align, because there is only one
-            frame.
-          </p>
-          <p class="small">
-            A mono source runs the identical path. The pipeline does not care how many cameras
-            are upstream of it.
-          </p>
-        </div>
-      </div>
-
-      <!-- All four describe the video link specifically — the control numbers
-           live in the Control section, not repeated here. -->
-      <div class="specs specs--4 mt-l">
-        <div><b>H.264 / RTP</b><span>over UDP, with FEC</span></div>
-        <div><b>50 Hz</b><span>receiver quality feedback</span></div>
-        <div><b>3 states</b><span>adaptive quality ladder</span></div>
-        <div><b>measured</b><span>one-way latency, not half the round trip</span></div>
-      </div>
-
-      <div class="linkrow">
-        
-        <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-vr-interface">VR interface, Unreal Engine 5 <em>↗</em></a>
-        <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-simulator">Robot-side backend, C++ <em>↗</em></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CURATE
-     ============================================================ -->
-<section id="curate" data-stage="curate">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Curate</span>
-      <h2>Labelled while it is collected, not afterwards.</h2>
-      <p>
-        At the end of every episode the operator marks it success, partial, or failure, and
-        the per-frame signals that support labelling are written as the episode runs. Nothing
-        is reconstructed in post. Failed episodes are kept and marked rather than quietly
-        dropped, because a dataset that only contains successes cannot tell you what failure
-        looks like.
-      </p>
-    </div>
-
-    <!-- row 1: annotation clip, given the larger share -->
-    <div class="g-2-1">
-      <figure>
-        <video src="assets/curate-annotation.mp4" autoplay muted loop playsinline></video>
-        <figcaption>
-          Annotation happens inside the interface, at the moment the operator still remembers
-          what went wrong.
-        </figcaption>
-      </figure>
-      <div>
-        <h4>What gets written</h4>
-        <p class="small mt-s">
-          Every episode carries its outcome and the full synchronised stream set — both wrist
-          cameras, the head view, end-effector pose and command, contact force, gripper state,
-          and gaze — plus a per-frame attention estimate: a Bayesian filter running over gaze
-          that maintains a probability distribution across the objects in the scene.
-        </p>
-        <p class="small">
-          Worth being exact about, because the distinction matters later: what this dataset
-          records is <strong>attention</strong>, not intent. Attention is measured. Intent is
-          inferred, and the model that infers it was trained on this data afterwards — so no
-          episode in the current set was labelled by it. Sessions recorded from here on carry
-          its live output as well.
-        </p>
-        <p class="small">
-          The operator also sees a running episode count and session time. A small thing, and
-          it exists because collecting a few hundred demonstrations is a session you pace
-          rather than a task you complete.
-        </p>
-      </div>
-    </div>
-
-    <!-- row 2: Rerun, full width -->
-    <figure class="media mt-l">
-      <video src="assets/curate-rerun.mp4" autoplay muted loop playsinline></video>
-      <figcaption>
-        Every stream on one synchronised timeline, which is what makes an episode auditable
-        rather than merely stored. The position plots carry commanded against achieved per
-        axis, so tracking quality is visible alongside the video; the intent panel shows the
-        model's live estimate of target and arm with its confidence.
-      </figcaption>
-    </figure>
-
-    <div class="mt-l g-1-1">
-      <dl class="deflist">
-        <div><dt>Task</dt><dd>Bimanual colour sorting — red and blue parcels, randomised placement, sorted into matching totes</dd></div>
-        <div><dt>Episodes</dt><dd>120 teleoperated, successes and failures both retained and labelled</dd></div>
-        <div><dt>Randomised</dt><dd>Object position, yaw and scale; light position, intensity and colour temperature; unimanual or bimanual mode</dd></div>
-        <div><dt>Splits</dt><dd>Train / validation / test, split by episode so no episode spans two splits</dd></div>
-        <div><dt>Streams</dt><dd>Both wrist cameras, head view, end-effector pose and command, contact force, gripper state, gaze</dd></div>
-        <div><dt>Format</dt><dd>HDF5 episode logs with synchronised video</dd></div>
-      </dl>
-      <div>
-        <div class="panel">
-          <h4>Small on purpose</h4>
-          <p class="small">
-            A hundred and twenty episodes is not a foundation-model corpus and is not presented
-            as one. It is a curated set with known provenance, documented failures, and labels
-            produced at collection time rather than reconstructed afterwards — which is the
-            property the research below depends on.
-          </p>
-          <p class="small">
-            The collection tooling is the reusable part. Running the task again, or a different
-            task, is a config change and another session, not another pipeline.
-          </p>
-        </div>
-
-        <div class="panel mt-m">
-          <h4>One seed per episode</h4>
-          <p class="small">
-            Scene generation is a separate service the robot asks for a fresh episode. It
-            samples object positions under minimum-separation constraints against each other
-            and against the bins, then yaw over the full circle and scale within ten per cent;
-            it repositions the key light, and varies its intensity and colour temperature; it
-            picks unimanual or bimanual. Every draw comes from one seed that is logged with the
-            episode, so any episode can be regenerated exactly.
-          </p>
-          <p class="tiny">
-            This is domain randomisation over what a camera actually sees, and it is why the
-            policy is not keyed to one lighting rig or one parcel position. It is not a
-            sim-to-real claim: the appearance gap between this renderer and the real cell is
-            not something randomising light colour closes on its own.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TRAIN
-     ============================================================ -->
-<section id="train" data-stage="train">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Train</span>
-      <h2>Two models, built in the order that earns them.</h2>
-      <p>
-        Two separate things are trained on this dataset and they answer different questions.
-        Each is treated on its own below, and every result in this section belongs to exactly
-        one of them.
-      </p>
-    </div>
-
-    <!-- ============ MODEL ONE — INTENT ============ -->
-    <div class="finding finding--train mt-l">
-      <span class="finding__tag">Model one — intent and phase recognition</span>
-
-      <div class="measure">
-        <h3>What is the operator about to do?</h3>
-        <p class="small mt-s">
-          Predicts which object or bin the operator is acting toward, and which phase they are
-          in: idle, approach, grasp, transport, place. Causally, one frame at a time, so the
-          rest of the system can react while the action is still happening rather than after
-          it. The representation is deliberately task-agnostic, so it carries across sorting,
-          stacking, and assembly.
-        </p>
-        <p class="small">
-          Three model families sit behind one interface and consume identical features — a
-          structured HMM, a GRU, and a causal transformer — so any difference in score is
-          attributable to the model rather than to its inputs.
-        </p>
-        <p class="tiny">
-          Reported as macro F1, not accuracy: idle is more than half of all frames, and a model
-          that has learned nothing still reaches sixty per cent frame accuracy here.
-        </p>
-      </div>
-
-      <div class="mt-m g-2-1">
-        <figure>
-          <img src="assets/train-ablation-ladder.png" alt="Validation macro F1 for four conditions: shuffled features at 0.244, features only at 0.786, GRU with memory at 0.862, transformer with attention at 0.846">
-          <figcaption>
-            Intent and phase recognition, validation macro F1. Each row differs from the one
-            above it by exactly one thing, so every claim has a control.
-          </figcaption>
-        </figure>
-        <div class="panel panel--accent">
-          <h4>What each ingredient is worth</h4>
-          <p class="small">
-            Features alone carry almost all of it: 0.244 at the chance floor to 0.786 with no
-            temporal context at all. Adding memory buys another 0.076. Adding attention buys
-            nothing, and tripling capacity makes it worse.
-          </p>
-          <p class="small">
-            Three unrelated mechanisms — a Bayesian filter, a recurrent state reset every frame,
-            and attention restricted to a single frame — land within 0.011 of each other around
-            0.78. That number is a property of the data, not of any model.
-          </p>
-        </div>
-      </div>
-
-    <div class="mt-m panel measure">
-      <h4>The null result was predicted, not discovered</h4>
-      <p class="small">
-        Before the transformer was written, segment-duration statistics put phase lengths at
-        57 to 137 frames, and a boundary analysis showed the residual errors were segment
-        <em>extent</em> rather than missed segments. Both said the task is short-horizon. The
-        transformer was then given a 1023-frame receptive field — about 34 seconds, roughly two
-        full pick-and-place cycles, deliberately more reach than the measured dependency
-        length — and gained nothing.
-      </p>
-      <p class="tiny">
-        Stating the prediction before running the experiment is what makes the negative result
-        worth reporting.
-      </p>
-    </div>
-    </div><!-- /model one -->
-
-    <!-- ============ MODEL TWO — POLICY ============ -->
-    <div class="finding finding--train mt-l">
-      <span class="finding__tag">Model two — manipulation policy</span>
-
-      <div class="measure">
-        <h3>Can the robot do the task without anyone driving?</h3>
-        <p class="small mt-s">
-          An action-chunking transformer (ACT) trained on the collected sorting demonstrations,
-          then deployed back onto the physical arms through the same impedance controllers the
-          operator was driving. This is the step that turns the pipeline from data
-          infrastructure into a working autonomous skill, and it is what makes "did the
-          demonstrations get better" a measurable question rather than a rhetorical one.
-        </p>
-        <p class="small">
-          
-          Both wrist cameras and the head view go in; fourteen dimensions of joint command for
-          both arms and grippers come out, predicted as a chunk rather than a single step, with
-          overlapping chunks combined by temporal ensembling at execution time. Nothing
-          privileged is fed to the policy — it sees the same images and proprioception the
-          operator's own loop produced.
-        </p>
-      </div>
-
-      <div class="mt-m g-2-1">
-        <figure>
-          <img src="assets/train-act-l1.png" alt="ACT training and validation L1 loss over 20,000 steps, tracking together without divergence">
-          <figcaption>
-            Manipulation policy, training and validation L1 across 20,000 steps.
-          </figcaption>
-        </figure>
-        <div>
-          <h4>What this curve does and does not say</h4>
-          <p class="small mt-s">
-            Training and validation track together with no divergence, so the policy is not
-            memorising the demonstration set. That is the only thing a loss curve can tell you.
-          </p>
-          <p class="small">
-            Whether it can actually sort parcels is a separate measurement, made by running it
-            on the arms — that is in Evaluate, below.
-          </p>
-          <p class="tiny">
-            ACT after Zhao et al., <em>Learning Fine-Grained Bimanual Manipulation with
-            Low-Cost Hardware</em>, RSS 2023.
-          </p>
-        </div>
-      </div>
-    </div><!-- /model two -->
-  </div>
-</section>
-
-<!-- ============================================================
-     EVALUATE
-     ============================================================ -->
-<section id="evaluate" data-stage="evaluate">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Evaluate</span>
-      <h2>Every number says where it was measured.</h2>
-      <p>
-        Simulation and hardware are not interchangeable, so every row below carries the
-        conditions it was measured under.
-      </p>
-    </div>
-
-    <h3>Intent and phase, three models on one timeline</h3>
-    <figure class="media mt-m">
-      <video src="assets/eval-intent-playback.mp4" autoplay muted loop playsinline></video>
-      <figcaption>
-        Ground truth against all three models as phase ribbons, running causally — each model
-        sees only the past, one frame at a time. Per-clip accuracy is shown live, including
-        where the models disagree with the label and with each other.
-      </figcaption>
-    </figure>
-
-    <div class="mt-l g-1-1">
-      <figure>
-        <img src="assets/eval-model-comparison.png" alt="Held-out macro F1 for HMM, GRU and transformer, with paired difference intervals showing the GRU-transformer difference crossing zero">
-        <figcaption>
-          Held-out test split, eleven episodes never used for fitting or selection. The
-          GRU–transformer interval crosses zero: that is a tie, and it is reported as one.
-        </figcaption>
-      </figure>
-      <div>
-        <table>
-          <thead>
-            <tr><th>Model</th><th>Params</th><th>Test macro F1</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>HMM + duration model</td><td class="num">—</td><td class="num">0.768</td></tr>
-            <tr><td>GRU</td><td class="num">28.5k</td><td class="num">0.832</td></tr>
-            <tr><td>Transformer</td><td class="num">28.8k</td><td class="num">0.833</td></tr>
-          </tbody>
-        </table>
-        <p class="tiny mt-s">
-          Both learned models beat the structured baseline by about 0.065 with a 95% interval
-          clear of zero. Against each other: +0.001, interval [−0.017, +0.018].
-        </p>
-      </div>
-    </div>
-
-    <!-- ============ LATENCY — THE DEPLOYMENT DECISION ============ -->
-    <div class="mt-l g-2-1">
-      <figure>
-        <img src="assets/eval-intent-latency.png" alt="Per-frame inference latency for HMM, GRU and transformer against a 30 Hz control-loop budget, log scale, with the transformer exceeding the budget">
-        <figcaption>
-          Per-frame cost, median and 99th percentile, against the control loop's budget.
-        </figcaption>
-      </figure>
-      <div class="panel panel--accent">
-        <h4>The best model is not the deployable one</h4>
-        <p class="small">
-          The module runs inside a 30 Hz loop. The GRU's per-frame work is constant; the
-          transformer re-encodes its whole context buffer every frame and costs roughly an
-          order of magnitude more, with its p99 over budget.
-        </p>
-        <p class="small">
-          So the GRU ships — and it is not the model that scored highest on validation. In a
-          real-time system, inference rate is part of whether a model works at all, not an
-          implementation detail discovered afterwards.
-        </p>
-      </div>
-    </div>
-
-    <h3 class="mt-l">Manipulation policy</h3>
-    <figure class="media mt-m">
-      <img src="assets/eval-act-replay.png" alt="Predicted versus logged commanded trajectories for both arms across x, y, z and gripper on a held-out episode">
-      <figcaption>
-        Open-loop replay on a held-out episode: predicted actions against the operator's logged
-        commands, both arms, all axes and gripper. Mean absolute deviation across the validation
-        split is 0.0385 in normalised joint units. Replay is a necessary check and not a
-        sufficient one — a policy can reproduce a trajectory and still fail the task, so the
-        numbers that matter are the closed-loop ones below.
-      </figcaption>
-    </figure>
-
-    <!-- ============================================================
-         CLOSED-LOOP RESULTS GO HERE.
-
-         When the sim rollouts land, paste this block back in and drop the
-         real figures into assets/. Both placeholder PNGs were deleted, so
-         nothing fabricated can ship by accident.
-
-         <div class="mt-l g-2-1">
-           <figure>
-             <img src="assets/eval-act-success.png" alt="Closed-loop success rate per sub-task, simulation against hardware, with 95% binomial intervals">
-             <figcaption>
-               Closed-loop rollouts with randomised parcel placement. Success is scored by the
-               same criterion the operator was given, and a rollout counts as a failure the
-               moment it needs a human to touch it.
-             </figcaption>
-           </figure>
-           <div class="panel panel--accent">
-             <h4>Where it drops</h4>
-             <p class="small">Which sub-task loses the most margin, and whether the
-             sim-to-hardware gap widens at the same point.</p>
-           </div>
-         </div>
-
-         <div class="mt-l g-2-1">
-           <figure>
-             <img src="assets/eval-act-data-scaling.png" alt="Full-task success rate against number of training demonstrations">
-             <figcaption>Success against dataset size, retrained from scratch at each point
-             with an identical architecture and training budget.</figcaption>
-           </figure>
-           <div>
-             <h4>Why this curve is the one that matters</h4>
-             <p class="small mt-s">If it is still rising at a hundred and twenty episodes the
-             policy is data-limited rather than architecture-limited — which is the regime in
-             which demonstration quality is worth measuring at all, and the regime the paired
-             comparison needs to be detectable.</p>
-           </div>
-         </div>
-         ============================================================ -->
-
-    <div class="mt-l panel panel--accent measure">
-      <h4>Closed-loop evaluation is running now</h4>
-      <p class="small">
-        Open-loop replay above shows the policy reproduces the operator's commands. Whether it
-        completes the task unattended is a different measurement, and it is the one in progress:
-        rollouts with randomised parcel placement, scored by the criterion the operator was
-        given, with a rollout counting as a failure the moment it needs a human to touch it.
-      </p>
-    </div>
-
-    <div class="mt-l g-2-1">
-      <div>
-        <table>
-          <thead>
-            <tr><th>Result</th><th>Where</th><th>Value</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Intent and phase macro F1, GRU</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.832</td></tr>
-            <tr><td>Intent inference, GRU p99</td><td><span class="tag tag--hw">Hardware</span></td><td class="num">1.5 ms</td></tr>
-            <tr><td>ACT open-loop replay MAE</td><td><span class="tag tag--hw">Replay</span></td><td class="num">0.0385</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--pending">Sim, pending</span></td><td class="num">—</td></tr>
-            <tr><td>Sorting success, ACT policy</td><td><span class="tag tag--pending">Hardware, pending</span></td><td class="num">—</td></tr>
-            <tr><td>Nudged vs. unnudged policy</td><td><span class="tag tag--pending">Pending</span></td><td class="num">—</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="panel">
-        <h4>What is not done yet</h4>
-        <p class="small">
-          The intent models are evaluated on replayed episodes only — their behaviour inside a
-          live loop, where their own predictions change what the operator does, is not yet
-          measured. The paired policy comparison, the result the research question actually
-          turns on, has not been run at all.
-        </p>
-        <p class="small">
-          
-          The intent models are fit on 58 labelled training episodes with 11 held out, so the
-          intervals are wide and honestly so: differences under about 0.02 macro F1 are not
-          measurable here. Around five per cent of committed target labels name a candidate
-          outside the model's own pool, mostly during transport — unwinnable frames for every
-          model in the comparison, and an open question about what "target" even means while
-          an object is being carried.
-        </p>
-        <p class="tiny">Updated July 2026.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     NUDGING — the contribution
-     ============================================================ -->
-<section id="nudging" data-stage="nudging">
-  <div class="wrap">
-    <div class="sechead measure">
-      <div class="stage-rule"></div>
-      <span class="eyebrow">Research contribution</span>
-      <h2>Guiding the operator, and asking what it is worth.</h2>
-    </div>
-
-    <p class="claim">
-      Shaping what the operator sees changes how they work. The open question is whether it
-      changes what their demonstrations can teach.
-    </p>
-
-    <!-- ============ STAGE ONE — ESTABLISHED ============ -->
-    <div class="mt-l finding finding--done">
-      <span class="finding__tag">Established — MSc thesis, TU Munich</span>
-      <div class="g-2-1">
-        <div>
-          <h3>Nudging measurably improves the operator.</h3>
-          <p class="small mt-s">
-            A ten-participant study across two tasks — gearbox assembly and tight-clearance
-            tactile insertion — compared six feedback conditions, from fully manual to
-            combined informational and dynamic assistance. Roughly three hundred trials,
-            randomised order with no condition repeating back to back, NASA-TLX after every
-            trial, contact forces and torques logged from the robot.
-          </p>
-          <p class="small">
-            Assistance cut perceived workload sharply and reduced peak contact forces without
-            costing completion time. The finding worth arguing about: combining informational
-            and dynamic assistance was <strong>not</strong> better than either channel alone.
-            More help is not monotonically better.
-          </p>
-          <div class="linkrow">
-            <a class="link" href="thesis.html">Method, all six conditions, and the full results <em>→</em></a>
-          </div>
-        </div>
-
-        <div>
-          <table>
-            <thead>
-              <tr><th>Insertion task</th><th>Time</th><th>TLX</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Manual</td><td class="num">160.9 s</td><td class="num">70.3</td></tr>
-              <tr><td>Pure information</td><td class="num">161.2 s</td><td class="num">26.9</td></tr>
-              <tr><td>Pure dynamic</td><td class="num">158.4 s</td><td class="num">27.7</td></tr>
-            </tbody>
-          </table>
-          <p class="tiny mt-s">
-            Mode-wise means over per-participant averages. Workload falls by more than forty
-            points while completion time does not move — in a precision-limited task,
-            difficulty is not about speed.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ STAGE TWO — OPEN ============ -->
-    <div class="mt-l finding finding--open">
-      <span class="finding__tag">Open — current work</span>
-      <div class="g-1-1">
-        <div>
-          <h3>Does it improve the policies too?</h3>
-          <p class="small mt-s">
-            Better operators are not the point. Better data is. The current system predicts
-            operator intent in real time — target object, arm, destination, phase — and uses
-            that prediction to shape what the operator sees, so the demonstrations they
-            produce are cleaner and more consistent.
-          </p>
-          <p class="small">
-            The test is a paired comparison: two policies with identical architecture and
-            training budget, one trained on nudge-assisted demonstrations and one on
-            unassisted, evaluated on task success. That reframes a noisy human-factors
-            question as a single number a robot-learning team already cares about.
-          </p>
-          <p class="tiny">
-            The interface and the intent model are running. The comparison has not been run
-            yet — the Evaluate table above says so.
-          </p>
-        </div>
-
-        <figure>
-          <video src="assets/nudge-gaze-probability.mp4" autoplay muted loop playsinline></video>
-          <figcaption>
-            Logged gaze attention — the scene is dimmed to show where the operator is actually
-            looking, recorded alongside every episode. Gaze is used strictly as a predictive
-            input; it never defines the ground-truth labels, since using it for both would
-            make the result circular.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="mt-l g3">
-      <div class="panel">
-        <h4>Gaze as input, never as label</h4>
-        <p class="tiny">Using the same signal to predict and to define ground truth would invalidate the result.</p>
-      </div>
-      <div class="panel">
-        <h4>Deployment-available signals only</h4>
-        <p class="tiny">No privileged simulator state, so nothing works in sim that cannot work on hardware.</p>
-      </div>
-      <div class="panel">
-        <h4>Complexity earned incrementally</h4>
-        <p class="tiny">A deterministic baseline first, and a larger model only where the simpler one demonstrably fails.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     BEYOND THIS SYSTEM
-     ============================================================ -->
-<section id="beyond">
-  <div class="wrap">
-    <div class="sechead measure">
-      <span class="eyebrow">The rest of the work</span>
-      <h2>Other hardware, other problems.</h2>
-      <p>
-        The current system is not the only one I have built. The MSc thesis ran on a different
-        machine entirely — a single arm with a pan-tilt head, a Sigma 7 haptic device, and ten
-        real participants in the loop. Alongside it sits a set of control and perception
-        projects from Boston University that have nothing to do with teleoperation.
-      </p>
-    </div>
-
-    <div class="g2">
-      <figure>
+      <a class="result" href="thesis.html">
         <video src="assets/hw-gearbox.mp4" autoplay muted loop playsinline></video>
-        <figcaption>Sequential assembly — one of the two study tasks, on the physical avatar.</figcaption>
-      </figure>
-      <figure>
-        <video src="assets/hw-insertion.mp4" autoplay muted loop playsinline></video>
-        <figcaption>The second task, where force feedback does the most work.</figcaption>
-      </figure>
-    </div>
-
-    <div class="mt-m g2">
-      <figure>
-        <video src="assets/hw-sigma7-operator.mp4" autoplay muted loop playsinline></video>
-        <figcaption>
-          Study participant driving the avatar. Published with consent.
-          <span style="font-family:var(--data);font-size:11px;color:var(--faint)">2025</span>
-        </figcaption>
-      </figure>
-      <figure>
-         <video src="assets/hw-operator-view.mp4" autoplay muted loop playsinline></video>
-        <figcaption>
-          The earlier interface: camera switching, force and torque gauges, assistance
-          controls. Separate recordings — these two views are not time-synchronised.
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="mt-l g-2-1">
-      <figure>
-        <img src="assets/force_feedback.png"
-             alt="Three stacked panels from one teleoperation trial: contact force per axis and its norm, instantaneous power at the operator-device port split by direction, and cumulative net energy decreasing monotonically to minus 1.71 joules">
-        <figcaption>
-          One trial at the operator–device port: contact force, the instantaneous power flowing
-          through the haptic channel, and the running integral of that power.
-        </figcaption>
-      </figure>
-      <div>
-        <h4>Guidance forces that provably cannot destabilise the loop</h4>
-        <p class="small mt-s">
-          The operator held a Sigma 7 running Cartesian impedance and
-          <strong>passivity-based</strong> guidance-force rendering in a 1 kHz loop. Rendering
-          assistance as force rather than as an image is what let the study compare an
-          informational channel against a dynamic one at all — but a device that pushes back on
-          a human is a device that can push a human-in-the-loop system unstable. Passivity is
-          the constraint that rules that out: if the operator–device port never generates
-          energy, the coupled system cannot be destabilised by the feedback, whatever the
-          operator does.
+        <b>70 → 32</b>
+        <span class="result__what">NASA-TLX, insertion task</span>
+        <p>
+          Ten-participant study, six assistance conditions, two tasks, ~300 trials on a
+          haptic avatar. Contact force −33 %, no time penalty — and the two assistance
+          channels do not add up. Under review, ICRA 2027. <span class="tag tag--hw">Hardware</span>
         </p>
-        <p class="small">
-          The bottom panel is the proof, per trial. The cumulative energy never rises. It falls
-          in steps that line up exactly with the contact bursts in the top panel, ending at
-          −1.71 J with a peak instantaneous power of 2.55 W. Over the whole trial the port only
-          ever dissipates. That is a property you can check on any log, which is why every
-          trial logs it.
-        </p>
-        <p class="tiny">
-          A revised version of this controller followed the study and is maintained as its own
-          project, independent of the system it originally served.
-        </p>
-      </div>
-    </div>
+        <span class="link">Operator study <em>→</em></span>
+      </a>
 
-    <div class="mt-l panel measure">
-      <h4>And separately</h4>
-      <p class="small">
-        Force-domain diffusion policies for sub-millimetre insertion, where the learned policy
-        ends up beating the scripted expert that generated its training data. Vision-based
-        pushing control with an EKF and chance-constrained NMPC, where telling the controller
-        about its own uncertainty turned out to cost more than it bought. And a MuJoCo
-        simulation layer built once and pulled in as a dependency by the rest.
-      </p>
-      <div class="linkrow">
-        <a class="link" href="projects.html">All three, in detail <em>→</em></a>
-      </div>
-    </div>
-
-    <div class="exits">
-      <div class="exit">
-        <a class="link" href="thesis.html">The user study <em>→</em></a>
-        <p>Ten participants, six feedback conditions, three hundred trials on a physical avatar.</p>
-      </div>
-      <div class="exit">
-        <a class="link" href="projects.html">Control and perception <em>→</em></a>
-        <p>Force-domain diffusion policies, vision-based NMPC, underactuated control.</p>
-      </div>
-      <div class="exit">
-        <a class="link" href="formula-student.html">Formula Student <em>→</em></a>
-        <p>Four years on an electric race car, two as technical director.</p>
-      </div>
+      <a class="result" href="system.html#latency">
+        <video src="assets/collect-ghost-overlay.mp4" autoplay muted loop playsinline></video>
+        <b>415 → 209 ms</b>
+        <span class="result__what">video latency, p95</span>
+        <p>
+          Every stage of the loop measured on one clock, photon to eye. FEC instead of
+          retransmit, one-frame jitter buffer, velocity feedforward in the controller
+          (−44 ms, predicted −45). <span class="tag tag--hw">Hardware</span>
+        </p>
+        <span class="link">Latency budget <em>→</em></span>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     BACKGROUND — the timeline, read as a close rather than an interruption
+     BUILT — four tiles, one line each
      ============================================================ -->
-<section id="background">
+<section id="built" data-stage="built">
   <div class="wrap">
-    <div class="sechead measure">
-      <span class="eyebrow">Background</span>
-      <h2>Eight years of closing loops on physical things.</h2>
+    <div class="sechead">
+      <span class="eyebrow">What I built</span>
+      <h2>Everything above libfranka, MuJoCo, Unreal and GStreamer.</h2>
+    </div>
+
+    <nav class="contents contents--built" aria-label="System parts">
+      <a href="system.html#control">
+        <span class="contents__n">Control · C++</span>
+        <span class="contents__t">Robot side</span>
+        <span class="contents__d">1 kHz Cartesian impedance with nullspace posture, CBF self-collision filter, per-device state machines. One binary, two backends: hardware and MuJoCo.</span>
+      </a>
+      <a href="system.html#collect">
+        <span class="contents__n">Interface · Unreal Engine 5</span>
+        <span class="contents__t">VR operator side</span>
+        <span class="contents__d">Stereo view, ghost gripper ahead of the delayed image, menus by gaze and voice so both hands stay on the task, event-driven HUD.</span>
+      </a>
+      <a href="system.html#latency">
+        <span class="contents__n">Video · GStreamer</span>
+        <span class="contents__t">Across the ocean</span>
+        <span class="contents__d">H.264 over RTP with FEC, one-way delay measured from an in-frame timestamp, three-state quality ladder that trades quality but never latency.</span>
+      </a>
+      <a href="policy.html">
+        <span class="contents__n">Data · Python</span>
+        <span class="contents__t">Demonstrations to policy</span>
+        <span class="contents__d">Episodes labelled at collection with gaze and intent, a GRU intent model at 0.83 macro F1 inside the 30 Hz loop, ACT policies, human-gated DAgger.</span>
+      </a>
+    </nav>
+
+    <div class="linkrow">
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-simulator">Robot-side backend <em>↗</em></a>
+      <a class="link" href="https://github.com/AlexanderWegenerRobotics/teleop-vr-interface">VR interface <em>↗</em></a>
+      <a class="link" href="system.html">Full system write-up <em>→</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESEARCH — the question, in four sentences
+     ============================================================ -->
+<section id="research" data-stage="research">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow">Research question</span>
+      <h2>Does guiding the operator produce better training data?</h2>
+    </div>
+    <div class="g-1-1">
       <p>
-        Battery packs, then motor design, then motor control, then robot control. The hardware
-        kept changing and the problem did not: make something physical behave, reliably, at
-        rate, when the inputs are imperfect.
+        Policies are only as good as the demonstrations, and through a teleoperation rig
+        people act worse than in person: they cannot feel contact, they see the past, and
+        the interface loads them. Nudging changes what the operator perceives, not what the
+        robot does, so the logged action stays purely human.
       </p>
+      <p>
+        Munich showed nudging helps the operator. The current system predicts operator
+        intent live and renders cues from it; the next study trains one policy on nudged
+        demonstrations and one on unassisted ones and compares task success. That study is in
+        design — the human-gated takeover above is its comparator.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BACKGROUND
+     ============================================================ -->
+<section id="background" data-stage="background">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow">Background</span>
+      <h2>Motors, then motor control, then robot control.</h2>
     </div>
 
     <ol class="track">
@@ -1314,7 +214,7 @@
         <a href="formula-student.html">
           <span class="track__yr">2018—2022</span>
           <span class="track__role">Formula Student</span>
-          <span class="track__note">4 years · 2 as technical director</span>
+          <span class="track__note">4 years · 2 as technical director of ~60</span>
         </a>
       </li>
       <li class="track__item">
@@ -1325,7 +225,7 @@
       <li class="track__item">
         <span class="track__yr">2022—2023</span>
         <span class="track__role">Tesla</span>
-        <span class="track__note">System Architecture, Modeling &amp; Controls</span>
+        <span class="track__note">Motor controls intern</span>
       </li>
       <li class="track__item">
         <span class="track__yr">2023—2025</span>
@@ -1343,73 +243,42 @@
         <span class="track__note">Graduate researcher · teleoperation</span>
       </li>
     </ol>
-  </div>
-</section>
 
-<!-- ============================================================
-     PUBLICATIONS
-     ============================================================ -->
-<section id="publications">
-  <div class="wrap">
-    <div class="sechead measure">
-      <span class="eyebrow">Writing</span>
-      <h2>Publications and reports.</h2>
-    </div>
-    <dl class="deflist">
+    <dl class="deflist mt-l">
       <div>
-        <dt>Journal / conference</dt>
+        <dt>Under review</dt>
+        <dd>Nudging in Teleoperated Manipulation: Task-Dependent Effects of Informational and Dynamic Assistance. ICRA 2027.</dd>
+      </div>
+      <div>
+        <dt>Conference</dt>
         <dd>
-          L. Chen et al., "Enhanced Robotic Navigation in Deformable Environments using Learning
-          from Demonstration and Dynamic Modulation," 2025 IEEE/RSJ International Conference on
-          Intelligent Robots and Systems (IROS), Hangzhou, China, 2025, pp. 9940–9947.
+          L. Chen et al., "Enhanced Robotic Navigation in Deformable Environments using Learning from
+          Demonstration and Dynamic Modulation," IROS 2025.
           <a class="link" style="margin-left:10px" href="https://doi.org/10.1109/IROS60139.2025.11247327">DOI <em>↗</em></a>
-          <a class="link" style="margin-left:10px" href="assets/Enhanced_Robotic_Navigation_in_Deformable_Environments_using_Learning_from_Demonstration_and_Dynamic_Modulation.pdf">PDF</a>
         </dd>
       </div>
       <div>
         <dt>MSc thesis</dt>
         <dd>
-          <strong>Nudging Human Decision-Making in Teleoperation Robotics — Design of an
-          Artificial Recommender System for Optimal and Controlled Guidance</strong> — Technical
-          University of Munich, MIRMI, Haddadin lab, 2025.
-          <a class="link" style="margin-left:10px" href="thesis.html">Summary <em>→</em></a>
+          Nudging Human Decision-Making in Teleoperation Robotics. TU Munich, MIRMI, 2025.
           <a class="link" style="margin-left:10px" href="assets/thesis.pdf">PDF</a>
         </dd>
       </div>
       <div>
-        <dt>BSc thesis</dt>
+        <dt>Reports</dt>
         <dd>
-          <em>Elektromagnetische Auslegung, Modellierung und dynamische Simulation einer
-          Reluktanzsynchronmaschine</em> — Munich University of Applied Sciences, 2022.
-          Supervised by Prof. Christoph Hackl. Finite-element field design, flux-map
-          characterisation, and dynamic simulation of a synchronous reluctance machine.
-          German, with English abstract.
-          <a class="link" style="margin-left:10px" href="assets/BA_AlexanderWegener.pdf">PDF</a>
-        </dd>
-      </div>
-      <div>
-        <dt>Report</dt>
-        <dd>
-          Wegener, A. <em>Vision-Based NMPC for Robotic Pushing Under Perception
-          Uncertainty.</em> Boston University, 2026.
+          Human-gated interactive imitation learning for bimanual VR teleoperation, 2026
+          <a class="link" style="margin-left:10px" href="assets/dagger-report.pdf">PDF</a>
+          &nbsp;·&nbsp; Vision-based NMPC for robotic pushing under perception uncertainty, 2026
           <a class="link" style="margin-left:10px" href="projects.html">Summary <em>→</em></a>
         </dd>
-      </div>
-      <div>
-        <dt>In preparation</dt>
-        <dd>Intent-driven operator nudging for demonstration collection. Preprint to follow.</dd>
       </div>
     </dl>
   </div>
 </section>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer>
   <div class="wrap">
-    <!-- MISSING FILE: assets/cv.pdf does not exist yet. Add it, or comment
-         out the first link below, before publishing. -->
     <div class="foot__links">
       <a class="link" href="assets/cv.pdf">Curriculum vitae <em>PDF</em></a>
       <a class="link" href="https://github.com/AlexanderWegenerRobotics">GitHub <em>↗</em></a>
@@ -1419,12 +288,11 @@
 
     <p class="foot__note">
       <strong>Alexander Wegener</strong> — German citizen, based in Boston. Graduating December
-      2026 and available from January 2027. Eligible for twelve months of OPT plus the
-      twenty-four month STEM extension: three years of US work authorisation with no
-      sponsorship required.
+      2026, available from January 2027. Three years of US work authorisation (OPT + STEM
+      extension), no sponsorship required.
     </p>
 
-    <p class="foot__meta">Last updated July 2026</p>
+    <p class="foot__meta">Last updated October 2026</p>
   </div>
 </footer>
 
@@ -1434,13 +302,11 @@
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- rail: light the stage currently in view ---- */
-  var stages = ['control','collect','curate','train','evaluate','nudging'];
+  var stages = ['results','built','research','background'];
   var links = {};
   stages.forEach(function(id){
     links[id] = document.querySelector('.rail__stage[data-stage="'+id+'"]');
   });
-
   var railObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       var l = links[e.target.id];
@@ -1451,13 +317,11 @@
       }
     });
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-
   stages.forEach(function(id){
     var el = document.getElementById(id);
     if(el) railObserver.observe(el);
   });
 
-  /* ---- one reveal, applied once ---- */
   if(!reduce){
     var targets = document.querySelectorAll('section > .wrap > *');
     targets.forEach(function(el){ el.classList.add('reveal'); });
